@@ -8,37 +8,37 @@
 					/obj/item/clothing/shoes/sandal,
 					/obj/item/clothing/head/wizard/fake)
 	cost = 20
-	containername = "\improper Wizard costume crate"
+	containername = "Wizard costume crate"
 
 /decl/hierarchy/supply_pack/miscellaneous/carpet
 	name = "Imported carpet"
 	contains = list(/obj/item/stack/tile/carpet/fifty)
 	cost = 15
-	containername = "\improper Imported carpet crate"
+	containername = "Imported carpet crate"
 
 /decl/hierarchy/supply_pack/miscellaneous/linoleum
 	name = "Linoleum"
 	contains = list(/obj/item/stack/tile/linoleum/fifty)
 	cost = 15
-	containername = "\improper Linoleum crate"
+	containername = "Linoleum crate"
 
 /decl/hierarchy/supply_pack/miscellaneous/white_tiles
 	name = "White floor tiles"
 	contains = list(/obj/item/stack/tile/floor_white/fifty)
 	cost = 15
-	containername = "\improper White floor tile crate"
+	containername = "White floor tile crate"
 
 /decl/hierarchy/supply_pack/miscellaneous/dark_tiles
 	name = "Dark floor tiles"
 	contains = list(/obj/item/stack/tile/floor_dark/fifty)
 	cost = 15
-	containername = "\improper Dark floor tile crate"
+	containername = "Dark floor tile crate"
 
 /decl/hierarchy/supply_pack/miscellaneous/freezer_tiles
 	name = "Freezer floor tiles"
 	contains = list(/obj/item/stack/tile/floor_freezer/fifty)
 	cost = 15
-	containername = "\improper Freezer floor tile crate"
+	containername = "Freezer floor tile crate"
 
 /decl/hierarchy/supply_pack/miscellaneous/costume
 	num_contained = 2
@@ -71,7 +71,7 @@
 					/obj/item/clothing/under/kilt)
 	name = "Costumes crate"
 	cost = 10
-	containername = "\improper Actor Costumes"
+	containername = "Actor Costumes"
 	supply_method = /decl/supply_method/randomized
 
 /decl/hierarchy/supply_pack/miscellaneous/formal_wear
@@ -92,23 +92,23 @@
 	name = "Formalwear closet"
 	cost = 30
 	containertype = /obj/structure/closet
-	containername = "\improper Formalwear for the best occasions."
+	containername = "Formalwear for the best occasions."
 
 /decl/hierarchy/supply_pack/miscellaneous/card_packs
 	num_contained = 5
 	contains = list(/obj/item/weapon/pack/cardemon,
 					/obj/item/weapon/pack/spaceball,
 					/obj/item/weapon/deck/holder)
-	name = "\improper Trading Card Crate"
+	name = "Trading Card Crate"
 	cost = 20
-	containername = "\improper cards crate"
+	containername = "cards crate"
 	supply_method = /decl/supply_method/randomized
 
 /decl/hierarchy/supply_pack/miscellaneous/eftpos
 	contains = list(/obj/item/device/eftpos)
 	name = "EFTPOS scanner"
 	cost = 10
-	containername = "\improper EFTPOS crate"
+	containername = "EFTPOS crate"
 
 /decl/hierarchy/supply_pack/miscellaneous/hats
 	num_contained = 4
@@ -134,14 +134,14 @@
 					/obj/item/clothing/head/collectable/petehat)
 	name = "Collectable hat crate!"
 	cost = 200
-	containername = "\improper Collectable hats crate! Brought to you by Bass.inc!"
+	containername = "Collectable hats crate! Brought to you by Bass.inc!"
 	supply_method = /decl/supply_method/randomized
 
 /decl/hierarchy/supply_pack/miscellaneous/cardboard_sheets
 	name = "50 cardboard sheets"
 	contains = list(/obj/item/stack/material/cardboard/fifty)
 	cost = 10
-	containername = "\improper Cardboard sheets crate"
+	containername = "Cardboard sheets crate"
 
 /decl/hierarchy/supply_pack/miscellaneous/witch
 	name = "Witch costume"
@@ -150,7 +150,7 @@
 					/obj/item/clothing/head/wizard/marisa/fake,
 					/obj/item/weapon/staff/broom)
 	cost = 20
-	containername = "\improper Witch costume"
+	containername = "Witch costume"
 	containertype = /obj/structure/closet
 
 /decl/hierarchy/supply_pack/miscellaneous/costume_hats
@@ -170,7 +170,7 @@
 					/obj/item/clothing/head/helmet/gladiator,
 					/obj/item/clothing/head/ushanka)
 	cost = 10
-	containername = "\improper Actor hats crate"
+	containername = "Actor hats crate"
 	containertype = /obj/structure/closet
 	num_contained = 2
 	supply_method = /decl/supply_method/randomized
@@ -189,7 +189,7 @@
 					/obj/item/clothing/under/dress/dress_yellow,
 					/obj/item/clothing/under/dress/dress_saloon)
 	cost = 15
-	containername = "\improper Pretty dress locker"
+	containername = "Pretty dress locker"
 	containertype = /obj/structure/closet
 	num_contained = 1
 	supply_method = /decl/supply_method/randomized
@@ -244,4 +244,4 @@
 					/obj/item/weapon/storage/backpack/cultpack,
 					/obj/item/weapon/storage/fancy/candle_box = 3)
 	cost = 10
-	containername = "\improper Chaplain equipment crate"
+	containername = "Chaplain equipment crate"

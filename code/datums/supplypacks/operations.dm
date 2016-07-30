@@ -6,21 +6,21 @@
 	contains = list(/obj/machinery/bot/mulebot)
 	cost = 20
 	containertype = /obj/structure/largecrate/mule
-	containername = "\improper MULEbot Crate"
+	containername = "MULEbot Crate"
 
 /decl/hierarchy/supply_pack/operations/cargotrain
 	name = "Cargo Train Tug"
 	contains = list(/obj/vehicle/train/cargo/engine)
 	cost = 45
 	containertype = /obj/structure/largecrate
-	containername = "\improper Cargo Train Tug Crate"
+	containername = "Cargo Train Tug Crate"
 
 /decl/hierarchy/supply_pack/operations/cargotrailer
 	name = "Cargo Train Trolley"
 	contains = list(/obj/vehicle/train/cargo/trolley)
 	cost = 15
 	containertype = /obj/structure/largecrate
-	containername = "\improper Cargo Train Trolley Crate"
+	containername = "Cargo Train Trolley Crate"
 
 /decl/hierarchy/supply_pack/operations/artscrafts
 	name = "Arts and Crafts supplies"
@@ -39,7 +39,7 @@
 	/obj/item/weapon/poster/contraband,
 	/obj/item/weapon/wrapping_paper = 3)
 	cost = 10
-	containername = "\improper Arts and Crafts crate"
+	containername = "Arts and Crafts crate"
 
 /decl/hierarchy/supply_pack/operations/contraband
 	num_contained = 5
@@ -50,7 +50,7 @@
 
 	name = "Contraband crate"
 	cost = 30
-	containername = "\improper Unlabeled crate"
+	containername = "Unlabeled crate"
 	contraband = 1
 	supply_method = /decl/supply_method/randomized
 
@@ -59,7 +59,7 @@
 	contains = list()
 	cost = 80
 	containertype = /obj/structure/largecrate/hoverpod
-	containername = "\improper Hoverpod Crate"
+	containername = "Hoverpod Crate"
 
 /decl/hierarchy/supply_pack/operations/webbing
 	name = "Webbing crate"
@@ -70,4 +70,4 @@
 					/obj/item/clothing/accessory/storage/white_vest,
 					/obj/item/clothing/accessory/storage/webbing)
 	cost = 15
-	containername = "\improper Webbing crate"
+	containername = "Webbing crate"

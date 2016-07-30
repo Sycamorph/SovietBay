@@ -17,7 +17,7 @@
 			/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer = 4
 			)
 	cost = 20
-	containername = "\improper Party equipment"
+	containername = "Party equipment"
 
 /decl/hierarchy/supply_pack/hospitality/barsupplies
 	name = "Bar supplies"
@@ -45,7 +45,7 @@
 					/obj/item/clothing/suit/bluetag = 3)
 	cost = 20
 	containertype = /obj/structure/closet
-	containername = "\improper Lasertag Closet"
+	containername = "Lasertag Closet"
 
 /decl/hierarchy/supply_pack/hospitality/pizza
 	num_contained = 5
@@ -56,5 +56,5 @@
 					/obj/item/pizzabox/vegetable)
 	cost = 15
 	containertype = /obj/structure/closet/crate/freezer
-	containername = "\improper Pizza crate"
+	containername = "Pizza crate"
 	supply_method = /decl/supply_method/randomized

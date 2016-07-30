@@ -4,7 +4,7 @@
 	spellbook_type = /datum/spellbook/student
 
 /datum/spellbook/student
-	name = "\improper Student's Spellbook"
+	name = "Student's Spellbook"
 	feedback = "ST"
 	desc = "This spell book has a sticker on it that says, 'certified for children 5 and older'."
 	book_desc = "This spellbook is dedicated to teaching neophytes in the ways of magic."

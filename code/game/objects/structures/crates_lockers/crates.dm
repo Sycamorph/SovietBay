@@ -293,7 +293,7 @@
 	icon_closed = "medicalcrate"
 
 /obj/structure/closet/crate/rcd
-	name = "\improper RCD crate"
+	name = "RCD crate"
 	desc = "A crate with rapid construction device."
 	icon_state = "crate"
 	icon_opened = "crateopen"

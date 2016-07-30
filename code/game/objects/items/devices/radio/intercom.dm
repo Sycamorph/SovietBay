@@ -27,7 +27,7 @@
 	frequency = AI_FREQ
 
 /obj/item/device/radio/intercom/specops
-	name = "\improper Spec Ops intercom"
+	name = "Spec Ops intercom"
 	frequency = ERT_FREQ
 
 /obj/item/device/radio/intercom/department
@@ -142,7 +142,7 @@
 	return ""
 
 /obj/item/device/radio/intercom/locked/ai_private
-	name = "\improper AI intercom"
+	name = "AI intercom"
 	frequency = AI_FREQ
 	broadcasting = 1
 	listening = 1

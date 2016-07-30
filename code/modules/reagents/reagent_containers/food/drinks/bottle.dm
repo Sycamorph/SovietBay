@@ -335,7 +335,7 @@
 		reagents.add_reagent("grenadine", 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/cola
-	name = "\improper Space Cola"
+	name = "Space Cola"
 	desc = "Cola. in space."
 	icon_state = "colabottle"
 	center_of_mass = "x=16;y=6"
@@ -344,7 +344,7 @@
 		reagents.add_reagent("cola", 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/space_up
-	name = "\improper Space-Up"
+	name = "Space-Up"
 	desc = "Tastes like a hull breach in your mouth."
 	icon_state = "space-up_bottle"
 	center_of_mass = "x=16;y=6"
@@ -353,7 +353,7 @@
 		reagents.add_reagent("space_up", 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/space_mountain_wind
-	name = "\improper Space Mountain Wind"
+	name = "Space Mountain Wind"
 	desc = "Blows right through you like a space wind."
 	icon_state = "space_mountain_wind_bottle"
 	center_of_mass = "x=16;y=6"
@@ -433,7 +433,7 @@
 		reagents.add_reagent("beer", 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale
-	name = "\improper Magm-Ale"
+	name = "Magm-Ale"
 	desc = "A true dorf's drink of choice."
 	icon_state = "alebottle"
 	item_state = "beer"

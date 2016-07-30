@@ -4,7 +4,7 @@
 	spellbook_type = /datum/spellbook/spatial
 
 /datum/spellbook/spatial
-	name = "\improper Spatial Manual"
+	name = "Spatial Manual"
 	feedback = "SP"
 	desc = "You feel like this might disappear from out of under you."
 	book_desc = "Movement and teleportation. Run from your problems!"

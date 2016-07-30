@@ -4,7 +4,7 @@
 	spellbook_type = /datum/spellbook/standard
 
 /datum/spellbook/standard
-	name = "\improper Standard Spellbook"
+	name = "Standard Spellbook"
 	feedback = "SB"
 	title = "Book of Spells and Artefacts"
 	title_desc = "Buy spells using your available spell slots. Artefacts may also be bought however their cost is permanent."
