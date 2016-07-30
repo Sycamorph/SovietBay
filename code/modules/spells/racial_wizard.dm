@@ -70,6 +70,9 @@
 		H.Paralyse(20)
 		H.adjustBrainLoss(10)
 
+/obj/item/weapon/storage/bag/cash/infinite
+	startswith = list(/obj/item/weapon/spacecash/bundle/c1000 = 1)
+
 
 //HUMAN
 /obj/item/weapon/storage/bag/cash/infinite/remove_from_storage(obj/item/W as obj, atom/new_location)
@@ -130,7 +133,7 @@
 	smoke_amt = 5
 	smoke_spread = 1
 
-	possible_transformations = list(/mob/living/simple_animal/armalis)
+	possible_transformations = list(/mob/living/simple_animal/hostile/armalis)
 
 	hud_state = "wiz_vox"
 
@@ -157,19 +160,30 @@
 
 /spell/moghes_blessing/choose_targets(mob/user = usr)
 	var/list/hands = list()
-	if(user.l_hand && !findtext(user.l_hand.name,"Moghes Blessing"))
-		hands += user.l_hand
-	if(user.r_hand && !findtext(user.r_hand.name,"Moghes Blessing"))
-		hands += user.r_hand
+	for(var/obj/item/I in list(user.l_hand, user.r_hand))
+		//make sure it's not already blessed
+		if(istype(I) && !has_extension(I, /datum/extension/moghes_blessing))
+			hands += I
 	return hands
 
 /spell/moghes_blessing/cast(var/list/targets, mob/user)
 	for(var/obj/item/I in targets)
-		I.name = "[I.name] (Moghes Blessing)"
-		I.force += 10
-		I.throwforce += 7
-		I.color = "#663300"
+		set_extension(I, /datum/extension/moghes_blessing, /datum/extension/moghes_blessing)
 
+/datum/extension/moghes_blessing
+	expected_type = /obj/item
+	flags = EXTENSION_FLAG_IMMEDIATE
+
+/datum/extension/moghes_blessing/New(var/datum/holder)
+	..(holder)
+	apply_blessing(holder)
+
+/datum/extension/moghes_blessing/proc/apply_blessing(obj/item/I)
+	I.name += " of Moghes"
+	I.desc += "<BR>It has been imbued with the memories of Moghes."
+	I.force += 10
+	I.throwforce += 14
+	I.color = "#663300"
 
 //DIONA
 /spell/aoe_turf/conjure/grove/gestalt
@@ -242,11 +256,16 @@
 
 	spell_flags = Z2NOCAST
 	hud_state = "wiz_IPC"
-	var/mob/observer/eye/ipc_eye/vision
+	var/mob/observer/eye/wizard_eye/vision
 
 /spell/camera_connection/New()
 	..()
 	vision = new(src)
+
+/spell/camera_connection/Destroy()
+	qdel(vision)
+	vision = null
+	. = ..()
 
 /spell/camera_connection/choose_targets()
 	var/mob/living/L = holder
@@ -257,18 +276,13 @@
 /spell/camera_connection/cast(var/list/targets, mob/user)
 	var/mob/living/L = targets[1]
 
-	vision.owner = L
-	L.eyeobj = vision
-	if(L.client)
-		L.client.eye = vision
-	for(var/datum/chunk/c in vision.visibleChunks)
-		c.remove(vision)
-	vision.setLoc(get_turf(L))
-
+	vision.possess(L)
 	L.verbs += /mob/living/proc/release_eye
 
+/mob/observer/eye/wizard_eye
+	name_sufix = "Wizard Eye"
 
-/mob/observer/eye/ipc_eye/New() //we dont use the Ai one because it has AI specific procs imbedded in it.
+/mob/observer/eye/wizard_eye/New() //we dont use the Ai one because it has AI specific procs imbedded in it.
 	..()
 	visualnet = cameranet
 
@@ -281,6 +295,4 @@
 
 	if(!eyeobj)
 		return
-
-	eyeobj.owner = null
-	eyeobj = null
+	eyeobj.release(src)

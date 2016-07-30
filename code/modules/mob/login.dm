@@ -30,7 +30,7 @@
 	world.update_status()
 
 	client.images = null				//remove the images such as AIs being unable to see runes
-	client.screen = null				//remove hud items just in case
+	client.screen = list()				//remove hud items just in case
 	if(hud_used)	qdel(hud_used)		//remove the hud objects
 	hud_used = new /datum/hud(src)
 
@@ -44,6 +44,13 @@
 	else
 		client.eye = src
 		client.perspective = MOB_PERSPECTIVE
+
+	if(eyeobj)
+		eyeobj.possess(src)
+
+	refresh_client_images()
+	reload_fullscreen() // Reload any fullscreen overlays this mob has.
+	add_click_catcher()
 
 	//set macro to normal incase it was overriden (like cyborg currently does)
 	switch(winget(usr, null, "mainwindow.macro"))

@@ -72,11 +72,12 @@
 	var/gibbed_anim = "gibbed-h"
 	var/dusted_anim = "dust-h"
 	var/death_sound
-	var/death_message = "seizes up and falls limp, their eyes dead and lifeless..."
+	var/death_message = "перестает дышать, видно как холоднеет взгл&#255;д и уходит жизнь."
 	var/knockout_message = "has been knocked unconscious!"
-	var/halloss_message = "slumps to the ground, too weak to continue fighting."
-	var/halloss_message_self = "You're in too much pain to keep going..."
+	var/halloss_message = "подкосившись, обессиленно оседает на пол."
+	var/halloss_message_self = "Тебе слишком больно, что бы продолжать путь..."
 
+	var/spawns_with_stack = 0
 	// Environment tolerance/life processes vars.
 	var/reagent_tag                                   //Used for metabolizing reagents.
 	var/breath_pressure = 16                          // Minimum partial pressure safe for breathing, kPa
@@ -114,6 +115,7 @@
 	// HUD data vars.
 	var/datum/hud_data/hud
 	var/hud_type
+	var/health_hud_intensity = 1
 
 	// Body/form vars.
 	var/list/inherent_verbs 	  // Species-specific verbs.
@@ -126,7 +128,7 @@
 	var/slowdown = 0              // Passive movement speed malus (or boost, if negative)
 	var/primitive_form            // Lesser form, if any (ie. monkey for humans)
 	var/greater_form              // Greater form, if any, ie. human for monkeys.
-	var/holder_type
+	var/holder_type               // In-hand wrapper object, if any.
 	var/gluttonous                // Can eat some mobs. Values can be GLUT_TINY, GLUT_SMALLER, GLUT_ANYTHING.
 	var/rarity_value = 1          // Relative rarity/collector value for this species.
 	                              // Determines the organs that the species spawns with and
@@ -155,6 +157,8 @@
 		"r_foot" = list("path" = /obj/item/organ/external/foot/right)
 		)
 
+	var/list/genders = list(MALE, FEMALE)
+
 	// Bump vars
 	var/bump_flag = HUMAN	// What are we considered to be when bumped?
 	var/push_flags = ~HEAVY	// What can we push?
@@ -178,9 +182,6 @@
 	unarmed_attacks = list()
 	for(var/u_type in unarmed_types)
 		unarmed_attacks += new u_type()
-
-/datum/species/proc/get_station_variant()
-	return name
 
 /datum/species/proc/get_bodytype()
 	return name
@@ -233,6 +234,7 @@
 
 /datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
 
+	H.mob_size = mob_size
 	for(var/obj/item/organ/organ in H.contents)
 		if((organ in H.organs) || (organ in H.internal_organs))
 			qdel(organ)
@@ -263,15 +265,15 @@
 
 /datum/species/proc/hug(var/mob/living/carbon/human/H,var/mob/living/target)
 
-	var/t_him = "them"
+/*	var/t_him = "он почувствовал"
 	switch(target.gender)
 		if(MALE)
-			t_him = "him"
+			t_him = "он почувствовал"
 		if(FEMALE)
-			t_him = "her"
+			t_him = "она почувствовала"*/
 
-	H.visible_message("<span class='notice'>[H] hugs [target] to make [t_him] feel better!</span>", \
-					"<span class='notice'>You hug [target] to make [t_him] feel better!</span>")
+	H.visible_message("<span class='notice'>[H] обнимает [target]!</span>", \
+					"<span class='notice'>Вы обнимаете [target]!</span>")
 
 /datum/species/proc/remove_inherent_verbs(var/mob/living/carbon/human/H)
 	if(inherent_verbs)
@@ -291,7 +293,6 @@
 	H.mob_swap_flags = swap_flags
 	H.mob_push_flags = push_flags
 	H.pass_flags = pass_flags
-	H.mob_size = mob_size
 
 /datum/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
 	return
@@ -357,19 +358,21 @@
 	if(H.equipment_tint_total >= TINT_BLIND)
 		H.eye_blind = max(H.eye_blind, 1)
 
-	if(H.blind)
-		H.blind.layer = (H.eye_blind ? 18 : 0)
-
 	if(!H.client)//no client, no screen to update
 		return 1
 
+	H.set_fullscreen(H.eye_blind && !H.equipment_prescription, "blind", /obj/screen/fullscreen/blind)
+
 	if(config.welder_vision)
 		if(short_sighted || (H.equipment_tint_total >= TINT_HEAVY))
-			H.client.screen += global_hud.darkMask
+			H.overlay_fullscreen("impaired", /obj/screen/fullscreen/impaired, 2)
 		else if((!H.equipment_prescription && (H.disabilities & NEARSIGHTED)) || H.equipment_tint_total == TINT_MODERATE)
-			H.client.screen += global_hud.vimpaired
-	if(H.eye_blurry)	H.client.screen += global_hud.blurry
-	if(H.druggy)		H.client.screen += global_hud.druggy
+			H.overlay_fullscreen("impaired", /obj/screen/fullscreen/impaired, 1)
+		else
+			H.clear_fullscreen("impaired")
+
+	H.set_fullscreen(H.eye_blurry, "blurry", /obj/screen/fullscreen/blurry)
+	H.set_fullscreen(H.druggy, "high", /obj/screen/fullscreen/high)
 
 	for(var/overlay in H.equipment_overlays)
 		H.client.screen |= overlay

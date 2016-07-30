@@ -1,4 +1,4 @@
-/datum/extension/multitool/items/mechcomp/get_interact_window(var/obj/item/device/multitool/M, var/mob/user)
+/datum/extension/interactive/multitool/items/mechcomp/get_interact_window(var/obj/item/device/multitool/M, var/mob/user)
 	var/found = 0
 	var/c = 1
 	while(c != holder.vars.len + 1)
@@ -11,6 +11,10 @@
 		return
 
 	var/datum/mechcomp/mechcomp = holder.vars[holder.vars[found]]
+
+	if(!mechcomp.master.allowed(user))
+		user << "<span class='warning'>\The [mechcomp.master] is locked!</span>"
+		return
 
 	. += "<B>[holder] - Component ID: \ref[holder]</B><HR>"
 
@@ -25,8 +29,8 @@
 	if(mechcomp.outgoing.len > 0)
 		. += "<HR>"
 		. += "Outputs:"
-		for (var/outputName in mechcomp.outgoing)
-			. += "[outputName] - Component ID: <B>\ref[outputName]</B> on input <B>[mechcomp.outgoing[outputName]]</B><BR>"
+		for (var/datum/mechcomp/output in mechcomp.outgoing)
+			. += "<B>[output.master.name]</B> - Component ID: <B>\ref[output]</B> on input <B>[mechcomp.outgoing[output]]</B><BR>"
 
 	//Snowflake code. It's either this or tons of verbs for each component. I prefer this
 	if(istype(holder, /obj/item/mechcomp))
@@ -36,7 +40,7 @@
 			. += "<HR>"
 			. += settings
 
-/datum/extension/multitool/items/mechcomp/on_topic(href, href_list, user)
+/datum/extension/interactive/multitool/items/mechcomp/on_topic(href, href_list, user)
 	var/datum/mechcomp/mechcomp
 
 	//Yes, that's a scary construction

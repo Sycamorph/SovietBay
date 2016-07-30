@@ -32,7 +32,7 @@
 	mob_size = MOB_MINISCULE
 	possession_candidate = 1
 
-	can_pull_size = 1
+	can_pull_size = TINY_ITEM
 	can_pull_mobs = MOB_PULL_NONE
 
 /mob/living/simple_animal/mouse/Life()
@@ -66,7 +66,7 @@
 	verbs += /mob/living/proc/hide
 
 	if(name == initial(name))
-		name = "[name] ([rand(1, 1000)])"
+		name = "[name] ([sequential_id(/mob/living/simple_animal/mouse)])"
 	real_name = name
 
 	if(!body_color)
@@ -131,6 +131,4 @@
 	..()
 	// Change my name back, don't want to be named Tom (666)
 	name = initial(name)
-
-/mob/living/simple_animal/mouse/cannot_use_vents()
-	return
+	real_name = name

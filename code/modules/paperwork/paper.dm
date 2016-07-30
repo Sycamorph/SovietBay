@@ -9,6 +9,7 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "paper"
 	item_state = "paper"
+	randpixel = 8
 	throwforce = 0
 	w_class = 1
 	throw_range = 1
@@ -38,8 +39,6 @@
 
 /obj/item/weapon/paper/New()
 	..()
-	pixel_y = rand(-8, 8)
-	pixel_x = rand(-9, 9)
 	stamps = ""
 
 	if(name != "paper")
@@ -231,8 +230,8 @@
 	t = replacetext(t, "\[/i\]", "</I>")
 	t = replacetext(t, "\[u\]", "<U>")
 	t = replacetext(t, "\[/u\]", "</U>")
-	t = replacetext(t, "\[time\]", "[worldtime2text()]")
-	t = replacetext(t, "\[date\]", "[worlddate2text()]")
+	t = replacetext(t, "\[time\]", "[stationtime2text()]")
+	t = replacetext(t, "\[date\]", "[stationdate2text()]")
 	t = replacetext(t, "\[large\]", "<font size=\"4\">")
 	t = replacetext(t, "\[/large\]", "</font>")
 	t = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[get_signature(P, user)]</i></font>")
@@ -413,37 +412,14 @@
 			B.name = name
 		else if (P.name != "paper" && P.name != "photo")
 			B.name = P.name
+
 		user.drop_from_inventory(P)
-		if (istype(user, /mob/living/carbon/human))
-			var/mob/living/carbon/human/h_user = user
-			if (h_user.r_hand == src)
-				h_user.drop_from_inventory(src)
-				h_user.put_in_r_hand(B)
-			else if (h_user.l_hand == src)
-				h_user.drop_from_inventory(src)
-				h_user.put_in_l_hand(B)
-			else if (h_user.l_store == src)
-				h_user.drop_from_inventory(src)
-				B.loc = h_user
-				B.layer = 20
-				h_user.l_store = B
-				h_user.update_inv_pockets()
-			else if (h_user.r_store == src)
-				h_user.drop_from_inventory(src)
-				B.loc = h_user
-				B.layer = 20
-				h_user.r_store = B
-				h_user.update_inv_pockets()
-			else if (h_user.head == src)
-				h_user.u_equip(src)
-				h_user.put_in_hands(B)
-			else if (!istype(src.loc, /turf))
-				src.loc = get_turf(h_user)
-				if(h_user.client)	h_user.client.screen -= src
-				h_user.put_in_hands(B)
+		user.drop_from_inventory(src)
+		user.put_in_hands(B)
+		src.forceMove(B)
+		P.forceMove(B)
+
 		user << "<span class='notice'>You clip the [P.name] to [(src.name == "paper") ? "the paper" : src.name].</span>"
-		src.loc = B
-		P.loc = B
 
 		B.pages.Add(src)
 		B.pages.Add(P)

@@ -56,6 +56,685 @@
 		
 		-->
 		<div class="commit sansserif">
+			<h2 class="date">13 July 2016</h2>
+			<h3 class="author">HarpyEagle updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Voidsuits and cyber suits are now more shock resistant, now roughly between hardsuits and thick clothing.</li>
+			</ul>
+
+			<h2 class="date">12 July 2016</h2>
+			<h3 class="author">atlantiscze updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Random event probabilities have been changed a bit. This is mostly noticeable with electrical storms, which should be less common now.</li>
+				<li class="tweak">Electrical storm now shuts down APCs for longer duration which is controlled by event severity. APCs with critical flag are now affected too, but are only shut down for a short time in comparison to others.</li>
+				<li class="tweak">EMPs are no longer one-hit kills for AIs - APCs with critical flag take reduced damage from EMPs, and AI's power restoration routine now resets the APC that may have been EMPed.</li>
+				<li class="tweak">AI's power usage has been overhauled. Under the hood changes should improve reliability a bit and take more scenarios in consideration. The power restoration routine now provides better feedback to the AI if it fails, such as, whether the APC is broken or only discharged, etc.</li>
+				<li class="rscadd">AI now has a Shutdown verb that can be used to reduce it's power usage five times. This disables AI's control, cameras, and most communications as if it was without power. This verb acts as a toggle, so it can be used again to turn yourself back on.</li>
+				<li class="rscadd">AI now has Toggle Power Override verb that can be used to disable power saving mode when it loses APC power. This results in much faster discharge of internal capacitor, but allows you to operate as if you were powered. Can be toggled at any time.</li>
+			</ul>
+
+			<h2 class="date">09 July 2016</h2>
+			<h3 class="author">HarpyEagle updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Severe enough burn damage now causes one-time blood loss due to blistering and body fluid cook-off.</li>
+				<li class="rscadd">Armor that provides 'bio' protection will now protect against the effects of slime feeding. Slimes can still glomp you, however, and are still dangerous even if you are wearing biohazard suits.</li>
+			</ul>
+
+			<h2 class="date">08 July 2016</h2>
+			<h3 class="author">Asanadas updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added two pairs of forensic gloves for detectives to use, ceasing their self-incrimination. Replacements can be found in the cargo detective crates.</li>
+			</ul>
+			<h3 class="author">TheWelp updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Rebalances leap to respect handcuffs, ability to walk, etc.</li>
+				<li class="tweak">Pariahs HP deficit has been removed (65->100), instead they are now more vulnerable to all types of damage.</li>
+				<li class="rscadd">Adds missing hair color flag for regular Vox. Now you can have colorful dyed Vox hair! Within reason.</li>
+			</ul>
+
+			<h2 class="date">06 July 2016</h2>
+			<h3 class="author">Ccomp5950 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Cleanbots will no longer obsess over dirt under doors/lockers or other areas they cannot access.</li>
+			</ul>
+			<h3 class="author">Hubblenaut updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Racks will automatically align their contents.</li>
+				<li class="tweak">Tables use an invisible 8x8 grid for item placement.</li>
+				<li class="tweak">Items spawning or placed in closets will not be pixelshifted.</li>
+				<li class="tweak">Certain items will now always be placed centered (This is mostly reserved for items with sprites too big to be handy for grid placement).</li>
+				<li class="tweak">Flips rack icon to be consistent with other sprites.</li>
+				<li class="bugfix">Sets center_of_mass for tools and chemistry reagent containers.</li>
+			</ul>
+			<h3 class="author">PsiOmegaDelta updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Uplink services now all spawn a proper item which can be used to trigger the relevant effect at a desired time, as opposed to it firing immediately.</li>
+				<li class="tweak">The jammer item has been moved into the 'Devices and Tools' category.</li>
+				<li class="tweak">The jammer services have been moved into the 'Services' category.</li>
+			</ul>
+			<h3 class="author">TheWelp updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Adds the item_worth var and get_worth proc to obj subtypes and mob/living</li>
+			</ul>
+
+			<h2 class="date">03 July 2016</h2>
+			<h3 class="author">Snapshot updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added Neural Laces which are an intented optional config togglable replacement to the cloning system. Neural laces are a mechanical backup of a character's memories and personality that can be exchanged between bodies.</li>
+				<li class="rscadd">Added Neural Lace Surgery mechanic which works the same way as implant surgery.</li>
+				<li class="rscadd">Added Neural Relacing Machine which will automate the procedure above and can be constructed through R&D.</li>
+				<li class="tweak">Health Analyzers will show if a subject has a neural lace.</li>
+				<li class="rscadd">Neural laces can be implanted in someone without a neural lace with a 30% chance of taking over their body</li>
+			</ul>
+			<h3 class="author">Zuhayr updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">The health indicator on the player GUI will now show a more detailed breakdown of damage to your body.</li>
+				<li class="rscadd">Added bioprinter to Genetics and prosthetic organ fab to Robotics.</li>
+			</ul>
+			<h3 class="author">redstryker updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Adds evening gloves to the loadout, with the ability to tweak their color.</li>
+			</ul>
+
+			<h2 class="date">28 June 2016</h2>
+			<h3 class="author">Cirra/ updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added a chemistry gripper for Crisis borgs.</li>
+			</ul>
+			<h3 class="author">HarpyEagle updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Adds applying pressure to body parts to reduce bleeding. With desired body part selected, help-intent click yourself or get an aggressive grab, then help-intent attack with the grab item. Each person should only be able to apply pressure to one body part on one person at a time, so choose wisely. Applying pressure will get blood on your hands.</li>
+				<li class="rscadd">Splints and hardsuits that support broken limbs will automatically apply pressure.</li>
+				<li class="rscadd">Wounds that require treatment (e.g. bandage) to stop bleeding will be bolded in the examine output. Wounds that will eventually stop bleeding on their own are not bolded.</li>
+				<li class="tweak">Rigsuits now only support limbs when online.</li>
+			</ul>
+			<h3 class="author">Haswell updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="maptweak">Added NanoMed wall vendors in engineering, security, bridge, bar, arrivals and escape hallways, replacing mapped in medkits and medical supplies.</li>
+				<li class="maptweak">Removed one security officer locker, added one cyborg recharging station in its place.</li>
+				<li class="maptweak">Added lights in head of security's office.</li>
+				<li class="maptweak">Added supply ordering, supply control and arcade circuit boards to tech storage.</li>
+				<li class="maptweak">Replaced out-of-place reinforced walls with normal walls.</li>
+			</ul>
+			<h3 class="author">PsiOmegaDelta updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">MedHUD overlays now have more stages, both for 'normal' and critical stages of injury, for improved quick-diagnosis.</li>
+			</ul>
+			<h3 class="author">TheWelp updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Adds support for map-specific jobs.</li>
+				<li class="rscadd">Adds torch specific jobs.</li>
+			</ul>
+			<h3 class="author">Zuhayr updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Ports/adapted several kitchen machines from Apollo Station.</li>
+			</ul>
+
+			<h2 class="date">25 June 2016</h2>
+			<h3 class="author">JoeyJo0 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Fixed chargers not charging anything other than cells.</li>
+			</ul>
+
+			<h2 class="date">24 June 2016</h2>
+			<h3 class="author">TheWelp updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Adds traders and a trader process.</li>
+			</ul>
+
+			<h2 class="date">22 June 2016</h2>
+			<h3 class="author">Asanadas updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Wall mounted Nanomed dispensers no longer require access to use.</li>
+			</ul>
+			<h3 class="author">Ccomp5950 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">IPCs and will no longer get genetic abilities from radstorms.  Also Diona.</li>
+				<li class="bugfix">Lobby folks will no longer hear Hailers</li>
+			</ul>
+			<h3 class="author">TheWelp updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Adds support for projectile guns to jam.</li>
+				<li class="rscadd">Adds cheap/crappy gun variants.</li>
+			</ul>
+			<h3 class="author">Zuhayr updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Changed the vault nuke into a self-destruct terminal.</li>
+			</ul>
+
+			<h2 class="date">20 June 2016</h2>
+			<h3 class="author">PsiOmegaDelta updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">EMPs now randomly set suit sensors, with strength affecting the probability of which mode is selected.</li>
+				<li class="rscadd">Because suit sensors can be affected externally a multitool can now be used to (un)lock the controls, to for example allow re-adjusting prisoner uniforms.</li>
+				<li class="rscadd">Because suit sensors can be locked the antag uplink now offers tools and services which are able to jam suit sensors in various ways.</li>
+				<li class="rscadd">Adds random events which will garble suit sensor data.</li>
+			</ul>
+
+			<h2 class="date">17 June 2016</h2>
+			<h3 class="author">Asanadas updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Changes to round-ending deathsquad and syndicate commando load-outs to maximize speed and minimize drag.</li>
+				<li class="tweak">Upped the pulse rifle family's general capacity, for better asset protection.</li>
+			</ul>
+			<h3 class="author">HarpyEagle updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Fixed shuttles causing lighting to break and leave shadowy rectangles behind.</li>
+				<li class="bugfix">Fixed shuttle corner appearance on the asteroid.</li>
+			</ul>
+			<h3 class="author">JerTheAce updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">CentCom Fax, Admin Prayer, and CentCom emergency messages now prompt admins with a pleasing sound effect.</li>
+			</ul>
+
+			<h2 class="date">15 June 2016</h2>
+			<h3 class="author">Ccomp5950 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Turret controllers now alert admins and logs when enabled or disabled as well as when set to stun or lethal.</li>
+			</ul>
+			<h3 class="author">HarpyEagle updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="soundadd">Adds new gunshot sounds for most bullet using guns.</li>
+				<li class="imageadd">Adds new bullet casing icons. All bullet casings now have distinct icon states for spent and unspent casings.</li>
+				<li class="rscadd">Adds a new energy weapon, the x-ray laser carbine. The advanced energy weapon crate now comes with two x-ray carbines and one x-ray pistol.</li>
+				<li class="bugfix">Fixed spear damage being set to a default value.</li>
+				<li class="tweak">Adjused spear damage, fixes steel spears now do somewhat less damage than steel baseball bats, but are sharp.</li>
+				<li class="tweak">Steel fire axes now do somewhat less damage when wielded, unwieled damage unaffected.</li>
+				<li class="tweak">Runtime can now become friends with anyone, regardless of their initial job.</li>
+				<li class="bugfix">Beepsky and other securitrons now react quicker when attacked or their perp tries to run, and move at closer to a running pace. Beepsky should no longer be so easy to outrun.</li>
+			</ul>
+			<h3 class="author">PsiOmegaDelta updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Vermin may now breed anywhere on the station but should also no longer spawn inside areas such as the atmospheric tanks.</li>
+			</ul>
+
+			<h2 class="date">12 June 2016</h2>
+			<h3 class="author">Ccomp5950 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Objects in bags and other containers (including your hands and pocket) will now hear speach again.  This impacts radios, explosive implants, and the universal recorder.</li>
+			</ul>
+			<h3 class="author">HarpyEagle updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Small mobs such as monkeys and resomi no longer gain the benefits of holding large or bulky items in two hands.</li>
+			</ul>
+			<h3 class="author">SparklySheep updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Move delay after clicking has been removed.</li>
+			</ul>
+			<h3 class="author">atlantiscze updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Modular computer batteries are no longer fully charged when printed by research.</li>
+			</ul>
+
+			<h2 class="date">09 June 2016</h2>
+			<h3 class="author">Aticius updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscdel">Removes resomi hallucinations due to loneliness.</li>
+			</ul>
+			<h3 class="author">HarpyEagle updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Adjusted the storage size of various items.</li>
+				<li class="rscadd">Added a new storage item: large boxes.</li>
+				<li class="tweak">Increased the shot capacity of energy crossbows to 8.</li>
+				<li class="tweak">Makes deadman switches hopefully more reliable.</li>
+				<li class="tweak">Inflatable barriers are studier and more resistant to puncture.</li>
+			</ul>
+			<h3 class="author">PsiOmegaDelta updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">A backpack is now required to diguise as a borg, along with the cardborg parts. The chosen backpack decides which borg module you'll appear to be using.</li>
+			</ul>
+			<h3 class="author">Techhead updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">New Random Event: Solar Storms. Similar to a radiation storm, but anywhere inside the station is safe. Also boosts solar panel output significantly for the duration.</li>
+			</ul>
+			<h3 class="author">Yoshax updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added towels to the loadout. These can be worn on the head, belt or outwear slots. You can also whip people with them for a special message and sound! In addition, using them in-hand will produce an emote where your towel yourself off.</li>
+			</ul>
+			<h3 class="author">atlantiscze updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">The PDA messaging server now reboots automatically after a power outage. This reboot takes about twenty seconds.</li>
+				<li class="tweak">Minor mapping changes to wiring and areas on the station. Brig has few sub-areas to even out the load. Research Dock is now on the research subgrid. Master grid has few extra power lines to make it a little bit more robust against physical damage.</li>
+			</ul>
+
+			<h2 class="date">08 June 2016</h2>
+			<h3 class="author">Asanadas updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Placed cryo pods on the escape shuttle (3 for humans, 1 for robots). Take care of SSD personnel!</li>
+			</ul>
+			<h3 class="author">Cirra updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">IPCs can now use the *buzz, *beep and *ping emotes.</li>
+			</ul>
+			<h3 class="author">atlantiscze updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added functioning tiny atmospherics to telecommunications.</li>
+				<li class="tweak">Various server rooms and telecommunications central compartment no longer contain supercooled atmosphere. Instead they are cooled down to 10 celsius by an air alarm, and have normal ventillation. This air alarm will trigger a warning at 30C, and alarm at 40C, which is also the point at which machines begin taking damage.</li>
+			</ul>
+
+			<h2 class="date">07 June 2016</h2>
+			<h3 class="author">Cirra updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Research grippers can now hold mech parts.</li>
+			</ul>
+			<h3 class="author">HarpyEagle updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Makes laser beams and muzzle flashes stand out in the dark.</li>
+			</ul>
+
+			<h2 class="date">05 June 2016</h2>
+			<h3 class="author">Cirra updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Adjusted the protolathe material cost of all modular computer components.</li>
+			</ul>
+
+			<h2 class="date">04 June 2016</h2>
+			<h3 class="author">Asanadas updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Nar-sie no longer causes FIX ME default turfs to display.</li>
+				<li class="tweak">Cult pylons now serve as decent light fixtures.</li>
+			</ul>
+			<h3 class="author">Cirra updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Cyborgs can no longer toggle their lights while dead.</li>
+			</ul>
+
+			<h2 class="date">02 June 2016</h2>
+			<h3 class="author">Haswell updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="maptweak">Reworked one of the break rooms on the research outpost into a work area.</li>
+				<li class="maptweak">Separated xenobiology biohazard shutters from the other research division blast doors, added controls in both xenobiology access and RD's office.</li>
+			</ul>
+
+			<h2 class="date">01 June 2016</h2>
+			<h3 class="author">Hubblenaut updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Adds new hairstyle (Ponytail 5)</li>
+			</ul>
+			<h3 class="author">Raptor1628 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Updated torch Z levels, map defines, and added non-ship Zs.</li>
+			</ul>
+
+			<h2 class="date">31 May 2016</h2>
+			<h3 class="author">Cirra updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Changed all dollar symbols to the Thaler symbol.</li>
+			</ul>
+			<h3 class="author">SinTwo updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Four new hairstyles added: Fringetail, Sleeze, Rows, Rows 2</li>
+			</ul>
+			<h3 class="author">Yoshax updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Admins can now toggle being able to hear remote LOOC.</li>
+			</ul>
+
+			<h2 class="date">29 May 2016</h2>
+			<h3 class="author">GinjaNinja32 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Rewrote drinking glasses. There are now eight types of glass, and drink appearance is based on color and the type of glass you put it in.</li>
+				<li class="rscadd">There are now 'glass extras' you can add to drinks. Straws, drink sticks, and fruit slices (yes, all of them) all work. You can add up to two extras per glass. Add extras by clicking the glass with the extra, remove by clicking the glass with an empty hand while it's in your other hand.</li>
+				<li class="rscadd">Adding 'fizzy' things (soda water, cola, etc) or ice to a drink will make it be fizzy or have ice floating in it.</li>
+			</ul>
+			<h3 class="author">HarpyEagle updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Fixes disarm-attack dislocation chances being so low that you were very likely to break the targeted limb before it would dislocate.</li>
+				<li class="bugfix">It is now possible to disarm-attack with stunbatons like with other melee weapons. Note that this means that using a stunbaton on disarm intent will hurt people.</li>
+				<li class="rscadd">Trying to move while being grabbed will now automatically resist.</li>
+				<li class="tweak">Small mobs are no longer able to pin larger mobs.</li>
+				<li class="tweak">Resisting a smaller mob's grab is more likely to be successful.</li>
+				<li class="bugfix">Fixed being able to climb onto a larger mob while restrained, weakened, unconscious, or dead.</li>
+			</ul>
+			<h3 class="author">Haswell updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added resomi science uniform to custom loadout, xenowear section.</li>
+			</ul>
+			<h3 class="author">Serithi updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Adds in lavender.</li>
+			</ul>
+			<h3 class="author">TheWelp updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Fully implements space-bikes. They are available to heist and mercenaries.</li>
+				<li class="tweak">Reworks the effect trail system (so we don't repeat the code over and over again.)</li>
+				<li class="rscadd">Added a system to invest spell slots to get more back. You can invest one spellslot at a time and you will recieve two back. Sacrificing specific items/reagents onto the spellbook will shorten the time by ten minutes. Can be done once per investment.</li>
+				<li class="tweak">Shapeshifting damage share now spreads out the damage to roughly ten damage chunks. Makes it less of a limb-gibber.</li>
+				<li class="tweak">Baleful Polymorph buffs the shapeshiftee's health pool to fifty, so no longer can you get insta-killed.</li>
+				<li class="tweak">Avian Form has been renamed to Polymorph (get it?)</li>
+				<li class="tweak">Polymorph no longer strips you when you transform.</li>
+				<li class="tweak">Polymorph and Baleful Polymorph no longer share damage.</li>
+				<li class="tweak">Armalis icons are properly centered, for real this time.</li>
+			</ul>
+			<h3 class="author">Yoshax updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Adjusting your suit sensors now displays a message to other people in range that you did so. In addition, seeing someone else adjust someone's suit sensors no longer informs you to what level.</li>
+			</ul>
+
+			<h2 class="date">25 May 2016</h2>
+			<h3 class="author">Daranz updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Food slices spawned in lunchboxes can now be actually eaten.</li>
+			</ul>
+			<h3 class="author">Haswell updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="maptweak">Minor furniture adjustments to forensics, xenobiology and xenobotany laboratories.</li>
+				<li class="rscadd">Added backpacks to xenoarcheology lockers.</li>
+				<li class="rscadd">Added clipboards to science lockers.</li>
+				<li class="rscadd">Added roleplay effects for nicotine.</li>
+				<li class="rscadd">Cigars and cigarettes now contain nicotine.</li>
+			</ul>
+
+			<h2 class="date">24 May 2016</h2>
+			<h3 class="author">Haswell updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added internal affairs closets, both secure and non-secure variants.</li>
+				<li class="maptweak">Revamped internal affairs and forensic offices.</li>
+			</ul>
+
+			<h2 class="date">22 May 2016</h2>
+			<h3 class="author">Yoshax updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">The antag uplink now offers regular discounts on randomly items.</li>
+			</ul>
+			<h3 class="author">atlantiscze updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Breaking a lot of lights at once will no longer cause massive lag spikes. This also applies to other sources of sparks.</li>
+				<li class="tweak">Malf AI Electrical Pulse ability now has a 15s cooldown to prevent spam.</li>
+				<li class="tweak">Door crush damage reduced by 25% according to feedback.</li>
+				<li class="rscadd">Electrical Storm event overhauled. It now occurs in three severities and simulates actual storm. A warning will be broadcasted shortly before it begins, and once it's over. Duration is severity-dependent. Possible effects include: Broken lights (as it's now), Hacked APCs (same as when emagged), or outright broken APCs with more severe event variants. Each affected APC will also shut down briefly, this causes station-wide power outages until the storm passes. Stronger storms last for longer and affect more APCs at once.</li>
+			</ul>
+
+			<h2 class="date">21 May 2016</h2>
+			<h3 class="author">Haswell updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="maptweak">Revamped kitchen and bar areas.</li>
+			</ul>
+			<h3 class="author">Irrationalist updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Accessories are now more 'magic' and more pleasant for non-humans to use.</li>
+				<li class="tweak">Copied gas_mask to gas_alt in masks.dmi, gas masks should not be obscure when worn by Resomi.</li>
+				<li class="imageadd">Added Resomi sprites for 'brown webbing vest', 'black webbing vest', 'white webbing vest' and 'webbing'.</li>
+				<li class="imageadd">Added Resomi sprites for Head of Security's trenchcoat and coat, and Warden's jacket. Including the grey version of the detective's leather coat.</li>
+				<li class="imageadd">Added Resomi sprites for old and new armour vests and webbing vests ('suit'-slot ones)</li>
+				<li class="bugfix">Fixed breath mask lacking a state name when worn by Resomi.</li>
+			</ul>
+
+			<h2 class="date">19 May 2016</h2>
+			<h3 class="author">Haswell updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added suit cyclers in the engineering and research outposts.</li>
+				<li class="tweak">Reworded ERT light armors and helmets to asset protection theme.</li>
+				<li class="rscadd">Added new xenobiologist's locker in xenobotany storage and xenobiology airlock, replaces botanist's lockers.</li>
+				<li class="rscadd">Added one biohazard closet to xenobotany storage.</li>
+				<li class="rscadd">Added scientist lockers and wardrobes to R&D and misc. research.</li>
+				<li class="rscadd">Added extra Emergency NanoMeds to research areas.</li>
+				<li class="rscadd">Added one science wardronbe to the research outpost locker room, replaced stray scientist's locker with xenoarcheologist's locker.</li>
+				<li class="tweak">Scientist's locker can now be unlocked with either toxins storage or R&D lab access.</li>
+				<li class="tweak">Removed toxins storage access from xenobiologists.</li>
+				<li class="tweak">Xenoarcheologist's locker now uses xenoarcheology access.</li>
+				<li class="maptweak">Toxins lab now uses toxins storage access instead of R&D access.</li>
+				<li class="maptweak">Adds xenobiology and toxins storage access to misc. research.</li>
+				<li class="maptweak">Tools from botanist's lockers in xenobotany storage are moved to the crate sitting nearby.</li>
+				<li class="maptweak">Removed one biohazard closet in xenobiology airlock, remaining closet now hold two sets of suits.</li>
+			</ul>
+			<h3 class="author">SilveryFerret updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Changes the Death Alarms from announcing over Common channel, to announcing only over Medical and Security channels.</li>
+			</ul>
+			<h3 class="author">Yoshax updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Processing strata floor can now be pried up with a crowbar.</li>
+				<li class="bugfix">Blue carpet can now also be removed with a crowbar, and has had it's ability to burn and have corners restored.</li>
+				<li class="rscadd">Added shotglasses. These can contain 10 units. They have their whole contents swalloed in one gulp. They can be produced in the autolathe or found in the booze vending machine in the bar.</li>
+			</ul>
+
+			<h2 class="date">17 May 2016</h2>
+			<h3 class="author">Techhead updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Stack items now take up storage space proportional to the size of the stack.</li>
+				<li class="tweak">Materials, rods, and tiles have had their weight class and max stack size adjusted.</li>
+				<li class="rscadd">Stacks now let you split them in any amount instead of one at a time.</li>
+			</ul>
+
+			<h2 class="date">15 May 2016</h2>
+			<h3 class="author">HarpyEagle updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Fixed lungs not rupturing in space.</li>
+			</ul>
+
+			<h2 class="date">14 May 2016</h2>
+			<h3 class="author">HarpyEagle updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Items can now be placed in pockets using the strip UI.</li>
+				<li class="rscadd">Lit welders can now be placed in pockets. Having a lit welder in your pocket sets you on fire.</li>
+			</ul>
+			<h3 class="author">Raptor1628 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Replaced standard Space Suit, AMI Hardsuit, Excavation Suit, and Anomaly Biosuit sprites.</li>
+				<li class="tweak">Restricts all station hardsuits to Humans with the exception of the CE's suit, which fits everyone but vox and diona, and the Unathi Breacher, which is for Unathi.</li>
+				<li class="rscadd">Adds alternate voidsuit types and more flavorful voidsuit descriptions.</li>
+			</ul>
+
+			<h2 class="date">11 May 2016</h2>
+			<h3 class="author">PsiOmegaDelta updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">The Cardborg costume now disguises you as a proper standard borg. This only fools synthetics (until they examine you), to and all other lifeforms you will remain your silly cardboard wearing self. - Based on RemieRichard's appearance framework from /tg/</li>
+			</ul>
+
+			<h2 class="date">08 May 2016</h2>
+			<h3 class="author">PsiOmegaDelta updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">The antag uplink now offers .45 ammunition.</li>
+			</ul>
+
+			<h2 class="date">07 May 2016</h2>
+			<h3 class="author">PsiOmegaDelta updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Can now buy the camera MIU from the 'Devices and Tools' category. Gives the user access to the station camera network on the current Z-level.</li>
+				<li class="rscadd">Activating an uplink telecrystal in hand now teleports you to a random semi-near location.</li>
+			</ul>
+
+			<h2 class="date">06 May 2016</h2>
+			<h3 class="author">HarpyEagle updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Allows AI holograms to change facing by clicking much like other mobs.</li>
+				<li class="tweak">Armor now has a chance to either block an attack or absorb a fixed portion of damage, instead of randomly blocking either nothing, half, or full damage.</li>
+				<li class="tweak">Armor protection against explosions is similarily less random now.</li>
+				<li class="tweak">Riot, ablative, and ballistic armor is less hyper-specialized. They provide moderate protection against other damage types now, while their protection against their main damage type is reduced but still very good.</li>
+			</ul>
+
+			<h2 class="date">05 May 2016</h2>
+			<h3 class="author">Daranz updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Mice and other small critters can now be eaten from hand. As a member of species eligible to eat mice, scoop a mouse and click on your character with the hand holding the mouse. The old method of eating from grab remains available both for unscoopable and scoopable creatures.</li>
+			</ul>
+
+			<h2 class="date">04 May 2016</h2>
+			<h3 class="author">Irrationalist updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Mercenary voidsuits no longer hide gloves</li>
+				<li class="tweak">Rigs now hide masks when sealed</li>
+			</ul>
+			<h3 class="author">TheWelp updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Readds Pariah space resistance. Their health is instead lowered by 15 (80->65)</li>
+				<li class="bugfix">Pariah stink now respects environment and if the person is a robot.</li>
+				<li class="rscadd">Pariahs will now vomit uncontrollably on occassion.</li>
+				<li class="tweak">Budget gloves now fit Vox.</li>
+				<li class="rscadd">Adds Vox organs. Now are both blue and alien.</li>
+				<li class="bugfix">Pariah will no longer have superhuman tasting capabilities.</li>
+				<li class="tweak">Vox hair can now be colored. It could always be colored using the random button in the character setup and honestly, it isn't lore breaking so I'll let people choose it themselves.</li>
+			</ul>
+
+			<h2 class="date">30 April 2016</h2>
+			<h3 class="author">HarpyEagle updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Mercenaries can now purchase several types of frag grenades for TC.</li>
+				<li class="rscadd">Mercenaries can now purchase grenade launchers for TC, comes pre-loaded with random grenades.</li>
+				<li class="rscadd">Many guns now have an accuracy and dispersion penalty for firing with only one hand, that roughly corresponds to the size and weight of the gun. You will see a message upon shooting with a compromised aim. The penalty is also affected by rapid-fire modes in the case of bullet throwers. To fire two-handed simply ensure that your other hand is empty and usable when shooting.</li>
+				<li class="tweak">Laser cannons now slightly increased shot capacity and have increased accuracy (better for fighting at longer ranges), can no longer fit in backpacks.</li>
+				<li class="tweak">X-ray laser gun now fires at the same pace as the laser carbine, has the same shot capacity, but does much more damage against armoured targets, and is slightly easier to one-hand with.</li>
+				<li class="tweak">Shotgun flares now blind over a larger area and illuminate for longer.</li>
+				<li class="tweak">Z8 does slightly less damage, has a larger magazine size, and slightly more armour piercing.</li>
+				<li class="bugfix">Shooting a shotgun stun shell now makes the appropriate sound.</li>
+			</ul>
+			<h3 class="author">PsiOmegaDelta updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Adds a cable painter for recoloring both coils and laid down cables.</li>
+				<li class="tweak">Pulling items now carries a slowdown penalty, based on weight or size.</li>
+			</ul>
+			<h3 class="author">atlantiscze updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">SMESes can now be damaged by gunfire/explosions/emitters, and repaired by welding tool. SMES that is too damaged will explode with strength dependent on remaining charge. Damage can be seen by examining the SMES.</li>
+				<li class="rscdel">Old cell rack PSUs have been removed (and replaced).</li>
+				<li class="rscadd">New cell rack PSUs have been added. Comes with set of simple sprites (I'm horrible spriter!), a new nanoUI that shows status of each power cell, and support for upgrades. Better capacitors increase charging/discharging rate, better matter bin increases max amount of cells that can be held inside the PSU (3/6/9 cells). PSUs do not allow precise setting of input/output levels. These new PSUs act as bridge between power cells and cables, allowing you to charge/discharge the cells into the grid.</li>
+			</ul>
+			<h3 class="author">mkalash updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Add antagonist vote now works midround</li>
+				<li class="rscadd">Ghosts can join a pool to be selected for off-station antag roles by add antag votes</li>
+				<li class="rscadd">Add antagonist option added to the crew transfer vote</li>
+			</ul>
+
+			<h2 class="date">26 April 2016</h2>
+			<h3 class="author">HarpyEagle updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Rewrote how the floating animation is updated, the animation now correctly updates when leaving space, activating/deactivating magboots, and buckling/unbuckling.</li>
+				<li class="bugfix">Examining people in crit now again indicates that they are not breathing.</li>
+				<li class="bugfix">Fixed spears giving slashing cuts and not puncture wounds.</li>
+				<li class="bugfix">Fixed wounds not bleeding when they are supposed to.</li>
+			</ul>
+			<h3 class="author">atlantiscze updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Reverts the reduction of backpack capacities introduced few days ago.</li>
+			</ul>
+
+			<h2 class="date">24 April 2016</h2>
+			<h3 class="author">HarpyEagle updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Items can now be positioned on tables by clicking.</li>
+			</ul>
+
+			<h2 class="date">23 April 2016</h2>
+			<h3 class="author">Irrationalist updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Fixed clothing (gloves and jumpsuits) hidden from description on examination, but are still being displayed on character anyway.</li>
+			</ul>
+			<h3 class="author">PsiOmegaDelta updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">The pAI Universal translation module now includes the language of the Resomi, Schechi.</li>
+			</ul>
+
+			<h2 class="date">21 April 2016</h2>
+			<h3 class="author">atlantiscze updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Being crushed by door will now push you out of the door, preventing door crush spam. To compensate, damage caused by door crushing has been increased.</li>
+			</ul>
+
+			<h2 class="date">20 April 2016</h2>
+			<h3 class="author">HarpyEagle updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Examining objects/yourself no longer triggers the gun hostage/aiming system.</li>
+			</ul>
+			<h3 class="author">Neerti updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">The toggle to shoot if the target talks on the radio defaults to off.</li>
+				<li class="bugfix">The aim intent icon now updates when clicked.</li>
+			</ul>
+
+			<h2 class="date">18 April 2016</h2>
+			<h3 class="author">HarpyEagle updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Fixes people not going unconscious when they should.</li>
+				<li class="tweak">Cigarette boxes/cigar cases/candleboxes can now hold any tiny item, such as pens or dice.</li>
+				<li class="tweak">Box storage almost doubled, they can now again hold up to 7 small items, they can no longer hold larger items.</li>
+				<li class="tweak">Backpack capacity is now 22, dufflebag capacity is now 32.</li>
+				<li class="bugfix">Dufflebags now properly apply slowdown when worn on the back. As before, they do not apply slowdown when held in hands.</li>
+				<li class="imageadd">Fixed missing dufflebag back sprites, ported them from /tg/.</li>
+				<li class="bugfix">Excavation kit can no longer be folded into cardboard.</li>
+				<li class="bugfix">Unathi knife harness can now hold more types of knives.</li>
+				<li class="tweak">Vials are now tiny items.</li>
+			</ul>
+			<h3 class="author">PsiOmegaDelta updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Can now prefill the loadout flask and vacuum-flask with a relevant liquid of your choice.</li>
+				<li class="tweak">Alters the available selection of genders for different species during character setup.</li>
+			</ul>
+
+			<h2 class="date">17 April 2016</h2>
+			<h3 class="author">mkalash updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">New voting system allows players to chose three options: high, medium, and low</li>
+				<li class="rscadd">Players can set individual antag roles to 'never' and will not be selected to antag by the game mode</li>
+				<li class="tweak">Players who do not vote for the game mode, but have not selected never, are candidates</li>
+				<li class="rscadd">The game will try the top three voted game modes before forcing extended without revote</li>
+			</ul>
+
+			<h2 class="date">15 April 2016</h2>
+			<h3 class="author">Datraen updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added Three New Mixed Gamemodes: Lizard, Changeling + Wizard; Intrigue, Traitors + Ninja; Visitors, Ninja + Wizard.</li>
+				<li class="tweak">Created a variable for latespawning antagonist templates, for customization of autospawning antagonists in mixed game modes.</li>
+				<li class="tweak">Removed JSON encoding of the PDA Manifest list.</li>
+			</ul>
+			<h3 class="author">HarpyEagle updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Shotgun flare illumination now lasts longer, around 3-4 minutes.</li>
+				<li class="bugfix">Fixed attack animation playing when using flashes even if the flash was not actually used due to being broken or recharging.</li>
+				<li class="bugfix">Fixed lightswitches layering over darkness. Now only the light layers above shadow. Lightswitch illumination is now much more subtle.</li>
+			</ul>
+			<h3 class="author">Mark9013100 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Paramedics, Medical Doctors, and the Chief Medical Officer can select white webbings from the custom loadout.</li>
+				<li class="rscadd">Can now order a wide assortment of job gear from cargo.</li>
+			</ul>
+			<h3 class="author">Sabess updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Detectives can now reskin the vintage .45 pistol.</li>
+			</ul>
+
+			<h2 class="date">14 April 2016</h2>
+			<h3 class="author">Datraen updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Manually ports /tg/station's dark click code https://github.com/tgstation/-tg-station/pull/10272 by Razharas.</li>
+				<li class="bugfix">Microwaves no longer try cooking their components while cooking.</li>
+			</ul>
+			<h3 class="author">HarpyEagle updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Fire extinguishers now spray a lot more water, will hopefully put out people on fire faster.</li>
+				<li class="tweak">Fire extinguishers now make the ground wet when you use them.</li>
+			</ul>
+			<h3 class="author">Hubblenaut/HarpyEagle updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Confused movement is a little less random. It is now easier to get to where you want to when confused, especially while walking.</li>
+				<li class="rscadd">People running into solid objects while confused can be knocked over.</li>
+			</ul>
+			<h3 class="author">Kearel updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Fixes armalis x shift, again.</li>
+				<li class="tweak">Adds spellbook descriptions in book of tomes.</li>
+				<li class="rscadd">Adds ability for bears to dance. The commands dance, boogy and boogie all work.</li>
+				<li class="rscadd">Adds ability for commanded mob subtypes to listen to the terms everybody and everyone.</li>
+			</ul>
+			<h3 class="author">PsiOmegaDelta updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Can now customize the color of select set of underwear, similar to some loadout equipment.</li>
+				<li class="rscdel">Due to new underwear names some selections may have been unset. Double-check your character setup settings.</li>
+			</ul>
+			<h3 class="author">TheWelp updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Ports more of TG's slimes. Includes Pyrite, Gold, Cerulean, Bluespace and Sepia</li>
+			</ul>
+			<h3 class="author">Yoshax updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Can take filled lunchboxes using the character loadout. These have a food item, a snack, and a drink, all configurable.</li>
+			</ul>
+			<h3 class="author">atlantiscze updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">RIGs driven by AIs inside IIS now use massively less power. In other words, the AI can walk more than few tiles without fully draining the battery.</li>
+			</ul>
+
 			<h2 class="date">11 April 2016</h2>
 			<h3 class="author">NullSnapshot updated:</h3>
 			<ul class="changes bgimages16">
@@ -74,7 +753,7 @@
 			</ul>
 			<h3 class="author">PsiOmegaDelta updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="add">Bedsheets can now be worn as capes.</li>
+				<li class="rscadd">Bedsheets can now be worn as capes.</li>
 			</ul>
 
 			<h2 class="date">06 April 2016</h2>

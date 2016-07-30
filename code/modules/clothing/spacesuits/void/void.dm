@@ -7,9 +7,10 @@
 	heat_protection = HEAD
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 20)
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	siemens_coefficient = 0.4
 
 	//Species-specific stuff.
-	species_restricted = list("Human")
+	species_restricted = list("Human", "Unathi", "Tajara", "Skrell", "Resomi")
 	sprite_sheets_refit = list(
 		"Unathi" = 'icons/mob/species/unathi/helmet.dmi',
 		"Tajara" = 'icons/mob/species/tajaran/helmet.dmi',
@@ -28,15 +29,16 @@
 /obj/item/clothing/suit/space/void
 	name = "voidsuit"
 	icon_state = "void"
-	item_state = "void"
+	item_state = "syndie_hardsuit"
+	w_class = 5//bulky item
 	desc = "A high-tech dark red space suit. Used for AI satellite maintenance."
-	slowdown = 1
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 20)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit)
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	siemens_coefficient = 0.4
 
-	species_restricted = list("Human", "Skrell")
+	species_restricted = list("Human", "Unathi", "Tajara", "Skrell", "Resomi")
 	sprite_sheets_refit = list(
 		"Unathi" = 'icons/mob/species/unathi/suit.dmi',
 		"Tajara" = 'icons/mob/species/tajaran/suit.dmi',

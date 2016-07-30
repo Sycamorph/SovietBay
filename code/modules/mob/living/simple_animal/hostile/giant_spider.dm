@@ -28,12 +28,14 @@
 	heat_damage_per_tick = 20
 	cold_damage_per_tick = 20
 	var/poison_per_bite = 5
-	var/poison_type = "toxin"
+	var/poison_type = "lexorin"
 	faction = "spiders"
 	var/busy = 0
 	pass_flags = PASSTABLE
 	move_to_delay = 6
+	var/notarget_move_delay = 6
 	speed = 3
+	controllable = 1
 
 //nursemaids - these create webs and eggs
 /mob/living/simple_animal/hostile/giant_spider/nurse
@@ -46,8 +48,9 @@
 	melee_damage_lower = 5
 	melee_damage_upper = 10
 	poison_per_bite = 10
+	move_to_delay = 4
 	var/atom/cocoon_target
-	poison_type = "stoxin"
+	poison_type = "chloralhydrate"
 	var/fed = 0
 
 //hunters have the most poison and move the fastest, so they can find prey
@@ -59,9 +62,11 @@
 	maxHealth = 120
 	health = 120
 	melee_damage_lower = 10
-	melee_damage_upper = 20
+	melee_damage_upper = 15
 	poison_per_bite = 5
-	move_to_delay = 4
+	move_to_delay = 2
+	poison_type = "stoxin"
+	var/atom/victim_target
 
 /mob/living/simple_animal/hostile/giant_spider/New(var/location, var/atom/parent)
 	get_light_and_color(parent)
@@ -72,10 +77,10 @@
 	if(isliving(target))
 		var/mob/living/L = target
 		if(L.reagents)
-			L.reagents.add_reagent("toxin", poison_per_bite)
-			if(prob(poison_per_bite))
+			L.reagents.add_reagent("toxin", rand(5,10))
+			if(L.canmove)
+				L.reagents.add_reagent(poison_type, poison_per_bite)
 				L << "\red You feel a tiny prick."
-				L.reagents.add_reagent(poison_type, 5)
 
 /mob/living/simple_animal/hostile/giant_spider/nurse/AttackingTarget()
 	var/target = ..()
@@ -83,13 +88,23 @@
 		var/mob/living/carbon/human/H = target
 		if(prob(poison_per_bite))
 			var/obj/item/organ/external/O = pick(H.organs)
-			if(!(O.status & ORGAN_ROBOT))
-				var/eggs = PoolOrNew(/obj/effect/spider/eggcluster/, list(O, src))
+			if(!(O.robotic >= ORGAN_ROBOT))
+				var/eggs = PoolOrNew(/obj/effect/spider/eggcluster, list(O, src))
 				O.implants += eggs
+
+/mob/living/simple_animal/hostile/giant_spider/UnarmedAttack(var/atom/A, var/proximity)
+	..()
+	if(isliving(A))
+		var/mob/living/L = A
+		if(L.reagents)
+			L.reagents.add_reagent("toxin", rand(5,10))
+			if(L.canmove)
+				L.reagents.add_reagent(poison_type, poison_per_bite)
+				L << "\red You feel a tiny prick."
 
 /mob/living/simple_animal/hostile/giant_spider/Life()
 	..()
-	if(!stat)
+	if(!stat && !client)
 		if(stance == HOSTILE_STANCE_IDLE)
 			//1% chance to skitter madly away
 			if(!busy && prob(1))
@@ -97,7 +112,7 @@
 				for(var/turf/T in orange(20, src))
 					move_targets.Add(T)*/
 				stop_automated_movement = 1
-				walk_to(src, pick(orange(20, src)), 1, move_to_delay)
+				walk_to(src, pick(orange(20, src)), 1, notarget_move_delay)
 				spawn(50)
 					stop_automated_movement = 0
 					walk(src,0)
@@ -112,7 +127,7 @@
 
 /mob/living/simple_animal/hostile/giant_spider/nurse/Life()
 	..()
-	if(!stat)
+	if(!stat && !client)
 		if(stance == HOSTILE_STANCE_IDLE)
 			var/list/can_see = view(src, 10)
 			//30% chance to stop wandering and do something
@@ -209,6 +224,87 @@
 		else
 			busy = 0
 			stop_automated_movement = 0
+
+/mob/living/simple_animal/hostile/giant_spider/nurse/verb/web()
+	set name = "Weave Web"
+	set category = "Spider"
+
+	if(!stat && !busy && client)
+		var/obj/effect/spider/stickyweb/W = locate() in get_turf(src)
+		if(!W)
+			busy = SPINNING_WEB
+			src.visible_message("<span class='notice'>\The [src] begins to secrete a sticky substance.</span>")
+			client.move_delay = world.time + 40
+			spawn(40)
+				if(busy == SPINNING_WEB)
+					new /obj/effect/spider/stickyweb(src.loc)
+					busy = 0
+
+
+/mob/living/simple_animal/hostile/giant_spider/nurse/Stat()
+	..()
+	stat("Food:", fed)
+
+/mob/living/simple_animal/hostile/giant_spider/nurse/verb/cocoon()
+	set name = "Create Cocoon"
+	set category = "Spider"
+
+	if(!stat && !busy && client)
+		var/list/cocoon_mobs = list()
+		for(var/mob/living/M in src.loc)
+			if(istype(M, /mob/living/simple_animal/hostile/giant_spider)) continue
+			cocoon_mobs += M
+		var/mob/living/cocoon_target = null
+		if(cocoon_mobs.len)
+			cocoon_target = input("Please, select a victim!", "Select a victim!") in cocoon_mobs
+		else
+			return
+
+		if(cocoon_target)
+			busy = SPINNING_COCOON
+			src.visible_message("<span class='notice'>\The [src] begins to secrete a sticky substance around \the [cocoon_target].</span>")
+			client.move_delay = world.time + 50
+			spawn(50)
+				if(busy == SPINNING_COCOON)
+					fed++
+					src.visible_message("<span class='warning'>\The [src] sticks a proboscis into \the [cocoon_target] and sucks a viscous substance out.</span>")
+					var/obj/effect/spider/cocoon/C = new(cocoon_target.loc)
+					C.icon_state = pick("cocoon_large1","cocoon_large2","cocoon_large3")
+					cocoon_target.loc = C
+					C.pixel_x = cocoon_target.pixel_x
+					C.pixel_y = cocoon_target.pixel_y
+					for(var/obj/item/I in C.loc)
+						I.loc = C
+					for(var/obj/structure/S in C.loc)
+						if(!S.anchored)
+							S.loc = C
+					for(var/obj/machinery/MCH in C.loc)
+						if(!MCH.anchored)
+							MCH.loc = C
+					busy = 0
+
+/mob/living/simple_animal/hostile/giant_spider/nurse/verb/eggs()
+	set name = "Lay Eggs"
+	set category = "Spider"
+
+	if(!stat && !busy && client)
+		var/obj/effect/spider/eggcluster/E = locate() in get_turf(src)
+		if(!E)
+			if(fed > 0)
+				busy = LAYING_EGGS
+				src.visible_message("<span class='notice'>\The [src] begins to lay a cluster of eggs.</span>")
+				client.move_delay = world.time + 50
+				spawn(50)
+					if(busy == LAYING_EGGS)
+						E = locate() in get_turf(src)
+						if(!E)
+							PoolOrNew(/obj/effect/spider/eggcluster, list(loc, src))
+							fed--
+						busy = 0
+			else
+				src << "<span class='warning'>You a hungry.</span>"
+		else
+			src << "<span class='warning'>At this point, already have something.</span>"
 
 #undef SPINNING_WEB
 #undef LAYING_EGGS

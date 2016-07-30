@@ -36,6 +36,20 @@
 			return
 		else
 			name = ("bookcase ([sanitize(newname)])")
+	else if(istype(O,/obj/item/weapon/wrench))
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
+		user << (anchored ? "<span class='notice'>You unfasten \the [src] from the floor.</span>" : "<span class='notice'>You secure \the [src] to the floor.</span>")
+		anchored = !anchored
+	else if(istype(O,/obj/item/weapon/screwdriver))
+		playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
+		user << "<span class='notice'>You begin dismantling \the [src].</span>"
+		if(do_after(user,25,src))
+			user << "<span class='notice'>You dismantle \the [src].</span>"
+			new/obj/item/stack/material/wood(get_turf(src), 5)
+			for(var/obj/item/weapon/book/b in contents)
+				b.loc = (get_turf(src))
+			qdel(src)
+
 	else
 		..()
 
@@ -151,7 +165,7 @@
 /obj/item/weapon/book/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(carved)
 		if(!store)
-			if(W.w_class < 3)
+			if(W.w_class < NORMAL_ITEM)
 				user.drop_item()
 				W.loc = src
 				store = W

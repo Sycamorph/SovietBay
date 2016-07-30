@@ -51,6 +51,15 @@ Location of Barsik's Sprites
 	worn_state = "hosformal"
 	siemens_coefficient = 0.6
 
+//VG Vampire-Coat
+
+/obj/item/clothing/suit/storage/draculacoat
+	name = "Vampire Coat"
+	desc = "What is a man? A miserable little pile of secrets."
+	icon_state = "draculacoat"
+	blood_overlay_type = "coat"
+	armor = list(melee = 30, bullet = 20, laser = 10, energy = 10, bomb = 0, bio = 0, rad = 0)
+
 //HoS's caps
 
 /obj/item/clothing/head/helmet/HoS/formal
@@ -202,8 +211,7 @@ Location of Barsik's Sprites
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.02
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
-	allowed = list(/obj/item/weapon/tank/emergency_oxygen, /obj/item/device/flashlight,/obj/item/weapon/gun/energy, /obj/item/weapon/gun/projectile, /obj/item/ammo_casing, /obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency_nitrogen,/obj/item/weapon/melee/energy/sword/red)
-	slowdown = 1.5
+	allowed = list(/obj/item/weapon/tank/emergency, /obj/item/device/flashlight,/obj/item/weapon/gun/energy, /obj/item/weapon/gun/projectile, /obj/item/ammo_casing, /obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/melee/energy/sword/red)
 	armor = list(melee = 65, bullet = 50, laser = 50, energy = 25, bomb = 50, bio = 100, rad = 50)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
@@ -347,39 +355,15 @@ Location of Barsik's Sprites
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	siemens_coefficient = 0.6
 
-/obj/item/clothing/suit/warvest
-	name = "Red Jacket"
-	desc = "Red Jacket. You see a label 'Made by Rorschash Ind.'."
-	var/base_icon_state = "warvest"
-	var/open =1
-	blood_overlay_type = "armor"
+/obj/item/clothing/suit/storage/toggle/gang/warriors
+	name = "red vest"
+	desc = "Vest of gang ''The Warriors''. On the back of the vest, painted wings and skull."
+	icon_state = "warvest"
+	item_state = "warvest"
+	icon_open = "warvest_open"
+	icon_closed = "warvest"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-
-	update_icon()
-		if(open)
-			icon_state="[base_icon_state]_open"
-		else
-			icon_state="[base_icon_state]"
-
-	verb/toggle()
-		set name = "Toggle Red Jacket Buttons"
-		set category = "Object"
-		set src in usr
-
-		if(!usr.canmove || usr.stat || usr.restrained())
-			return 0
-
-		if(open)
-			usr << "You button up the jacket."
-		else
-			usr << "You unbutton the jacket."
-		open=!open
-		update_icon()
-		usr.update_inv_wear_suit()
-
-/obj/item/clothing/suit/warvest/New()
-	. = ..()
-	update_icon()
+	armor = list(melee = 10, bullet = 5, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
 
 
 // Other shit.
@@ -407,7 +391,6 @@ Location of Barsik's Sprites
 	desc = "The attire of a true krieger. All shall fall, and only das vaterland will remain."
 	item_state = "rig-nazi"
 	icon_state = "rig-nazi"
-	slowdown = 1
 	species_restricted = list("exclude","Vox")//GAS THE VOX
 	armor = list(melee = 40, bullet = 30, laser = 30, energy = 15, bomb = 35, bio = 100, rad = 20)
 	allowed = list(/obj/item/weapon/gun,/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/melee/)
@@ -425,7 +408,6 @@ Location of Barsik's Sprites
 	desc = "Crafted with the pride of the proletariat. The last thing the enemy sees is the bottom of this armor's boot."
 	item_state = "rig-soviet"
 	icon_state = "rig-soviet"
-	slowdown = 1
 	species_restricted = list("exclude","Vox")//HET
 	armor = list(melee = 40, bullet = 30, laser = 30, energy = 15, bomb = 35, bio = 100, rad = 20)
 	allowed = list(/obj/item/weapon/gun,/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/melee/)
@@ -498,7 +480,7 @@ Location of Barsik's Sprites
 	desc = "A heavily armored suit that protects against a lot of things. Used in special operations."
 	icon_state = "rig-deathsquad"
 	item_state = "rig-deathsquad"
-	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency_oxygen,/obj/item/weapon/tank/emergency_nitrogen,/obj/item/weapon/pinpointer,/obj/item/weapon/shield/energy,/obj/item/weapon/plastique,/obj/item/weapon/disk/nuclear)
+	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency,/obj/item/weapon/pinpointer,/obj/item/weapon/shield/energy,/obj/item/weapon/plastique,/obj/item/weapon/disk/nuclear)
 	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 60, bio = 100, rad = 60)
 	siemens_coefficient = 0.5
 	species_restricted = list("exclude","Vox")

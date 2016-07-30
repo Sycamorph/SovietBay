@@ -88,7 +88,7 @@
 				src << "<span class='notice'>You feel a breath of fresh air enter your lungs. It feels good.</span>"
 				H << "<span class='warning'>Repeat at least every 7 seconds.</span>"
 
-			else
+			else if(!(M == src && apply_pressure(M, M.zone_sel.selecting)))
 				help_shake_act(M)
 			return 1
 
@@ -131,6 +131,9 @@
 						return 0
 					if(get_species() == "Machine")
 						H << "\red They have no blood"
+						return 0
+					if((get_species() == "Monkey") && (H.mind.vampire.bloodusable >50))
+						H << "\red I will not drink the blood of monkeys. It's disgusting. I'm not so hungry."
 						return 0
 					//we're good to suck the blood, blaah
 					//and leave an attack log
@@ -244,12 +247,12 @@
 				rand_damage *= 2
 			real_damage = max(1, real_damage)
 
-			var/armour = run_armor_check(affecting, "melee")
+			var/armour = run_armor_check(hit_zone, "melee")
 			// Apply additional unarmed effects.
 			attack.apply_effects(H, src, armour, rand_damage, hit_zone)
 
 			// Finally, apply damage to target
-			apply_damage(real_damage, (attack.deal_halloss ? HALLOSS : BRUTE), affecting, armour, sharp=attack.sharp, edge=attack.edge)
+			apply_damage(real_damage, (attack.deal_halloss ? HALLOSS : BRUTE), hit_zone, armour, sharp=attack.sharp, edge=attack.edge)
 
 		if(I_DISARM)
 			M.attack_log += text("\[[time_stamp()]\] <font color='red'>Disarmed [src.name] ([src.ckey])</font>")
@@ -280,7 +283,7 @@
 				var/armor_check = run_armor_check(affecting, "melee")
 				apply_effect(3, WEAKEN, armor_check)
 				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-				if(armor_check < 2)
+				if(armor_check < 100)
 					visible_message("<span class='danger'>[M] has pushed [src]!</span>")
 				else
 					visible_message("<span class='warning'>[M] attempted to push [src]!</span>")
@@ -340,7 +343,7 @@
 	if(!target_zone)
 		return 0
 	var/obj/item/organ/external/organ = get_organ(check_zone(target_zone))
-	if(!organ || organ.is_dislocated() || organ.dislocated == -1)
+	if(!organ || organ.dislocated > 0 || organ.dislocated == -1) //don't use is_dislocated() here, that checks parent
 		return 0
 
 	user.visible_message("<span class='warning'>[user] begins to dislocate [src]'s [organ.joint]!</span>")
@@ -373,3 +376,39 @@
 		spawn(1)
 			qdel(rgrab)
 	return success
+
+/*
+	We want to ensure that a mob may only apply pressure to one organ of one mob at any given time. Currently this is done mostly implicitly through
+	the behaviour of do_after() and the fact that applying pressure to someone else requires a grab:
+
+	If you are applying pressure to yourself and attempt to grab someone else, you'll change what you are holding in your active hand which will stop do_mob()
+	If you are applying pressure to another and attempt to apply pressure to yourself, you'll have to switch to an empty hand which will also stop do_mob()
+	Changing targeted zones should also stop do_mob(), preventing you from applying pressure to more than one body part at once.
+*/
+/mob/living/carbon/human/proc/apply_pressure(mob/living/user, var/target_zone)
+	var/obj/item/organ/external/organ = get_organ(target_zone)
+	if(!organ || !(organ.status & ORGAN_BLEEDING) || (organ.robotic >= ORGAN_ROBOT))
+		return 0
+
+	if(organ.applied_pressure)
+		user << "<span class='warning'>[ismob(organ.applied_pressure)? "Someone" : "\A [organ.applied_pressure]"] is already applying pressure to [user == src? "your [organ.name]" : "[src]'s [organ.name]"].</span>"
+		return 0
+
+	if(user == src)
+		user.visible_message("\The [user] starts applying pressure to \his [organ.name]!", "You start applying pressure to your [organ.name]!")
+	else
+		user.visible_message("\The [user] starts applying pressure to [src]'s [organ.name]!", "You start applying pressure to [src]'s [organ.name]!")
+	spawn(0)
+		organ.applied_pressure = user
+
+		//apply pressure as long as they stay still and keep grabbing
+		do_mob(user, src, INFINITY, target_zone, progress = 0)
+
+		organ.applied_pressure = null
+
+		if(user == src)
+			user.visible_message("\The [user] stops applying pressure to \his [organ.name]!", "You stop applying pressure to your [organ.name]!")
+		else
+			user.visible_message("\The [user] stops applying pressure to [src]'s [organ.name]!", "You stop applying pressure to [src]'s [organ.name]!")
+
+	return 1

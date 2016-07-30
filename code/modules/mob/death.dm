@@ -7,7 +7,7 @@
 	icon = null
 	invisibility = 101
 	update_canmove()
-	dead_mob_list -= src
+	remove_from_dead_mob_list()
 
 	var/atom/movable/overlay/animation = null
 	animation = new(loc)
@@ -41,20 +41,20 @@
 	flick(anim, animation)
 	new remains(loc)
 
-	dead_mob_list -= src
+	remove_from_dead_mob_list()
 	spawn(15)
 		if(animation)	qdel(animation)
 		if(src)			qdel(src)
 
 
-/mob/proc/death(gibbed,deathmessage="seizes up and falls limp...")
+/mob/proc/death(gibbed,deathmessage="seizes up and falls limp...",silent=0)
 
 	if(stat == DEAD)
 		return 0
 
 	facing_dir = null
 
-	if(!gibbed && deathmessage != "no message") // This is gross, but reliable. Only brains use it.
+	if(!gibbed && deathmessage != "no message" && !silent) // This is gross, but reliable. Only brains use it.
 		src.visible_message("<b>\The [src.name]</b> [deathmessage]")
 
 	stat = DEAD
@@ -66,9 +66,6 @@
 
 	layer = MOB_LAYER
 
-	if(blind && client)
-		blind.layer = 0
-
 	sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
 	see_in_dark = 8
 	see_invisible = SEE_INVISIBLE_LEVEL_TWO
@@ -79,6 +76,7 @@
 	//TODO:  Change death state to health_dead for all these icon files.  This is a stop gap.
 
 	if(healths)
+		healths.overlays = null // This is specific to humans but the relevant code is here; shouldn't mess with other mobs.
 		if("health7" in icon_states(healths.icon))
 			healths.icon_state = "health7"
 		else
@@ -86,9 +84,8 @@
 			log_debug("[src] ([src.type]) died but does not have a valid health7 icon_state (using health6 instead). report this error to Ccomp5950 or your nearest Developer")
 
 	timeofdeath = world.time
-	if(mind) mind.store_memory("Time of death: [worldtime2text()]", 0)
-	living_mob_list -= src
-	dead_mob_list |= src
+	if(mind) mind.store_memory("Time of death: [stationtime2text()]", 0)
+	switch_from_living_to_dead_mob_list()
 
 	updateicon()
 

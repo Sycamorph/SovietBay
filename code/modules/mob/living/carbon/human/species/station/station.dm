@@ -12,13 +12,30 @@
 	secondary_langs = list(LANGUAGE_SOL_COMMON)
 	name_language = null // Use the first-name last-name generator rather than a language scrambler
 	min_age = 17
-	max_age = 110
+	max_age = 100
 
 	spawn_flags = CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
-/datum/species/human/get_bodytype()
-	return "Human"
+	has_limbs = list(
+		"chest" =  list("path" = /obj/item/organ/external/chest/human),
+		"groin" =  list("path" = /obj/item/organ/external/groin/human),
+		"head" =   list("path" = /obj/item/organ/external/head/human),
+		"l_arm" =  list("path" = /obj/item/organ/external/arm/human),
+		"r_arm" =  list("path" = /obj/item/organ/external/arm/right/human),
+		"l_leg" =  list("path" = /obj/item/organ/external/leg/human),
+		"r_leg" =  list("path" = /obj/item/organ/external/leg/right/human),
+		"l_hand" = list("path" = /obj/item/organ/external/hand/human),
+		"r_hand" = list("path" = /obj/item/organ/external/hand/right/human),
+		"l_foot" = list("path" = /obj/item/organ/external/foot/human),
+		"r_foot" = list("path" = /obj/item/organ/external/foot/right/human)
+		)
+
+/datum/species/human/get_bodytype(var/gender)
+	if(gender == "female")
+		return "Human_f"
+	else
+		return "Human"
 
 /datum/species/unathi
 	name = "Unathi"
@@ -36,6 +53,7 @@
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_UNATHI)
 	name_language = LANGUAGE_UNATHI
+	health_hud_intensity = 4
 
 	min_age = 18
 	max_age = 60
@@ -96,6 +114,7 @@
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_SIIK_MAAS)
 	name_language = LANGUAGE_SIIK_MAAS
+	health_hud_intensity = 3
 
 	min_age = 17
 	max_age = 80
@@ -152,9 +171,10 @@
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_SKRELLIAN)
 	name_language = null
+	health_hud_intensity = 2.5
 
 	min_age = 19
-	max_age = 80
+	max_age = 90
 
 	spawn_flags = CAN_JOIN | IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
@@ -181,6 +201,8 @@
 	show_ssd = "completely quiescent"
 	num_alternate_languages = 1
 	name_language = LANGUAGE_ROOTSPEAK
+	spawns_with_stack = 0
+	health_hud_intensity = 1.5
 
 	min_age = 1
 	max_age = 300
@@ -241,6 +263,7 @@
 	flesh_color = "#907E4A"
 
 	reagent_tag = IS_DIONA
+	genders = list(PLURAL)
 
 /datum/species/diona/can_understand(var/mob/other)
 	var/mob/living/carbon/alien/diona/D = other
@@ -345,6 +368,7 @@
 	heat_discomfort_strings = list(
 		"Your CPU temperature probes warn you that you are approaching critical heat levels!"
 		)
+	genders = list(NEUTER)
 
 /datum/species/machine/handle_death(var/mob/living/carbon/human/H)
 	..()
@@ -354,4 +378,3 @@
 
 /datum/species/machine/sanitize_name(var/new_name)
 	return sanitizeName(new_name, allow_numbers = 1)
-

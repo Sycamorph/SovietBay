@@ -2,7 +2,6 @@ var/datum/antagonist/actor/actor
 
 /datum/antagonist/actor
 	id = MODE_ACTOR
-	bantype = "actor"
 	role_text = "NanoTrasen Actor"
 	role_text_plural = "NanoTrasen Actors"
 	welcome_text = "You've been hired to entertain people through the power of television!"
@@ -44,6 +43,10 @@ var/datum/antagonist/actor/actor
 	set name = "Join as Actor"
 	set desc = "Join as an Actor to entertain the crew through television!"
 
+	if(usr.mind.special_role == "NanoTrasen Actor")
+		usr << "No more actors may spawn at the current time."
+		return
+
 	if(!MayRespawn(1))
 		return
 
@@ -51,7 +54,7 @@ var/datum/antagonist/actor/actor
 	if(choice != "Yes")
 		return
 
-	if(isghost(usr) || isnewplayer(usr))
+	if(isghostmind(usr.mind) || isnewplayer(usr))
 		if(actor.current_antagonists.len >= actor.hard_cap)
 			usr << "No more actors may spawn at the current time."
 			return

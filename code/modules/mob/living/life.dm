@@ -20,7 +20,7 @@
 		//Chemicals in the body
 		handle_chemicals_in_body()
 
-		//Blood
+		//Blood - do this after chemicals so that dexplus doesn't keep people awake with no heart
 		handle_blood()
 
 		//Random events (vomiting etc)
@@ -47,13 +47,16 @@
 	// human/handle_regular_status_updates() needs a cleanup, as blindness should be handled in handle_disabilities()
 	if(handle_regular_status_updates()) // Status & health update, are we dead or alive etc.
 		handle_disabilities() // eye, ear, brain damages
-		handle_status_effects() //all special effects, stunned, weakened, jitteryness, hallucination, sleeping, etc
+		handle_statuses() //all special effects, stunned, weakened, jitteryness, hallucination, sleeping, etc
 
 	handle_actions()
 
 	update_canmove()
 
 	handle_regular_hud_updates()
+
+	eye_blink()
+
 
 /mob/living/proc/handle_breathing()
 	return
@@ -93,19 +96,55 @@
 			stat = CONSCIOUS
 		return 1
 
-//this updates all special effects: stunned, sleeping, weakened, druggy, stuttering, etc..
-/mob/living/proc/handle_status_effects()
-	if(paralysis)
-		paralysis = max(paralysis-1,0)
+/mob/living/proc/handle_statuses()
+	handle_stunned()
+	handle_weakened()
+	handle_paralysed()
+	handle_stuttering()
+	handle_silent()
+	handle_drugged()
+	handle_slurring()
+
+/mob/living/proc/handle_stunned()
 	if(stunned)
-		stunned = max(stunned-1,0)
+		AdjustStunned(-1)
 		if(!stunned)
 			update_icons()
+	return stunned
 
+/mob/living/proc/handle_weakened()
 	if(weakened)
 		weakened = max(weakened-1,0)
 		if(!weakened)
 			update_icons()
+	return weakened
+
+/mob/living/proc/handle_stuttering()
+	if(stuttering)
+		stuttering = max(stuttering-1, 0)
+	return stuttering
+
+/mob/living/proc/handle_silent()
+	if(silent)
+		silent = max(silent-1, 0)
+	return silent
+
+/mob/living/proc/handle_drugged()
+	if(druggy)
+		druggy = max(druggy-1, 0)
+	return druggy
+
+/mob/living/proc/handle_slurring()
+	if(slurring)
+		slurring = max(slurring-1, 0)
+	return slurring
+
+/mob/living/proc/handle_paralysed()
+	if(paralysis)
+		AdjustParalysis(-1)
+		if(!paralysis)
+			update_icons()
+	return paralysis
 
 /mob/living/proc/handle_disabilities()
 	//Eyes
@@ -134,23 +173,19 @@
 	return 1
 
 /mob/living/proc/handle_vision()
-	client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask, global_hud.nvg, global_hud.thermal, global_hud.meson, global_hud.science)
 	update_sight()
 
 	if(stat == DEAD)
 		return
 
-	if(blind)
-		if(eye_blind)
-			blind.layer = 18
-		else
-			blind.layer = 0
-			if (disabilities & NEARSIGHTED)
-				client.screen += global_hud.vimpaired
-			if (eye_blurry)
-				client.screen += global_hud.blurry
-			if (druggy)
-				client.screen += global_hud.druggy
+	if(eye_blind)
+		overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
+	else
+		clear_fullscreen("blind")
+		set_fullscreen(disabilities & NEARSIGHTED, "impaired", /obj/screen/fullscreen/impaired, 1)
+		set_fullscreen(eye_blurry, "blurry", /obj/screen/fullscreen/blurry)
+		set_fullscreen(druggy, "high", /obj/screen/fullscreen/high)
+
 	if(machine)
 		var/viewflags = machine.check_eye(src)
 		if(viewflags < 0)

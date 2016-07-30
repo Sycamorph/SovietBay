@@ -56,8 +56,6 @@
 			else		src << "<font color='red'>Error: Private-Message: Client not found. They may have lost connection, so try using an adminhelp!</font>"
 			return
 
-	if (src.handle_spam_prevention(msg,MUTE_ADMINHELP))
-		return
 
 	//clean the message if it's not sent by a high-rank admin
 	//if(!check_rights(R_SERVER|R_DEBUG,0))
@@ -136,7 +134,10 @@
 //		src << "<span class='notice'>[msg]</span>"
 //		return
 
-	send2adminirc("PlayerPM to [sender] from [key_name(src)]: [lhtml_decode(msg)]")
+	var/rank = "Player"
+	if(holder)
+		rank = holder.rank
+	send2adminirc("[rank]PM to [sender] from [key_name(src)]: [html_decode(msg)]")
 
 	src << "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "", src) + " to <span class='name'>IRC-[sender]</span>: <span class='message'>[msg]</span></span></span>"
 

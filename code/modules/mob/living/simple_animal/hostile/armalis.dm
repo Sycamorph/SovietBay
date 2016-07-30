@@ -1,4 +1,4 @@
-/mob/living/simple_animal/armalis
+/mob/living/simple_animal/hostile/armalis
 	name = "Vox Armalis"
 	desc = "In truth, this scares you."
 
@@ -20,8 +20,6 @@
 	melee_damage_lower = 15
 	melee_damage_upper = 20
 
-	pixel_x = -10
-
 	min_oxy = 0
 	max_co2 = 0
 	max_tox = 0
@@ -30,8 +28,10 @@
 
 	a_intent = I_HURT
 
+	pixel_x = -5
 
-/mob/living/simple_animal/armalis/armored
+
+/mob/living/simple_animal/hostile/armalis/armored
 	icon_state = "armalis_armored"
 	icon_living = "armalis_armored"
 	icon_dead = "armalis_armored_dead"

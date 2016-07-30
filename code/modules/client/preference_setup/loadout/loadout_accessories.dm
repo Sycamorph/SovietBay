@@ -28,6 +28,18 @@
 	display_name = "armband, science"
 	path = /obj/item/clothing/accessory/armband/science
 
+/datum/gear/accessory/wallet
+	display_name = "wallet"
+	path = /obj/item/weapon/storage/wallet
+/datum/gear/accessory/wallet/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice())
+
+/datum/gear/accessory/wallet_poly
+	display_name = "wallet, polychromic"
+	path = /obj/item/weapon/storage/wallet/poly
+	cost = 2
+
 /datum/gear/accessory/holster
 	display_name = "holster, armpit"
 	path = /obj/item/clothing/accessory/holster/armpit
@@ -62,6 +74,28 @@
 	display_name = "webbing, security"
 	path = /obj/item/clothing/accessory/storage/black_vest
 	allowed_roles = list("Security Officer","Head of Security","Warden")
+
+/datum/gear/accessory/white_vest
+	display_name = "webbing, medical"
+	path = /obj/item/clothing/accessory/storage/white_vest
+	allowed_roles = list("Paramedic","Chief Medical Officer","Medical Doctor")
+
+/datum/gear/accessory/brown_drop_pouches
+	display_name = "drop pouches, engineering"
+	path = /obj/item/clothing/accessory/storage/brown_drop_pouches
+	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer")
+
+
+/datum/gear/accessory/black_drop_pouches
+	display_name = "drop pouches, security"
+	path = /obj/item/clothing/accessory/storage/black_drop_pouches
+	allowed_roles = list("Security Officer","Head of Security","Warden")
+
+
+/datum/gear/accessory/white_drop_pouches
+	display_name = "drop pouches, medical"
+	path = /obj/item/clothing/accessory/storage/white_drop_pouches
+	allowed_roles = list("Paramedic","Chief Medical Officer","Medical Doctor")
 
 /datum/gear/accessory/webbing
 	display_name = "webbing, simple"

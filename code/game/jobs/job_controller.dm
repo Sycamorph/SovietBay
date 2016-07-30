@@ -7,15 +7,18 @@ var/global/datum/controller/occupations/job_master
 /datum/controller/occupations
 		//List of all jobs
 	var/list/occupations = list()
+		//Associative list of all jobs, by type
+	var/list/occupations_by_type
 		//Players who need jobs
 	var/list/unassigned = list()
 		//Debug info
 	var/list/job_debug = list()
 
 
-	proc/SetupOccupations(var/faction = "Station")
+	proc/SetupOccupations(var/faction = "Station", var/setup_titles = 0)
 		occupations = list()
-		var/list/all_jobs = typesof(/datum/job)
+		occupations_by_type = list()
+		var/list/all_jobs = list(/datum/job/assistant) | using_map.allowed_jobs
 		if(!all_jobs.len)
 			world << "<span class='warning'>Error setting up jobs, no job datums found!</span>"
 			return 0
@@ -24,6 +27,24 @@ var/global/datum/controller/occupations/job_master
 			if(!job)	continue
 			if(job.faction != faction)	continue
 			occupations += job
+			occupations_by_type[job.type] = job
+			if(!setup_titles) continue
+			if(job.department_flag & COM)
+				command_positions |= job.title
+			if(job.department_flag & SEC)
+				security_positions |= job.title
+			if(job.department_flag & ENG)
+				engineering_positions += job.title
+			if(job.department_flag & MED)
+				medical_positions |= job.title
+			if(job.department_flag & SCI)
+				science_positions |= job.title
+			if(job.department_flag & CRG)
+				cargo_positions |= job.title
+			if(job.department_flag & CIV)
+				civilian_positions |= job.title
+			if(job.department_flag & MSC)
+				nonhuman_positions |= job.title
 
 
 		return 1
@@ -41,6 +62,12 @@ var/global/datum/controller/occupations/job_master
 			if(!J)	continue
 			if(J.title == rank)	return J
 		return null
+
+	proc/ShouldCreateRecords(var/rank)
+		if(!rank) return 0
+		var/datum/job/job = GetJob(rank)
+		if(!job) return 0
+		return job.create_record
 
 	proc/GetPlayerAltTitle(mob/new_player/player, rank)
 		return player.client.prefs.GetPlayerAltTitle(GetJob(rank))
@@ -94,7 +121,7 @@ var/global/datum/controller/occupations/job_master
 			if(flag && !(flag in player.client.prefs.be_special_role))
 				Debug("FOC flag failed, Player: [player], Flag: [flag], ")
 				continue
-			if(player.client.prefs.GetJobDepartment(job, level) & job.flag)
+			if(player.client.prefs.CorrectLevel(job,level))
 				Debug("FOC pass, Player: [player], Level:[level]")
 				candidates += player
 		return candidates
@@ -268,7 +295,7 @@ var/global/datum/controller/occupations/job_master
 						continue
 
 					// If the player wants that job on this level, then try give it to him.
-					if(player.client.prefs.GetJobDepartment(job, level) & job.flag)
+					if(player.client.prefs.CorrectLevel(job,level))
 
 						// If the job isn't filled
 						if((job.current_positions < job.spawn_positions) || job.spawn_positions == -1)
@@ -342,7 +369,7 @@ var/global/datum/controller/occupations/job_master
 						else
 							permitted = 1
 
-						if(G.whitelisted && (G.whitelisted != H.species.name || !is_alien_whitelisted(H, G.whitelisted)))
+						if(G.whitelisted && (G.whitelisted != H.species.name || !is_species_whitelisted(H, G.whitelisted)))
 							permitted = 0
 
 						if(!permitted)
@@ -363,10 +390,8 @@ var/global/datum/controller/occupations/job_master
 						else
 							spawn_in_storage += thing
 			//Equip job items.
-			job.equip(H)
 			job.setup_account(H)
-			job.equip_backpack(H)
-			job.equip_survival(H)
+			job.equip(H, H.mind ? H.mind.role_alt_title : "")
 			job.apply_fingerprints(H)
 
 			//If some custom items could not be equipped before, try again now.
@@ -415,7 +440,7 @@ var/global/datum/controller/occupations/job_master
 			if(department_account)
 				remembered_info += "<b>Your department's account number is:</b> #[department_account.account_number]<br>"
 				remembered_info += "<b>Your department's account pin is:</b> [department_account.remote_access_pin]<br>"
-				remembered_info += "<b>Your department's account funds are:</b> $[department_account.money]<br>"
+				remembered_info += "<b>Your department's account funds are:</b> ю[department_account.money]<br>"
 
 			H.mind.store_memory(remembered_info)
 
@@ -434,20 +459,23 @@ var/global/datum/controller/occupations/job_master
 					captain_announcement.Announce("All hands, Captain [H.real_name] on deck!", new_sound=announce_sound)
 
 			//Deferred item spawning.
-			if(spawn_in_storage && spawn_in_storage.len)
-				var/obj/item/weapon/storage/B
-				for(var/obj/item/weapon/storage/S in H.contents)
-					B = S
-					break
+			for(var/thing in spawn_in_storage)
+				var/datum/gear/G = gear_datums[thing]
+				var/metadata = H.client.prefs.gear[G.display_name]
+				var/item = G.spawn_item(null, metadata)
 
-				if(!isnull(B))
-					for(var/thing in spawn_in_storage)
-						H << "<span class='notice'>Placing \the [thing] in your [B.name]!</span>"
-						var/datum/gear/G = gear_datums[thing]
-						var/metadata = H.client.prefs.gear[G.display_name]
-						G.spawn_item(B, metadata)
-				else
-					H << "<span class='danger'>Failed to locate a storage object on your mob, either you spawned with no arms and no backpack or this is a bug.</span>"
+				var/atom/placed_in = H.equip_to_storage(item)
+				if(placed_in)
+					H << "<span class='notice'>Placing \the [item] in your [placed_in.name]!</span>"
+					continue
+				if(H.equip_to_appropriate_slot(item))
+					H << "<span class='notice'>Placing \the [item] in your inventory!</span>"
+					continue
+				if(H.put_in_hands(item))
+					H << "<span class='notice'>Placing \the [item] in your hands!</span>"
+					continue
+				H << "<span class='danger'>Failed to locate a storage object on your mob, either you spawned with no arms and no backpack or this is a bug.</span>"
+				qdel(item)
 
 		if(istype(H)) //give humans wheelchairs, if they need them.
 			var/obj/item/organ/external/l_foot = H.get_organ("l_foot")
@@ -465,10 +493,7 @@ var/global/datum/controller/occupations/job_master
 		if(job.supervisors)
 			H << "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
 
-		if(job.idtype)
-			spawnId(H, rank, alt_title)
-			H.equip_to_slot_or_del(new /obj/item/device/radio/headset(H), slot_l_ear)
-			H << "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>"
+		H << "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>"
 
 		if(job.req_admin_notify)
 			H << "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>"
@@ -484,47 +509,6 @@ var/global/datum/controller/occupations/job_master
 		BITSET(H.hud_updateflag, IMPLOYAL_HUD)
 		BITSET(H.hud_updateflag, SPECIALROLE_HUD)
 		return H
-
-
-	proc/spawnId(var/mob/living/carbon/human/H, rank, title)
-		if(!H)	return 0
-		var/obj/item/weapon/card/id/C = null
-
-		var/datum/job/job = null
-		for(var/datum/job/J in occupations)
-			if(J.title == rank)
-				job = J
-				break
-
-		if(job)
-			if(job.title == "Cyborg")
-				return
-			else
-				C = new job.idtype(H)
-				C.access = job.get_access()
-		else
-			C = new /obj/item/weapon/card/id(H)
-		if(C)
-			C.rank = rank
-			C.assignment = title ? title : rank
-			H.set_id_info(C)
-
-			//put the player's account number onto the ID
-			if(H.mind && H.mind.initial_account)
-				C.associated_account_number = H.mind.initial_account.account_number
-
-			H.equip_to_slot_or_del(C, slot_wear_id)
-
-		H.equip_to_slot_or_del(new /obj/item/device/pda(H), slot_belt)
-		if(locate(/obj/item/device/pda,H))
-			var/obj/item/device/pda/pda = locate(/obj/item/device/pda,H)
-			pda.owner = H.real_name
-			pda.ownjob = C.assignment
-			pda.ownrank = C.rank
-			pda.name = "PDA-[H.real_name] ([pda.ownjob])"
-
-		return 1
-
 
 	proc/LoadJobs(jobsfile) //ran during round setup, reads info from jobs.txt -- Urist
 		if(!config.load_jobs_from_txt)
@@ -580,11 +564,11 @@ var/global/datum/controller/occupations/job_master
 				if(!job.player_old_enough(player.client))
 					level6++
 					continue
-				if(player.client.prefs.GetJobDepartment(job, 1) & job.flag)
+				if(player.client.prefs.CorrectLevel(job, 1))
 					level1++
-				else if(player.client.prefs.GetJobDepartment(job, 2) & job.flag)
+				else if(player.client.prefs.CorrectLevel(job, 2))
 					level2++
-				else if(player.client.prefs.GetJobDepartment(job, 3) & job.flag)
+				else if(player.client.prefs.CorrectLevel(job, 3))
 					level3++
 				else level4++ //not selected
 
@@ -618,11 +602,14 @@ var/global/datum/controller/occupations/job_master
 				if(H)
 					H << "Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job. Spawning you at the default spawn point instead."
 					H.forceMove(pick(latejoin))
-				return "has arrived on the station"
+				return "прибывает на станцию"
 	else
 		if(return_location)
 			return pick(latejoin)
 		else
 			if(H)
 				H.forceMove(pick(latejoin))
-			return "has arrived on the station"
+			return "прибывает на станцию"
+
+/datum/controller/occupations/proc/GetJobByType(var/job_type)
+	return occupations_by_type[job_type]

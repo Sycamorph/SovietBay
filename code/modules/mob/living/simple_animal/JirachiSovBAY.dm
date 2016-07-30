@@ -93,7 +93,7 @@
 
 
 
-/mob/living/simple_animal/jirachi/Process_Spacemove(var/check_drift = 0)		//Move freely in space
+/mob/living/simple_animal/jirachi/Allow_Spacemove(var/check_drift = 0)		//Move freely in space
 	return 1
 
 
@@ -319,7 +319,7 @@
 	else
 		src << "\blue I teleport [I] to the [A]"
 		I << "\red Suddenly, you've been blinded with a flash of light!"
-		flick("e_flash", I.flash)
+		flick("e_flash", I.flash_eyes())
 
 	I.forceMove(pick(L))
 
@@ -443,7 +443,7 @@
 		if(processing == 0)
 			return
 
-		if(Z.stat == 2 || !Z in living_mob_list || !Z)
+		if(Z.stat == 2 || !Z in living_mob_list_ || !Z)
 			src << "\red It...died..."
 			processing = 0
 			return
@@ -649,7 +649,7 @@
 		else
 			src << "\blue I teleport [I] to the [A]"
 			I << "\red Suddenly, you've been blinded with a flash of light!"
-			flick("e_flash", I.flash)
+			flick("e_flash", I.flash_eyes())
 
 		I.forceMove(pick(L))
 
@@ -748,7 +748,7 @@
 		name = "Jirachi-S"	//Change it's sprite!
 
 		for(var/mob/living/carbon/P in view(7,src))
-			flick("e_flash", P.flash)
+			flick("e_flash", P.flash_eyes())
 			P << "\red <b>Jirachi starts to glow very brightly!</b>"
 	else
 		if(star_form)
@@ -1055,14 +1055,14 @@
 				else
 					var/client/C = pick(candidates)
 					for(var/mob/living/P in view(7,get_turf(src.loc)))
-						flick("e_flash", P.flash)
+						flick("e_flash", P.flash_eyes())
 						P << "\red \b Stone starts to glow very brightly, as it starts to transform into some kind of creature..."
 
 
 					var/mob/living/simple_animal/jirachi = new /mob/living/simple_animal/jirachi
 					jirachi.loc = get_turf(src)
 					jirachi.key = C.key
-					dead_mob_list -= C
+					dead_mob_list_ -= C
 					jirachi << "\blue <i><b>Strange feeling...</b></i>"
 					jirachi << "\blue <i><b>I feel energy pulsating from every inch of my body</b></i>"
 					jirachi << "\blue <i><b>Star power begins to emerge from me, breaking my involucre</b></i>"

@@ -22,6 +22,10 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	var/datum/announcement/priority/emergency_shuttle_called = new(0, new_sound = sound('sound/AI/shuttlecalled.ogg'))
 	var/datum/announcement/priority/emergency_shuttle_recalled = new(0, new_sound = sound('sound/AI/shuttlerecalled.ogg'))
 
+/datum/emergency_shuttle_controller/New()
+	escape_pods = list()
+	..()
+
 /datum/emergency_shuttle_controller/proc/process()
 	if (wait_for_launch)
 		if (evac && auto_recall && world.time >= auto_recall_time)
@@ -48,12 +52,12 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 			var/estimated_time = 0
 			if (evac)
 				estimated_time = round(emergency_shuttle.estimate_launch_time()/60,1)
-				emergency_shuttle_docked.Announce("The Emergency Shuttle has docked with the station. You have approximately [estimated_time] minute\s to board the Emergency Shuttle.")
+				emergency_shuttle_docked.Announce("Аварийный шаттл состыковалс&#255; со станцией. Расчетное врем&#255; до отлета - [estimated_time] минуты.")
 			else
 				estimated_time = round(estimate_launch_time()/60,1)
-				priority_announcement.Announce("The scheduled Crew Transfer Shuttle to [dock_name] has docked with the station. It will depart in approximately [estimated_time] minute\s.")
+				priority_announcement.Announce("Шаттл состыковалс&#255; со станцией. Расчетное врем&#255; до отлета - [estimated_time] минуты.")
 			if(config.announce_shuttle_dock_to_irc)
-				send2mainirc("The shuttle has docked with the station. It will depart in approximately [estimated_time] minute\s.")
+				send2mainirc("Шаттл состыковалс&#255; со станцией. Расчетное врем&#255; до отлета - [estimated_time] минуты.")
 
 		//arm the escape pods
 		if (evac)
@@ -82,7 +86,8 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	shuttle.move_time = SHUTTLE_TRANSIT_DURATION
 
 	evac = 1
-	emergency_shuttle_called.Announce("An emergency evacuation shuttle has been called. It will arrive in approximately [round(estimate_arrival_time()/60)] minutes.")
+	emergency_shuttle_called.Announce("Вызван шаттл экстренной эвакуации. Расчетное врем&#255; прибыти&#255; - [round(estimate_arrival_time()/60)] минут.")
+
 	for(var/area/A in world)
 		if(istype(A, /area/hallway))
 			A.readyalert()
@@ -99,7 +104,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	//reset the shuttle transit time if we need to
 	shuttle.move_time = SHUTTLE_TRANSIT_DURATION
 
-	priority_announcement.Announce("A crew transfer to [dock_name] has been scheduled. The shuttle has been called. It will arrive in approximately [round(estimate_arrival_time()/60)] minutes.")
+	priority_announcement.Announce("В св&#255;зи с запланированным концом смены на станцию отправлен шаттл. Расчетное врем&#255; прибыти&#255; - [round(estimate_arrival_time()/60)] минут.")
 
 //recalls the shuttle
 /datum/emergency_shuttle_controller/proc/recall()
@@ -109,14 +114,14 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	shuttle.cancel_launch(src)
 
 	if (evac)
-		emergency_shuttle_recalled.Announce("The emergency shuttle has been recalled.")
+		emergency_shuttle_recalled.Announce("Шаттл экстренной эвакуации отозван.")
 
 		for(var/area/A in world)
 			if(istype(A, /area/hallway))
 				A.readyreset()
 		evac = 0
 	else
-		priority_announcement.Announce("The scheduled crew transfer has been cancelled.")
+		priority_announcement.Announce("Шаттл отозван.")
 
 /datum/emergency_shuttle_controller/proc/can_call()
 	if (!universe.OnShuttleCall(null))

@@ -9,9 +9,12 @@
 	var/mob/living/owner = null
 	var/gender = FEMALE
 	var/iscloaking = 0 // handles the vampire cloak toggle
+	var/ismenacing = 0 // handles the vampire menace toggle
 	var/list/powers = list() // list of available powers and passives, see defines in setup.dm
 	var/mob/living/carbon/human/draining // who the vampire is draining of blood
 	var/nullified = 0 //Nullrod makes them useless for a short while.
+	var/smitecounter = 0 //Keeps track of how badly the vampire has been affected by holy tiles.
+	var/cloak_remove = 0
 
 /datum/vampire/New(gend = FEMALE)
 	..()
@@ -28,6 +31,9 @@
 	verbs += /client/vampire/proc/vampire_rejuvinate
 	verbs += /client/vampire/proc/vampire_hypnotise
 	verbs += /client/vampire/proc/vampire_glare
+	for(var/mob/living/carbon/human/C in range(0))
+		C.change_skin_tone(40)
+
 	//testing purposes REMOVE BEFORE PUSH TO MASTER
 	/*for(var/handler in typesof(/client/proc))
 		if(findtext("[handler]","vampire_"))
@@ -57,7 +63,13 @@
 				verbs += /client/vampire/proc/vampire_shadowstep
 			if(VAMP_SLAVE)
 				verbs += /client/vampire/proc/vampire_enthrall
+			if(VAMP_SHADOW)
+//				verbs += /client/vampire/proc/vampire_shadowmenace
+				continue
 			if(VAMP_FULL)
+				verbs += /client/vampire/proc/vampire_undeath
+				verbs += /client/vampire/proc/vampire_spawncape
+				verbs -= /client/vampire/proc/infect_vampirism
 				continue
 
 /mob/proc/remove_vampire_powers()
@@ -84,6 +96,9 @@
 		bloodusable = src.mind.vampire.bloodusable
 		if(!H.vessel.get_reagent_amount("blood"))
 			src << "\red They've got no blood left to give."
+			break
+		if((H.get_species() == "Monkey") && (src.mind.vampire.bloodusable >50))
+			src << "\red I will not drink this blood. It's disgusting."
 			break
 		if(H.stat < 2) //alive
 			blood = min(10, H.vessel.get_reagent_amount("blood"))// if they have less than 10 blood, give them the remnant else they get 10 blood
@@ -150,7 +165,12 @@
 			vamp.powers.Add(VAMP_SLAVE)
 
 	// TIER 5
-	if(vamp.bloodtotal >= 500)
+	if(vamp.bloodtotal >= 400)
+		if(!(VAMP_SHADOW in vamp.powers))
+			vamp.powers.Add(VAMP_SHADOW)
+
+	// TIER 6
+	if(vamp.bloodtotal >= 666)
 		if(!(VAMP_FULL in vamp.powers))
 			vamp.powers.Add(VAMP_FULL)
 
@@ -187,9 +207,14 @@
 				if(VAMP_BLINK)
 					src << "\blue You have gained the ability to shadowstep, which makes you disappear into nearby shadows at the cost of blood."
 					verbs += /client/vampire/proc/vampire_shadowstep
+				if(VAMP_SHADOW)
+					src << "\blue You have gained mastery over the shadows. In the dark, you can mask your identity, instantly terrify non-vampires who approach you, and enter the chapel for a longer period of time."
+//					verbs += /client/vampire/proc/vampire_shadowmenace //also buffs Cloak of Shadows
 				if(VAMP_FULL)
 					src << "\blue You have reached your full potential and are no longer weak to the effects of anything holy and your vision has been improved greatly."
-					//no verb
+					verbs += /client/vampire/proc/vampire_undeath
+					verbs += /client/vampire/proc/vampire_spawncape
+					verbs += /client/vampire/proc/infect_vampirism
 
 					//This should hold all the vampire related powers
 
@@ -266,7 +291,7 @@
 	return T
 
 /client/vampire/proc/vampire_rejuvinate()
-	set category = "Abilities"
+	set category = "Vampire"
 	set name = "Rejuvinate "
 	set desc= "Flush your system with spare blood to remove any incapacitating effects"
 	var/datum/mind/M = usr.mind
@@ -290,7 +315,7 @@
 			M.current.verbs += /client/vampire/proc/vampire_rejuvinate
 
 /client/vampire/proc/vampire_hypnotise()
-	set category = "Abilities"
+	set category = "Vampire"
 	set name = "Hypnotise" // (20)
 	set desc= "A piercing stare that incapacitates your victim for a good length of time."
 	var/datum/mind/M = usr.mind
@@ -336,7 +361,7 @@
 			return
 
 /client/vampire/proc/vampire_disease()
-	set category = "Abilities"
+	set category = "Vampire"
 	set name = "Diseased Touch (200)"
 	set desc = "Touches your victim with infected blood giving them the Shutdown Syndrome which quickly shutsdown their major organs resulting in a quick painful death."
 	var/datum/mind/M = usr.mind
@@ -387,8 +412,51 @@
 	M.current.verbs -= /client/vampire/proc/vampire_disease
 	spawn(1800) M.current.verbs += /client/vampire/proc/vampire_disease
 
+/client/vampire/proc/vampire_returntolife()
+	set category = "Vampire"
+	set name = "Return To Life"
+	set desc= "Instantly return to un-life."
+	var/datum/mind/M = usr.mind
+	if(!M)	return
+	if(M.current.on_fire || M.vampire.smitecounter)
+		M.current << "span class='warning'>Your corpse has been sanctified!</span>"
+		return
+
+	if(M.current.vampire_power(0, 3))
+		M.current.remove_vampire_blood(M.vampire.bloodusable)
+		M.current.revive(0)
+		M.current << "<span class='sinister'>You awaken, ready to strike fear into the hearts of mortals once again.</span>"
+		M.current.update_canmove()
+		M.current.make_vampire()
+	M.current.regenerate_icons()
+	src.verbs -= /client/vampire/proc/vampire_returntolife
+
+/client/vampire/proc/vampire_undeath()
+	set category = "Vampire"
+	set name = "Rise Dead"
+	set desc= "Instantly return to un-life."
+	var/datum/mind/M = usr.mind
+	if(!M)	return
+
+	if(M.current.vampire_power(0, 3))
+		if(!M.current.stat)
+			M.current << "\blue You need to be dead to do that. Well, you're already dead; undead to be precise, but you need to be DEAD dead to use it."
+			return
+		if(M.current.on_fire || M.vampire.smitecounter)
+			M.current << "\blue Your corpse has been sanctified!"
+			return
+			M.current << "You attempt to recover."
+
+		M.current.update_canmove()
+		M.current.remove_vampire_powers()
+
+		sleep(rand(300,450))
+		M.current << "Your corpse twitches slightly. It's safe to assume nobody noticed."
+		src.verbs += /client/vampire/proc/vampire_returntolife
+		return 1
+
 /client/vampire/proc/vampire_glare()
-	set category = "Abilities"
+	set category = "Vampire"
 	set name = "Glare"
 	set desc= "A scary glare that incapacitates people for a short while around you."
 	var/datum/mind/M = usr.mind
@@ -402,6 +470,7 @@
 		M.current.visible_message("\red <b>[M.current]'s eyes emit a blinding flash!")
 		//M.vampire.bloodusable -= 10
 		M.current.verbs -= /client/vampire/proc/vampire_glare
+		M.current.cloak_remove(50)
 		spawn(800)
 			M.current.verbs += /client/vampire/proc/vampire_glare
 		if(istype(M.current:glasses, /obj/item/clothing/glasses/sunglasses/blindfold))
@@ -418,22 +487,24 @@
 			C << "\red You are blinded by [M.current]'s glare"
 
 /client/vampire/proc/vampire_shapeshift() //Hi.  I'm stupid and there are missing procs all around.  Namely the randomname proc.  I can't find it and can't code a new one because I am bad.  Sorry!
-	set category = "Abilities"
+	set category = "Vampire"
 	set name = "Shapeshift (50)"
-	set desc = "This does nothing.  It's broken.  Sorry!"//orig text: Changes your name and appearance at the cost of 50 blood and has a cooldown of 3 minutes.
-/*	var/datum/mind/M = usr.mind
+	set desc = "Changes your name and appearance at the cost of 50 blood and has a cooldown of 3 minutes."//orig text: Changes your name and appearance at the cost of 50 blood and has a cooldown of 3 minutes.
+	var/datum/mind/M = usr.mind
 	if(!M) return
 	if(M.current.vampire_power(50, 0))
 		M.current.visible_message("<span class='warning'>[M.current.name] transforms!</span>")
 		M.current.client.prefs.real_name = M.current.generate_name() //random_name(M.current.gender)
-		M.current.client.prefs.randomize_appearance_for(M.current)
+		M.current.client.prefs.randomize_appearance_and_body_for(M.current)
 		M.current.regenerate_icons()
 		M.current.remove_vampire_blood(50)
 		M.current.verbs -= /client/vampire/proc/vampire_shapeshift
-		spawn(1800) M.current.verbs += /client/vampire/proc/vampire_shapeshift
-*/
+		M.current.cloak_remove(50)
+		spawn(1800)
+		M.current.verbs += /client/vampire/proc/vampire_shapeshift
+
 /client/vampire/proc/vampire_screech()
-	set category = "Abilities"
+	set category = "Vampire"
 	set name = "Chiropteran  Screech (90)"
 	set desc = "An extremely loud shriek that stuns nearby humans in a four-tile radius, as well as shattering the windows."
 	var/datum/mind/M = usr.mind
@@ -457,10 +528,11 @@
 		playsound(M.current.loc, 'sound/effects/creepyshriek.ogg', 100, 1)
 		M.current.remove_vampire_blood(90)
 		M.current.verbs -= /client/vampire/proc/vampire_screech
+		M.current.cloak_remove(50)
 		spawn(3600) M.current.verbs += /client/vampire/proc/vampire_screech
 
 /client/vampire/proc/vampire_enthrall()
-	set category = "Abilities"
+	set category = "Vampire"
 	set name = "Enthrall (150)"
 	set desc = "You use a large portion of your power to sway those loyal to none to be loyal to you only."
 	var/datum/mind/M = usr.mind
@@ -475,6 +547,7 @@
 		return
 	M.current.visible_message("\red [M.current.name] bites [C.name]'s neck!", "\red You bite [C.name]'s neck and begin the flow of power.")
 	C << "<span class='warning'>You feel the tendrils of evil invade your mind.</span>"
+	M.current.cloak_remove(50)
 	if(!ishuman(C))
 		M.current << "\red You can only enthrall humans"
 		return
@@ -492,7 +565,7 @@
 		return
 
 /client/vampire/proc/vampire_cloak()
-	set category = "Abilities"
+	set category = "Vampire"
 	set name = "Cloak of Darkness (toggle)"
 	set desc = "Toggles whether you are currently cloaking yourself in darkness."
 	var/datum/mind/M = usr.mind
@@ -501,23 +574,41 @@
 		M.vampire.iscloaking = !M.vampire.iscloaking
 		M.current << "\blue You will now be [M.vampire.iscloaking ? "hidden" : "seen"] in darkness."
 
-/mob/proc/handle_vampire_cloak()
-	if(!mind || !mind.vampire || !ishuman(src))
-		alpha = 255
-		return
-	var/turf/simulated/T = get_turf(src)
 
-	if(!istype(T))
-		return 0
+/mob/proc/cloak_remove(time)
+	usr.mind.vampire.cloak_remove = 1
+	handle_vampire_cloak()
+	sleep(time)
+	usr.mind.vampire.cloak_remove = 0
+
+/mob/proc/handle_vampire_cloak()
+	if(!mind || !mind.vampire || !ishuman(src) || !canmove)
+		alpha = 255
+		color = "#FFFFFF"
+		return
+
+	if(mind.vampire.cloak_remove == 1)
+		alpha = 255
+		color = "#FFFFFF"
+		return
+
+	var/turf/T = get_turf(src)
 
 	if(!mind.vampire.iscloaking)
 		alpha = 255
+		color = "#FFFFFF"
 		return 0
-//	if(T.lighting_lumcount <= 2)
-//		alpha = round((255 * 0.15))
-//		return 1
+
+	if((T.get_lumcount() * 10) <= 2)
+		alpha = round((255 * 0.50))
+		color = "#000000"
+		if(VAMP_SHADOW in mind.vampire.powers)
+			alpha = round((255 * 0.15))
+			color = "#000000"
+		return 1
 	else
 		alpha = round((255 * 0.80))
+		color = "#FFFFFF"
 
 /mob/proc/can_enthrall(mob/living/carbon/C)
 	var/enthrall_safe = 0
@@ -569,7 +660,7 @@
 	msg_admin_attack("[key_name_admin(src)] has mind-slaved [key_name_admin(H)] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[H.x];Y=[H.y];Z=[H.z]'>JMP</a>.")
 
 /client/vampire/proc/vampire_bats()
-	set category = "Abilities"
+	set category = "Vampire"
 	set name = "Summon Bats (60)"
 	set desc = "You summon a pair of space bats who attack nearby targets until they or their target is dead."
 	var/datum/mind/M = usr.mind
@@ -594,11 +685,12 @@
 			new /mob/living/simple_animal/hostile/scarybat(M.current.loc, M.current)
 		M.current.remove_vampire_blood(60)
 		M.current.verbs -= /client/vampire/proc/vampire_bats
+		M.current.cloak_remove(50)
 		spawn(1200) M.current.verbs += /client/vampire/proc/vampire_bats
 
 /client/vampire/proc/vampire_jaunt()
 	//AHOY COPY PASTE INCOMING
-	set category = "Abilities"
+	set category = "Vampire"
 	set name = "Mist Form (30)"
 	set desc = "You take on the form of mist for a short period of time."
 	var/jaunt_duration = 50 //in deciseconds
@@ -653,14 +745,16 @@
 			qdel(holder)
 		M.current.remove_vampire_blood(30)
 		M.current.verbs -= /client/vampire/proc/vampire_jaunt
+		M.current.cloak_remove(50)
 		spawn(600) M.current.verbs += /client/vampire/proc/vampire_jaunt
 
 // Blink for vamps
 // Less smoke spam.
 /client/vampire/proc/vampire_shadowstep()
-	set category = "Abilities"
-	set name = "Shadowstep (30)"
+	set category = "Vampire"
+	set name = "Shadowstep (20)"
 	set desc = "Vanish into the shadows."
+
 	var/datum/mind/M = usr.mind
 	if(!M) return
 
@@ -669,10 +763,9 @@
 	var/outer_tele_radius = 6
 
 	// Maximum lighting_lumcount.
-//	var/max_lum = 1
+	var/max_lum = 1
 
-	if(M.current.vampire_power(30, 0))
-		if(M.current.buckled) M.current.buckled.unbuckle_mob()
+	if(M.current.vampire_power(20, 0))
 		spawn(0)
 			var/list/turfs = new/list()
 			for(var/turf/T in range(usr,outer_tele_radius))
@@ -681,14 +774,11 @@
 				if(T.density) continue
 				if(T.x>world.maxx-outer_tele_radius || T.x<outer_tele_radius)	continue	//putting them at the edge is dumb
 				if(T.y>world.maxy-outer_tele_radius || T.y<outer_tele_radius)	continue
-
-				// LIGHTING CHECK
-			//	if(T.lighting_lumcount > max_lum) continue
-			//	turfs += T
-				//M.current.remove_vampire_blood(30) This isn't the right place for this either.
+				if((T.get_lumcount() * 10) > max_lum) continue
+				turfs += T
 
 			if(!turfs.len)
-				usr << "\red You cannot find darkness to step to."
+				usr << "<span class='warning'>You cannot find darkness to step to.</span>"
 				return
 
 			var/turf/picked = pick(turfs)
@@ -696,24 +786,56 @@
 			if(!picked || !isturf(picked))
 				return
 			M.current.ExtinguishMob()
-			if(M.current.buckled)
-				M.current.buckled.unbuckle_mob()
-			var/atom/movable/overlay/animation = new /atom/movable/overlay( get_turf(usr) )
-			animation.name = usr.name
-			animation.density = 0
-			animation.anchored = 1
-			animation.icon = usr.icon
-			animation.alpha = 127
-			animation.layer = 5
-			//animation.master = src
 			usr.loc = picked
-			M.current.remove_vampire_blood(30)
-			spawn(10)
-				qdel(animation)
-//		M.current.remove_vampire_blood(30)
 		M.current.verbs -= /client/vampire/proc/vampire_shadowstep
-		spawn(20)
-			M.current.verbs += /client/vampire/proc/vampire_shadowstep
+		sleep(20)
+		M.current.verbs += /client/vampire/proc/vampire_shadowstep
+/*
+/client/vampire/proc/vampire_shadowmenace()
+	set category = "Vampire"
+	set name = "Shadowy Menace (toggle)"
+	set desc = "Terrify anyone who looks at you in the dark."
+	var/datum/mind/M = usr.mind
+	if(!M) return
+
+	if(M.current.vampire_power(0, 0))
+		M.vampire.ismenacing = !M.vampire.ismenacing
+		M.current << "\blue You will [M.vampire.ismenacing ? "now" : "no longer"] terrify those who see you the in dark."
+
+/mob/proc/handle_vampire_menace()
+	if(!mind || !mind.vampire || !ishuman(src))
+		mind.vampire.ismenacing = 0
+		return
+
+	if(!mind.vampire.ismenacing)
+		mind.vampire.ismenacing = 0
+		return 0
+
+	var/turf/T = get_turf(src)
+
+	if(T.get_lumcount() > 2)
+		mind.vampire.ismenacing = 0
+		return 0
+
+	for(var/mob/living/carbon/C in oview(6))
+		if(prob(35))	continue //to prevent fearspam
+		if(!C.vampire_affected(mind.current))	continue
+		C.stuttering += 20
+		C << "\blue Your heart is filled with dread, and you shake uncontrollably."
+*/
+/client/vampire/proc/vampire_spawncape()
+	set category = "Vampire"
+	set name = "Spawn Cape"
+	set desc = "Acquire a fabulous, yet fearsome cape."
+
+	var/datum/mind/M = usr.mind
+	if(!M) return
+
+	if(M.current.vampire_power(0, 0))
+		var/obj/item/clothing/suit/storage/draculacoat/D = new /obj/item/clothing/suit/storage/draculacoat(M.current.loc, M.current)
+		M.current.put_in_any_hand_if_possible(D)
+		M.current.verbs -= /client/vampire/proc/vampire_spawncape
+		M.current.cloak_remove(50)
 
 /mob/proc/remove_vampire_blood(amount = 0)
 	var/bloodold
@@ -836,3 +958,107 @@
 	if(istype(loc, /turf/space))
 		check_sun()
 	mind.vampire.nullified = max(0, mind.vampire.nullified - 1)
+
+/client/vampire/proc/infect_vampirism()
+	set category = "Vampire"
+	set name = "Infect Vampirism (only one uses)"
+	set desc= "Infected vampirism another player. One use."
+	var/datum/mind/M = usr.mind
+	if(!M) return
+	var/mob/living/carbon/human/C = M.current.vampire_active(0, 0, 1)
+	if(!C) return
+	if(C==usr)
+		M.current << "\red You can't do that to yourself"
+		return
+	if(C.get_species() == "Machine")
+		M.current << "\red You can only infect humans"
+		return
+	M.current.visible_message("\red <b>[M.current.name] bites [C.name]'s neck!", "\red <b>You bite [C.name]'s neck!")
+	M.current.verbs -= /client/vampire/proc/infect_vampirism
+	if(M.current.vampire_power(0, 0))
+		if(do_mob(M.current, C, 50))
+			if(C.mind && C.mind.vampire)	return
+			else
+				M.current << "\red Your infected [C.name]."
+				C << "\red Do you feel that something has changed in you"
+				C.porphyric_hemophilia()
+		else
+			M.current << "\red Not enough time to complete."
+			return
+/mob/living/carbon/human/proc/porphyric_hemophilia()
+	var/i = 30
+	while(i)
+		sleep(600)
+		i--
+		if(i >= 20)	 continue
+		if(i == 19)
+			src << "\red <b>Чувствую себ&#255; странно."
+		if(i == 18)
+			emote("cough")
+		if(i == 17)
+			src << "\red <b>Мне страшно..."
+		if(i == 16)
+			src << "\red <b>Не могу пон&#255;ть, чего-то хочетс&#255;, но чего?"
+		if(i == 15)
+			src << "\red <b>Странное чувство усиливаетс&#255;."
+		if(i == 14)
+			emote("collapse")
+			stuttering = 20
+		if(i == 13)  continue
+		if(i == 12)
+			src << "\red <b>Хочу м&#255;са, сырого!"
+		if(i == 11)
+			emote("collapse")
+			stuttering = 20
+		if(i == 10)
+			emote("mumble")
+		if(i == 9)
+			emote("me",1,"дрожит!")
+		if(i == 8)
+			emote("wave")
+			src << "\red <b>Кружитс&#255; голова!"
+		if(i == 7)
+			oxyloss = 20
+			emote("gasp")
+		if(i == 6)
+			oxyloss = 40
+			emote("gasp")
+		if(i == 5)
+			src << "\red <b>Мо&#255; кожа побледнела."
+			change_skin_tone(40)
+		if(i == 4)
+			src << "\red <b>За мной кто-то следит?"
+		if(i == 3)
+			emote("scream")
+			src << "\red <b>Что это? Агрх... показалось."
+		if(i == 2)
+			src << "\red <b>Черт! Больно!"
+			halloss = 50
+		if(i == 1)
+			emote("scream")
+			src << "\red <b>Агрх... это ужасно... кажетс&#255;... &#255;... умираю!"
+			oxyloss = 20
+			emote("gasp")
+			sleep(50)
+			oxyloss = 40
+			emote("gasp")
+			sleep(50)
+			oxyloss = 80
+			sleep(50)
+			oxyloss = 120
+			sleep(50)
+			oxyloss = 170
+			sleep(50)
+			death()
+			if(prob(65))
+				sleep(30)
+				revive(1)
+				Weaken(10)
+				Stun(10)
+				stuttering = 10
+				make_vampire()
+				sleep(10)
+				emote("me",1,"резко вобрав в себ&#255; возух, [get_visible_gender() == MALE ? "открыл" : get_visible_gender() == FEMALE ? "открыла" : "открыл"] глаза!")
+				src << "\red <b>Я возвращаюсь к жизни... мо&#255; кожа бледна, а тело хладно словно лед... &#255; вампир, создание ночи... кровь, хочу крови..."
+			else
+				src << "\red <b>Болезнь сразила мен&#255;, мое тело не выдержало."

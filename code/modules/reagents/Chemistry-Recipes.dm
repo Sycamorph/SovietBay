@@ -39,7 +39,7 @@
 	var/result_amount = 0
 
 	//how far the reaction proceeds each time it is processed. Used with either REACTION_RATE or HALF_LIFE macros.
-	var/reaction_rate = HALF_LIFE(0)
+	var/reaction_rate = HALF_LIFE(1)
 
 	//if less than 1, the reaction will be inhibited if the ratio of products/reagents is too high.
 	//0.5 = 50% yield -> reaction will only proceed halfway until products are removed.
@@ -53,6 +53,7 @@
 	var/reaction_sound = 'sound/effects/bubbles.ogg'
 
 	var/log_is_important = 0 // If this reaction should be considered important for logging. Important recipes message admins when mixed, non-important ones just log to file.
+
 /datum/chemical_reaction/proc/can_happen(var/datum/reagents/holder)
 	//check that all the required reagents are present
 	if(!holder.has_all_reagents(required_reagents))
@@ -576,6 +577,7 @@
 	required_reagents = list("water" = 1, "potassium" = 1)
 	result_amount = 2
 	mix_message = null
+	reaction_rate = HALF_LIFE(0)
 
 /datum/chemical_reaction/explosion_potassium/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/datum/effect/effect/system/reagents_explosion/e = new()
@@ -595,6 +597,7 @@
 	result = null
 	required_reagents = list("aluminum" = 1, "potassium" = 1, "sulfur" = 1 )
 	result_amount = null
+	reaction_rate = HALF_LIFE(0)
 
 /datum/chemical_reaction/flash_powder/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -608,7 +611,7 @@
 					if(istype(M:glasses, /obj/item/clothing/glasses/sunglasses))
 						continue
 
-				flick("e_flash", M.flash)
+				M.flash_eyes()
 				M.Weaken(15)
 
 			if(4 to 5)
@@ -616,7 +619,7 @@
 					if(istype(M:glasses, /obj/item/clothing/glasses/sunglasses))
 						continue
 
-				flick("e_flash", M.flash)
+				M.flash_eyes()
 				M.Stun(5)
 
 /datum/chemical_reaction/emp_pulse
@@ -641,6 +644,7 @@
 	required_reagents = list("glycerol" = 1, "pacid" = 1, "sacid" = 1)
 	result_amount = 2
 	log_is_important = 1
+	reaction_rate = HALF_LIFE(0)
 
 /datum/chemical_reaction/nitroglycerin/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/datum/effect/effect/system/reagents_explosion/e = new()
@@ -676,6 +680,7 @@
 	result = null
 	required_reagents = list("potassium" = 1, "sugar" = 1, "phosphorus" = 1)
 	result_amount = 0.4
+	reaction_rate = HALF_LIFE(0) //need to process everything at once for the smoke strength calculation to work
 
 /datum/chemical_reaction/chemsmoke/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -695,6 +700,7 @@
 	required_reagents = list("surfactant" = 1, "water" = 1)
 	result_amount = 2
 	mix_message = "The solution violently bubbles!"
+	reaction_rate = HALF_LIFE(0)
 
 /datum/chemical_reaction/foam/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -714,6 +720,7 @@
 	result = null
 	required_reagents = list("aluminum" = 3, "foaming_agent" = 1, "pacid" = 1)
 	result_amount = 5
+	reaction_rate = HALF_LIFE(0)
 
 /datum/chemical_reaction/metalfoam/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -732,6 +739,7 @@
 	result = null
 	required_reagents = list("iron" = 3, "foaming_agent" = 1, "pacid" = 1)
 	result_amount = 5
+	reaction_rate = HALF_LIFE(0)
 
 /datum/chemical_reaction/ironfoam/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -982,6 +990,7 @@
 /* Slime cores */
 
 /datum/chemical_reaction/slime
+	reaction_rate = HALF_LIFE(0)
 	var/required = null
 
 /datum/chemical_reaction/slime/can_happen(var/datum/reagents/holder)
@@ -1055,8 +1064,7 @@
 	P.loc = get_turf(holder.my_atom)
 	..()
 
-
-//Gold - no longer removed.
+//Gold
 /datum/chemical_reaction/slime/crit
 	name = "Slime Crit"
 	id = "m_tele"
@@ -1064,22 +1072,23 @@
 	required_reagents = list("phoron" = 1)
 	result_amount = 1
 	required = /obj/item/slime_extract/gold
+	var/list/possible_mobs = list(
+							/mob/living/simple_animal/hostile/alien,
+							/mob/living/simple_animal/hostile/alien/drone,
+							/mob/living/simple_animal/hostile/alien/sentinel,
+							/mob/living/simple_animal/hostile/giant_spider,
+							/mob/living/simple_animal/hostile/giant_spider/nurse,
+							/mob/living/simple_animal/hostile/giant_spider/hunter,
+							/mob/living/simple_animal/hostile/scarybat,
+							/mob/living/simple_animal/hostile/creature,
+							/mob/living/simple_animal/hostile/mimic,
+							/mob/living/simple_animal/hostile/carp/pike,
+							/mob/living/simple_animal/hostile/commanded/nanomachine
+							)
 
 /datum/chemical_reaction/slime/crit/on_reaction(var/datum/reagents/holder)
-	var/list/crit = typesof(/mob/living/simple_animal/hostile) - /mob/living/simple_animal/hostile
-	playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
-	for(var/mob/living/carbon/human/M in viewers(get_turf(holder.my_atom), null))
-		if(M.eyecheck() <= 0)
-			flick("e_flash", M.flash)
-
-	for(var/i = 1, i <= 4 + rand(1,2), i++)
-		var/chosen = pick(crit)
-		var/obj/B = new chosen
-		if(B)
-			B.loc = get_turf(holder.my_atom)
-			if(prob(50))
-				for(var/j = 1, j <= rand(1, 3), j++)
-					step(B, pick(NORTH, SOUTH, EAST, WEST))
+	var/type = pick(possible_mobs)
+	new type(get_turf(holder.my_atom))
 	..()
 
 //Silver
@@ -1096,7 +1105,7 @@
 	playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
 	for(var/mob/living/carbon/human/M in viewers(get_turf(holder.my_atom), null))
 		if(M.eyecheck() < FLASH_PROTECTION_MODERATE)
-			flick("e_flash", M.flash)
+			M.flash_eyes()
 
 	for(var/i = 1, i <= 4 + rand(1,2), i++)
 		var/chosen = pick(borks)
@@ -1184,6 +1193,7 @@
 	required = /obj/item/slime_extract/yellow
 
 /datum/chemical_reaction/slime/cell/on_reaction(var/datum/reagents/holder, var/created_volume)
+	..()
 	var/obj/item/weapon/cell/slime/P = new /obj/item/weapon/cell/slime
 	P.loc = get_turf(holder.my_atom)
 
@@ -1327,6 +1337,94 @@
 	var/obj/effect/golemrune/Z = new /obj/effect/golemrune
 	Z.loc = get_turf(holder.my_atom)
 	Z.announce_to_ghosts()
+
+//Sepia
+/datum/chemical_reaction/slime/film
+	name = "Slime Film"
+	id = "m_film"
+	result = null
+	required_reagents = list("blood" = 1)
+	result_amount = 2
+	required = /obj/item/slime_extract/sepia
+
+/datum/chemical_reaction/slime/film/on_reaction(var/datum/reagents/holder)
+	for(var/i in 1 to result_amount)
+		new /obj/item/device/camera_film(get_turf(holder.my_atom))
+	..()
+
+/datum/chemical_reaction/slime/camera
+	name = "Slime Camera"
+	id = "m_camera"
+	result = null
+	required_reagents = list("phoron" = 1)
+	result_amount = 1
+	required = /obj/item/slime_extract/sepia
+
+/datum/chemical_reaction/slime/camera/on_reaction(var/datum/reagents/holder)
+	new /obj/item/device/camera(get_turf(holder.my_atom))
+	..()
+
+//Bluespace
+/datum/chemical_reaction/slime/teleport
+	name = "Slime Teleport"
+	id = "m_blink"
+	result = null
+	required_reagents = list("phoron" = 1)
+	required = /obj/item/slime_extract/bluespace
+	reaction_sound = 'sound/effects/teleport.ogg'
+
+/datum/chemical_reaction/slime/teleport/on_reaction(var/datum/reagents/holder)
+	var/list/turfs = list()
+	for(var/turf/T in orange(holder.my_atom,6))
+		turfs += T
+	for(var/atom/movable/a in viewers(holder.my_atom,2))
+		if(!a.simulated)
+			continue
+		a.forceMove(pick(turfs))
+	..()
+
+//pyrite
+/datum/chemical_reaction/slime/paint
+	name = "Slime Paint"
+	id = "m_paint"
+	result = null
+	required_reagents = list("phoron" = 1)
+	required = /obj/item/slime_extract/pyrite
+
+/datum/chemical_reaction/slime/paint/on_reaction(var/datum/reagents/holder)
+	new /obj/item/weapon/reagent_containers/glass/paint/random(get_turf(holder.my_atom))
+	..()
+
+//cerulean
+/datum/chemical_reaction/slime/extract_enhance
+	name = "Extract Enhancer"
+	id = "m_enhance"
+	result = null
+	required_reagents = list("phoron" = 1)
+	required = /obj/item/slime_extract/cerulean
+
+/datum/chemical_reaction/slime/extract_enhance/on_reaction(var/datum/reagents/holder)
+	new /obj/item/weapon/slimesteroid2(get_turf(holder.my_atom))
+	..()
+
+/datum/chemical_reaction/soap_key
+	name = "Soap Key"
+	id = "skey"
+	result = null
+	required_reagents = list("frostoil" = 2, "cleaner" = 5)
+	var/strength = 3
+
+/datum/chemical_reaction/soap_key/can_happen(var/datum/reagents/holder)
+	if(holder.my_atom && istype(holder.my_atom, /obj/item/weapon/soap))
+		return ..()
+	return 0
+
+/datum/chemical_reaction/soap_key/on_reaction(var/datum/reagents/holder)
+	var/obj/item/weapon/soap/S = holder.my_atom
+	if(S.key_data)
+		var/obj/item/weapon/key/soap/key = new(get_turf(holder.my_atom), S.key_data)
+		key.uses = strength
+	..()
 
 /* Food */
 

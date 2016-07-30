@@ -6,6 +6,7 @@
 /area
 	var/global/global_uid = 0
 	var/uid
+	blend_mode = BLEND_MULTIPLY
 
 /area/New()
 	icon_state = ""
@@ -149,7 +150,7 @@
 	return
 
 /area/proc/updateicon()
-	if ((fire || eject || party) && (!requires_power||power_environ) && !istype(src, /area/space))//If it doesn't require power, can still activate this proc.
+	if ((fire || eject || party) && (!requires_power||power_environ))//If it doesn't require power, can still activate this proc.
 		if(fire && !eject && !party)
 			icon_state = "blue"
 		/*else if(atmosalm && !fire && !eject && !party)
@@ -163,7 +164,6 @@
 	else
 	//	new lighting behaviour with obj lights
 		icon_state = null
-
 
 /*
 #define EQUIP 1
@@ -221,6 +221,16 @@
 		if(ENVIRON)
 			used_environ += amount
 
+/area/proc/set_lightswitch(var/new_switch)
+	if(lightswitch != new_switch)
+		lightswitch = new_switch
+		updateicon()
+		power_change()
+
+/area/proc/set_emergency_lighting(var/enable)
+	for(var/obj/machinery/light/M in src)
+		M.set_emergency_lighting(enable)
+
 
 var/list/mob/living/forced_ambiance_list = new
 
@@ -234,9 +244,10 @@ var/list/mob/living/forced_ambiance_list = new
 		L.lastarea = get_area(L.loc)
 	var/area/newarea = get_area(L.loc)
 	var/area/oldarea = L.lastarea
-	if((oldarea.has_gravity == 0) && (newarea.has_gravity == 1) && (L.m_intent == "run")) // Being ready when you change areas gives you a chance to avoid falling all together.
-		thunk(L)
-		L.update_floating( L.Check_Dense_Object() )
+	if(oldarea.has_gravity != newarea.has_gravity)
+		if(newarea.has_gravity == 1 && L.m_intent == "run") // Being ready when you change areas allows you to avoid falling.
+			thunk(L)
+		L.update_floating()
 
 	L.lastarea = newarea
 	play_ambience(L)
@@ -272,7 +283,7 @@ var/list/mob/living/forced_ambiance_list = new
 	for(var/mob/M in A)
 		if(has_gravity)
 			thunk(M)
-		M.update_floating( M.Check_Dense_Object() )
+		M.update_floating()
 
 /area/proc/thunk(mob)
 	if(istype(get_turf(mob), /turf/space)) // Can't fall onto nothing.
@@ -284,11 +295,11 @@ var/list/mob/living/forced_ambiance_list = new
 			return
 
 		if(H.m_intent == "run")
-			H.AdjustStunned(2)
-			H.AdjustWeakened(2)
+			H.AdjustStunned(6)
+			H.AdjustWeakened(6)
 		else
-			H.AdjustStunned(1)
-			H.AdjustWeakened(1)
+			H.AdjustStunned(3)
+			H.AdjustWeakened(3)
 		mob << "<span class='notice'>The sudden appearance of gravity makes you fall to the floor!</span>"
 
 /area/proc/prison_break()

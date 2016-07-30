@@ -12,6 +12,7 @@
 	spawn_flags = IS_RESTRICTED
 	siemens_coefficient = 3 //conductive
 	darksight = 3
+	health_hud_intensity = 2
 
 	blood_color = "#05FF9B"
 	flesh_color = "#05FFFB"
@@ -43,6 +44,7 @@
 		"l_foot" = list("path" = /obj/item/organ/external/foot/unbreakable),
 		"r_foot" = list("path" = /obj/item/organ/external/foot/right/unbreakable)
 		)
+	genders = list(NEUTER)
 
 /datum/species/slime/handle_death(var/mob/living/carbon/human/H)
 	spawn(1)

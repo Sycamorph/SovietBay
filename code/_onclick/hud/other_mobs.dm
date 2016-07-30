@@ -9,15 +9,7 @@
 	return
 
 /mob/living/carbon/brain/instantiate_hud(var/datum/hud/HUD)
-	HUD.brain_hud()
-
-/datum/hud/proc/brain_hud(ui_style = 'icons/mob/screen1_Midnight.dmi')
-	mymob.blind = new /obj/screen()
-	mymob.blind.icon = 'icons/mob/screen1_full.dmi'
-	mymob.blind.icon_state = "blackimageoverlay"
-	mymob.blind.name = " "
-	mymob.blind.screen_loc = "1,1"
-	mymob.blind.layer = 0
+	return
 
 /mob/living/silicon/ai/instantiate_hud(var/datum/hud/HUD)
 	HUD.ai_hud()
@@ -31,17 +23,18 @@
 	blobpwrdisplay.name = "blob power"
 	blobpwrdisplay.icon_state = "block"
 	blobpwrdisplay.screen_loc = ui_health
-	blobpwrdisplay.layer = 20
+	blobpwrdisplay.layer = SCREEN_LAYER
 
 	blobhealthdisplay = new /obj/screen()
 	blobhealthdisplay.name = "blob health"
 	blobhealthdisplay.icon_state = "block"
 	blobhealthdisplay.screen_loc = ui_internal
-	blobhealthdisplay.layer = 20
+	blobhealthdisplay.layer = SCREEN_LAYER
 
-	mymob.client.screen = null
+	mymob.client.screen = list()
 
 	mymob.client.screen += list(blobpwrdisplay, blobhealthdisplay)
+	common_hud()
 
 /mob/living/carbon/slime/instantiate_hud(var/datum/hud/HUD)
 	HUD.slime_hud()
@@ -58,7 +51,7 @@
 	using.icon = ui_style
 	using.icon_state = "intent_"+mymob.a_intent
 	using.screen_loc = ui_zonesel
-	using.layer = 20
+	using.layer = SCREEN_LAYER
 	src.adding += using
 	action_intent = using
 
@@ -109,8 +102,9 @@
 	src.adding += using
 	hurt_intent = using
 
-	mymob.client.screen = null
+	mymob.client.screen = list()
 	mymob.client.screen += src.adding
+	common_hud()
 
 	return
 
@@ -128,13 +122,6 @@
 		constructtype = "wraith"
 	else if(istype(mymob,/mob/living/simple_animal/construct/harvester))
 		constructtype = "harvester"
-
-	mymob.flash = new /obj/screen()
-	mymob.flash.icon = 'icons/mob/screen1.dmi'
-	mymob.flash.icon_state = "blank"
-	mymob.flash.name = "flash"
-	mymob.flash.screen_loc = ui_entire_screen
-	mymob.flash.layer = 17
 
 	if(constructtype)
 		mymob.fire = new /obj/screen()
@@ -166,6 +153,7 @@
 		mymob.purged.name = "purged"
 		mymob.purged.screen_loc = ui_construct_purge
 
-	mymob.client.screen = null
+	mymob.client.screen = list()
 
-	mymob.client.screen += list(mymob.fire, mymob.healths, mymob.pullin, mymob.zone_sel, mymob.purged, mymob.flash)
+	mymob.client.screen += list(mymob.fire, mymob.healths, mymob.pullin, mymob.zone_sel, mymob.purged)
+	common_hud()

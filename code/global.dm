@@ -1,5 +1,5 @@
 //#define TESTING
-#if DM_VERSION < 506
+#if DM_VERSION < 509
 #warn This compiler is out of date. You may experience issues with projectile animations.
 #endif
 
@@ -13,6 +13,9 @@ var/global/list/active_diseases          = list()
 var/global/list/med_hud_users            = list() // List of all entities using a medical HUD.
 var/global/list/sec_hud_users            = list() // List of all entities using a security HUD.
 var/global/list/hud_icon_reference       = list()
+var/global/list/traders                  = list() //List of all nearby traders
+
+var/global/list/listening_objects         = list() // List of objects that need to be able to hear, used to avoid recursive searching through contents.
 
 
 var/global/list/global_mutations  = list() // List of hidden mutation things.
@@ -85,6 +88,8 @@ var/game_year      = (text2num(time2text(world.realtime, "YYYY")) + 544)
 var/round_progressing = 1
 
 var/master_mode       = "extended" // "extended"
+var/secondary_mode    = "extended"
+var/tertiary_mode     = "extended"
 var/secret_force_mode = "secret"   // if this is anything but "secret", the secret rotation will forceably choose this mode.
 
 var/host = null //only here until check @ code\modules\ghosttrap\trap.dm:112 is fixed
@@ -107,7 +112,6 @@ var/list/latejoin_cryo    = list()
 var/list/latejoin_cyborg  = list()
 
 var/list/prisonwarp         = list() // Prisoners go to these
-var/list/holdingfacility    = list() // Captured people go here
 var/list/xeno_spawn         = list() // Aliens spawn at at these.
 var/list/tdome1             = list()
 var/list/tdome2             = list()

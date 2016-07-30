@@ -17,8 +17,8 @@
 
 /datum/uplink_item/item/tools/clerical
 	name = "Morphic Clerical Kit"
-	item_cost = 3
-	path = /obj/item/weapon/storage/box/syndie_kit/clerical
+	item_cost = 4
+	path = /obj/item/weapon/storage/backpack/satchel/syndie_kit
 
 /datum/uplink_item/item/tools/plastique
 	name = "C-4 (Destroys walls)"
@@ -34,6 +34,13 @@
 	name = "Encrypted Radio Channel Key"
 	item_cost = 4
 	path = /obj/item/device/encryptionkey/syndicate
+
+/datum/uplink_item/item/tools/suit_sensor_mobile
+	name = "Suit Sensor Jamming Device"
+	desc = "This device will affect suit sensor data using method and radius defined by the user."
+	item_cost = 5
+	path = /obj/item/device/suit_sensor_jammer
+
 
 /datum/uplink_item/item/tools/encryptionkey_binary
 	name = "Binary Translator Key"
@@ -55,8 +62,8 @@
 
 /datum/uplink_item/item/tools/space_suit
 	name = "Space Suit"
-	item_cost = 6
-	path = /obj/item/weapon/storage/box/syndie_kit/space
+	item_cost = 7
+	path = /obj/item/weapon/storage/backpack/satchel/syndie_kit/space
 
 /datum/uplink_item/item/tools/thermal
 	name = "Thermal Imaging Glasses"
@@ -86,3 +93,9 @@
 	name = "Hacked Supply Beacon (DANGER!)"
 	item_cost = 14
 	path = /obj/item/supply_beacon
+
+/datum/uplink_item/item/tools/camera_mask
+	name = "Camera MIU"
+	item_cost = 15
+	antag_costs = list(MODE_MERCENARY = 30)
+	path = /obj/item/clothing/mask/ai

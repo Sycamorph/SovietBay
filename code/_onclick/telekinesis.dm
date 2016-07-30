@@ -62,13 +62,13 @@ var/const/tk_maxrange = 15
 */
 /obj/item/tk_grab
 	name = "Telekinetic Grab"
-	desc = "Magic"
+	desc = "Magic."
 	icon = 'icons/obj/magic.dmi'//Needs sprites
 	icon_state = "2"
 	flags = NOBLUDGEON
 	//item_state = null
 	w_class = 10.0
-	layer = 20
+	layer = SCREEN_LAYER
 
 	var/last_throw = 0
 	var/atom/movable/focus = null
@@ -106,21 +106,13 @@ var/const/tk_maxrange = 15
 	if(isobj(target) && !isturf(target.loc))
 		return
 
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	var/d = get_dist(user, target)
-	if(focus) d = max(d,get_dist(user,focus)) // whichever is further
-	switch(d)
-		if(0)
-			;
-		if(1 to 5) // not adjacent may mean blocked by window
-			if(!proximity)
-				user.setMoveCooldown(2)
-		if(5 to 7)
-			user.setMoveCooldown(5)
-		if(8 to tk_maxrange)
-			user.setMoveCooldown(10)
-		else
-			user << "<span class='notice'>Your mind won't reach that far.</span>"
-			return
+	if(focus)
+		d = max(d, get_dist(user, focus)) // whichever is further
+	if(d > tk_maxrange)
+		user << "<span class='notice'>Your mind won't reach that far.</span>"
+		return
 
 	if(!focus)
 		focus_object(target, user)

@@ -16,7 +16,7 @@
 	var/locked =    0          // Have we locked on?
 	var/lock_time = 0          // When -will- we lock on?
 	var/active =    0          // Is our owner intending to take hostages?
-	var/target_permissions = 0 // Permission bitflags.
+	var/target_permissions = TARGET_CAN_RADIO // Permission bitflags.
 
 /obj/aiming_overlay/New(var/newowner)
 	..()
@@ -201,6 +201,7 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 		else
 			owner << "<span class='notice'>You will no longer aim rather than fire.</span>"
 			owner.client.remove_gun_icons()
+		owner.gun_setting_icon.icon_state = "gun[active]"
 
 /obj/aiming_overlay/proc/cancel_aiming(var/no_message = 0)
 	if(!aiming_with || !aiming_at)

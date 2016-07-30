@@ -31,6 +31,13 @@
 	BITSET(hud_updateflag, STATUS_HUD)
 	BITSET(hud_updateflag, LIFE_HUD)
 
+
+	//backs up lace if available.
+	var/obj/item/organ/stack/s = get_organ("stack")
+	if(s)
+		s.do_backup()
+
+
 	//Handle species-specific deaths.
 	species.handle_death(src)
 
@@ -64,7 +71,7 @@
 	if(wearing_rig)
 		wearing_rig.notify_ai("<span class='danger'>Warning: user death event. Mobility control passed to integrated intelligence system.</span>")
 
-	. = ..(gibbed,species.death_message)
+	. = ..(gibbed,species.death_message,1)
 	if(!gibbed)
 		handle_organs()
 		if(species.death_sound)
@@ -81,7 +88,8 @@
 	update_hair(0)
 
 	mutations.Add(HUSK)
-	status_flags |= DISFIGURED	//makes them unknown without fucking up other stuff like admintools
+	for(var/obj/item/organ/external/E in organs)
+		E.disfigured = 1
 	update_body(1)
 	return
 
@@ -100,6 +108,7 @@
 	update_hair(0)
 
 	mutations.Add(SKELETON)
-	status_flags |= DISFIGURED
-	update_body(0)
+	for(var/obj/item/organ/external/E in organs)
+		E.disfigured = 1
+	update_body(1)
 	return

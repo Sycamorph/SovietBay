@@ -144,16 +144,14 @@
 		else
 	return
 
-/obj/machinery/body_scanconsole/power_change()
-	..()
+/obj/machinery/body_scanconsole/update_icon()
 	if(stat & BROKEN)
 		icon_state = "body_scannerconsole-p"
+	else if (stat & NOPOWER)
+		spawn(rand(0, 15))
+			src.icon_state = "body_scannerconsole-p"
 	else
-		if (stat & NOPOWER)
-			spawn(rand(0, 15))
-				src.icon_state = "body_scannerconsole-p"
-		else
-			icon_state = initial(icon_state)
+		icon_state = initial(icon_state)
 
 /obj/machinery/body_scanconsole
 	var/obj/machinery/bodyscanner/connected
@@ -254,7 +252,7 @@
 		return
 	var/mob/living/carbon/human/H = occupant
 	var/list/occupant_data = list(
-		"stationtime" = worldtime2text(),
+		"stationtime" = stationtime2text(),
 		"stat" = H.stat,
 		"health" = round(H.health/H.maxHealth)*100,
 		"virus_present" = H.virus2.len,
@@ -345,14 +343,15 @@
 			break
 		if(istype(e, /obj/item/organ/external/chest) && occ["lung_ruptured"])
 			lung_ruptured = "Lung ruptured:"
-		if(e.status & ORGAN_SPLINTED)
+		if(e.splinted)
 			splint = "Splinted:"
 		if(e.status & ORGAN_BLEEDING)
 			bled = "Bleeding:"
 		if(e.status & ORGAN_BROKEN)
 			AN = "[e.broken_description]:"
-		if(e.status & ORGAN_ROBOT)
-			robot = "Prosthetic:"
+		switch(e.robotic)
+			if(ORGAN_ROBOT) robot = "Prosthetic:"
+			if(ORGAN_ASSISTED) robot = "Augmented:"
 		if(e.open)
 			open = "Open:"
 

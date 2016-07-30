@@ -91,7 +91,10 @@ var/list/admin_verbs_admin = list(
 	/client/proc/view_chemical_reaction_logs,
 	/client/proc/makePAI,
 	/datum/admins/proc/paralyze_mob,
-	/client/proc/fixatmos
+	/client/proc/fixatmos,
+	/client/proc/list_traders,
+	/client/proc/add_trader,
+	/client/proc/remove_trader
 )
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
@@ -102,9 +105,10 @@ var/list/admin_verbs_sounds = list(
 	/client/proc/play_sound,
 	/client/proc/play_server_sound
 	)
+
 var/list/admin_verbs_fun = list(
 	/client/proc/object_talk,
-	/client/proc/cmd_admin_dress,
+	/datum/admins/proc/cmd_admin_dress,
 	/client/proc/cmd_admin_gib_self,
 	/client/proc/drop_bomb,
 	/client/proc/everyone_random,
@@ -119,7 +123,9 @@ var/list/admin_verbs_fun = list(
 	/client/proc/editappear,
 	/client/proc/roll_dices,
 	/datum/admins/proc/call_supply_drop,
-	/datum/admins/proc/call_drop_pod
+	/datum/admins/proc/call_drop_pod,
+	/client/proc/create_dungeon,
+	/datum/admins/proc/ai_hologram_set
 	)
 
 var/list/admin_verbs_spawn = list(
@@ -189,7 +195,9 @@ var/list/admin_verbs_debug = list(
 	/client/proc/jumptomob,
 	/client/proc/jumptocoord,
 	/client/proc/dsay,
-	/datum/admins/proc/run_unit_test
+	/datum/admins/proc/run_unit_test,
+	/turf/proc/view_chunk,
+	/turf/proc/update_chunk
 	)
 
 var/list/admin_verbs_paranoid_debug = list(
@@ -234,7 +242,7 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/play_sound,
 	/client/proc/play_server_sound,
 	/client/proc/object_talk,
-	/client/proc/cmd_admin_dress,
+	/datum/admins/proc/cmd_admin_dress,
 	/client/proc/cmd_admin_gib_self,
 	/client/proc/drop_bomb,
 	/client/proc/cinematic,
@@ -728,7 +736,7 @@ var/list/admin_verbs_mentor = list(
 	var/new_name = sanitizeSafe(input(src, "Enter new name. Leave blank or as is to cancel.", "[S.real_name] - Enter new silicon name", S.real_name))
 	if(new_name && new_name != S.real_name)
 		log_and_message_admins("has renamed the silicon '[S.real_name]' to '[new_name]'")
-		S.SetName(new_name)
+		S.fully_replace_character_name(new_name)
 	feedback_add_details("admin_verb","RAI") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/manage_silicon_laws()

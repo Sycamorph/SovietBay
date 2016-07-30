@@ -11,13 +11,13 @@
 	sent_spiders_to_station = 0
 
 /datum/event/spider_infestation/announce()
-	command_announcement.Announce("Unidentified lifesigns detected coming aboard [station_name()]. Secure any exterior access, including ducting and ventilation.", "Lifesign Alert", new_sound = 'sound/AI/aliens.ogg')
+	command_announcement.Announce("Неизвестные биологические обьекты обнаружены на борту [station_name()]. Обехопасьте входы в отсеки, в том числе вентил&#255;цию.", "Неизвестные био-сигналы", new_sound = 'sound/AI/aliens.ogg')
 
 
 /datum/event/spider_infestation/start()
 	var/list/vents = list()
 	for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in world)
-		if(!temp_vent.welded && temp_vent.network && temp_vent.loc.z in config.station_levels)
+		if(!temp_vent.welded && temp_vent.network && temp_vent.loc.z in using_map.station_levels)
 			if(temp_vent.network.normal_members.len > 50)
 				vents += temp_vent
 

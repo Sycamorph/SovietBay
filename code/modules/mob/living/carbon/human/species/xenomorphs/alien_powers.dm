@@ -1,5 +1,5 @@
 /proc/alien_queen_exists(var/ignore_self,var/mob/living/carbon/human/self)
-	for(var/mob/living/carbon/human/Q in living_mob_list)
+	for(var/mob/living/carbon/human/Q in living_mob_list_)
 		if(self && ignore_self && self == Q)
 			continue
 		if(Q.species.name != "Xenomorph Queen")
@@ -218,7 +218,7 @@ mob/living/carbon/human/proc/xeno_infest(mob/living/carbon/human/M as mob in ovi
 		return
 
 	var/obj/item/organ/affecting = M.get_organ("chest")
-	if(!affecting || (affecting.status & ORGAN_ROBOT))
+	if(!affecting || (affecting.robotic >= ORGAN_ROBOT))
 		src << "<span class='warning'>This form is not compatible with our physiology.</span>"
 		return
 
@@ -231,7 +231,7 @@ mob/living/carbon/human/proc/xeno_infest(mob/living/carbon/human/M as mob in ovi
 		src << "<span class='warning'>They are too far away.</span>"
 		return
 
-	if(M.species.get_bodytype() == "Xenomorph" || !isnull(M.internal_organs_by_name["hive node"]) || !affecting || (affecting.status & ORGAN_ROBOT))
+	if(M.species.get_bodytype() == "Xenomorph" || !isnull(M.internal_organs_by_name["hive node"]) || !affecting || (affecting.robotic >= ORGAN_ROBOT))
 		return
 
 	if(!check_alien_ability(500,1,"egg sac"))
@@ -242,12 +242,12 @@ mob/living/carbon/human/proc/xeno_infest(mob/living/carbon/human/M as mob in ovi
 	var/obj/item/organ/xenos/hivenode/node = new(affecting)
 	node.replaced(M,affecting)
 
-/mob/living/carbon/human/proc/pry_open(obj/machinery/door/A in oview(1))
+/mob/living/carbon/human/proc/pry_open(obj/machinery/door/A in filter_list(oview(1), /obj/machinery/door))
 	set name = "Pry Open Airlock"
 	set desc = "Pry open an airlock with your claws."
 	set category = "Abilities"
 
-	if(!istype(A))
+	if(!istype(A) || incapacitated())
 		return
 
 	if(!A.Adjacent(src))

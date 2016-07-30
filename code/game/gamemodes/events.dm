@@ -106,7 +106,7 @@ var/eventchance = 10 // Percent chance per 5 minutes.
 var/hadevent    = 0
 
 /proc/appendicitis()
-	for(var/mob/living/carbon/human/H in shuffle(living_mob_list))
+	for(var/mob/living/carbon/human/H in shuffle(living_mob_list_))
 		if(H.client && H.stat != DEAD)
 			var/obj/item/organ/appendix/A = H.get_organ("appendix")
 			if(!istype(A) || (A && A.inflamed))
@@ -121,7 +121,7 @@ var/hadevent    = 0
 	//world << sound('sound/AI/aliens.ogg')
 	var/list/vents = list()
 	for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in machines)
-		if(!temp_vent.welded && temp_vent.network && temp_vent.loc.z in config.station_levels)
+		if(!temp_vent.welded && temp_vent.network && temp_vent.loc.z in using_map.station_levels)
 			if(temp_vent.network.normal_members.len > 50) // Stops Aliens getting stuck in small networks. See: Security, Virology
 				vents += temp_vent
 
@@ -152,16 +152,16 @@ var/hadevent    = 0
 
 	sleep(100)
 */
-	for(var/mob/living/carbon/human/H in living_mob_list)
+	for(var/mob/living/carbon/human/H in living_mob_list_)
 		var/turf/T = get_turf(H)
 		if(!T)
 			continue
 		if(isNotStationLevel(T.z))
 			continue
 		if(istype(H,/mob/living/carbon/human))
-			H.apply_effect((rand(15,75)),IRRADIATE,0)
+			H.apply_effect((rand(15,75)),IRRADIATE, blocked = H.getarmor(null, "rad"))
 			if (prob(5))
-				H.apply_effect((rand(90,150)),IRRADIATE,0)
+				H.apply_effect((rand(90,150)),IRRADIATE, blocked = H.getarmor(null, "rad"))
 			if (prob(25))
 				if (prob(75))
 					randmutb(H)
@@ -259,7 +259,7 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 */
 
 	//AI laws
-	for(var/mob/living/silicon/ai/M in living_mob_list)
+	for(var/mob/living/silicon/ai/M in living_mob_list_)
 		if(M.stat != 2 && M.see_in_dark != 0)
 			var/who2 = pick("ALIENS", "BEARS", "CLOWNS", "XENOS", "PETES", "BOMBS", "FETISHES", "WIZARDS", "SYNDICATE AGENTS", "CENTCOM OFFICERS", "SPACE PIRATES", "TRAITORS", "MONKEYS",  "BEES", "CARP", "CRABS", "EELS", "BANDITS", "LIGHTS")
 			var/what2 = pick("BOLTERS", "STAVES", "DICE", "SINGULARITIES", "TOOLBOXES", "NETTLES", "AIRLOCKS", "CLOTHES", "WEAPONS", "MEDKITS", "BOMBS", "CANISTERS", "CHAIRS", "BBQ GRILLS", "ID CARDS", "CAPTAINS")

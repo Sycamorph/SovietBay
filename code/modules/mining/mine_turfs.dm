@@ -170,7 +170,7 @@
 					artifact_debris()
 
 		if(do_after(user,P.digspeed, src))
-			user << "\blue [translation(src,"finish_drill",P)]"
+			user << "\blue You finish drilling the rock."
 
 			if(finds && finds.len)
 				var/datum/find/F = finds[1]
@@ -281,10 +281,10 @@
 				if(prob(50))
 					M.adjustBruteLoss(5)
 			else
-				flick("flash",M.flash)
+				M.flash_eyes()
 				if(prob(50))
 					M.Stun(5)
-			M.apply_effect(25, IRRADIATE)
+			M.apply_effect(25, IRRADIATE, blocked = M.getarmor(null, "rad"))
 
 	if(rand(1,500) == 1)
 		visible_message("<span class='notice'>An old dusty crate was buried within!</span>", translation = list("object"=src,"name"="find_crate"))
@@ -470,8 +470,8 @@
 		user << "\blue [translation(src,"dug")]"
 		gets_dug()
 
-	else if(istype(W,/obj/item/weapon/storage/bag/ore))
-		var/obj/item/weapon/storage/bag/ore/S = W
+	else if(istype(W,/obj/item/weapon/storage/ore))
+		var/obj/item/weapon/storage/ore/S = W
 		if(S.collection_mode)
 			for(var/obj/item/weapon/ore/O in contents)
 				O.attackby(W,user)
@@ -528,11 +528,11 @@
 	if(istype(M,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = M
 		if(R.module)
-			if(istype(R.module_state_1,/obj/item/weapon/storage/bag/ore))
+			if(istype(R.module_state_1,/obj/item/weapon/storage/ore))
 				attackby(R.module_state_1,R)
-			else if(istype(R.module_state_2,/obj/item/weapon/storage/bag/ore))
+			else if(istype(R.module_state_2,/obj/item/weapon/storage/ore))
 				attackby(R.module_state_2,R)
-			else if(istype(R.module_state_3,/obj/item/weapon/storage/bag/ore))
+			else if(istype(R.module_state_3,/obj/item/weapon/storage/ore))
 				attackby(R.module_state_3,R)
 			else
 				return

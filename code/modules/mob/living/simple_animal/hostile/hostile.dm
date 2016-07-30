@@ -9,6 +9,7 @@
 	var/projectilesound
 	var/casingtype
 	var/move_to_delay = 4 //delay for the automated movement.
+	var/attack_delay = DEFAULT_ATTACK_COOLDOWN
 	var/list/friends = list()
 	var/break_stuff_probability = 10
 	stop_automated_movement_when_pulled = 0
@@ -17,6 +18,8 @@
 
 	var/shuttletarget = null
 	var/enroute = 0
+	var/controllable = 0
+	var/firedelayworld
 
 /mob/living/simple_animal/hostile/proc/FindTarget()
 
@@ -63,19 +66,23 @@
 /mob/living/simple_animal/hostile/proc/Found(var/atom/A)
 	return
 
+/mob/living/simple_animal/hostile/movement_delay()
+	return	(move_to_delay - 3)
+
 /mob/living/simple_animal/hostile/proc/MoveToTarget()
-	stop_automated_movement = 1
-	if(!target_mob || SA_attackable(target_mob))
-		stance = HOSTILE_STANCE_IDLE
-	if(target_mob in ListTargets(10))
-		if(ranged)
-			if(get_dist(src, target_mob) <= 6)
-				OpenFire(target_mob)
+	if(!client)
+		stop_automated_movement = 1
+		if(!target_mob || SA_attackable(target_mob))
+			stance = HOSTILE_STANCE_IDLE
+		if(target_mob in ListTargets(10))
+			if(ranged)
+				if(get_dist(src, target_mob) <= 6)
+					OpenFire(target_mob)
+				else
+					walk_to(src, target_mob, 1, move_to_delay)
 			else
+				stance = HOSTILE_STANCE_ATTACKING
 				walk_to(src, target_mob, 1, move_to_delay)
-		else
-			stance = HOSTILE_STANCE_ATTACKING
-			walk_to(src, target_mob, 1, move_to_delay)
 
 /mob/living/simple_animal/hostile/proc/AttackTarget()
 	stop_automated_movement = 1
@@ -85,11 +92,14 @@
 	if(!(target_mob in ListTargets(10)))
 		LostTarget()
 		return 0
+	if(next_move >= world.time)
+		return 0
 	if(get_dist(src, target_mob) <= 1)	//Attacking
 		AttackingTarget()
 		return 1
 
 /mob/living/simple_animal/hostile/proc/AttackingTarget()
+	setClickCooldown(attack_delay)
 	if(!Adjacent(target_mob))
 		return
 	if(isliving(target_mob))
@@ -152,9 +162,30 @@
 					DestroySurroundings()
 				AttackTarget()
 
+
+/mob/living/simple_animal/hostile/attackby(var/obj/item/O, var/mob/user)
+	var/oldhealth = health
+	. = ..()
+	if(health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
+		target_mob = user
+		MoveToTarget()
+
+/mob/living/simple_animal/hostile/attack_hand(mob/living/carbon/human/M)
+	. = ..()
+	if(M.a_intent == I_HURT && !incapacitated(INCAPACITATION_KNOCKOUT))
+		target_mob = M
+		MoveToTarget()
+
+/mob/living/simple_animal/hostile/bullet_act(var/obj/item/projectile/Proj)
+	var/oldhealth = health
+	. = ..()
+	if(!target_mob && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
+		target_mob = Proj.firer
+		MoveToTarget()
+
 /mob/living/simple_animal/hostile/proc/OpenFire(target_mob)
 	var/target = target_mob
-	visible_message("\red <b>[src]</b> fires at [target]!", 1)
+	visible_message("\red <b>[src]</b> fires at [target]!")
 
 	if(rapid)
 		spawn(1)
@@ -233,3 +264,7 @@
 		spawn(10)
 			if(!src.stat)
 				horde()
+
+mob/living/simple_animal/hostile/Login()
+	..()
+	walk(src,0)

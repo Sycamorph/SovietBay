@@ -57,6 +57,10 @@
 		name = "Short Hair"	  // try to capatilize the names please~
 		icon_state = "hair_a" // you do not need to define _s or _l sub-states, game automatically does this for you
 
+	short2
+		name = "Short Hair 2"
+		icon_state = "hair_shorthair3"
+
 	resomi
 		name = "Resomi Plumage"
 		icon_state = "resomi_default"
@@ -138,6 +142,15 @@
 		icon_state = "hair_ponytail4"
 		gender = FEMALE
 
+	ponytail5
+		name = "Ponytail 5"
+		icon_state = "hair_ponytail5"
+		gender = FEMALE
+
+	fringetail
+		name = "Fringetail"
+		icon_state = "hair_fringetail"
+
 	sideponytail
 		name = "Side Ponytail"
 		icon_state = "hair_stail"
@@ -151,6 +164,10 @@
 		name = "Pompadour"
 		icon_state = "hair_pompadour"
 		gender = MALE
+
+	sleeze
+		name = "Sleeze"
+		icon_state = "hair_sleeze"
 
 	quiff
 		name = "Quiff"
@@ -247,6 +264,14 @@
 		icon_state = "hair_bigafro"
 		gender = MALE
 
+	rows
+		name = "Rows"
+		icon_state = "hair_rows1"
+
+	rows2
+		name = "Rows 2"
+		icon_state = "hair_rows2"
+
 	sargeant
 		name = "Flat Top"
 		icon_state = "hair_sargeant"
@@ -268,6 +293,54 @@
 	longovereye
 		name = "Overeye Long"
 		icon_state = "hair_longovereye"
+
+	longbedheadfemale                      //Renard Queenston's spizhennoe
+		name = "Long Bedhead Female"
+		icon_state = "hair_long_bedheadfemale"
+		gender = FEMALE
+		species_allowed = list("Human")
+
+	longbedheadmale                      //Renard Queenston's spizhennoe
+		name = "Long Bedhead Male"
+		icon_state = "hair_long_bedheadmale"
+		gender = MALE
+		species_allowed = list("Human")
+
+	longtails                              //Renard Queenston's spizhennoe
+		name = "Long Tails"
+		icon_state = "hair_long_d_tails"
+		gender = FEMALE
+		species_allowed = list("Human")
+
+	flutter                                //Renard Queenston's spizhennoe
+		name = "Flutter"
+		icon_state = "hair_fluttershy"
+		gender = FEMALE
+		species_allowed = list("Human")
+
+	nia                                    //Renard Queenston's spizhennoe
+		name = "Nia"
+		icon_state = "hair_nia"
+		gender = FEMALE
+		species_allowed = list("Human")
+
+	eightcentury                           //Renard Queenston's spizhennoe
+		name = "80s"
+		icon_state = "hair_80s"
+		gender = FEMALE
+		species_allowed = list("Human")
+
+	applejack                              //Renard Queenston's spizhennoe
+		name = "Applejack"
+		icon_state = "hair_applejack"
+		gender = FEMALE
+		species_allowed = list("Human")
+
+	judehair                               //Renard Queenston's spizhennoe
+		name = "Judge Hair"
+		icon_state = "hair_judge"
+		gender = FEMALE
+		species_allowed = list("Human")
 
 	fag
 		name = "Flow Hair"
@@ -430,8 +503,12 @@
 		icon_state = "hair_halfshaved"
 
 	bun
-		name = "Bun"
+		name = "Low Bun"
 		icon_state = "hair_bun"
+
+	bun2
+		name = "High Bun"
+		icon_state = "hair_bun2"
 
 	doublebun
 		name = "Double-Bun"
@@ -526,7 +603,7 @@
 
 /datum/sprite_accessory/facial_hair
 
-	icon = 'icons/mob/Human_face.dmi'
+	icon = 'icons/mob/human_face.dmi'
 	gender = MALE // barf (unless you're a dorf, dorfs dig chix /w beards :P)
 
 	shaved
@@ -715,6 +792,15 @@
 		icon_state = "vox_shortquills"
 		species_allowed = list("Vox")
 
+	vox_quills_kingly
+		name = "Kingly Vox Quills"
+		icon_state = "vox_kingly"
+		species_allowed = list("Vox")
+
+	vox_quills_mohawk
+		name = "Quill Mohawk"
+		icon_state = "vox_mohawk"
+		species_allowed = list("Vox")
 /datum/sprite_accessory/facial_hair
 
 	taj_sideburns

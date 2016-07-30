@@ -146,7 +146,7 @@ var/datum/antagonist/traitor/traitors
 			if ((freq % 2) == 0)
 				freq += 1
 		freq = freqlist[rand(1, freqlist.len)]
-		var/obj/item/device/uplink/hidden/T = new(R, traitor_mob.mind)
+		var/obj/item/device/uplink/T = new(R, traitor_mob.mind)
 		target_radio.hidden_uplink = T
 		target_radio.traitor_frequency = freq
 		traitor_mob << "A portable object teleportation relay has been installed in your [R.name] [loc]. Simply dial the frequency [format_frequency(freq)] to unlock its hidden features."
@@ -155,12 +155,16 @@ var/datum/antagonist/traitor/traitors
 	else if (istype(R, /obj/item/device/pda))
 		// generate a passcode if the uplink is hidden in a PDA
 		var/pda_pass = "[rand(100,999)] [pick("Alpha","Bravo","Delta","Omega")]"
-		var/obj/item/device/uplink/hidden/T = new(R, traitor_mob.mind)
+		var/obj/item/device/uplink/T = new(R, traitor_mob.mind)
 		R.hidden_uplink = T
 		var/obj/item/device/pda/P = R
 		P.lock_code = pda_pass
 		traitor_mob << "A portable object teleportation relay has been installed in your [R.name] [loc]. Simply enter the code \"[pda_pass]\" into the ringtone select to unlock its hidden features."
 		traitor_mob.mind.store_memory("<B>Uplink Passcode:</B> [pda_pass] ([R.name] [loc]).")
+		for(var/obj/item/weapon/pen/O in P.contents)
+			O.Destroy()
+		var/obj/item/weapon/pen/chameleon/C = new()
+		C.loc = P
 
 /datum/antagonist/traitor/proc/add_law_zero(mob/living/silicon/ai/killer)
 	var/law = "Accomplish your objectives at all costs. You may ignore all other laws."

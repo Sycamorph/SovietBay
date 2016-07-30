@@ -89,8 +89,7 @@
 				R.key = ghost.key
 
 	R.stat = CONSCIOUS
-	dead_mob_list -= R
-	living_mob_list |= R
+	R.switch_from_dead_to_living_mob_list()
 	R.notify_ai(ROBOT_NOTIFICATION_NEW_UNIT)
 	return 1
 
@@ -184,7 +183,7 @@
 
 /obj/item/borg/upgrade/syndicate/
 	name = "illegal equipment module"
-	desc = "Unlocks the hidden, deadlier functions of a robot"
+	desc = "Unlocks the hidden, deadlier functions of a robot."
 	icon_state = "cyborg_upgrade3"
 	require_module = 1
 

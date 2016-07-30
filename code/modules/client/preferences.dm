@@ -17,6 +17,7 @@ datum/preferences
 	//game-preferences
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
 	var/ooccolor = "#010000"			//Whatever this is set to acts as 'reset' color and is thus unusable as an actual custom color
+	var/list/never_be_special_role = list()
 	var/list/be_special_role = list()		//Special role selection
 	var/UI_style = "Midnight"
 	var/UI_style_color = "#ffffff"
@@ -26,7 +27,6 @@ datum/preferences
 	//character preferences
 	var/real_name						//our character's name
 	var/be_random_name = 0				//whether we are a random name every round
-	var/gender = MALE					//gender of character (well duh)
 	var/age = 30						//age of character
 	var/spawnpoint = "Arrivals Shuttle" //where this character will spawn (0-2).
 	var/b_type = "A+"					//blood type (not-chooseable)
@@ -60,21 +60,12 @@ datum/preferences
 
 		//Mob preview
 	var/icon/preview_icon = null
-	var/icon/preview_icon_front = null
-	var/icon/preview_icon_side = null
 
-		//Jobs, uses bitflags
-	var/job_civilian_high = 0
-	var/job_civilian_med = 0
-	var/job_civilian_low = 0
 
-	var/job_medsci_high = 0
-	var/job_medsci_med = 0
-	var/job_medsci_low = 0
-
-	var/job_engsec_high = 0
-	var/job_engsec_med = 0
-	var/job_engsec_low = 0
+	//Since there can only be 1 high job.
+	var/job_high = null
+	var/list/job_medium = list() //List of all things selected for medium weight
+	var/list/job_low    = list() //List of all the things selected for low weight
 
 	//Keeps track of preferrence for not getting any wanted jobs
 	var/alternate_option = 0
@@ -104,6 +95,7 @@ datum/preferences
 
 	// OOC Metadata:
 	var/metadata = ""
+	var/list/ignored_players = list()
 
 	var/client/client = null
 	var/client_ckey = null
@@ -111,12 +103,13 @@ datum/preferences
 	var/savefile/loaded_preferences
 	var/savefile/loaded_character
 	var/datum/category_collection/player_setup_collection/player_setup
+	var/datum/browser/panel
 
 /datum/preferences/New(client/C)
 	player_setup = new(src)
 	gender = pick(MALE, FEMALE)
 	real_name = random_name(gender,species)
-	b_type = pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
+	b_type = RANDOM_BLOOD_TYPE
 
 	gear = list()
 
@@ -211,12 +204,14 @@ datum/preferences
 	dat += player_setup.content(user)
 
 	dat += "</html></body>"
-	user << browse(dat, "window=preferences;size=635x736")
+	var/datum/browser/popup = new(user, "Character Setup","Character Setup", 800, 800, src)
+	popup.set_content(dat)
+	popup.open()
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
-	if(!user)	return
 
-	if(!istype(user, /mob/new_player))	return
+	if(!user)	return
+	if(isliving(user)) return
 
 	if(href_list["preference"] == "open_whitelist_forum")
 		if(config.forumurl)
@@ -237,12 +232,14 @@ datum/preferences
 	else if(href_list["reload"])
 		load_preferences()
 		load_character()
+		sanitize_preferences()
 	else if(href_list["load"])
 		if(!IsGuestKey(usr.key))
 			open_load_dialog(usr)
 			return 1
 	else if(href_list["changeslot"])
 		load_character(text2num(href_list["changeslot"]))
+		sanitize_preferences()
 		close_load_dialog(usr)
 	else
 		return 0
@@ -250,9 +247,10 @@ datum/preferences
 	ShowChoices(usr)
 	return 1
 
-/datum/preferences/proc/copy_to(mob/living/carbon/human/character, safety = 0)
+/datum/preferences/proc/copy_to(mob/living/carbon/human/character, is_preview_copy = FALSE)
 	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
 	player_setup.sanitize_setup()
+	character.set_species(species)
 	if(be_random_name)
 		real_name = random_name(gender,species)
 
@@ -264,25 +262,7 @@ datum/preferences
 		else if(firstspace == name_length)
 			real_name += "[pick(last_names)]"
 
-	character.real_name = real_name
-	character.name = character.real_name
-	if(character.dna)
-		character.dna.real_name = character.real_name
-
-	character.flavor_texts["general"] = flavor_texts["general"]
-	character.flavor_texts["head"] = flavor_texts["head"]
-	character.flavor_texts["face"] = flavor_texts["face"]
-	character.flavor_texts["eyes"] = flavor_texts["eyes"]
-	character.flavor_texts["torso"] = flavor_texts["torso"]
-	character.flavor_texts["arms"] = flavor_texts["arms"]
-	character.flavor_texts["hands"] = flavor_texts["hands"]
-	character.flavor_texts["legs"] = flavor_texts["legs"]
-	character.flavor_texts["feet"] = flavor_texts["feet"]
-
-	character.med_record = med_record
-	character.sec_record = sec_record
-	character.gen_record = gen_record
-	character.exploit_record = exploit_record
+	character.fully_replace_character_name(real_name)
 
 	character.gender = gender
 	character.age = age
@@ -292,10 +272,12 @@ datum/preferences
 	character.g_eyes = g_eyes
 	character.b_eyes = b_eyes
 
+	character.h_style = h_style
 	character.r_hair = r_hair
 	character.g_hair = g_hair
 	character.b_hair = b_hair
 
+	character.f_style = f_style
 	character.r_facial = r_facial
 	character.g_facial = g_facial
 	character.b_facial = b_facial
@@ -309,16 +291,7 @@ datum/preferences
 	character.h_style = h_style
 	character.f_style = f_style
 
-	character.home_system = home_system
-	character.citizenship = citizenship
-	character.personal_faction = faction
-	character.religion = religion
-
-	character.skills = skills
-	character.used_skillpoints = used_skillpoints
-
 	// Destroy/cyborgize organs
-
 	for(var/name in organ_data)
 
 		var/status = organ_data[name]
@@ -338,7 +311,7 @@ datum/preferences
 					O.robotize(rlimb_data[name])
 				else
 					O.robotize()
-		else
+		else if(!O && !is_preview_copy)
 			var/obj/item/organ/I = character.internal_organs_by_name[name]
 			if(I)
 				if(status == "assisted")
@@ -347,12 +320,15 @@ datum/preferences
 					I.robotize()
 
 	character.all_underwear.Cut()
+	character.all_underwear_metadata.Cut()
 
 	for(var/underwear_category_name in all_underwear)
 		var/datum/category_group/underwear/underwear_category = global_underwear.categories_by_name[underwear_category_name]
 		if(underwear_category)
 			var/underwear_item_name = all_underwear[underwear_category_name]
 			character.all_underwear[underwear_category_name] = underwear_category.items_by_name[underwear_item_name]
+			if(all_underwear_metadata[underwear_category_name])
+				character.all_underwear_metadata[underwear_category_name] = all_underwear_metadata[underwear_category_name]
 		else
 			all_underwear -= underwear_category_name
 
@@ -360,14 +336,42 @@ datum/preferences
 		backbag = 1 //Same as above
 	character.backbag = backbag
 
-	//Debugging report to track down a bug, which randomly assigned the plural gender to people.
-	if(character.gender in list(PLURAL, NEUTER))
-		if(isliving(src)) //Ghosts get neuter by default
-			message_admins("[character] ([character.ckey]) has spawned with their gender as plural or neuter. Please notify coders.")
-			character.gender = MALE
+	character.force_update_limbs()
+	character.update_mutations(0)
+	character.update_body(0)
+	character.update_underwear(0)
+	character.update_hair(0)
+	character.update_icons()
+
+	if(is_preview_copy)
+		return
+
+	character.flavor_texts["general"] = flavor_texts["general"]
+	character.flavor_texts["head"] = flavor_texts["head"]
+	character.flavor_texts["face"] = flavor_texts["face"]
+	character.flavor_texts["eyes"] = flavor_texts["eyes"]
+	character.flavor_texts["torso"] = flavor_texts["torso"]
+	character.flavor_texts["arms"] = flavor_texts["arms"]
+	character.flavor_texts["hands"] = flavor_texts["hands"]
+	character.flavor_texts["legs"] = flavor_texts["legs"]
+	character.flavor_texts["feet"] = flavor_texts["feet"]
+
+	character.med_record = med_record
+	character.sec_record = sec_record
+	character.gen_record = gen_record
+	character.exploit_record = exploit_record
+
+	character.home_system = home_system
+	character.citizenship = citizenship
+	character.personal_faction = faction
+	character.religion = religion
+
+	character.skills = skills
+	character.used_skillpoints = used_skillpoints
 
 /datum/preferences/proc/open_load_dialog(mob/user)
-	var/dat = "<body>"
+	var/dat  = list()
+	dat += "<body>"
 	dat += "<tt><center>"
 
 	var/savefile/S = new /savefile(path)
@@ -384,7 +388,10 @@ datum/preferences
 
 	dat += "<hr>"
 	dat += "</center></tt>"
-	user << browse(dat, "window=saves;size=300x390")
+	panel = new(user, "Character Slots", "Character Slots", 300, 390, src)
+	panel.set_content(jointext(dat,null))
+	panel.open()
 
 /datum/preferences/proc/close_load_dialog(mob/user)
 	user << browse(null, "window=saves")
+	panel.close()

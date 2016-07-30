@@ -24,8 +24,17 @@ REAGENT SCANNER
 	origin_tech = list(TECH_MAGNET = 1, TECH_BIO = 1)
 	var/mode = 1;
 
+/obj/item/device/healthanalyzer/do_surgery(mob/living/M, mob/living/user)
+	if(user.a_intent != I_HELP) //in case it is ever used as a surgery tool
+		return ..()
+	scan_mob(M, user) //default surgery behaviour is just to scan as usual
+	return 1
 
-/obj/item/device/healthanalyzer/attack(mob/living/M as mob, mob/living/user as mob)
+/obj/item/device/healthanalyzer/attack(mob/living/M, mob/living/user)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	scan_mob(M, user)
+
+/obj/item/device/healthanalyzer/proc/scan_mob(mob/living/M, mob/living/user)
 	if ((CLUMSY in user.mutations) && prob(50))
 		user << text("<span class='warning'>You try to analyze the floor's vitals!</span>")
 		for(var/mob/O in viewers(M, null))
@@ -75,7 +84,7 @@ REAGENT SCANNER
 			for(var/obj/item/organ/external/org in damaged)
 				user.show_message(text("<span class='notice'>     [][]: [][] - []</span>",
 				capitalize(org.name),
-				(org.status & ORGAN_ROBOT) ? "(Cybernetic)" : "",
+				(org.robotic >= ORGAN_ROBOT) ? "(Cybernetic)" : "",
 				(org.brute_dam > 0) ? "<span class='warning'>[org.brute_dam]</span>" : 0,
 				(org.status & ORGAN_BLEEDING)?"<span class='danger'>\[Bleeding\]</span>":"",
 				(org.burn_dam > 0) ? "<font color='#FFA500'>[org.burn_dam]</font>" : 0),1)
@@ -127,6 +136,7 @@ REAGENT SCANNER
 //		user.show_message("<span class='notice'>Bloodstream Analysis located [M.reagents:get_reagent_amount("inaprovaline")] units of rejuvenation chemicals.</span>")
 	if (M.has_brain_worms())
 		user.show_message("<span class='warning'>Subject suffering from aberrant brain activity. Recommend further scanning.</span>")
+
 	else if (M.getBrainLoss() >= 60 || !M.has_brain())
 		user.show_message("<span class='warning'>Subject is brain dead.</span>")
 	else if (M.getBrainLoss() >= 25)
@@ -141,10 +151,13 @@ REAGENT SCANNER
 				continue
 			var/limb = e.name
 			if(e.status & ORGAN_BROKEN)
-				if(((e.name == "l_arm") || (e.name == "r_arm") || (e.name == "l_leg") || (e.name == "r_leg")) && (!(e.status & ORGAN_SPLINTED)))
+				if(((e.name == "l_arm") || (e.name == "r_arm") || (e.name == "l_leg") || (e.name == "r_leg")) && (!e.splinted))
 					user << "<span class='warning'>Unsecured fracture in subject [limb]. Splinting recommended for transport.</span>"
 			if(e.has_infected_wound())
 				user << "<span class='warning'>Infected wound detected in subject [limb]. Disinfection recommended.</span>"
+
+		if (H.internal_organs_by_name["stack"])
+			user.show_message("<span class='notice'>Subject has a neural lace implant.</span>")
 
 		for(var/name in H.organs_by_name)
 			var/obj/item/organ/external/e = H.organs_by_name[name]
@@ -168,8 +181,6 @@ REAGENT SCANNER
 			else
 				user.show_message("<span class='notice'>Blood Level Normal: [blood_percent]% [blood_volume]cl. Type: [blood_type]</span>")
 		user.show_message("<span class='notice'>Subject's pulse: <font color='[H.pulse() == PULSE_THREADY || H.pulse() == PULSE_NONE ? "red" : "blue"]'>[H.get_pulse(GETPULSE_TOOL)] bpm.</font></span>")
-	src.add_fingerprint(user)
-	return
 
 /obj/item/device/healthanalyzer/verb/toggle_mode()
 	set name = "Switch Verbosity"

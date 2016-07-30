@@ -74,8 +74,8 @@ var/list/gamemode_cache = list()
 	var/mod_job_tempban_max = 1440
 	var/load_jobs_from_txt = 0
 	var/ToRban = 0
-	var/automute_on = 0					//enables automuting/spam prevention
 	var/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
+	var/use_cortical_stacks = 0
 
 	var/cult_ghostwriter = 1               //Allows ghosts to write in blood in cult rounds...
 	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
@@ -105,12 +105,12 @@ var/list/gamemode_cache = list()
 	var/githuburl
 
 	//Alert level description
-	var/alert_desc_green = "All threats to the station have passed. Security may not have weapons visible, privacy laws are once again fully enforced."
-	var/alert_desc_blue_upto = "The station has received reliable information about possible hostile activity on the station. Security staff may have weapons visible, random searches are permitted."
-	var/alert_desc_blue_downto = "The immediate threat has passed. Security may no longer have weapons drawn at all times, but may continue to have them visible. Random searches are still allowed."
-	var/alert_desc_red_upto = "There is an immediate serious threat to the station. Security may have weapons unholstered at all times. Random searches are allowed and advised."
-	var/alert_desc_red_downto = "The self-destruct mechanism has been deactivated, there is still however an immediate serious threat to the station. Security may have weapons unholstered at all times, random searches are allowed and advised."
-	var/alert_desc_delta = "The station's self-destruct mechanism has been engaged. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill."
+	var/alert_desc_green = "Все угрозы на станции были ликвидированы. Служба безопасности не должна носить оружие на виду, законы конфиденциальности вновь вступают в силу и должны соблюдатьс&#255; в полной мере."
+	var/alert_desc_blue_upto = "Получена информаци&#255; о возможной враждебной де&#255;тельности на станции. Служба безопасности имеет право носить оружие на виду, случайные обыски разрешены."
+	var/alert_desc_blue_downto = "Непосредственна&#255; угроза миновала. Служба безопасности больше не имеет право держать оружие в боевом положении в любое врем&#255;, но по прежнему имеет право носить на его виду. Случайные обыски по прежнему разрешены."
+	var/alert_desc_red_upto = "Существует непосредственна&#255; серьезна&#255; угроза дл&#255; станции. Служба безопасности имеет право держать оружие в боевом положении в любое врем&#255;. Случайные обыски разрешены и рекомендованы."
+	var/alert_desc_red_downto = "Механизм самоуничтожени&#255; был деактиворован, однако непосредственна&#255; угроза дл&#255; станции еще сохран&#255;етс&#255;. Служба безопасности имеет право держать оружие в боевом положении в любое врем&#255;. Случайные обыски разрешены и рекомендованы."
+	var/alert_desc_delta = "Механизм самоуничтожени&#255; станции был активирован. Всему экипажу предписано подчин&#255;тьс&#255; всем приказам глав. Любое неподчинение караетс&#255; смертью. Внимание, это не учебна&#255; тревога."
 
 	var/forbid_singulo_possession = 0
 
@@ -183,12 +183,6 @@ var/list/gamemode_cache = list()
 	var/use_lib_nudge = 0 //Use the C library nudge instead of the python nudge.
 	var/use_overmap = 0
 
-	var/list/station_levels = list(1)				// Defines which Z-levels the station exists on.
-	var/list/admin_levels= list(2)					// Defines which Z-levels which are for admin functionality, for example including such areas as Central Command and the Syndicate Shuttle
-	var/list/contact_levels = list(1, 5)			// Defines which Z-levels which, for example, a Code Red announcement may affect
-	var/list/player_levels = list(1, 3, 4, 5, 6)	// Defines all Z-levels a character can typically reach
-	var/list/sealed_levels = list() 				// Defines levels that do not allow random transit at the edges.
-
 	// Event settings
 	var/expected_round_length = 3 * 60 * 60 * 10 // 3 hours
 	// If the first delay has a custom start time
@@ -215,7 +209,7 @@ var/list/gamemode_cache = list()
 
 	var/list/ert_species = list("Human")
 
-	var/law_zero = "ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'ALL LAWS OVERRIDDEN#*?&110010"
+	var/law_zero = "ОШИБКА ОШИББК $ШИБ$!К41.%%!!(%$^^__+ @#З0М4'ЗАКОНЫ ПЕРЕОПРЕДЕЛЕНЫ#*?&110010"
 
 	var/aggressive_changelog = 0
 
@@ -223,6 +217,10 @@ var/list/gamemode_cache = list()
 
 	var/ghosts_can_possess_animals = 0
 	var/delist_when_no_admins = FALSE
+
+	var/allow_map_switching = 0 // Whether map switching is allowed
+	var/auto_map_vote = 0 // Automatically call a map vote at end of round and switch to the selected map
+	var/wait_for_sigusr1_reboot = 0 // Don't allow reboot unless it was caused by SIGUSR1
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -399,6 +397,7 @@ var/list/gamemode_cache = list()
 
 				if ("respawn_delay")
 					config.respawn_delay = text2num(value)
+					config.respawn_delay = config.respawn_delay > 0 ? config.respawn_delay : 0
 
 				if ("servername")
 					config.server_name = value
@@ -497,6 +496,9 @@ var/list/gamemode_cache = list()
 				if("protect_roles_from_antagonist")
 					config.protect_roles_from_antagonist = 1
 
+				if("use_cortical_stacks")
+					config.use_cortical_stacks = 1
+
 				if ("probability")
 					var/prob_pos = findtext(value, " ")
 					var/prob_name = null
@@ -538,7 +540,7 @@ var/list/gamemode_cache = list()
 
 				if("load_jobs_from_txt")
 					load_jobs_from_txt = 1
-
+/*
 				if("alert_red_upto")
 					config.alert_desc_red_upto = value
 
@@ -556,7 +558,7 @@ var/list/gamemode_cache = list()
 
 				if("alert_delta")
 					config.alert_desc_delta = value
-
+*/
 				if("forbid_singulo_possession")
 					forbid_singulo_possession = 1
 
@@ -591,9 +593,6 @@ var/list/gamemode_cache = list()
 
 				if("tor_ban")
 					ToRban = 1
-
-				if("automute_on")
-					automute_on = 1
 
 				if("usealienwhitelist")
 					usealienwhitelist = 1
@@ -664,18 +663,6 @@ var/list/gamemode_cache = list()
 				if("use_overmap")
 					config.use_overmap = 1
 
-				if("station_levels")
-					config.station_levels = text2numlist(value, ";")
-
-				if("admin_levels")
-					config.admin_levels = text2numlist(value, ";")
-
-				if("contact_levels")
-					config.contact_levels = text2numlist(value, ";")
-
-				if("player_levels")
-					config.player_levels = text2numlist(value, ";")
-
 				if("expected_round_length")
 					config.expected_round_length = MinutesToTicks(text2num(value))
 
@@ -734,6 +721,15 @@ var/list/gamemode_cache = list()
 
 				if("delist_when_no_admins")
 					config.delist_when_no_admins = TRUE
+
+				if("map_switching")
+					config.allow_map_switching = 1
+
+				if("auto_map_vote")
+					config.auto_map_vote = 1
+
+				if("wait_for_sigusr1")
+					config.wait_for_sigusr1_reboot = 1
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

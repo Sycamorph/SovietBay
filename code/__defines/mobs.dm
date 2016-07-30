@@ -12,7 +12,7 @@
 #define PASSEMOTES  0x32    // Mob has a cortical borer or holders inside of it that need to see emotes.
 #define GODMODE     0x1000
 #define FAKEDEATH   0x2000  // Replaces stuff like changeling.changeling_fakedeath.
-#define DISFIGURED  0x4000  // Set but never checked. Remove this sometime and replace occurences with the appropriate organ code
+#define NO_ANTAG    0x4000  // Players are restricted from gaining antag roles when occupying this mob
 #define XENO_HOST   0x8000  // Tracks whether we're gonna be a baby alien's mummy.
 
 // Grab levels.
@@ -109,6 +109,10 @@
 
 #define COMPANY_ALIGNMENTS		list(COMPANY_LOYAL,COMPANY_SUPPORTATIVE,COMPANY_NEUTRAL,COMPANY_SKEPTICAL,COMPANY_OPPOSED)
 
+// Defines the argument used for get_mobs_and_objs_in_view_fast
+#define GHOSTS_ALL_HEAR 1
+#define ONLY_GHOSTS_IN_VIEW 0
+
 
 // Defines mob sizes, used by lockers and to determine what is considered a small sized mob, etc.
 #define MOB_LARGE  		40
@@ -121,6 +125,10 @@
 #define GLUT_TINY 1       // Eat anything tiny and smaller
 #define GLUT_SMALLER 2    // Eat anything smaller than we are
 #define GLUT_ANYTHING 3   // Eat anything, ever
+
+// Devour speeds, returned by can_devour()
+#define DEVOUR_SLOW 1
+#define DEVOUR_FAST 2
 
 #define TINT_NONE 0
 #define TINT_MODERATE 1
@@ -138,20 +146,23 @@
 #define DRONE_SPAWN_DELAY  round(config.respawn_delay / 3)
 
 // Incapacitation flags, used by the mob/proc/incapacitated() proc
+#define INCAPACITATION_NONE 0
 #define INCAPACITATION_RESTRAINED 1
 #define INCAPACITATION_BUCKLED_PARTIALLY 2
 #define INCAPACITATION_BUCKLED_FULLY 4
-#define INCAPACITATION_DISABLED 8
+#define INCAPACITATION_STUNNED 8
+#define INCAPACITATION_FORCELYING 16 //needs a better name - represents being knocked down BUT still conscious.
+#define INCAPACITATION_KNOCKOUT 32
 
+#define INCAPACITATION_KNOCKDOWN (INCAPACITATION_KNOCKOUT|INCAPACITATION_FORCELYING)
+#define INCAPACITATION_DISABLED (INCAPACITATION_KNOCKDOWN|INCAPACITATION_STUNNED)
 #define INCAPACITATION_DEFAULT (INCAPACITATION_RESTRAINED|INCAPACITATION_BUCKLED_FULLY|INCAPACITATION_DISABLED)
-#define INCAPACITATION_ALL (INCAPACITATION_RESTRAINED|INCAPACITATION_BUCKLED_PARTIALLY|INCAPACITATION_BUCKLED_FULLY|INCAPACITATION_DISABLED)
+#define INCAPACITATION_ALL (~INCAPACITATION_NONE)
 
 #define MOB_PULL_NONE 0
 #define MOB_PULL_SMALLER 1
 #define MOB_PULL_SAME 2
 #define MOB_PULL_LARGER 3
-
-#define MOVED_DROP 1
 
 //carbon taste sensitivity defines, used in mob/living/carbon/proc/ingest
 #define TASTE_HYPERSENSITIVE 3 //anything below 5%

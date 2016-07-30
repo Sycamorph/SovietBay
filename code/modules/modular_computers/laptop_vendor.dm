@@ -2,7 +2,7 @@
 
 /obj/machinery/lapvend
 	name = "computer vendor"
-	desc = "A vending machine with microfabricator capable of dispensing various NT-branded computers"
+	desc = "A vending machine with microfabricator capable of dispensing various NT-branded computers."
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "robotics"
 	layer = 2.9
@@ -229,7 +229,7 @@
 	data["hw_nanoprint"] = dev_nanoprint
 	data["hw_card"] = dev_card
 	data["hw_cpu"] = dev_cpu
-	data["totalprice"] = "[total_price]$"
+	data["totalprice"] = "[total_price]þ"
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -246,10 +246,12 @@ obj/machinery/lapvend/attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(process_payment(I,W))
 			fabricate_and_recalc_price(1)
 			if((devtype == 1) && fabricated_laptop)
+				fabricated_laptop.cpu.battery_module.charge_to_full()
 				fabricated_laptop.forceMove(src.loc)
 				fabricated_laptop.close_laptop()
 				fabricated_laptop = null
 			else if((devtype == 2) && fabricated_tablet)
+				fabricated_tablet.battery_module.charge_to_full()
 				fabricated_tablet.forceMove(src.loc)
 				fabricated_tablet = null
 			ping("Enjoy your new product!")
@@ -289,6 +291,6 @@ obj/machinery/lapvend/attackby(obj/item/weapon/W as obj, mob/user as mob)
 		T.amount = total_price
 		T.source_terminal = src.name
 		T.date = current_date_string
-		T.time = worldtime2text()
+		T.time = stationtime2text()
 		customer_account.transaction_log.Add(T)
 		return 1

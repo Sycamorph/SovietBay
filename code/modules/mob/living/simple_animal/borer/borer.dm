@@ -21,6 +21,13 @@
 	pass_flags = PASSTABLE
 	universal_understand = 1
 	holder_type = /obj/item/weapon/holder/borer
+	mob_size = MOB_SMALL
+
+	var/generation = 1
+	var/static/list/borer_names = list(
+		"Primary", "Secondary", "Tertiary", "Quaternary", "Quinary", "Senary",
+		"Septenary", "Octonary", "Novenary", "Decenary", "Undenary", "Duodenary",
+		)
 
 	var/used_dominate
 	var/chemicals = 10                      // Chemicals used for reproduction and spitting neurotoxin.
@@ -40,14 +47,15 @@
 	if(mind)
 		borers.add_antagonist(mind)
 
-/mob/living/simple_animal/borer/New()
-	..()
+/mob/living/simple_animal/borer/New(atom/newloc, var/gen=1)
+	..(newloc)
 
 	add_language("Cortical Link")
 	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
 
-	truename = "[pick("Primary","Secondary","Tertiary","Quaternary")] [rand(1000,9999)]"
+	generation = gen
+	truename = "[borer_names[min(generation, borer_names.len)]] [random_id("borer[generation]", 1000, 9999)]"
 	if(!roundstart) request_player()
 
 /mob/living/simple_animal/borer/Life()
@@ -89,7 +97,7 @@
 					host.say("*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_s","gasp"))]")
 
 /mob/living/simple_animal/borer/Stat()
-	..()
+	. = ..()
 	statpanel("Status")
 
 	if(emergency_shuttle)
@@ -175,6 +183,3 @@
 /mob/living/simple_animal/borer/proc/request_player()
 	var/datum/ghosttrap/G = get_ghost_trap("cortical borer")
 	G.request_player(src, "A cortical borer needs a player.")
-
-/mob/living/simple_animal/borer/cannot_use_vents()
-	return

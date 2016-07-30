@@ -11,13 +11,22 @@
 		return L.mob_size <= MOB_SMALL
 	return 0
 
+//returns the number of size categories between two mob_sizes, rounded. Positive means A is larger than B
+/proc/mob_size_difference(var/mob_size_A, var/mob_size_B)
+	return round(log(2, mob_size_A/mob_size_B), 1)
+
+/mob/proc/can_wield_item(obj/item/W)
+	if(W.w_class >= LARGE_ITEM && issmall(src))
+		return FALSE //M is too small to wield this
+	return TRUE
+
 /mob/living/proc/isSynthetic()
 	return 0
 
 /mob/living/carbon/human/isSynthetic()
 	// If they are 100% robotic, they count as synthetic.
 	for(var/obj/item/organ/external/E in organs)
-		if(!(E.status & ORGAN_ROBOT))
+		if(!(E.robotic >= ORGAN_ROBOT))
 			return 0
 	return 1
 
@@ -214,9 +223,8 @@ proc/slur(phrase)
 			if(1,3,5,8)	newletter="[lowertext_alt(newletter)]"
 			if(2,4,6,15)	newletter="[uppertext_alt(newletter)]"
 			if(7)	newletter+="'"
-			//if(9,10)	newletter="<b>[newletter]</b>"
-			//if(11,12)	newletter="<big>[newletter]</big>"
-			//if(13)	newletter="<small>[newletter]</small>"
+			if(9,10)	newletter="<b>[newletter]</b>"
+			if(11,12)	newletter="<small>[newletter]</small>" 	//if(11,12)	newletter="<big>[newletter]</big>" 	//if(13)	newletter="<small>[newletter]</small>"
 		newphrase+="[newletter]";counter-=1
 	return newphrase
 
@@ -226,9 +234,9 @@ proc/slur(phrase)
 	n = length(n)//length of the entire word
 	var/alphabet[0]
 	//"b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","y","z"
-	alphabet.Add(98,99,100,102,103,104,105,106,107,108,109,110,112,113,114,115,116,118,119,120,121,122)
+	alphabet.Add("b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","y","z")
 	//"á","â","ã","ä","æ","ç","é","ê","ë","ì","í","ï","ð","ñ","ò","ô","õ","ö","÷","ø","ù"
-	alphabet.Add(225,226,227,228,230,231,233,234,235,236,237,239,240,241,242,244,245,246,247,248,249)
+	alphabet.Add("á","â","ã","ä","æ","ç","é","ê","ë","ì","í","ï","ð","ñ","ò","ô","õ","ö","÷","ø","ù")
 
 	var/p = null
 	p = 1//1 is the start of any word
@@ -436,6 +444,8 @@ proc/is_blind(A)
 			var/follow
 			var/lname
 			if(subject)
+				if(M.is_key_ignored(subject.client.key)) // If we're ignored, do nothing.
+					continue
 				if(subject != M)
 					follow = "([ghost_follow_link(subject, M)]) "
 				if(M.stat != DEAD && M.client.holder)
@@ -595,3 +605,43 @@ proc/is_blind(A)
 
 /mob/living/silicon/ai/get_multitool()
 	return ..(aiMulti)
+
+/proc/get_both_hands(mob/living/carbon/M)
+	if(!istype(M))
+		return
+	var/list/hands = list(M.l_hand, M.r_hand)
+	return hands
+
+/mob/proc/refresh_client_images()
+	if(client)
+		client.images |= client_images
+
+/mob/proc/hide_client_images()
+	if(client)
+		client.images -= client_images
+
+/mob/proc/add_client_image(var/image)
+	if(image in client_images)
+		return
+	client_images += image
+	if(client)
+		client.images += image
+
+/mob/proc/remove_client_image(var/image)
+	client_images -= image
+	if(client)
+		client.images -= image
+
+/mob/proc/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
+	return
+
+/mob/proc/fully_replace_character_name(var/new_name, var/in_depth = TRUE)
+	if(!new_name || new_name == real_name)	return 0
+	real_name = new_name
+	name = new_name
+	if(mind)
+		mind.name = new_name
+	if(dna)
+		dna.real_name = real_name
+	return 1
+

@@ -1,3 +1,10 @@
+/mob/living/New()
+	..()
+	if(stat == DEAD)
+		add_to_dead_mob_list()
+	else
+		add_to_living_mob_list()
+
 //mob verbs are faster than object verbs. See mob/verb/examine.
 /mob/living/verb/pulled(atom/movable/AM as mob|obj in oview(1))
 	set name = "Pull"
@@ -43,6 +50,11 @@ default behaviour is:
 		if(mob_bump_flag & context_flags)
 			return 1
 		return 0
+
+/mob/living/canface()
+	if(stat)
+		return 0
+	return ..()
 
 /mob/living/Bump(atom/movable/AM, yes)
 	spawn(0)
@@ -117,22 +129,26 @@ default behaviour is:
 		now_pushing = 0
 		spawn(0)
 			..()
-			if (!istype(AM, /atom/movable))
+			if (!istype(AM, /atom/movable) || AM.anchored)
+				if(confused && prob(50) && m_intent=="run")
+					Weaken(2)
+					playsound(loc, "punch", 25, 1, -1)
+					visible_message("<span class='warning'>[src] [pick("ran", "slammed")] into \the [AM]!</span>")
+					src.apply_damage(5, BRUTE)
 				return
 			if (!now_pushing)
 				now_pushing = 1
 
-				if (!AM.anchored)
-					var/t = get_dir(src, AM)
-					if (istype(AM, /obj/structure/window))
-						for(var/obj/structure/window/win in get_step(AM,t))
-							now_pushing = 0
-							return
-					step(AM, t)
-					if(ishuman(AM) && AM:grabbed_by)
-						for(var/obj/item/weapon/grab/G in AM:grabbed_by)
-							step(G:assailant, get_dir(G:assailant, AM))
-							G.adjust_position()
+				var/t = get_dir(src, AM)
+				if (istype(AM, /obj/structure/window))
+					for(var/obj/structure/window/win in get_step(AM,t))
+						now_pushing = 0
+						return
+				step(AM, t)
+				if(ishuman(AM) && AM:grabbed_by)
+					for(var/obj/item/weapon/grab/G in AM:grabbed_by)
+						step(G:assailant, get_dir(G:assailant, AM))
+						G.adjust_position()
 				now_pushing = 0
 			return
 	return
@@ -236,14 +252,14 @@ default behaviour is:
 
 /mob/living/proc/adjustBruteLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	bruteloss = min(max(bruteloss + amount, 0),(maxHealth*2))
+	bruteloss = min(max(bruteloss + amount, 0),(maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/getOxyLoss()
 	return oxyloss
 
 /mob/living/proc/adjustOxyLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	oxyloss = min(max(oxyloss + amount, 0),(maxHealth*2))
+	oxyloss = min(max(oxyloss + amount, 0),(maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/setOxyLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
@@ -254,7 +270,7 @@ default behaviour is:
 
 /mob/living/proc/adjustToxLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	toxloss = min(max(toxloss + amount, 0),(maxHealth*2))
+	toxloss = min(max(toxloss + amount, 0),(maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/setToxLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
@@ -265,14 +281,14 @@ default behaviour is:
 
 /mob/living/proc/adjustFireLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	fireloss = min(max(fireloss + amount, 0),(maxHealth*2))
+	fireloss = min(max(fireloss + amount, 0),(maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/getCloneLoss()
 	return cloneloss
 
 /mob/living/proc/adjustCloneLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	cloneloss = min(max(cloneloss + amount, 0),(maxHealth*2))
+	cloneloss = min(max(cloneloss + amount, 0),(maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/setCloneLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
@@ -283,7 +299,7 @@ default behaviour is:
 
 /mob/living/proc/adjustBrainLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	brainloss = min(max(brainloss + amount, 0),(maxHealth*2))
+	brainloss = min(max(brainloss + amount, 0),(maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/setBrainLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
@@ -294,7 +310,7 @@ default behaviour is:
 
 /mob/living/proc/adjustHalLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	halloss = min(max(halloss + amount, 0),(maxHealth*2))
+	halloss = min(max(halloss + amount, 0),(maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/setHalLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
@@ -359,7 +375,7 @@ default behaviour is:
 	return 0
 
 
-/mob/living/proc/can_inject()
+/mob/living/proc/can_inject(var/mob/user, var/target_zone)
 	return 1
 
 /mob/living/proc/get_organ_target()
@@ -423,7 +439,8 @@ default behaviour is:
 	fire_stacks = 0
 
 /mob/living/proc/rejuvenate()
-	reagents.clear_reagents()
+	if(reagents)
+		reagents.clear_reagents()
 
 	// shut down various types of badness
 	setToxLoss(0)
@@ -453,8 +470,7 @@ default behaviour is:
 
 	// remove the character from the list of the dead
 	if(stat == DEAD)
-		dead_mob_list -= src
-		living_mob_list += src
+		switch_from_dead_to_living_mob_list()
 		tod = null
 		timeofdeath = 0
 
@@ -469,7 +485,7 @@ default behaviour is:
 	BITSET(hud_updateflag, LIFE_HUD)
 
 	failed_last_breath = 0 //So mobs that died of oxyloss don't revive and have perpetual out of breath.
-
+	reload_fullscreen()
 	return
 
 /mob/living/proc/UpdateDamageIcon()
@@ -596,7 +612,7 @@ default behaviour is:
 	set name = "Resist"
 	set category = "IC"
 
-	if(!stat && canClick())
+	if(!incapacitated(INCAPACITATION_KNOCKOUT) && canClick())
 		setClickCooldown(20)
 		resist_grab()
 		if(!weakened)
@@ -651,24 +667,9 @@ default behaviour is:
 
 /mob/living/proc/resist_grab()
 	var/resisting = 0
-	for(var/obj/O in requests)
-		requests.Remove(O)
-		qdel(O)
-		resisting++
 	for(var/obj/item/weapon/grab/G in grabbed_by)
 		resisting++
-		switch(G.state)
-			if(GRAB_PASSIVE)
-				qdel(G)
-			if(GRAB_AGGRESSIVE)
-				if(prob(60)) //same chance of breaking the grab as disarm
-					visible_message("<span class='warning'>[src] has broken free of [G.assailant]'s grip!</span>")
-					qdel(G)
-			if(GRAB_NECK)
-				//If the you move when grabbing someone then it's easier for them to break free. Same if the affected mob is immune to stun.
-				if (((world.time - G.assailant.l_move_time < 30 || !stunned) && prob(15)) || prob(3))
-					visible_message("<span class='warning'>[src] has broken free of [G.assailant]'s headlock!</span>")
-					qdel(G)
+		G.handle_resist()
 	if(resisting)
 		visible_message("<span class='danger'>[src] resists!</span>")
 
@@ -787,8 +788,19 @@ default behaviour is:
 		if(new_area)
 			new_area.Entered(src)
 
+//called when the mob receives a bright flash
+/mob/living/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
+	if(override_blindness_check || !(disabilities & BLIND))
+		overlay_fullscreen("flash", type)
+		spawn(25)
+			if(src)
+				clear_fullscreen("flash", 25)
+		return 1
+
 /mob/living/proc/cannot_use_vents()
-	return "You can't fit into that vent."
+	if(mob_size > MOB_SMALL)
+		return "You can't fit into that vent."
+	return null
 
 /mob/living/proc/has_brain()
 	return 1
@@ -802,27 +814,7 @@ default behaviour is:
 /mob/living/carbon/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
 	if(W in internal_organs)
 		return
-	..()
-
-/mob/living/touch_map_edge()
-
-	//check for nuke disks
-	if(client && stat != DEAD) //if they are clientless and dead don't bother, the parent will treat them as any other container
-		if(ticker && istype(ticker.mode, /datum/game_mode/nuclear)) //only really care if the game mode is nuclear
-			var/datum/game_mode/nuclear/G = ticker.mode
-			if(G.check_mob(src))
-				if(x <= TRANSITIONEDGE)
-					inertia_dir = 4
-				else if(x >= world.maxx -TRANSITIONEDGE)
-					inertia_dir = 8
-				else if(y <= TRANSITIONEDGE)
-					inertia_dir = 1
-				else if(y >= world.maxy -TRANSITIONEDGE)
-					inertia_dir = 2
-				src << "<span class='warning'>Something you are carrying is preventing you from leaving.</span>"
-				return
-
-	..()
+	. = ..()
 
 //damage/heal the mob ears and adjust the deaf amount
 /mob/living/adjustEarDamage(var/damage, var/deaf)

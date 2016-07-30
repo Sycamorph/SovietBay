@@ -91,13 +91,8 @@
 /obj/machinery/alarm/server/New()
 	..()
 	req_access = list(access_rd, access_atmospherics, access_engine_equip)
-	TLV["oxygen"] =			list(-1.0, -1.0,-1.0,-1.0) // Partial pressure, kpa
-	TLV["carbon dioxide"] = list(-1.0, -1.0,   5,  10) // Partial pressure, kpa
-	TLV["phoron"] =			list(-1.0, -1.0, 0.2, 0.5) // Partial pressure, kpa
-	TLV["other"] =			list(-1.0, -1.0, 0.5, 1.0) // Partial pressure, kpa
-	TLV["pressure"] =		list(0,ONE_ATMOSPHERE*0.10,ONE_ATMOSPHERE*1.40,ONE_ATMOSPHERE*1.60) /* kpa */
-	TLV["temperature"] =	list(20, 40, 140, 160) // K
-	target_temperature = 90
+	TLV["temperature"] =	list(T0C-26, T0C, T0C+30, T0C+40) // K
+	target_temperature = T0C+10
 
 /obj/machinery/alarm/Destroy()
 	unregister_radio(src, frequency)
@@ -514,11 +509,11 @@
 	data["has_environment"] = total
 	if(total)
 		var/pressure = environment.return_pressure()
-		environment_data[++environment_data.len] = list("name" = "Pressure", "value" = pressure, "unit" = "kPa", "danger_level" = pressure_dangerlevel)
-		environment_data[++environment_data.len] = list("name" = "Oxygen", "value" = environment.gas["oxygen"] / total * 100, "unit" = "%", "danger_level" = oxygen_dangerlevel)
-		environment_data[++environment_data.len] = list("name" = "Carbon dioxide", "value" = environment.gas["carbon_dioxide"] / total * 100, "unit" = "%", "danger_level" = co2_dangerlevel)
-		environment_data[++environment_data.len] = list("name" = "Toxins", "value" = environment.gas["phoron"] / total * 100, "unit" = "%", "danger_level" = phoron_dangerlevel)
-		environment_data[++environment_data.len] = list("name" = "Temperature", "value" = environment.temperature, "unit" = "K ([round(environment.temperature - T0C, 0.1)]C)", "danger_level" = temperature_dangerlevel)
+		environment_data[++environment_data.len] = list("name" = "[fix_rus_nanoui("Давление")]", 		"value" = pressure, "unit" = "[fix_rus_nanoui("кПа")]", "danger_level" = pressure_dangerlevel)
+		environment_data[++environment_data.len] = list("name" = "[fix_rus_nanoui("Кислород")]", 		"value" = environment.gas["oxygen"] / total * 100, "unit" = "%", "danger_level" = oxygen_dangerlevel)
+		environment_data[++environment_data.len] = list("name" = "[fix_rus_nanoui("Углекислый газ")]", 	"value" = environment.gas["carbon_dioxide"] / total * 100, "unit" = "%", "danger_level" = co2_dangerlevel)
+		environment_data[++environment_data.len] = list("name" = "[fix_rus_nanoui("Форон")]", 			"value" = environment.gas["phoron"] / total * 100, "unit" = "%", "danger_level" = phoron_dangerlevel)
+		environment_data[++environment_data.len] = list("name" = "[fix_rus_nanoui("Температура")]",		"value" = environment.temperature, "unit" = "K ([round(environment.temperature - T0C, 0.1)]C)", "danger_level" = temperature_dangerlevel)
 	data["total_danger"] = danger_level
 	data["environment"] = environment_data
 	data["atmos_alarm"] = alarm_area.atmosalm
@@ -560,20 +555,20 @@
 						"panic"		= info["panic"],
 						"filters"	= list()
 					)
-				scrubbers[scrubbers.len]["filters"] += list(list("name" = "Oxygen",			"command" = "o2_scrub",	"val" = info["filter_o2"]))
-				scrubbers[scrubbers.len]["filters"] += list(list("name" = "Nitrogen",		"command" = "n2_scrub",	"val" = info["filter_n2"]))
-				scrubbers[scrubbers.len]["filters"] += list(list("name" = "Carbon Dioxide", "command" = "co2_scrub","val" = info["filter_co2"]))
-				scrubbers[scrubbers.len]["filters"] += list(list("name" = "Toxin"	, 		"command" = "tox_scrub","val" = info["filter_phoron"]))
-				scrubbers[scrubbers.len]["filters"] += list(list("name" = "Nitrous Oxide",	"command" = "n2o_scrub","val" = info["filter_n2o"]))
+				scrubbers[scrubbers.len]["filters"] += list(list("name" = "[fix_rus_nanoui("Кислород")]",		"command" = "o2_scrub",	"val" = info["filter_o2"]))
+				scrubbers[scrubbers.len]["filters"] += list(list("name" = "[fix_rus_nanoui("Азот")]",			"command" = "n2_scrub",	"val" = info["filter_n2"]))
+				scrubbers[scrubbers.len]["filters"] += list(list("name" = "[fix_rus_nanoui("Углекислый газ")]", "command" = "co2_scrub","val" = info["filter_co2"]))
+				scrubbers[scrubbers.len]["filters"] += list(list("name" = "[fix_rus_nanoui("Форон")]", 			"command" = "tox_scrub","val" = info["filter_phoron"]))
+				scrubbers[scrubbers.len]["filters"] += list(list("name" = "[fix_rus_nanoui("N2O")]",			"command" = "n2o_scrub","val" = info["filter_n2o"]))
 			data["scrubbers"] = scrubbers
 		if(AALARM_SCREEN_MODE)
 			var/modes[0]
-			modes[++modes.len] = list("name" = "Filtering - Scrubs out contaminants", 			"mode" = AALARM_MODE_SCRUBBING,		"selected" = mode == AALARM_MODE_SCRUBBING, 	"danger" = 0)
-			modes[++modes.len] = list("name" = "Replace Air - Siphons out air while replacing", "mode" = AALARM_MODE_REPLACEMENT,	"selected" = mode == AALARM_MODE_REPLACEMENT,	"danger" = 0)
-			modes[++modes.len] = list("name" = "Panic - Siphons air out of the room", 			"mode" = AALARM_MODE_PANIC,			"selected" = mode == AALARM_MODE_PANIC, 		"danger" = 1)
-			modes[++modes.len] = list("name" = "Cycle - Siphons air before replacing", 			"mode" = AALARM_MODE_CYCLE,			"selected" = mode == AALARM_MODE_CYCLE, 		"danger" = 1)
-			modes[++modes.len] = list("name" = "Fill - Shuts off scrubbers and opens vents", 	"mode" = AALARM_MODE_FILL,			"selected" = mode == AALARM_MODE_FILL, 			"danger" = 0)
-			modes[++modes.len] = list("name" = "Off - Shuts off vents and scrubbers", 			"mode" = AALARM_MODE_OFF,			"selected" = mode == AALARM_MODE_OFF, 			"danger" = 0)
+			modes[++modes.len] = list("name" = "[fix_rus_nanoui("Фильтрация - вывод загрязняющик веществ")]", 					"mode" = AALARM_MODE_SCRUBBING,		"selected" = mode == AALARM_MODE_SCRUBBING, 	"danger" = 0)
+			modes[++modes.len] = list("name" = "[fix_rus_nanoui("Замена воздуха - плавная замена")]",							"mode" = AALARM_MODE_REPLACEMENT,	"selected" = mode == AALARM_MODE_REPLACEMENT,	"danger" = 0)
+			modes[++modes.len] = list("name" = "[fix_rus_nanoui("Экстренная откачка - быстрая откачка")]", 						"mode" = AALARM_MODE_PANIC,			"selected" = mode == AALARM_MODE_PANIC, 		"danger" = 1)
+			modes[++modes.len] = list("name" = "[fix_rus_nanoui("Цикл - откачка возуха с последующим заполнением")]", 			"mode" = AALARM_MODE_CYCLE,			"selected" = mode == AALARM_MODE_CYCLE, 		"danger" = 1)
+			modes[++modes.len] = list("name" = "[fix_rus_nanoui("Наполнение - наполнение и выключенными фильтрами")]", 			"mode" = AALARM_MODE_FILL,			"selected" = mode == AALARM_MODE_FILL, 			"danger" = 0)
+			modes[++modes.len] = list("name" = "[fix_rus_nanoui("Выключить - отключение фильтров и помп")]", 					"mode" = AALARM_MODE_OFF,			"selected" = mode == AALARM_MODE_OFF, 			"danger" = 0)
 			data["modes"] = modes
 			data["mode"] = mode
 		if(AALARM_SCREEN_SENSORS)
@@ -583,8 +578,8 @@
 			var/list/gas_names = list(
 				"oxygen"         = "O<sub>2</sub>",
 				"carbon dioxide" = "CO<sub>2</sub>",
-				"phoron"         = "Toxin",
-				"other"          = "Other")
+				"phoron"         = "[fix_rus_nanoui("Форон")]",
+				"other"          = "[fix_rus_nanoui("Остальное")]")
 			for (var/g in gas_names)
 				thresholds[++thresholds.len] = list("name" = gas_names[g], "settings" = list())
 				selected = TLV[g]
@@ -592,12 +587,12 @@
 					thresholds[thresholds.len]["settings"] += list(list("env" = g, "val" = i, "selected" = selected[i]))
 
 			selected = TLV["pressure"]
-			thresholds[++thresholds.len] = list("name" = "Pressure", "settings" = list())
+			thresholds[++thresholds.len] = list("name" = "[fix_rus_nanoui("Давление")]", "settings" = list())
 			for(var/i = 1, i <= 4, i++)
 				thresholds[thresholds.len]["settings"] += list(list("env" = "pressure", "val" = i, "selected" = selected[i]))
 
 			selected = TLV["temperature"]
-			thresholds[++thresholds.len] = list("name" = "Temperature", "settings" = list())
+			thresholds[++thresholds.len] = list("name" = "[fix_rus_nanoui("Температура")]", "settings" = list())
 			for(var/i = 1, i <= 4, i++)
 				thresholds[thresholds.len]["settings"] += list(list("env" = "temperature", "val" = i, "selected" = selected[i]))
 
@@ -832,11 +827,6 @@
 
 	return ..()
 
-/obj/machinery/alarm/power_change()
-	..()
-	spawn(rand(0,15))
-		update_icon()
-
 /obj/machinery/alarm/examine(mob/user)
 	..(user)
 	if (buildstage < 2)
@@ -1007,11 +997,6 @@ FIRE ALARM
 
 	return
 
-/obj/machinery/firealarm/power_change()
-	..()
-	spawn(rand(0,15))
-		update_icon()
-
 /obj/machinery/firealarm/attack_hand(mob/user as mob)
 	if(user.stat || stat & (NOPOWER|BROKEN))
 		return
@@ -1096,6 +1081,7 @@ FIRE ALARM
 	update_icon()
 	return
 
+
 /obj/machinery/firealarm/proc/alarm(var/duration = 0)
 	if (!( src.working))
 		return
@@ -1105,7 +1091,6 @@ FIRE ALARM
 	update_icon()
 	//playsound(src.loc, 'sound/ambience/signal.ogg', 75, 0)
 	return
-
 
 
 /obj/machinery/firealarm/New(loc, dir, building)
@@ -1129,7 +1114,7 @@ FIRE ALARM
 		update_icon()
 
 /obj/machinery/firealarm/initialize()
-	if(z in config.contact_levels)
+	if(z in using_map.contact_levels)
 		set_security_level(security_level? get_security_level() : "green")
 
 /*
@@ -1140,7 +1125,7 @@ Just a object used in constructing fire alarms
 	name = "fire alarm electronics"
 	icon = 'icons/obj/doors/door_assembly.dmi'
 	icon_state = "door_electronics"
-	desc = "A circuit. It has a label on it, it says \"Can handle heat levels up to 40 degrees celsius!\""
+	desc = "A circuit. It has a label on it, it says \"Can handle heat levels up to 40 degrees celsius!\"."
 	w_class = 2.0
 	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
 
@@ -1241,3 +1226,4 @@ Just a object used in constructing fire alarms
 		usr << browse(null, "window=partyalarm")
 		return
 	return
+

@@ -35,6 +35,9 @@ var/list/global_huds = list(
 	screen.icon_state = icon_state
 	screen.layer = SCREEN_LAYER
 	screen.mouse_opacity = 0
+	screen.blend_mode = BLEND_MULTIPLY
+	screen.alpha = 180
+
 
 	return screen
 
@@ -161,6 +164,9 @@ datum/hud/New(mob/owner)
 //	item_action_list = null // ?
 	mymob = null
 
+/datum/hud/proc/common_hud()
+    mymob.client.screen += mymob.client.void
+
 /datum/hud/proc/hidden_inventory_update()
 	if(!mymob) return
 	if(ishuman(mymob))
@@ -255,8 +261,8 @@ datum/hud/New(mob/owner)
 	var/ui_alpha = mymob.client.prefs.UI_style_alpha
 	if(mymob.mind && mymob.mind.vampire)
 		vampire_hud()
-
 	mymob.instantiate_hud(src, ui_style, ui_color, ui_alpha)
+
 
 /mob/proc/instantiate_hud(var/datum/hud/HUD, var/ui_style, var/ui_color, var/ui_alpha)
 	return
@@ -359,3 +365,9 @@ datum/hud/New(mob/owner)
 	hud_used.hidden_inventory_update()
 	hud_used.persistant_inventory_update()
 	update_action_buttons()
+
+/mob/proc/add_click_catcher()
+	client.screen += client.void
+
+/mob/new_player/add_click_catcher()
+	return

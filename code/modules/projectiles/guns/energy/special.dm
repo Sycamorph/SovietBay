@@ -3,15 +3,16 @@
 	desc = "The NT Mk60 EW Halicon is a man portable anti-armor weapon designed to disable mechanical threats, produced by NT. Not the best of its type."
 	icon_state = "ionrifle"
 	item_state = "ionrifle"
-	fire_sound = 'sound/weapons/Laser.ogg'
 	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 4)
-	w_class = 4
+	w_class = 5
 	force = 10
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
+	requires_two_hands = 4
 	charge_cost = 300
 	max_shots = 10
 	projectile_type = /obj/item/projectile/ion
+	cell_type = /obj/item/weapon/cell/device/laser/super
 
 /obj/item/weapon/gun/energy/ionrifle/emp_act(severity)
 	..(max(severity, 2)) //so it doesn't EMP itself, I guess
@@ -19,32 +20,34 @@
 /obj/item/weapon/gun/energy/ionrifle/update_icon()
 	..()
 	if(power_supply.charge < charge_cost)
-		item_state = "ionrifle-empty"
+		item_state_slots[slot_l_hand_str] = "ionrifle-empty"
+		item_state_slots[slot_r_hand_str] = "ionrifle-empty"
 	else
-		item_state = initial(item_state)
+		item_state_slots[slot_l_hand_str] = initial(item_state)
+		item_state_slots[slot_r_hand_str] = initial(item_state)
 
 /obj/item/weapon/gun/energy/decloner
 	name = "biological demolecularisor"
 	desc = "A gun that discharges high amounts of controlled radiation to slowly break a target into component elements."
 	icon_state = "decloner"
 	item_state = "decloner"
-	fire_sound = 'sound/weapons/pulse3.ogg'
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 4, TECH_POWER = 3)
 	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/declone
+	cell_type = /obj/item/weapon/cell/device/laser/high
 
 /obj/item/weapon/gun/energy/floragun
 	name = "floral somatoray"
 	desc = "A tool that discharges controlled radiation which induces mutation in plant cells."
 	icon_state = "floramut100"
 	item_state = "floramut"
-	fire_sound = 'sound/effects/stealthoff.ogg'
 	charge_cost = 100
 	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/floramut
 	origin_tech = list(TECH_MATERIAL = 2, TECH_BIO = 3, TECH_POWER = 3)
 	modifystate = "floramut"
 	self_recharge = 1
+	cell_type = /obj/item/weapon/cell/device/laser
 
 	firemodes = list(
 		list(mode_name="induce mutations", projectile_type=/obj/item/projectile/energy/floramut, modifystate="floramut"),
@@ -65,12 +68,13 @@
 	icon_state = "riotgun"
 	item_state = "c20r"
 	slot_flags = SLOT_BELT|SLOT_BACK
-	w_class = 4
+	w_class = 5
 	projectile_type = /obj/item/projectile/meteor
 	cell_type = /obj/item/weapon/cell/potato
 	self_recharge = 1
 	recharge_time = 5 //Time it takes for shots to recharge (in ticks)
 	charge_meter = 0
+
 
 /obj/item/weapon/gun/energy/meteorgun/pen
 	name = "meteor pen"
@@ -87,22 +91,22 @@
 	desc = "A custom-built weapon of some kind."
 	icon_state = "xray"
 	projectile_type = /obj/item/projectile/beam/mindflayer
-	fire_sound = 'sound/weapons/Laser.ogg'
+	cell_type = /obj/item/weapon/cell/device/laser/high
 
 /obj/item/weapon/gun/energy/toxgun
 	name = "phoron pistol"
 	desc = "A specialized firearm designed to fire lethal bolts of phoron."
 	icon_state = "toxgun"
-	fire_sound = 'sound/effects/stealthoff.ogg'
 	w_class = 3.0
 	origin_tech = list(TECH_COMBAT = 5, TECH_PHORON = 4)
 	projectile_type = /obj/item/projectile/energy/phoron
+	cell_type = /obj/item/weapon/cell/device/laser/high
 
 /* Staves */
 
 /obj/item/weapon/gun/energy/staff
 	name = "staff of change"
-	desc = "An artefact that spits bolts of coruscating energy which cause the target's very form to reshape itself"
+	desc = "An artefact that spits bolts of coruscating energy which cause the target's very form to reshape itself."
 	icon = 'icons/obj/gun.dmi'
 	item_icons = null
 	icon_state = "staffofchange"
@@ -110,12 +114,13 @@
 	fire_sound = 'sound/weapons/emitter.ogg'
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
-	w_class = 4.0
+	w_class = 5
 	max_shots = 5
 	projectile_type = /obj/item/projectile/change
 	origin_tech = null
 	self_recharge = 1
 	charge_meter = 0
+	cell_type = /obj/item/weapon/cell/device/laser
 
 /obj/item/weapon/gun/energy/staff/special_check(var/mob/user)
 	if((user.mind && !wizards.is_antagonist(user.mind)))

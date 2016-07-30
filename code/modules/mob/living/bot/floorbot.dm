@@ -143,11 +143,13 @@
 						target = T
 				if(improvefloors && istype(T, /turf/simulated/floor))
 					var/turf/simulated/floor/F = T
-					if(!F.flooring && (get_turf(T) == loc || prob(40)))
+					if(!F.flooring && turf_is_targetable(T) && (get_turf(T) == loc || prob(40)))
 						target = T
 
 	if(emagged) // Time to griff
 		for(var/turf/simulated/floor/D in view(src))
+			if(!turf_is_targetable(get_turf(D)))
+				continue
 			if(D.loc.name == "Space")
 				continue
 			if(D in ignorelist)
@@ -315,7 +317,7 @@
 	return
 
 /obj/item/weapon/toolbox_tiles
-	desc = "It's a toolbox with tiles sticking out the top"
+	desc = "It's a toolbox with tiles sticking out the top."
 	name = "tiles and toolbox"
 	icon = 'icons/obj/aibots.dmi'
 	icon_state = "toolbox_tiles"
@@ -345,7 +347,7 @@
 		created_name = t
 
 /obj/item/weapon/toolbox_tiles_sensor
-	desc = "It's a toolbox with tiles sticking out the top and a sensor attached"
+	desc = "It's a toolbox with tiles sticking out the top and a sensor attached."
 	name = "tiles, toolbox and sensor arrangement"
 	icon = 'icons/obj/aibots.dmi'
 	icon_state = "toolbox_tiles_sensor"

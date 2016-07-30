@@ -44,6 +44,7 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/corner
 	icon_state = "corner_white"
+	alpha = 229
 
 /obj/effect/floor_decal/corner/black
 	name = "black corner"
@@ -104,7 +105,7 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/corner/yellow/three_quarters
 	icon_state = "corner_white_three_quarters"
-	
+
 /obj/effect/floor_decal/corner/yellow/full
 	icon_state = "corner_white_full"
 
@@ -127,7 +128,7 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/corner/red/three_quarters
 	icon_state = "corner_white_three_quarters"
-	
+
 /obj/effect/floor_decal/corner/red/full
 	icon_state = "corner_white_full"
 
@@ -246,6 +247,7 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/industrial/hatch
 	name = "hatched marking"
 	icon_state = "delivery"
+	alpha = 229
 
 /obj/effect/floor_decal/industrial/hatch/yellow
 	color = "#CFCF55"
@@ -253,6 +255,7 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/industrial/outline
 	name = "white outline"
 	icon_state = "outline"
+	alpha = 229
 
 /obj/effect/floor_decal/industrial/outline/blue
 	name = "blue outline"
@@ -269,6 +272,7 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/industrial/loading
 	name = "loading area"
 	icon_state = "loadingarea"
+	alpha = 229
 
 /obj/effect/floor_decal/plaque
 	name = "plaque"
@@ -398,3 +402,11 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/sign/p
 	icon_state = "white_p"
+
+/obj/effect/floor_decal/solarpanel
+	icon_state = "solarpanel"
+
+/obj/effect/floor_decal/snow
+	icon = 'icons/turf/overlays.dmi'
+	icon_state = "snowfloor"
+

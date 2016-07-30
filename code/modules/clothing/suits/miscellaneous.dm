@@ -60,7 +60,7 @@
 
 /obj/item/clothing/suit/greatcoat
 	name = "great coat"
-	desc = "A heavy great coat"
+	desc = "A heavy great coat."
 	icon_state = "nazi"
 	item_state = "nazi"
 
@@ -114,13 +114,13 @@
 	item_state = "space_suit_syndicate"
 	desc = "A plastic replica of the syndicate space suit, you'll look just like a real murderous syndicate agent in this! This is a toy, it is not made for use in space!"
 	w_class = 3
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency_oxygen,/obj/item/toy)
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency,/obj/item/toy)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS|LEGS|FEET
 
 /obj/item/clothing/suit/hastur
 	name = "Hastur's Robes"
-	desc = "Robes not meant to be worn by man"
+	desc = "Robes not meant to be worn by man."
 	icon_state = "hastur"
 	item_state = "hastur"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
@@ -148,7 +148,7 @@
 
 /obj/item/clothing/suit/monkeysuit
 	name = "Monkey Suit"
-	desc = "A suit that looks like a primate"
+	desc = "A suit that looks like a primate."
 	icon_state = "monkeysuit"
 	item_state = "monkeysuit"
 	body_parts_covered = UPPER_TORSO|ARMS|LOWER_TORSO|LEGS|FEET|HANDS
@@ -172,6 +172,10 @@
 	item_state = "cardborg"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	flags_inv = HIDEJUMPSUIT
+
+/obj/item/clothing/suit/cardborg/initialize()
+	..()
+	set_extension(src, /datum/extension/appearance, /datum/extension/appearance/cardborg)
 
 /*
  * Misc
@@ -260,7 +264,7 @@
 
 /obj/item/clothing/under/stripper/mankini
 	name = "mankini"
-	desc = "No honest man would wear this abomination"
+	desc = "No honest man would wear this abomination."
 	icon_state = "mankini"
 	siemens_coefficient = 1
 
@@ -356,6 +360,14 @@
 	item_state = "leather_jacket"
 	body_parts_covered = UPPER_TORSO|ARMS
 
+/obj/item/clothing/suit/storage/halatik
+	name = "Black Cloak"
+	desc = "A black fleece cloak."
+	icon_state = "halatik"
+	item_state = "halatik"
+	body_parts_covered = UPPER_TORSO|ARMS|HANDS|LOWER_TORSO|LEGS
+	min_cold_protection_temperature = T0C - 20
+
 /obj/item/clothing/suit/storage/leather_jacket/nanotrasen
 	desc = "A black leather coat. A corporate logo is proudly displayed on the back."
 	icon_state = "leather_jacket_nt"
@@ -402,3 +414,53 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	siemens_coefficient = 2.0
+
+//Fallout starts here
+
+/obj/item/clothing/suit/f13/mfp //Mad Max 1979 babe!
+	name = "mfp jacket"
+	desc = "A Main Force Patrol leather jacket."
+	icon_state = "mad_max"
+	item_state = "mad_max"
+	body_parts_covered = UPPER_TORSO|ARMS
+	armor = list(melee = 20, bullet = 10, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	allowed = list(/obj/item/weapon/gun/projectile/shotgun/doublebarrel/max_sawn_off,/obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn)
+
+/obj/item/clothing/suit/f13/elder
+	name = "brotherhood elder's robe"
+	desc = "A blue cloth robe with some scarlet red parts, traditionally worn by the Brotherhood of Steel Elder."
+	icon_state = "brotherhood_elder"
+	item_state = "brotherhood_elder"
+	body_parts_covered = UPPER_TORSO|ARMS
+	armor = list(melee = 20, bullet = 10, laser = 10,energy = 10, bomb = 0, bio = 0, rad = 0)
+	allowed = list(/obj/item/weapon/pen,/obj/item/weapon/paper,/obj/item/weapon/stamp,/obj/item/weapon/reagent_containers/food/drinks/flask,/obj/item/weapon/storage/box/matches,/obj/item/device/flashlight,/obj/item/weapon/gun,/obj/item/weapon/storage/pill_bottle/dice,/obj/item/weapon/dice)
+
+/obj/item/clothing/suit/f13/scribe
+	name = "brotherhood scribe's robe"
+	desc = "A blue cloth robe worn by the Brotherhood of Steel Scribes."
+	icon_state = "brotherhood_scribe"
+	item_state = "brotherhood_scribe"
+	body_parts_covered = UPPER_TORSO|ARMS
+	armor = list(melee = 15, bullet = 5, laser = 10,energy = 10, bomb = 0, bio = 0, rad = 0)
+	allowed = list(/obj/item/weapon/pen,/obj/item/weapon/paper,/obj/item/weapon/stamp,/obj/item/weapon/reagent_containers/food/drinks/flask,/obj/item/weapon/storage/box/matches,/obj/item/device/flashlight,/obj/item/weapon/gun,/obj/item/weapon/storage/pill_bottle/dice,/obj/item/weapon/dice)
+
+/obj/item/clothing/suit/f13/veteran
+	name = "merc veteran coat"
+	desc = "A blue leather coat along with a few war medals.<br>That type of outfit is common for professional mercenaries and bounty hunters."
+	icon_state = "veteran"
+	item_state = "veteran"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	armor = list(melee = 20, bullet = 20, laser = 10,energy = 10, bomb = 10, bio = 0, rad = 0)
+	allowed = list(/obj/item/weapon/pen,/obj/item/weapon/paper,/obj/item/weapon/stamp,/obj/item/weapon/reagent_containers/food/drinks/flask,/obj/item/weapon/melee,/obj/item/weapon/storage/box/matches,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/device/flashlight,/obj/item/weapon/gun/energy,/obj/item/weapon/gun/projectile,/obj/item/ammo_casing)
+
+obj/item/clothing/suit/storage/toggle/f13/wanderer
+	name = "wanderer's jacket"
+	desc = "A warm, leather jacket."
+	icon_state = "wanderer_jacket"
+	item_state = "wanderer_jacket"
+	icon_open = "wanderer_jacket_open"
+	icon_closed = "wanderer_jacket"
+	armor = list(melee = 5, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	min_cold_protection_temperature = T0C - 30
+	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS

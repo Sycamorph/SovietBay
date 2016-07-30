@@ -195,9 +195,16 @@
 		var/new_ambition = input("Enter a new ambition", "Memory", mind.ambitions) as null|message
 		if(isnull(new_ambition))
 			return
+		new_ambition = sanitize(new_ambition)
 		if(mind)
-			mind.ambitions = sanitize(new_ambition)
-			mind.current << "<span class='warning'>Your ambitions have been changed by higher powers, they are now: [mind.ambitions]</span>"
+			if(new_ambition)
+				mind.current << "<span class='warning'>Your ambitions have been changed by higher powers, they are now: [mind.ambitions]</span>"
+				log_and_message_admins("made [key_name(mind.current)]'s ambitions be '[mind.ambitions]'.")
+			else
+				mind.current << "<span class='warning'>Your ambitions have been unmade by higher powers.</span>"
+				log_and_message_admins("has cleared [key_name(mind.current)]'s ambitions.")
+		else
+			usr << "<span class='warning'>The mind has ceased to be.</span>"
 
 	else if (href_list["obj_edit"] || href_list["obj_add"])
 		var/datum/objective/objective
@@ -399,7 +406,7 @@
 				memory = null//Remove any memory they may have had.
 			if("crystals")
 				if (usr.client.holder.rights & R_FUN)
-					var/obj/item/device/uplink/hidden/suplink = find_syndicate_uplink()
+					var/obj/item/device/uplink/suplink = find_syndicate_uplink()
 					var/crystals
 					if (suplink)
 						crystals = suplink.uses
@@ -424,7 +431,7 @@
 	return null
 
 /datum/mind/proc/take_uplink()
-	var/obj/item/device/uplink/hidden/H = find_syndicate_uplink()
+	var/obj/item/device/uplink/H = find_syndicate_uplink()
 	if(H)
 		qdel(H)
 

@@ -55,6 +55,7 @@ var/list/organ_cache = list()
 		max_damage = min_broken_damage * 2
 	if(istype(holder))
 		src.owner = holder
+		src.w_class = max(src.w_class + mob_size_difference(holder.mob_size, MOB_MEDIUM), 1) //smaller mobs have smaller organs.
 		species = all_species["Human"]
 		if(holder.dna)
 			dna = holder.dna.Clone()
@@ -87,7 +88,7 @@ var/list/organ_cache = list()
 		species = all_species[new_dna.species]
 
 /obj/item/organ/proc/die()
-	if(status & ORGAN_ROBOT)
+	if(robotic >= ORGAN_ROBOT)
 		return
 	damage = max_damage
 	status |= ORGAN_DEAD
@@ -111,7 +112,7 @@ var/list/organ_cache = list()
 	if(istype(loc,/obj/structure/closet/body_bag/cryobag) || istype(loc,/obj/structure/closet/crate/freezer) || istype(loc,/obj/item/weapon/storage/box/freezer))
 		return
 	//Process infections
-	if ((status & ORGAN_ROBOT) || (owner && owner.species && (owner.species.flags & IS_PLANT)))
+	if ((robotic >= ORGAN_ROBOT) || (owner && owner.species && (owner.species.flags & IS_PLANT)))
 		germ_level = 0
 		return
 
@@ -235,7 +236,9 @@ var/list/organ_cache = list()
 
 //Note: external organs have their own version of this proc
 /obj/item/organ/proc/take_damage(amount, var/silent=0)
-	if(src.status & ORGAN_ROBOT)
+	amount = round(amount, 0.1)
+
+	if(src.robotic >= ORGAN_ROBOT)
 		src.damage = between(0, src.damage + (amount * 0.8), max_damage)
 	else
 		src.damage = between(0, src.damage + amount, max_damage)
@@ -250,23 +253,19 @@ var/list/organ_cache = list()
 	damage = max(damage, min_bruised_damage)
 
 /obj/item/organ/proc/robotize() //Being used to make robutt hearts, etc
-	robotic = 2
+	robotic = ORGAN_ROBOT
 	src.status &= ~ORGAN_BROKEN
 	src.status &= ~ORGAN_BLEEDING
-	src.status &= ~ORGAN_SPLINTED
 	src.status &= ~ORGAN_CUT_AWAY
-	src.status |= ORGAN_ROBOT
-	src.status |= ORGAN_ASSISTED
 
 /obj/item/organ/proc/mechassist() //Used to add things like pacemakers, etc
 	robotize()
-	src.status &= ~ORGAN_ROBOT
-	robotic = 1
+	robotic = ORGAN_ASSISTED
 	min_bruised_damage = 15
 	min_broken_damage = 35
 
 /obj/item/organ/emp_act(severity)
-	if(!(status & ORGAN_ROBOT))
+	if(!(robotic >= ORGAN_ROBOT))
 		return
 	switch (severity)
 		if (1)
@@ -276,7 +275,15 @@ var/list/organ_cache = list()
 		if (3)
 			take_damage(1)
 
-/obj/item/organ/proc/removed(var/mob/living/user)
+//disconnected the organ from it's owner but does not remove it, instead it becomes an implant that can be removed with implant surgery
+//TODO move this to organ/internal once the FPB port comes through
+/obj/item/organ/proc/cut_away(var/mob/living/user)
+	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
+	if(istype(parent)) //TODO ensure that we don't have to check this.
+		removed(user, drop_organ=0)
+		parent.implants += src
+
+/obj/item/organ/proc/removed(var/mob/living/user, var/drop_organ=1)
 
 	if(!istype(owner))
 		return
@@ -287,14 +294,19 @@ var/list/organ_cache = list()
 	owner.internal_organs -= src
 
 	var/obj/item/organ/external/affected = owner.get_organ(parent_organ)
-	if(affected) affected.internal_organs -= src
+	if(affected) 
+		affected.internal_organs -= src
+		status |= ORGAN_CUT_AWAY
 
-	loc = get_turf(owner)
+	if(drop_organ)
+		dropInto(owner.loc)
+
 	processing_objects |= src
 	rejecting = null
-	var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in reagents.reagent_list
-	if(!organ_blood || !organ_blood.data["blood_DNA"])
-		owner.vessel.trans_to(src, 5, 1, 1)
+	if(robotic < ORGAN_ROBOT)
+		var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in reagents.reagent_list //TODO fix this and all other occurences of locate(/datum/reagent/blood) horror
+		if(!organ_blood || !organ_blood.data["blood_DNA"])
+			owner.vessel.trans_to(src, 5, 1, 1)
 
 	if(owner && vital)
 		if(user)
@@ -309,6 +321,8 @@ var/list/organ_cache = list()
 
 	if(!istype(target)) return
 
+	if(status & ORGAN_CUT_AWAY) return //organs don't work very well in the body when they aren't properly attached
+
 	var/datum/reagent/blood/transplant_blood = locate(/datum/reagent/blood) in reagents.reagent_list
 	transplant_data = list()
 	if(!transplant_blood)
@@ -321,13 +335,11 @@ var/list/organ_cache = list()
 		transplant_data["blood_DNA"] =  transplant_blood.data["blood_DNA"]
 
 	owner = target
-	loc = owner
+	forceMove(owner) //just in case
 	processing_objects -= src
 	target.internal_organs |= src
 	affected.internal_organs |= src
 	target.internal_organs_by_name[organ_tag] = src
-	if(robotic)
-		status |= ORGAN_ROBOT
 
 /obj/item/organ/eyes/replaced(var/mob/living/carbon/human/target)
 

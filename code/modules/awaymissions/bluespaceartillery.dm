@@ -16,6 +16,7 @@
 	icon = 'icons/obj/machines/artillery.dmi'
 	anchored = 1
 	density = 1
+	desc = "The ship's old bluespace artillery cannon. Looks inoperative."
 
 /obj/structure/artilleryplaceholder/decorative
 	density = 0
@@ -45,7 +46,7 @@
 			command_announcement.Announce("Bluespace artillery fire detected. Brace for impact.")
 			message_admins("[key_name_admin(usr)] has launched an artillery strike.", 1)
 			var/list/L = list()
-			for(var/turf/T in get_area_turfs(thearea.type))
+			for(var/turf/T in get_area_turfs(thearea))
 				L+=T
 			var/loc = pick(L)
 			explosion(loc,2,5,11)
@@ -59,7 +60,7 @@
 	spawn(30)
 	var/list/L = list()
 
-	for(var/turf/T in get_area_turfs(thearea.type))
+	for(var/turf/T in get_area_turfs(thearea))
 		L+=T
 	var/loc = pick(L)
 	explosion(loc,2,5,11)*/

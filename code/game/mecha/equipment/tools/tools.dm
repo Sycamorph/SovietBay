@@ -390,7 +390,7 @@
 		var/area/thearea = pick(theareas)
 		var/list/L = list()
 		var/turf/pos = get_turf(src)
-		for(var/turf/T in get_area_turfs(thearea.type))
+		for(var/turf/T in get_area_turfs(thearea))
 			if(!T.density && pos.z == T.z)
 				var/clear = 1
 				for(var/obj/O in T)
@@ -926,10 +926,7 @@
 	process(var/obj/item/mecha_parts/mecha_equipment/generator/nuclear/EG)
 		if(..())
 			for(var/mob/living/carbon/M in view(EG.chassis))
-				if(istype(M,/mob/living/carbon/human))
-					M.apply_effect((EG.rad_per_cycle*3),IRRADIATE,0)
-				else
-					M.apply_effect(EG.rad_per_cycle, IRRADIATE)
+				M.apply_effect((EG.rad_per_cycle*3),IRRADIATE, blocked = M.getarmor(null, "rad"))
 		return 1
 
 

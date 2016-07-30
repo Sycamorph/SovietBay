@@ -64,8 +64,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/obj/item/device/paicard/pai = null	// A slot for a personal AI device
 
 /obj/item/device/pda/examine(mob/user)
-	if(..(user, 1))
-		user << "The time [worldtime2text()] is displayed in the corner of the screen."
+	. = ..(user, 1)
+	if(.)
+		user << "The time [stationtime2text()] is displayed in the corner of the screen."
 
 /obj/item/device/pda/medical
 	default_cartridge = /obj/item/weapon/cartridge/medical
@@ -418,7 +419,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			cartdata["charges"] = cartridge.charges ? cartridge.charges : 0
 		data["cartridge"] = cartdata
 
-	data["stationTime"] = worldtime2text()
+	data["stationTime"] = stationtime2text()
 	data["new_Message"] = new_message
 	data["new_News"] = new_news
 
@@ -606,9 +607,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if ("Authenticate")//Checks for ID
 			id_check(U, 1)
 		if("UpdateInfo")
-			ownjob = id.assignment
-			ownrank = id.rank
-			name = "PDA-[owner] ([ownjob])"
+			set_rank_job(id.rank, ownjob)
 		if("Eject")//Ejects the cart, only done from hub.
 			verb_remove_cartridge()
 
@@ -914,11 +913,11 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		message += "Large clouds of noxious smoke billow forth from your [P]!"
 	if(i>=65 && i<=75) //Weaken
 		if(M && isliving(M))
-			M.apply_effects(0,1)
+			M.apply_effects(weaken = 1)
 		message += "Your [P] flashes with a blinding white light! You feel weaker."
 	if(i>=75 && i<=85) //Stun and stutter
 		if(M && isliving(M))
-			M.apply_effects(1,0,0,0,1)
+			M.apply_effects(stun = 1, stutter = 1)
 		message += "Your [P] flashes with a blinding white light! You feel weaker."
 	if(i>=85) //Sparks
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -1044,7 +1043,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	new_message(sending_device, sending_device.owner, sending_device.ownjob, message)
 
 /obj/item/device/pda/proc/new_message(var/sending_unit, var/sender, var/sender_job, var/message)
-	var/reception_message = "\icon[src] <b>Message from [sender] ([sender_job]), </b>\"[message]\" (<a href='byond://?src=\ref[src];choice=Message;skiprefresh=1;target=\ref[sending_unit]'>Reply</a>)"
+	var/reception_message = "\icon[src] <b>Сообщение от [sender] ([sender_job]), </b>\"[message]\" (<a href='byond://?src=\ref[src];choice=Message;skiprefresh=1;target=\ref[sending_unit]'>Ответить</a>)"
 	new_info(message_silent, ttone, reception_message)
 
 	log_pda("[usr] (PDA: [sending_unit]) sent \"[message]\" to [name]")
@@ -1056,7 +1055,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if(ismob(sending_unit.loc) && isAI(loc))
 		track = "(<a href='byond://?src=\ref[loc];track=\ref[sending_unit.loc];trackname=[lhtml_encode(sender)]'>Follow</a>)"
 
-	var/reception_message = "\icon[src] <b>Message from [sender] ([sender_job]), </b>\"[message]\" (<a href='byond://?src=\ref[src];choice=Message;skiprefresh=1;target=\ref[sending_unit]'>Reply</a>) [track]"
+	var/reception_message = "\icon[src] <b>Сообщение от [sender] ([sender_job]), </b>\"[message]\" (<a href='byond://?src=\ref[src];choice=Message;skiprefresh=1;target=\ref[sending_unit]'>Ответить</a>) [track]"
 	new_info(message_silent, newstone, reception_message)
 
 	log_pda("[usr] (PDA: [sending_unit]) sent \"[message]\" to [name]")
@@ -1181,9 +1180,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			user << "<span class='notice'>\The [src] rejects the ID.</span>"
 			return
 		if(!owner)
-			owner = idcard.registered_name
-			ownjob = idcard.assignment
-			ownrank = idcard.rank
+			set_owner_rank_job(idcard.registered_name, idcard.rank, idcard.assignment)
 			name = "PDA-[owner] ([ownjob])"
 			user << "<span class='notice'>Card scanned.</span>"
 		else
@@ -1398,3 +1395,19 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/emp_act(severity)
 	for(var/atom/A in src)
 		A.emp_act(severity)
+
+/obj/item/device/pda/proc/set_owner(var/owner)
+	src.owner = owner
+	update_label()
+
+/obj/item/device/pda/proc/set_rank_job(var/owner, var/rank, var/job)
+	ownrank = rank
+	ownjob = job ? job : rank
+	update_label()
+
+/obj/item/device/pda/proc/set_owner_rank_job(var/owner, var/rank, var/job)
+	set_owner(owner)
+	set_rank_job(rank, job)
+
+/obj/item/device/pda/proc/update_label()
+	name = "PDA-[owner] ([ownjob])"
