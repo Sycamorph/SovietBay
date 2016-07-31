@@ -53,7 +53,7 @@
 
 // Space suit uplink kit
 /obj/item/weapon/storage/backpack/satchel/syndie_kit/space
-	//name = "\improper EVA gear pack"
+	//name = "EVA gear pack"
 
 	startswith = list(
 		/obj/item/clothing/suit/space/syndicate,
@@ -118,7 +118,7 @@
 	new /obj/item/device/spy_monitor(src)
 
 /obj/item/weapon/storage/box/syndie_kit/g9mm
-	name = "\improper Smooth operator"
+	name = "Smooth operator"
 	desc = "9mm with silencer kit."
 
 /obj/item/weapon/storage/box/syndie_kit/g9mm/New()
@@ -136,7 +136,7 @@
 	new /obj/item/weapon/reagent_containers/syringe(src)
 
 /obj/item/weapon/storage/box/syndie_kit/cigarette
-	name = "\improper Tricky smokes"
+	name = "Tricky smokes"
 	desc = "Comes with the following brands of cigarettes, in this order: 2xFlash, 2xSmoke, 1xMindBreaker, 1xTricordrazine. Avoid mixing them up."
 
 /obj/item/weapon/storage/box/syndie_kit/cigarette/New()
@@ -177,7 +177,7 @@
 
 //Rig Electrowarfare and Voice Synthesiser kit
 /obj/item/weapon/storage/backpack/satchel/syndie_kit/ewar_voice
-	//name = "\improper Electrowarfare and Voice Synthesiser pack"
+	//name = "Electrowarfare and Voice Synthesiser pack"
 	//desc = "Kit for confounding organic and synthetic entities alike."
 	startswith = list(
 		/obj/item/rig_module/electrowarfare_suite,

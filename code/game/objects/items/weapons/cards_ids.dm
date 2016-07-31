@@ -247,7 +247,7 @@ var/const/NO_EMAG_ACT = -50
 	..()
 
 /obj/item/weapon/card/id/synthetic
-	name = "\improper Synthetic ID"
+	name = "Synthetic ID"
 	desc = "Access module for NanoTrasen Synthetics"
 	icon_state = "id-robot"
 	item_state = "tdgreen"
@@ -258,7 +258,7 @@ var/const/NO_EMAG_ACT = -50
 	..()
 
 /obj/item/weapon/card/id/centcom
-	name = "\improper CentCom. ID"
+	name = "CentCom. ID"
 	desc = "An ID straight from Cent. Com."
 	icon_state = "centcom"
 	registered_name = "Central Command"
@@ -272,7 +272,7 @@ var/const/NO_EMAG_ACT = -50
 	access |= get_all_station_access()
 
 /obj/item/weapon/card/id/centcom/ERT
-	name = "\improper Emergency Response Team ID"
+	name = "Emergency Response Team ID"
 	assignment = "Emergency Response Team"
 
 /obj/item/weapon/card/id/centcom/ERT/New()
@@ -280,7 +280,7 @@ var/const/NO_EMAG_ACT = -50
 	access |= get_all_station_access()
 
 /obj/item/weapon/card/id/all_access
-	name = "\improper Administrator's spare ID"
+	name = "Administrator's spare ID"
 	desc = "The spare ID of the Lord of Lords himself."
 	icon_state = "gold"
 	item_state = "tdgreen"

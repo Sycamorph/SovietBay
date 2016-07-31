@@ -287,7 +287,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	return "You learn the spell [S]"
 
 /datum/spellbook
-	var/name = "\improper Book of Tomes"
+	var/name = "Book of Tomes"
 	var/desc = "The legendary book of spells of the wizard."
 	var/book_desc = "Holds information on the various tomes available to a wizard"
 	var/feedback = "" //doesn't need one.

@@ -12,13 +12,13 @@
 					)
 	cost = 10
 	containertype = /obj/structure/closet/crate/freezer
-	containername = "\improper Food crate"
+	containername = "Food crate"
 
 /decl/hierarchy/supply_pack/supply/toner
 	name = "Toner cartridges"
 	contains = list(/obj/item/device/toner = 6)
 	cost = 10
-	containername = "\improper Toner cartridges"
+	containername = "Toner cartridges"
 
 /decl/hierarchy/supply_pack/supply/janitor
 	name = "Janitorial supplies"
@@ -32,13 +32,13 @@
 					/obj/item/weapon/grenade/chem_grenade/cleaner = 3,
 					/obj/structure/mopbucket)
 	cost = 10
-	containername = "\improper Janitorial supplies"
+	containername = "Janitorial supplies"
 
 /decl/hierarchy/supply_pack/supply/boxes
 	name = "Empty boxes"
 	contains = list(/obj/item/weapon/storage/box = 10)
 	cost = 10
-	containername = "\improper Empty box crate"
+	containername = "Empty box crate"
 
 /decl/hierarchy/supply_pack/supply/bureaucracy
 	contains = list(/obj/item/weapon/clipboard,
@@ -55,13 +55,13 @@
 					 /obj/item/weapon/paper_bin)
 	name = "Office supplies"
 	cost = 15
-	containername = "\improper Office supplies crate"
+	containername = "Office supplies crate"
 
 /decl/hierarchy/supply_pack/supply/spare_pda
 	name = "Spare PDAs"
 	contains = list(/obj/item/device/pda = 3)
 	cost = 10
-	containername = "\improper Spare PDA crate"
+	containername = "Spare PDA crate"
 
 /decl/hierarchy/supply_pack/supply/minergear
 	name = "Shaft miner equipment"
@@ -81,5 +81,5 @@
 					/obj/item/clothing/glasses/meson)
 	cost = 15
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Shaft miner equipment"
+	containername = "Shaft miner equipment"
 	access = access_mining

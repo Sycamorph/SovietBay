@@ -87,7 +87,7 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	update_icon()
 
 /obj/item/weapon/cell/crap
-	name = "\improper rechargable AA battery"
+	name = "rechargable AA battery"
 	desc = "You can't top the plasma top." //TOTALLY TRADEMARK INFRINGEMENT
 	origin_tech = list(TECH_POWER = 0)
 	maxcharge = 500

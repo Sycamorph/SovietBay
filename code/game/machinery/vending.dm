@@ -976,7 +976,7 @@
 
 
 /obj/machinery/vending/autodrobe
-	name = "\improper AutoDrobe"
+	name = "AutoDrobe"
 	desc = "A vending machine for costumes."
 	icon_state = "theater"
 	icon_deny = "theater-deny"

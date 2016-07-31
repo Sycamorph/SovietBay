@@ -165,7 +165,7 @@
 			APC_entry["cell_status"] = A.cell ? chg[A.charging+1] : "N"
 			// Other info
 			APC_entry["total_load"] = reading_to_text(A.lastused_total)
-			// Hopefully removes those goddamn \improper s which are screwing up the UI
+			// Hopefully removes those goddamn s which are screwing up the UI
 			var/N = A.area.name
 			if(findtext(N, "ÿ"))
 				N = copytext(N, 3)

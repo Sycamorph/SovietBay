@@ -291,7 +291,7 @@ Location of Barsik's Sprites
 	siemens_coefficient = 0.6
 
 /obj/item/clothing/mask/gas/metrocop
-	name = "\improper armored mask"
+	name = "armored mask"
 	desc = "Strange mask, looks can change voice."
 	icon_state = "mpfmask"
 	siemens_coefficient = 0.7
@@ -966,7 +966,7 @@ Location of Barsik's Sprites
 	flags_inv = HIDEJUMPSUIT
 
 /obj/item/clothing/mask/gas/security
-	name = "\improper security mask"
+	name = "security mask"
 	desc = "A close-fitting tactical mask that can be connected to an air supply."
 	icon_state = "secmask"
 	siemens_coefficient = 0.7

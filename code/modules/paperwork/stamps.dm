@@ -36,7 +36,7 @@
 	icon_state = "stamp-cmo"
 
 /obj/item/weapon/stamp/denied
-	name = "\improper DENIED rubber stamp"
+	name = "DENIED rubber stamp"
 	icon_state = "stamp-deny"
 
 /obj/item/weapon/stamp/clown

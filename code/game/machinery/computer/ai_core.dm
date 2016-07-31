@@ -1,7 +1,7 @@
 /obj/structure/AIcore
 	density = 1
 	anchored = 0
-	name = "\improper AI core"
+	name = "AI core"
 	icon = 'icons/mob/AI.dmi'
 	icon_state = "0"
 	var/state = 0

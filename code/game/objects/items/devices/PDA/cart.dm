@@ -34,27 +34,27 @@
 	var/list/stored_data = list()
 
 /obj/item/weapon/cartridge/engineering
-	name = "\improper Power-ON cartridge"
+	name = "Power-ON cartridge"
 	icon_state = "cart-e"
 	access_engine = 1
 
 /obj/item/weapon/cartridge/atmos
-	name = "\improper BreatheDeep cartridge"
+	name = "BreatheDeep cartridge"
 	icon_state = "cart-a"
 	access_atmos = 1
 
 /obj/item/weapon/cartridge/medical
-	name = "\improper Med-U cartridge"
+	name = "Med-U cartridge"
 	icon_state = "cart-m"
 	access_medical = 1
 
 /obj/item/weapon/cartridge/chemistry
-	name = "\improper ChemWhiz cartridge"
+	name = "ChemWhiz cartridge"
 	icon_state = "cart-chem"
 	access_reagent_scanner = 1
 
 /obj/item/weapon/cartridge/security
-	name = "\improper R.O.B.U.S.T. cartridge"
+	name = "R.O.B.U.S.T. cartridge"
 	icon_state = "cart-s"
 	access_security = 1
 
@@ -63,31 +63,31 @@
 	..()
 
 /obj/item/weapon/cartridge/detective
-	name = "\improper D.E.T.E.C.T. cartridge"
+	name = "D.E.T.E.C.T. cartridge"
 	icon_state = "cart-s"
 	access_security = 1
 	access_medical = 1
 
 
 /obj/item/weapon/cartridge/janitor
-	name = "\improper CustodiPRO cartridge"
+	name = "CustodiPRO cartridge"
 	desc = "The ultimate in clean-room design."
 	icon_state = "cart-j"
 	access_janitor = 1
 
 /obj/item/weapon/cartridge/lawyer
-	name = "\improper P.R.O.V.E. cartridge"
+	name = "P.R.O.V.E. cartridge"
 	icon_state = "cart-s"
 	access_security = 1
 
 /obj/item/weapon/cartridge/clown
-	name = "\improper Honkworks 5.0 cartridge"
+	name = "Honkworks 5.0 cartridge"
 	icon_state = "cart-clown"
 	access_clown = 1
 	charges = 5
 
 /obj/item/weapon/cartridge/mime
-	name = "\improper Gestur-O 1000 cartridge"
+	name = "Gestur-O 1000 cartridge"
 	icon_state = "cart-mi"
 	access_mime = 1
 	charges = 5
@@ -104,7 +104,7 @@
 	var/qdeled = 0
 
 /obj/item/weapon/cartridge/signal/science
-	name = "\improper Signal Ace 2 cartridge"
+	name = "Signal Ace 2 cartridge"
 	desc = "Complete with integrated radio signaler!"
 	icon_state = "cart-tox"
 	access_reagent_scanner = 1
@@ -119,7 +119,7 @@
 	..()
 
 /obj/item/weapon/cartridge/quartermaster
-	name = "\improper Space Parts & Space Vendors cartridge"
+	name = "Space Parts & Space Vendors cartridge"
 	desc = "Perfect for the Quartermaster on the go!"
 	icon_state = "cart-q"
 	access_quartermaster = 1
@@ -129,12 +129,12 @@
 	..()
 
 /obj/item/weapon/cartridge/head
-	name = "\improper Easy-Record DELUXE"
+	name = "Easy-Record DELUXE"
 	icon_state = "cart-h"
 	access_status_display = 1
 
 /obj/item/weapon/cartridge/hop
-	name = "\improper HumanResources9001 cartridge"
+	name = "HumanResources9001 cartridge"
 	icon_state = "cart-h"
 	access_status_display = 1
 	access_quartermaster = 1
@@ -145,7 +145,7 @@
 	radio = new /obj/item/radio/integrated/mule(src)
 
 /obj/item/weapon/cartridge/hos
-	name = "\improper R.O.B.U.S.T. DELUXE"
+	name = "R.O.B.U.S.T. DELUXE"
 	icon_state = "cart-hos"
 	access_status_display = 1
 	access_security = 1
@@ -155,21 +155,21 @@
 	..()
 
 /obj/item/weapon/cartridge/ce
-	name = "\improper Power-On DELUXE"
+	name = "Power-On DELUXE"
 	icon_state = "cart-ce"
 	access_status_display = 1
 	access_engine = 1
 	access_atmos = 1
 
 /obj/item/weapon/cartridge/cmo
-	name = "\improper Med-U DELUXE"
+	name = "Med-U DELUXE"
 	icon_state = "cart-cmo"
 	access_status_display = 1
 	access_reagent_scanner = 1
 	access_medical = 1
 
 /obj/item/weapon/cartridge/rd
-	name = "\improper Signal Ace DELUXE"
+	name = "Signal Ace DELUXE"
 	icon_state = "cart-rd"
 	access_status_display = 1
 	access_reagent_scanner = 1
@@ -180,7 +180,7 @@
 	..()
 
 /obj/item/weapon/cartridge/captain
-	name = "\improper Value-PAK cartridge"
+	name = "Value-PAK cartridge"
 	desc = "Now with 200% more value!"
 	icon_state = "cart-c"
 	access_quartermaster = 1
@@ -193,7 +193,7 @@
 	access_atmos = 1
 
 /obj/item/weapon/cartridge/syndicate
-	name = "\improper Detomatix cartridge"
+	name = "Detomatix cartridge"
 	icon_state = "cart"
 	access_remote_door = 1
 	access_detonate_pda = 1

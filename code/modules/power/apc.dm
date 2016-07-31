@@ -180,7 +180,7 @@
 		area.apc = src
 		opened = 1
 		operating = 0
-		name = "\improper [area.name] APC"
+		name = "[area.name] APC"
 		stat |= MAINT
 		src.update_icon()
 
@@ -233,10 +233,10 @@
 	//if area isn't specified use current
 	if(isarea(A) && src.areastring == null)
 		src.area = A
-		name = "\improper [area.name] APC"
+		name = "[area.name] APC"
 	else
 		src.area = get_area_name(areastring)
-		name = "\improper [area.name] APC"
+		name = "[area.name] APC"
 	area.apc = src
 	update_icon()
 

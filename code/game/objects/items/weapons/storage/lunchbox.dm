@@ -55,7 +55,7 @@
 	filled = TRUE
 
 /obj/item/weapon/storage/lunchbox/mars
-	name = "\improper Mars university lunchbox"
+	name = "Mars university lunchbox"
 	icon_state = "lunchbox_marsuniversity"
 	item_state = "toolbox_red"
 	desc = "A little lunchbox. This one is branded with the Mars university logo!"
@@ -64,7 +64,7 @@
 	filled = TRUE
 
 /obj/item/weapon/storage/lunchbox/cti
-	name = "\improper CTI lunchbox"
+	name = "CTI lunchbox"
 	icon_state = "lunchbox_cti"
 	item_state = "toolbox_blue"
 	desc = "A little lunchbox. This one is branded with the CTI logo!"
@@ -73,7 +73,7 @@
 	filled = TRUE
 
 /obj/item/weapon/storage/lunchbox/nymph
-	name = "\improper Diona nymph lunchbox"
+	name = "Diona nymph lunchbox"
 	icon_state = "lunchbox_dionanymph"
 	item_state = "toolbox_yellow"
 	desc = "A little lunchbox. This one is an adorable Diona nymph on the side!"

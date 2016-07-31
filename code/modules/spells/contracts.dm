@@ -53,7 +53,7 @@
 
 
 /obj/item/weapon/contract/wizard //contracts that involve making a deal with the Wizard Acadamy (or NON PLAYERS)
-	contract_master = "\improper Wizard Academy"
+	contract_master = "Wizard Academy"
 
 /obj/item/weapon/contract/wizard/xray
 	name = "xray vision contract"
@@ -113,7 +113,7 @@
 		return 1
 
 /obj/item/weapon/contract/boon/wizard
-	contract_master = "\improper Wizard Academy"
+	contract_master = "Wizard Academy"
 
 /obj/item/weapon/contract/boon/wizard/artificer
 	path = /spell/aoe_turf/conjure/construct
@@ -133,7 +133,7 @@
 
 /obj/item/weapon/contract/boon/wizard/forcewall
 	path = /spell/aoe_turf/conjure/forcewall
-	contract_master = "\improper Mime Federation"
+	contract_master = "Mime Federation"
 	desc = "This contract has a dedication to mimes everywhere at the top."
 
 /obj/item/weapon/contract/boon/wizard/knock

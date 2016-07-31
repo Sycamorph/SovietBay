@@ -1130,7 +1130,7 @@ Just a object used in constructing fire alarms
 	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
 
 /obj/machinery/partyalarm
-	name = "\improper PARTY BUTTON"
+	name = "PARTY BUTTON"
 	desc = "Cuban Pete is in the house!"
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "fire0"

@@ -3,7 +3,7 @@
 	spellbook_type = /datum/spellbook/cleric
 
 /datum/spellbook/cleric
-	name = "\improper Cleric's Tome"
+	name = "Cleric's Tome"
 	feedback = "CR"
 	desc = "For those who do not harm, or at least feel sorry about it."
 	book_desc = "All about healing. Mobility and offense comes at a higher price but not impossible."
