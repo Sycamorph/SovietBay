@@ -6,7 +6,7 @@
 	contains = list(/obj/item/weapon/virusdish/random = 4)
 	cost = 25
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Virus sample crate"
+	containername = "Virus sample crate"
 	access = access_cmo
 
 /decl/hierarchy/supply_pack/science/coolanttank
@@ -14,7 +14,7 @@
 	contains = list(/obj/structure/reagent_dispensers/coolanttank)
 	cost = 16
 	containertype = /obj/structure/largecrate
-	containername = "\improper coolant tank crate"
+	containername = "coolant tank crate"
 
 /decl/hierarchy/supply_pack/science/mecha_ripley
 	name = "Circuit Crate (\"Ripley\" APLU)"
@@ -23,7 +23,7 @@
 					/obj/item/weapon/circuitboard/mecha/ripley/peripherals) //TEMPORARY due to lack of circuitboard printer
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper APLU \"Ripley\" Circuit Crate"
+	containername = "APLU \"Ripley\" Circuit Crate"
 	access = access_robotics
 
 /decl/hierarchy/supply_pack/science/mecha_odysseus
@@ -32,7 +32,7 @@
 					/obj/item/weapon/circuitboard/mecha/odysseus/main) //TEMPORARY due to lack of circuitboard printer
 	cost = 25
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper \"Odysseus\" Circuit Crate"
+	containername = "\"Odysseus\" Circuit Crate"
 	access = access_robotics
 
 /decl/hierarchy/supply_pack/science/phoron
@@ -43,5 +43,5 @@
 					/obj/item/device/assembly/timer = 3)
 	cost = 10
 	containertype = /obj/structure/closet/crate/secure/phoron
-	containername = "\improper Phoron assembly crate"
+	containername = "Phoron assembly crate"
 	access = access_tox_storage

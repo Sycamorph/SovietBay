@@ -48,7 +48,7 @@
 	return "You no longer have to be conscious to activate this spell."
 
 /obj/effect/cleanable/wizard_mark
-	name = "\improper Mark of the Wizard"
+	name = "Mark of the Wizard"
 	desc = "A strange rune said to be made by wizards. Or its just some shmuck playing with crayons again."
 	icon = 'icons/obj/rune.dmi'
 	icon_state = "wizard_mark"

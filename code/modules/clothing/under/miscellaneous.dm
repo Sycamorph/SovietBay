@@ -65,7 +65,7 @@
 //This set of uniforms looks fairly fancy and is generally used for high-ranking NT personnel from what I've seen, so lets give them appropriate ranks.
 /obj/item/clothing/under/rank/centcom
 	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Captain.\"."
-	name = "\improper Officer's Dress Uniform"
+	name = "Officer's Dress Uniform"
 	icon_state = "officer"
 	item_state = "lawyer_black"
 	worn_state = "officer"
@@ -73,7 +73,7 @@
 
 /obj/item/clothing/under/rank/centcom_officer
 	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Admiral.\"."
-	name = "\improper Officer's Dress Uniform"
+	name = "Officer's Dress Uniform"
 	icon_state = "officer"
 	item_state = "lawyer_black"
 	worn_state = "officer"
@@ -81,7 +81,7 @@
 
 /obj/item/clothing/under/rank/centcom_captain
 	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Admiral-Executive.\"."
-	name = "\improper Officer's Dress Uniform"
+	name = "Officer's Dress Uniform"
 	icon_state = "centcom"
 	item_state = "lawyer_black"
 	worn_state = "centcom"
@@ -97,7 +97,7 @@
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/under/space
-	name = "\improper NASA jumpsuit"
+	name = "NASA jumpsuit"
 	desc = "It has a NASA logo on it and is made of space-proofed materials."
 	icon_state = "black"
 	item_state = "bl_suit"

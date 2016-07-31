@@ -142,9 +142,9 @@
 
 			proc/name()
 				if(refObj:mineral)
-					return "\improper [refObj:mineral.display_name] deposit"
+					return "[refObj:mineral.display_name] deposit"
 				else
-					return "\improper rock"
+					return "rock"
 			proc/tape_m(var/args = null)	return "\blue [args ? args["user"] : "user"] extends [args ? args["P"] : "measuring tape"] towards [GetVar()]."
 			proc/tape_sm(var/args = null)	return "\blue You extend [args ? args["P"] : "measuring tape"] towards [GetVar()]."
 			proc/tape(var/args = null)	return "\blue \icon[args ? args["P"] : null] [GetVar()] has been excavated to a depth of [2*(args ? args["excavation_level"] : 0)]cm."

@@ -34,7 +34,7 @@
 
 //WHY?
 /obj/item/weapon/gun/energy/pulse_rifle/M1911
-	name = "\improper M1911-P"
+	name = "M1911-P"
 	desc = "It's not the size of the gun, it's the size of the hole it puts through people."
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	icon_state = "m1911-p"

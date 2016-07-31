@@ -70,7 +70,7 @@
 		return ..()
 
 /obj/item/weapon/storage/backpack/santabag
-	name = "\improper Santa's gift bag"
+	name = "Santa's gift bag"
 	desc = "Space Santa uses this to deliver toys to all the nice children in space for Christmas! Wow, it's pretty big!"
 	icon_state = "giftbag0"
 	item_state = "giftbag"

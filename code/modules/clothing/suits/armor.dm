@@ -285,7 +285,7 @@
 	icon_state = "hosvest"
 
 /obj/item/clothing/suit/storage/vest/pcrc
-	name = "\improper PCRC armor vest"
+	name = "PCRC armor vest"
 	desc = "A synthetic armor vest with SECURITY printed in cyan lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "pcrcvest"
 
@@ -302,7 +302,7 @@
 
 
 /obj/item/clothing/suit/armor/centcomm
-	name = "\improper Cent. Com. armor"
+	name = "Cent. Com. armor"
 	desc = "A suit that protects against some damage."
 	icon_state = "centcom"
 	item_state = "centcom"

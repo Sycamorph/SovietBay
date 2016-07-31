@@ -37,7 +37,7 @@
 
 	if(src && input && !M.incapacitated() && in_range(M,src))
 		if(!findtext(input, "the", 1, 4))
-			input = "\improper [input]"
+			input = "[input]"
 		name = input
 		unique_name = input
 		M << "You name the gun '[input]'. Say hello to your new friend."
@@ -80,29 +80,29 @@
 	icon_state = initial(d.icon_state)
 
 /datum/detective_gun_skin/colt
-	name = "\improper Colt M1911"
+	name = "Colt M1911"
 	icon_state = "colt"
 
 /datum/detective_gun_skin/luger
-	name = "\improper P08 Luger"
+	name = "P08 Luger"
 	icon_state = "p08"
 
 /datum/detective_gun_skin/luger_brown
-	name = "\improper P08 Luger, brown"
+	name = "P08 Luger, brown"
 	icon_state = "p08b"
 
 /datum/detective_gun_skin/mk_standard
-	name = "\improper NT Mk. 58"
+	name = "NT Mk. 58"
 	icon_state = "secguncomp"
 
 /datum/detective_gun_skin/mk_custom
-	name = "\improper NT Mk. 58 Custom"
+	name = "NT Mk. 58 Custom"
 	icon_state = "secgundark"
 
 /datum/detective_gun_skin/usp
-	name = "\improper USP"
+	name = "USP"
 	icon_state = "usp"
 
 /datum/detective_gun_skin/vp
-	name = "\improper H&K VP"
+	name = "H&K VP"
 	icon_state = "VP78"

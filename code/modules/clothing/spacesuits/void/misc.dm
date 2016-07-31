@@ -1,6 +1,6 @@
 
 /obj/item/clothing/suit/space/void/swat
-	name = "\improper SWAT suit"
+	name = "SWAT suit"
 	desc = "A heavily armored suit that protects against moderate damage. Used in special operations."
 	icon_state = "deathsquad"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS

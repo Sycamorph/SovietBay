@@ -1,9 +1,9 @@
 /obj/item/weapon/circuitboard/atmoscontrol
-	name = "\improper Central Atmospherics Computer Circuitboard"
+	name = "Central Atmospherics Computer Circuitboard"
 	build_path = /obj/machinery/computer/atmoscontrol
 
 /obj/machinery/computer/atmoscontrol
-	name = "\improper Central Atmospherics Computer"
+	name = "Central Atmospherics Computer"
 	icon = 'icons/obj/computer.dmi'
 	icon_keyboard = "generic_key"
 	icon_screen = "comm_logs"

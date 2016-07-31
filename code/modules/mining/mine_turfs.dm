@@ -108,10 +108,10 @@
 /turf/simulated/mineral/proc/UpdateMineral()
 	clear_ore_effects()
 	if(!mineral)
-		name = "\improper Rock"
+		name = "Rock"
 		icon_state = "rock"
 		return
-	name = "\improper [mineral.display_name] deposit"
+	name = "[mineral.display_name] deposit"
 	new /obj/effect/mineral(src, mineral)
 
 //Not even going to touch this pile of spaghetti

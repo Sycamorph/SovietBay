@@ -1121,7 +1121,7 @@ var/list/WALLITEMS = list(
 	return 0
 
 /proc/format_text(text)
-	return replacetext(replacetext(text,"\proper ",""),"\improper ","")
+	return replacetext(replacetext(text,"\proper ",""),"","")
 
 /proc/topic_link(var/datum/D, var/arglist, var/content)
 	if(istype(arglist,/list))

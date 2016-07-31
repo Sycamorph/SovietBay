@@ -139,7 +139,7 @@
 
 
 /obj/item/weapon/reagent_containers/food/drinks/coffee
-	name = "\improper Robust Coffee"
+	name = "Robust Coffee"
 	desc = "Careful, the beverage you're about to enjoy is extremely hot."
 	icon_state = "coffee"
 	center_of_mass = "x=15;y=10"
@@ -226,7 +226,7 @@
 	center_of_mass = "x=17;y=7"
 
 /obj/item/weapon/reagent_containers/food/drinks/flask
-	name = "\improper Captain's flask"
+	name = "Captain's flask"
 	desc = "A metal flask belonging to the captain."
 	icon_state = "flask"
 	volume = 60
@@ -243,7 +243,7 @@
 	icon_state = "lithiumflask"
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/detflask
-	name = "\improper Detective's flask"
+	name = "Detective's flask"
 	desc = "A metal flask with a leather band and golden badge belonging to the detective."
 	icon_state = "detflask"
 	volume = 60

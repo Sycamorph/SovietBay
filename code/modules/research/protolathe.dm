@@ -1,5 +1,5 @@
 /obj/machinery/r_n_d/protolathe
-	name = "\improper Protolathe"
+	name = "Protolathe"
 	icon_state = "protolathe"
 	flags = OPENCONTAINER
 

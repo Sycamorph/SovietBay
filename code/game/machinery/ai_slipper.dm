@@ -1,5 +1,5 @@
 /obj/machinery/ai_slipper
-	name = "\improper AI Liquid Dispenser"
+	name = "AI Liquid Dispenser"
 	icon = 'icons/obj/device.dmi'
 	icon_state = "motion0"
 	layer = 3
