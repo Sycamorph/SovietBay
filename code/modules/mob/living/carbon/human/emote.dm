@@ -97,6 +97,8 @@
 			if (input2 == "Visible")
 				m_type = VISIBLE_MESSAGE
 			else if (input2 == "Hearable")
+				if (src.miming)
+					return
 				m_type = AUDIBLE_MESSAGE
 			else
 				alert("Unable to use this emote, must be either hearable or visible.")
