@@ -6,6 +6,7 @@ Thumbs.db
 *.dmb
 *.lk
 *.backup
+*.before
 data/
 cfg/
 build_log.txt
@@ -14,4 +15,4 @@ stopserver
 reboot_called
 atupdate
 libbooks/
-maps/exodus/backup/exodus-22.dmm
+maps/exodus/backup/exodus-22.dmm__pycache__

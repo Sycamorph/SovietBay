@@ -464,3 +464,11 @@ obj/item/clothing/suit/storage/toggle/f13/wanderer
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	min_cold_protection_temperature = T0C - 30
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
+
+/obj/item/clothing/suit/storage/mbill
+	name = "shipping jacket"
+	desc = "A green jacket bearing the logo of Major Bill's Shipping."
+	icon_state = "mbill"
+	item_state = "mbill"
+
+
