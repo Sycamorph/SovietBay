@@ -1015,10 +1015,6 @@
 	if (client.statpanel == "Status")
 		if(istype(src,/mob/living/simple_animal/jirachi))
 			stat(null, "Energy: [energy]/[max_energy]")
-	if(emergency_shuttle)
-		var/eta_status = emergency_shuttle.get_status_panel_eta()
-		if(eta_status)
-			stat(null, eta_status)
 
 
 

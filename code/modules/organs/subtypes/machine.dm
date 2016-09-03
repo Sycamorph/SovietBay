@@ -24,7 +24,6 @@
 	parent_organ = "chest"
 	icon = 'icons/obj/robot_component.dmi'
 	icon_state = "motor"
-	dead_icon = "motor_broken"
 
 	var/max_hot_temperature = 2000
 	var/max_cold_temperature = -1
