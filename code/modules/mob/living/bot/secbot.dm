@@ -302,7 +302,7 @@
 	else
 		a_intent = I_GRAB
 
-	stun_baton.attack(M, src, "chest") //robots and turrets aim for center of mass
+	stun_baton.attack(M, src, BP_CHEST) //robots and turrets aim for center of mass
 	flick(attack_state, src)
 
 /mob/living/bot/secbot/explode()
@@ -349,7 +349,7 @@
 			custom_emote(1, "points at [M.name]!")
 
 			playsound(src.loc, pick(threat_found_sounds), 50)
-			
+
 			mode = SECBOT_HUNT
 			break
 	return

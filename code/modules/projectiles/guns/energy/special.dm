@@ -9,7 +9,7 @@
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
 	requires_two_hands = 4
-	charge_cost = 300
+	charge_cost = 30
 	max_shots = 10
 	projectile_type = /obj/item/projectile/ion
 	cell_type = /obj/item/weapon/cell/device/laser/super
@@ -41,7 +41,7 @@
 	desc = "A tool that discharges controlled radiation which induces mutation in plant cells."
 	icon_state = "floramut100"
 	item_state = "floramut"
-	charge_cost = 100
+	charge_cost = 10
 	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/floramut
 	origin_tech = list(TECH_MATERIAL = 2, TECH_BIO = 3, TECH_POWER = 3)
