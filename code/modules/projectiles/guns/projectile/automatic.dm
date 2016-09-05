@@ -272,3 +272,11 @@
 	w_class = 5
 	force = 10
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 1, TECH_ILLEGAL = 4)
+
+
+/obj/item/weapon/gun/projectile/automatic/sts35/honey_badger
+	name = "honey badger"
+	desc = "Assault rifle for spec ops corps."
+	icon_state = "honey_badger"
+	item_state = "honey_badger"
+	magazine_type = /obj/item/ammo_magazine/c762/honey_badger

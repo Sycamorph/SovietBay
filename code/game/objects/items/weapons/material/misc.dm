@@ -38,6 +38,17 @@
 	attack_verb = list("stabbed", "chopped", "cut")
 	applies_material_colour = 1
 
+/obj/item/weapon/material/hatchet/tacknife/combatknife
+	name = "combat knife"
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "combat_knife"
+	desc = "A combat knife for fast cutting humans"
+	force_divisor = 0.25 // 15 when wielded with hardness 60 (steel)
+	thrown_force_divisor = 0.75 // 15 with weight 20 (steel)
+	unbreakable = 1
+	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 3)
+
+
 /obj/item/weapon/material/minihoe // -- Numbers
 	name = "mini hoe"
 	desc = "It's used for removing weeds or scratching your back."

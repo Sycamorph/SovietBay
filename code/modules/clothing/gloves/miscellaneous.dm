@@ -52,3 +52,16 @@
 	item_state = "ggloves"
 	permeability_coefficient = 0.05
 	siemens_coefficient = 0.50 //thick work gloves
+
+/obj/item/clothing/gloves/ballistic
+	desc = "A black pair of ballistic gloves. Good protection from hammer."
+	name = "black ballistic gloves"
+	icon_state = "ballisticgloves"
+	item_state = "ballisticgloves"
+	armor = list(melee = 50, bullet = 80, laser = 50, energy = 15, bomb = 30, bio = 0, rad = 0)
+
+/obj/item/clothing/gloves/ballistic/fingerless
+	desc = "A black pair of fingerless ballistic gloves. Not good protection from hammer."
+	name = "black fingerless ballistic gloves"
+	icon_state = "fingerless_ballisticgloves"
+	item_state = "fingerless_ballisticgloves"

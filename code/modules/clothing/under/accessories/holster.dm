@@ -126,3 +126,8 @@
 	name = "hip holster"
 	desc = "A handgun holster slung low on the hip, draw pardner!"
 	icon_state = "holster_hip"
+
+obj/item/clothing/accessory/holster/leg
+	name = "leg holster"
+	desc = "The holster hung on the leg for quickly snag."
+	icon_state = "leg_holster"

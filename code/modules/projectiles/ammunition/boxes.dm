@@ -48,6 +48,11 @@
 	name = "magazine (.45 flash)"
 	ammo_type = /obj/item/ammo_casing/c45f
 
+/obj/item/ammo_magazine/c45m/grach
+	name = "grach magazine (.45)"
+	ammo_type =  /obj/item/ammo_casing/c45
+	max_ammo = 18
+
 /obj/item/ammo_magazine/mc9mm
 	name = "magazine (9mm)"
 	icon_state = "9x19p"
@@ -196,6 +201,11 @@
 /obj/item/ammo_magazine/c762/resomi
 	name = "resomi rifle magazine (7.62mm)"
 	icon_state = "resomi"
+
+/obj/item/ammo_magazine/c762/honey_badger
+	name = "honey badger magazine (7.62mm)"
+	icon_state = "b762"
+	max_ammo = 45
 
 /obj/item/ammo_magazine/caps
 	name = "speed loader (caps)"

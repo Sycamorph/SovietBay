@@ -60,6 +60,21 @@
 	armor = list(melee = 42, bullet = 75, laser = 42, energy = 10, bomb = 25, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
 
+/obj/item/clothing/suit/armor/ballistic
+	name = "black ballistic armor"
+	desc = "A black ballistic armor. Bullets? Knives? What is that?"
+	icon_state = "ballistick_black_armor"
+	item_state = "ballistick_black_armor"
+	blood_overlay_type = "armor"
+	armor = list(melee = 50, bullet = 80, laser = 50, energy = 15, bomb = 30, bio = 0, rad = 0)
+	siemens_coefficient = 0.7
+
+/obj/item/clothing/suit/armor/ballistic/tan
+	name = "tan ballistic armor"
+	desc = "A tan ballistic armor. Bullets? Knives? What is that?"
+	icon_state = "ballistick_tan_armor"
+	item_state = "ballistick_tan_armor"
+
 /obj/item/clothing/suit/armor/laserproof
 	name = "ablative armor vest"
 	desc = "A vest that excels in protecting the wearer against energy projectiles."
@@ -283,6 +298,20 @@
 	name = "\improper PCRC armor vest"
 	desc = "A synthetic armor vest with SECURITY printed in cyan lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "pcrcvest"
+
+/obj/item/clothing/suit/storage/vest/specops
+	name = "black spec ops armor vest"
+	desc = "A very high-quality armor vest in a fetching black. For missions where one fire extinguisher doesn't help."
+	icon_state = "black_specops_vest"
+	item_state = "black_specops_vest"
+	blood_overlay_type = "armor"
+	armor = list(melee = 65, bullet = 65, laser = 65, energy = 45, bomb = 45, bio = 0, rad = 0)
+
+/obj/item/clothing/suit/storage/vest/specops/tan
+	name = "tan spec ops armor vest"
+	desc = "A very high-quality armor vest in a fetching tan. For missions where one fire extinguisher doesn't help."
+	icon_state = "tan_specops_vest"
+	item_state = "tan_specops_vest"
 
 //Provides the protection of a merc voidsuit, but only covers the chest/groin, and also takes up a suit slot. In exchange it has no slowdown and provides storage.
 /obj/item/clothing/suit/storage/vest/merc

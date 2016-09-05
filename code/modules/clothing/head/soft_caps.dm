@@ -65,6 +65,11 @@
 	desc = "It's a peaked cap in a tasteless purple color."
 	icon_state = "purplesoft"
 
+/obj/item/clothing/head/soft/black
+	name = "black cap"
+	desc = "It's a peaked cap in a tasteless black color."
+	icon_state = "blacksoft"
+
 /obj/item/clothing/head/soft/rainbow
 	name = "rainbow cap"
 	desc = "It's a peaked cap in a bright rainbow of colors."
