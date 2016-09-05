@@ -322,7 +322,7 @@ Location of Barsik's Sprites
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	siemens_coefficient = 0.6
 
-// Llegoman clothes
+// Legoman clothes
 
 /obj/item/clothing/under/leeunder
 	name = "casual uniform with jacket"

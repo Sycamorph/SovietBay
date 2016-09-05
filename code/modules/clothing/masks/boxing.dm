@@ -18,10 +18,23 @@
 	item_state = "balaclava"
 	flags_inv = HIDEFACE|BLOCKHAIR
 	w_class = 2
+	flags_inv = HIDEFACE
 	sprite_sheets = list(
 		"Tajara" = 'icons/mob/species/tajaran/mask.dmi',
 		"Unathi" = 'icons/mob/species/unathi/mask.dmi',
 		)
+
+/obj/item/clothing/mask/balaclava/tactical/ghost
+	name = "ghostclava"
+	desc = "Shhh... Be very, very quiet..."
+	icon_state = "ghostclava"
+	item_state = "ghostclava"
+
+/obj/item/clothing/mask/balaclava/tactical/ghost/riley
+	name = "skeletonclava"
+	desc = "I'm still alive, Shepard!"
+	icon_state = "skeletonclava"
+	item_state = "skeletonclava"
 
 /obj/item/clothing/mask/luchador
 	name = "Luchador Mask"

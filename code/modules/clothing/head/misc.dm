@@ -53,6 +53,12 @@
 	desc = "<i>Choo-choo</i>!"
 	body_parts_covered = 0
 
+/obj/item/clothing/head/officercapold
+	name = "old officer cap"
+	icon_state = "officer_cap_old"
+	desc = "Special cap for elite police of Victorian age"
+	armor = list(melee = 10, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
+
 /obj/item/clothing/head/plaguedoctorhat
 	name = "plague doctor's hat"
 	desc = "These were once used by Plague doctors. They're pretty much useless."

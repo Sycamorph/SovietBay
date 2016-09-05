@@ -93,6 +93,21 @@
 	..()
 	slowdown_per_slot[slot_wear_suit] = 0
 
+/obj/item/clothing/suit/armor/ballistic
+	name = "black ballistic armor"
+	desc = "A black ballistic armor. Bullets? Knives? What is that?"
+	icon_state = "ballistick_black_armor"
+	item_state = "ballistick_black_armor"
+	blood_overlay_type = "armor"
+	armor = list(melee = 50, bullet = 80, laser = 50, energy = 15, bomb = 30, bio = 0, rad = 0)
+	siemens_coefficient = 0.7
+
+/obj/item/clothing/suit/armor/ballistic/tan
+	name = "tan ballistic armor"
+	desc = "A tan ballistic armor. Bullets? Knives? What is that?"
+	icon_state = "ballistick_tan_armor"
+	item_state = "ballistick_tan_armor"
+
 /obj/item/clothing/suit/armor/laserproof
 	name = "ablative suit"
 	desc = "A suit of armor with advanced shielding to protect against energy weapons. Looks like it might impair movement."
@@ -369,6 +384,21 @@
 	item_state = "tacwebvest"
 	armor = list(melee = 40, bullet = 40, laser = 60, energy = 35, bomb = 30, bio = 0, rad = 0)
 
+/obj/item/clothing/suit/storage/vest/specops
+	name = "black spec ops armor vest"
+	desc = "A very high-quality armor vest in a fetching black. For missions where one fire extinguisher doesn't help."
+	icon_state = "black_specops_vest"
+	item_state = "black_specops_vest"
+	blood_overlay_type = "armor"
+	armor = list(melee = 65, bullet = 65, laser = 65, energy = 45, bomb = 45, bio = 0, rad = 0)
+
+/obj/item/clothing/suit/storage/vest/specops/tan
+	name = "tan spec ops armor vest"
+	desc = "A very high-quality armor vest in a fetching tan. For missions where one fire extinguisher doesn't help."
+	icon_state = "tan_specops_vest"
+	item_state = "tan_specops_vest"
+
+//Provides the protection of a merc voidsuit, but only covers the chest/groin, and also takes up a suit slot. In exchange it has no slowdown and provides storage.
 /obj/item/clothing/suit/storage/vest/merc
 	name = "heavy combat armor"
 	desc = "A high-quality armored vest made from a hard synthetic material. It is surprisingly flexible and light, despite formidable armor plating."

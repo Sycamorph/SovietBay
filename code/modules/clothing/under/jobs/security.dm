@@ -70,6 +70,14 @@
 	armor = list(melee = 10, bullet = 5, laser = 5,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 
+/obj/item/clothing/under/spec_ops
+	name = "spec ops uniform"
+	desc = "A spec ops uniform for killing very robust assistants"
+	icon_state = "spec_ops"
+	worn_state = "spec_ops"
+	armor = list(melee = 15, bullet = 10, laser = 10,energy = 5, bomb = 5, bio = 0, rad = 0)
+	siemens_coefficient = 0.9
+
 /*
  * Detective
  */

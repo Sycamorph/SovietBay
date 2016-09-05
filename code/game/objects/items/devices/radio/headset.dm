@@ -202,6 +202,14 @@
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/ert
 
+/obj/item/device/radio/headset/ert/earset
+	name = "tactical earset"
+	desc = "Sgt. Griggs reporting for duty!"
+	icon_state = "tactical_earset"
+	item_state = "tactical_earset"
+	slot_flags = SLOT_EARS | SLOT_TWOEARS
+
+
 /obj/item/device/radio/headset/ia
 	name = "internal affair's headset"
 	desc = "The headset of your worst enemy."

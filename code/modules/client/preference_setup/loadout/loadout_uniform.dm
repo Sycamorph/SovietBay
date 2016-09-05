@@ -204,3 +204,18 @@
 		var/obj/item/clothing/under/pants/short_type = short
 		shorts[initial(short_type.name)] = short_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(shorts))
+
+/datum/gear/uniform/filthyfrank
+	display_name = "pink b0zz uniform selection"
+	path = /obj/item/clothing/under/filthyfrank
+
+/datum/gear/uniform/filthyfrank/New()
+	..()
+	var/list/filthyfrank = list()
+	for(var/pink_b0zz in typesof(/obj/item/clothing/under/filthyfrank))
+		var/obj/item/clothing/under/filthyfrank/pink_b0zz_type = pink_b0zz
+		filthyfrank[initial(pink_b0zz_type.name)] = pink_b0zz_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(filthyfrank))
+
+
+

@@ -131,3 +131,8 @@
 	name = "thigh holster"
 	desc = "A drop leg holster made of a durable synthetic fiber."
 	icon_state = "holster_thigh"
+
+obj/item/clothing/accessory/holster/leg
+	name = "leg holster"
+	desc = "The holster hung on the leg for quickly snag."
+	icon_state = "leg_holster"

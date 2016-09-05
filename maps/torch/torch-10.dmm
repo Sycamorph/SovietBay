@@ -1306,7 +1306,7 @@
 "azf" = (/obj/machinery/clonepod,/turf/simulated/floor/shuttle/white,/area/shuttle/administration/centcom)
 "azg" = (/obj/machinery/computer/scan_consolenew,/turf/simulated/floor/shuttle/white,/area/shuttle/administration/centcom)
 "azh" = (/obj/machinery/computer/shuttle_control{req_access = list(101); shuttle_tag = "Administration"},/turf/simulated/floor/shuttle/red,/area/shuttle/administration/centcom)
-"azi" = (/obj/structure/device/piano{dir = 4},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/living)
+"azi" = (/obj/structure/piano{dir = 4},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/living)
 "azj" = (/obj/item/weapon/stool{pixel_y = 8},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/living)
 "azk" = (/obj/structure/closet/secure_closet/bar{req_access = list(25)},/turf/unsimulated/floor{dir = 2; icon_state = "white"},/area/centcom/living)
 "azl" = (/obj/structure/reagent_dispensers/beerkeg,/turf/unsimulated/floor{dir = 2; icon_state = "white"},/area/centcom/living)

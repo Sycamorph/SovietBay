@@ -40,6 +40,21 @@
 	else
 		icon_state = "secgundark-e"
 
+/obj/item/weapon/gun/projectile/sec/mp443
+	name = "MP-443 ''Grach''"
+	desc = "Pistol for spec ops corps. Uses Uses .45 rounds."
+	icon_state = "mp_443"
+	magazine_type = /obj/item/ammo_magazine/c45m/grach
+	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3)
+
+/obj/item/weapon/gun/projectile/sec/mp443/update_icon()
+	..()
+	if(ammo_magazine)
+		icon_state = "mp_443"
+	else
+		icon_state = "mp_443-e"
+
+
 /obj/item/weapon/gun/projectile/silenced
 	name = "silenced pistol"
 	desc = "A handgun with an integral silencer. Uses .45 rounds."
@@ -74,7 +89,6 @@
 	item_state = "deagleg"
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
-
 
 /obj/item/weapon/gun/projectile/gyropistol
 	name = "gyrojet pistol"
