@@ -273,7 +273,7 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	name = "standart laser battery"
 	desc = "Standart battery power supply high-intensity."
 	origin_tech = list(TECH_POWER = 1)
-	maxcharge = 1000
+	maxcharge = 100
 
 /obj/item/weapon/cell/device/laser/high
 	name = "high laser battery"
@@ -281,7 +281,7 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	icon_state = "high"
 	origin_tech = list(TECH_POWER = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 60)
-	maxcharge = 2000
+	maxcharge = 200
 
 /obj/item/weapon/cell/device/laser/super
 	name = "super laser battery"
@@ -289,7 +289,7 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	icon_state = "super"
 	origin_tech = list(TECH_POWER = 5)
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 70)
-	maxcharge = 3000
+	maxcharge = 300
 
 /obj/item/weapon/cell/device/laser/hyper
 	name = "hyper laser battery"
@@ -297,7 +297,7 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	icon_state = "hyper"
 	origin_tech = list(TECH_POWER = 6)
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 80)
-	maxcharge = 4000
+	maxcharge = 400
 
 /obj/item/weapon/cell/device/variable/New(newloc, charge_amount)
 	..(newloc)

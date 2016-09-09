@@ -523,11 +523,8 @@ obj/random/material //Random materials for building stuff
 					prob(1);/obj/item/weapon/storage/fancy/cigar,\
 					prob(3);/obj/item/clothing/mask/gas,\
 					prob(4);/obj/item/clothing/mask/breath,\
-					prob(2);/obj/item/clothing/mask/balaclava,\
 					prob(2);/obj/item/weapon/reagent_containers/glass/rag ,\
-					prob(2);/obj/item/weapon/storage/secure/briefcase,\
 					prob(4);/obj/item/weapon/storage/briefcase,\
-					prob(4);/obj/item/weapon/storage/briefcase/inflatable,\
 					prob(5);/obj/item/weapon/storage/backpack,\
 					prob(5);/obj/item/weapon/storage/backpack/satchel,\
 					prob(3);/obj/item/weapon/storage/backpack/dufflebag,\
@@ -538,47 +535,29 @@ obj/random/material //Random materials for building stuff
 					prob(4);/obj/item/weapon/storage/box/mousetraps,\
 					prob(3);/obj/item/weapon/storage/box/engineer,\
 					prob(3);/obj/item/weapon/storage/wallet,\
-					prob(2);/obj/item/weapon/storage/belt/utility/full,\
-					prob(2);/obj/item/weapon/storage/belt/medical/emt,\
 					prob(4);/obj/item/device/toner,\
 					prob(1);/obj/item/device/paicard,\
 					prob(3);/obj/item/clothing/shoes/workboots,\
 					prob(3);/obj/item/clothing/shoes/jackboots,\
-					prob(1);/obj/item/clothing/shoes/swat,\
-					prob(1);/obj/item/clothing/shoes/combat,\
 					prob(2);/obj/item/clothing/shoes/galoshes,\
 					prob(1);/obj/item/clothing/shoes/magboots,\
 					prob(4);/obj/item/clothing/shoes/laceup,\
-					prob(1);/obj/item/clothing/gloves/insulated,\
-					prob(4);/obj/item/clothing/gloves/thick,\
-					prob(2);/obj/item/clothing/gloves/latex,\
-					prob(1);/obj/item/clothing/gloves/thick/swat,\
-					prob(1);/obj/item/clothing/gloves/thick/combat,\
-					prob(5);/obj/item/clothing/gloves/white,\
-					prob(5);/obj/item/clothing/gloves/rainbow,\
 					prob(1);/obj/item/clothing/glasses/sunglasses,\
 					prob(3);/obj/item/clothing/glasses/meson,\
 					prob(2);/obj/item/clothing/glasses/meson/prescription,\
 					prob(4);/obj/item/clothing/glasses/science,\
-					prob(3);/obj/item/clothing/glasses/material,\
 					prob(1);/obj/item/clothing/glasses/welding,\
 					prob(2);/obj/item/weapon/weldingtool/largetank,\
-					prob(2);/obj/item/clothing/head/helmet,\
 					prob(4);/obj/item/clothing/head/hardhat,\
 					prob(4);/obj/item/clothing/head/hardhat/orange,\
 					prob(4);/obj/item/clothing/head/hardhat/red,\
 					prob(4);/obj/item/clothing/head/hardhat/dblue,\
 					prob(3);/obj/item/clothing/head/ushanka,\
-					prob(2);/obj/item/clothing/head/welding,\
 					prob(4);/obj/item/clothing/suit/storage/hazardvest,\
-					prob(2);/obj/item/clothing/suit/armor/vest,\
 					prob(4);/obj/item/clothing/suit/storage/toggle/labcoat,\
-					prob(1);/obj/item/weapon/beartrap,\
-					prob(2);/obj/item/weapon/handcuffs,\
 					prob(3);/obj/item/weapon/camera_assembly,\
 					prob(4);/obj/item/weapon/caution,\
 					prob(4);/obj/item/weapon/caution/cone,\
-					prob(1);/obj/random/loot,\
 					prob(3);/obj/item/device/radio/headset)
 
 
