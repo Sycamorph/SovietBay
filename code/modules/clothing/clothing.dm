@@ -426,6 +426,9 @@ BLIND     // can't see anything
 		"Resomi" = 'icons/mob/species/resomi/shoes.dmi',
 		"Human_f" = 'icons/mob/human_female/feet.dmi'
 		)
+	female_sprite_sheets = list(
+		"Human" = 'icons/mob/human_female/feet.dmi'
+		)
 	blood_overlay_type = "shoeblood"
 
 /obj/item/clothing/shoes/New()
@@ -504,6 +507,9 @@ BLIND     // can't see anything
 		"Human_f" = 'icons/mob/human_female/suit.dmi',
 		"Resomi" = 'icons/mob/species/resomi/suit.dmi'
 		)
+	female_sprite_sheets = list(
+		"Human" = 'icons/mob/human_female/suit.dmi'
+		)
 
 /obj/item/clothing/suit/update_clothing_icon()
 	if (ismob(src.loc))
@@ -550,6 +556,9 @@ BLIND     // can't see anything
 		"Vox" = 'icons/mob/species/vox/uniform.dmi',
 		"Resomi" = 'icons/mob/species/resomi/uniform.dmi',
 		"Human_f" = 'icons/mob/human_female/uniform.dmi'
+		)
+	sprite_sheets = list(
+		"Human" = 'icons/mob/human_female/uniform.dmi'
 		)
 
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.
