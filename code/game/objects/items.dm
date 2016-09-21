@@ -75,6 +75,7 @@
 	// Species-specific sprite sheets for inventory sprites
 	// Works similarly to worn sprite_sheets, except the alternate sprites are used when the clothing/refit_for_species() proc is called.
 	var/list/sprite_sheets_obj = list()
+	var/list/female_sprite_sheets = list()
 
 /obj/item/New()
 	..()
@@ -712,5 +713,8 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		mob_icon = item_icons[slot]
 	else
 		mob_icon = default_onmob_icons[slot]
+
+	if((user_mob.get_gender() == "female") && female_sprite_sheets.Find(user_mob.get_species()) && !(slot == slot_r_hand_str || slot == slot_l_hand_str))
+		mob_icon = female_sprite_sheets[user_mob.get_species()]
 
 	return overlay_image(mob_icon,mob_state,color,RESET_COLOR)
