@@ -671,10 +671,12 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			var/n = input(U, "Please enter message", name, notehtml) as message
 			if (in_range(src, U) && loc == U)
 				n = sanitizeSafe(n, extra = 0)
+				n = fix_rus_nanoui(n)
 				if (mode == 1)
 					note = lhtml_decode(n)
 					notehtml = note
 					note = replacetext(note, "\n", "<br>")
+
 			else
 				ui.close()
 		if("Toggle Messenger")
@@ -956,6 +958,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	t = sanitize(t)
 	//t = readd_quotes(t)
 	t = replace_characters(t, list("&#34;" = "\""))
+	//t = fix_rus_nanoui(t)
 	if (!t || !istype(P))
 		return
 	if (!in_range(src, U) && loc != U)
@@ -983,8 +986,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			U << "ERROR: Messaging server rejected your message. Reason: contains '[send_result]'."
 			return
 
-		tnote.Add(list(list("sent" = 1, "owner" = "[P.owner]", "job" = "[P.ownjob]", "message" = "[t]", "target" = "\ref[P]")))
-		P.tnote.Add(list(list("sent" = 0, "owner" = "[owner]", "job" = "[ownjob]", "message" = "[t]", "target" = "\ref[src]")))
+		tnote.Add(list(list("sent" = 1, "owner" = "[P.owner]", "job" = "[P.ownjob]", "message" = "[fix_rus_nanoui(t)]", "target" = "\ref[P]")))
+		P.tnote.Add(list(list("sent" = 0, "owner" = "[owner]", "job" = "[ownjob]", "message" = "[fix_rus_nanoui(t)]", "target" = "\ref[src]")))
 		for(var/mob/M in player_list)
 			if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears)) // src.client is so that ghosts don't have to listen to mice
 				if(istype(M, /mob/new_player))
