@@ -51,11 +51,14 @@
 		user << "<span class='info'>[translation(src, "access_denied")]</span>"
 		return
 
-	if(istype(I, /obj/item/weapon/screwdriver))
-		if(!panel_open)
-			user << "<span class='notice'>[translation(src, "open_panel")]</span>"
-			set_sign(new /datum/barsign/signoff)
-			panel_open = 1
+	var/obj/item/weapon/card/id/card = I.GetIdCard()
+	if(istype(card))
+		if(access_bar in card.GetAccess())
+			var/sign_type = input(user, "What would you like to change the barsign to?") as null|anything in get_valid_states(0)
+			if(!sign_type)
+				return
+			icon_state = sign_type
+			user << "<span class='notice'>You change the barsign.</span>"
 		else
 			user << "<span class='notice'>[translation(src, "close_panel")]</span>"
 			if(!broken && !emagged)

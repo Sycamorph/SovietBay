@@ -286,7 +286,14 @@ var/list/organ_cache = list()
 /obj/item/organ/external/cut_away(var/mob/living/user)
 	removed(user)
 
-/obj/item/organ/proc/removed(var/mob/living/user, var/drop_organ=1)
+/**
+ *  Remove an organ
+ *
+ *  drop_organ - if true, organ will be dropped at the loc of its former owner
+ *  detach - if true, organ will be detached from parent. Keep false for organs
+ *           removed together with parent, as with an amputation.
+ */
+/obj/item/organ/proc/removed(var/mob/living/user, var/drop_organ=1, var/detach=1)
 
 	if(!istype(owner))
 		return
@@ -296,10 +303,11 @@ var/list/organ_cache = list()
 	owner.internal_organs_by_name -= null
 	owner.internal_organs -= src
 
-	var/obj/item/organ/external/affected = owner.get_organ(parent_organ)
-	if(affected) 
-		affected.internal_organs -= src
-		status |= ORGAN_CUT_AWAY
+	if(detach)
+		var/obj/item/organ/external/affected = owner.get_organ(parent_organ)
+		if(affected)
+			affected.internal_organs -= src
+			status |= ORGAN_CUT_AWAY
 
 	if(drop_organ)
 		dropInto(owner.loc)
@@ -313,9 +321,7 @@ var/list/organ_cache = list()
 
 	if(owner && vital)
 		if(user)
-			user.attack_log += "\[[time_stamp()]\]<font color='red'> removed a vital organ ([src]) from [owner.name] ([owner.ckey]) (INTENT: [uppertext(user.a_intent)])</font>"
-			owner.attack_log += "\[[time_stamp()]\]<font color='orange'> had a vital organ ([src]) removed by [user.name] ([user.ckey]) (INTENT: [uppertext(user.a_intent)])</font>"
-			msg_admin_attack("[user.name] ([user.ckey]) removed a vital organ ([src]) from [owner.name] ([owner.ckey]) (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+			admin_attack_log(user, owner, "Removed a vital organ ([src]).", "Had a vital organ ([src]) removed.", "removed a vital organ ([src]) from")
 		owner.death()
 
 	owner = null
@@ -327,11 +333,11 @@ var/list/organ_cache = list()
 
 	if(status & ORGAN_CUT_AWAY)
 		return 0 //organs don't work very well in the body when they aren't properly attached
-		
+
 	// robotic organs emulate behavior of the equivalent flesh organ of the species
 	if(robotic >= ORGAN_ROBOT || !species)
 		species = target.species
-		
+
 	owner = target
 	forceMove(owner) //just in case
 	processing_objects -= src

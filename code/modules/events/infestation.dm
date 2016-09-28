@@ -69,7 +69,7 @@
 	command_announcement.Announce("Биосканеры обнаружили размножение [vermstring] в \the [location]. Очистите место от паразитов, пока они не начали наносить ущерб продуктивности.", "Заражение вредител&#255;ми")
 
 /datum/event/infestation/proc/set_location_get_infestation_turfs()
-	location = pick_area(list(/proc/is_not_space, /proc/is_station_area))
+	location = pick_area(list(/proc/is_not_space_area, /proc/is_station_area))
 	if(!location)
 		log_debug("Vermin infestation failed to find a viable area. Aborting.")
 		kill()

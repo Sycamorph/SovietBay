@@ -57,6 +57,10 @@
 		name = "Short Hair"	  // try to capatilize the names please~
 		icon_state = "hair_a" // you do not need to define _s or _l sub-states, game automatically does this for you
 
+	twintail
+		name = "Twintail"
+		icon_state = "hair_twintail"
+
 	short2
 		name = "Short Hair 2"
 		icon_state = "hair_shorthair3"
@@ -74,6 +78,27 @@
 	resomi_excited
 		name = "Resomi Spiky"
 		icon_state = "resomi_spiky"
+		species_allowed = list("Resomi")
+		
+
+	resomi_hedgehog
+		name = "Resomi Hedgehog"
+		icon_state = "resomi_hedge"
+		species_allowed = list("Resomi")
+
+	resomi_long
+		name = "Resomi Unpruned"
+		icon_state = "resomi_long"
+		species_allowed = list("Resomi")
+	
+	resomi_sunburst
+		name = "Resomi Sunburst" // kill me
+		icon_state = "resomi_burst_short"
+		species_allowed = list("Resomi")
+
+	resomi_mohawk
+		name = "Resomi Mohawk"
+		icon_state = "resomi_mohawk"
 		species_allowed = list("Resomi")
 
 	cut

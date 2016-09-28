@@ -23,6 +23,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	else if(istype(A, /obj/item/weapon/flame))
 		var/obj/item/weapon/flame/F = A
 		return (F.lit)
+	else if(istype(A, /obj/item/clothing/mask/smokable) && !istype(A, /obj/item/clothing/mask/smokable/pipe))
+		var/obj/item/clothing/mask/smokable/S = A
+		return (S.lit)
 	else if(istype(A, /obj/item/device/assembly/igniter))
 		return 1
 	return 0
@@ -94,6 +97,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	var/zippomes = "USER lights NAME with FLAME"
 	var/weldermes = "USER lights NAME with FLAME"
 	var/ignitermes = "USER lights NAME with FLAME"
+	var/brand
 
 /obj/item/clothing/mask/smokable/New()
 	..()
@@ -152,6 +156,8 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if (type_butt)
 		var/obj/item/butt = new type_butt(T)
 		transfer_fingerprints_to(butt)
+		if(brand)
+			butt.desc += " This one is \a [brand]."
 		if(ismob(loc))
 			var/mob/living/M = loc
 			if (!nomessage)

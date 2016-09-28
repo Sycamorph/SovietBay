@@ -1,3 +1,4 @@
+
 var/datum/map/using_map = new USING_MAP_DATUM
 var/list/all_maps = list()
 
@@ -23,7 +24,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 /datum/map
 	var/name = "Unnamed Map"
 	var/full_name = "Unnamed Map"
-	proc/setup_map()
 	var/path
 
 	var/list/station_levels = list() // Z-levels the station exists on
@@ -39,11 +39,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	                               //That doesn't mean we have to include them with the rest of the jobs though, especially for map specific ones.
 	                               //Also including them lets us override already created jobs, letting us keep the datums to a minimum mostly.
 	                               //This is probably a lot longer explanation than it needs to be.
-	// Unit test vars
-	var/list/exempt_areas = list()
-	var/const/NO_APC = 1
-	var/const/NO_VENT = 2
-	var/const/NO_SCRUBBER = 4
 
 	var/shuttle_docked_message
 	var/shuttle_leaving_dock
@@ -53,6 +48,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/emergency_shuttle_leaving_dock
 	var/emergency_shuttle_called_message
 	var/emergency_shuttle_recall_message
+	var/list/station_networks = list() 		// Camera networks that will show up on the console.
 
 	var/list/holodeck_programs = list() // map of string ids to /datum/holodeck_program instances
 	var/list/holodeck_supported_programs = list() // map of maps - first level maps from list-of-programs string id (e.g. "BarPrograms") to another map
@@ -61,9 +57,11 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	                                              // as defined in holodeck_programs
 	var/list/holodeck_restricted_programs = list() // as above... but EVIL!
 
+	var/allowed_spawns = list("Arrivals Shuttle","Gateway", "Cryogenic Storage", "Cyborg Storage")
 	var/flags = 0
 	var/evac_controller_type = /datum/evacuation_controller
 	var/overmap_z = 0		//If 0 will generate overmap zlevel on init. Otherwise will populate the zlevel provided.
+
 
 /datum/map/New()
 	..()
@@ -72,10 +70,13 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if(!allowed_jobs)
 		allowed_jobs = subtypesof(/datum/job)
 
-// Used to apply various post-compile procedural effects to the map.
+/datum/map/proc/setup_map()
+	return
+
 /datum/map/proc/perform_map_generation()
 	return
 
+// Used to apply various post-compile procedural effects to the map.
 /datum/map/proc/refresh_mining_turfs()
 
 	set background = 1
@@ -83,7 +84,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	for(var/thing in mining_walls)
 		var/turf/simulated/mineral/M = thing
-		M.updateMineralOverlays()
+		M.update_icon()
 	for(var/thing in mining_floors)
 		var/turf/simulated/floor/asteroid/M = thing
 		M.updateMineralOverlays()
