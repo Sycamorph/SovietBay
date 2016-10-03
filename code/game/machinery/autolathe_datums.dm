@@ -316,11 +316,6 @@
 	path = /obj/item/device/assembly/voice
 	category = "Devices and Components"
 
-/datum/autolathe/recipe/sensor_infra
-	name = "infrared sensor"
-	path = /obj/item/device/assembly/infra
-	category = "Devices and Components"
-
 /datum/autolathe/recipe/timer
 	name = "timer"
 	path = /obj/item/device/assembly/timer

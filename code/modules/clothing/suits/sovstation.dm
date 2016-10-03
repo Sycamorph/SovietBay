@@ -937,7 +937,6 @@ Location of Barsik's Sprites
 	item_state = "swat_suit"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	armor = list(melee = 50, bullet = 50, laser = 50, energy = 50, bomb = 25, bio = 10, rad = 10)
-	flags_inv = HIDEJUMPSUIT
 	siemens_coefficient = 0.5
 
 /obj/item/clothing/head/helmet/marine

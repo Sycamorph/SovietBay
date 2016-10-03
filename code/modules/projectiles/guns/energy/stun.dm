@@ -21,7 +21,7 @@
 	name = "experimental taser gun"
 	desc = "Experimental taser gun developed by NT"
 	icon_state = "taservg"
-	item_state = null
+	item_state = "taser"
 	fire_sound = 'sound/weapons/taser2.ogg'
 	max_shots = 5
 	projectile_type = /obj/item/projectile/beam/stun
