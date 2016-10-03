@@ -58,7 +58,7 @@
 			src.add_fingerprint(user)
 			playsound(src, 'sound/items/defib_zap.ogg', 50, 1, 1)
 			user.visible_message("[user] shocks [M] with [src].", "You shock [M] with [src].</span>", "You hear electricity zaps flesh.")
-			user.attack_log += "\[[time_stamp()]\]<font color='red'> Shock [M.name] ([M.ckey]) with [src.name]</font>"
+			admin_attack_log(user, "Shock [M.name] ([M.ckey]) with [src.name]")
 			msg_admin_attack("[user.name] ([user.ckey]) shock [M.name] ([M.ckey]) with [src.name] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 			if((world.time - C.timeofdeath) < 3600 || C.stat != DEAD)	//if he is dead no more than 6 minutes

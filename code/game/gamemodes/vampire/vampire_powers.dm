@@ -405,8 +405,7 @@
 	shutdown.stage = 2
 	shutdown.clicks = 185
 	msg_admin_attack("[key_name_admin(usr)] gave [key_name_admin(C)] the shutdown disease - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[C.x];Y=[C.y];Z=[C.z]'>JMP</a>")
-	usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Gave [C.name] ([C.ckey]) the shutdown disease</font>")
-	C.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been given the shutdown disease by [usr.name] ([usr.ckey])</font>")
+	admin_attack_log(usr, "Gave [C.name] ([C.ckey]) the shutdown disease")
 	infect_virus2(C,shutdown,0)
 	M.current.remove_vampire_blood(200)
 	M.current.verbs -= /client/vampire/proc/vampire_disease

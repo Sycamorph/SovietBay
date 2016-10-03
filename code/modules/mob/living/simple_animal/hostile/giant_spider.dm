@@ -298,7 +298,7 @@
 					if(busy == LAYING_EGGS)
 						E = locate() in get_turf(src)
 						if(!E)
-							PoolOrNew(/obj/effect/spider/eggcluster, list(loc, src))
+							new /obj/effect/spider/eggcluster(loc, src)
 							fed--
 						busy = 0
 			else

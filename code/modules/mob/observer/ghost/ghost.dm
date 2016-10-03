@@ -703,7 +703,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(mind && mind.current && mind.current.stat != DEAD && can_reenter_corpse == CORPSE_CAN_REENTER)
 		if(feedback)
 			to_chat(src, "<span class='warning'>Your non-dead body prevents you from respawning.</span>")
-		return 0*/
+		return 0
 	if(config.antag_hud_restricted && has_enabled_antagHUD == 1)
 		if(feedback)
 			to_chat(src, "<span class='warning'>antagHUD restrictions prevent you from respawning.</span>")

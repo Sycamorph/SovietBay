@@ -95,16 +95,16 @@
 			gender = FEMALE
 			proc/name()
 				if(refObj:reinf_material)
-					return "укреплённая [refObj:material.display_name] стена"
+					return "укреплённая [refObj:material:display_name] стена"
 				else
-					return "[refObj:material.display_name] стена"
+					return "[refObj:material:display_name] стена"
 
 			desc = "A huge chunk of metal used to seperate rooms."
 			proc/desc()
 				if(refObj:reinf_material)
-					return "It seems to be a section of hull reinforced with [refObj:reinf_material.display_name] and plated with [refObj:material.display_name]."
+					return "It seems to be a section of hull reinforced with [refObj:reinf_material:display_name] and plated with [refObj:material:display_name]."
 				else
-					return "It seems to be a section of hull plated with [refObj:material.display_name]."
+					return "It seems to be a section of hull plated with [refObj:material:display_name]."
 
 			var/intact = "It looks fully intact."
 			var/slightly = "It looks slightly damaged."
@@ -116,7 +116,7 @@
 			var/fail_smash = "You smash against the wall!"
 			var/success_smash = "You smash through the wall!"
 			proc/reinf_crumbly()	return "\The [refObj:reinf_material:display_name] feels porous and crumbly."
-			proc/crumbles()	return "\The [refObj:material.display_name] crumbles under your touch!"
+			proc/crumbles()	return "\The [refObj:material:display_name] crumbles under your touch!"
 			var/push = "You push the wall, but nothing happens."
 			proc/burn_fungi(var/args = null) return "You burn away the fungi with \the [args ? translation(args) : "welder"]."
 			proc/crumbles_force(var/args = null) return "\The [GetVar()] crumbles away under the force of your [args ? translation(args) : "weapon"]."

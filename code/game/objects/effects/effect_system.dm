@@ -147,7 +147,7 @@ steam.start() -- spawns the effect
 			spawn(0)
 				if(holder)
 					src.location = get_turf(holder)
-				var/obj/effect/sparks/sparks = new /obj/effect/sparks(location)
+				var/obj/effect/effect/sparks = new /obj/effect/effect/sparks(location)
 				var/direction
 				if(src.cardinals)
 					direction = pick(cardinal)

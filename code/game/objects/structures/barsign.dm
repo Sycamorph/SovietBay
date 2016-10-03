@@ -21,6 +21,14 @@
 	else
 		set_sign(pick(barsigns))
 
+/obj/structure/sign/double/barsign/proc/get_valid_states(initial=1)
+	. = icon_states(icon)
+	. -= "on"
+	. -= "narsiebistro"
+	. -= "empty"
+	if(initial)
+		. -= "Off"
+
 /obj/structure/sign/double/barsign/proc/set_sign(datum/barsign/newsign)
 	if(!istype(newsign))
 		return

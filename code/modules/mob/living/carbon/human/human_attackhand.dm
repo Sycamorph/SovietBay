@@ -137,8 +137,7 @@
 						return 0
 					//we're good to suck the blood, blaah
 					//and leave an attack log
-					H.attack_log += text("\[[time_stamp()]\] <font color='red'>Bit [src.name] ([src.ckey]) in the neck and draining their blood</font>")
-					src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been bit in the neck by [H.name] ([H.ckey])</font>")
+					admin_attack_log(H, src, "Bit [src.name] ([src.ckey]) in the neck and draining their blood", "Has been bit in the neck by [H.name] ([H.ckey])")
 					msg_admin_attack("[key_name_admin(H)] bit [key_name_admin(src)] in the neck - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[M.x];Y=[M.y];Z=[M.z]'>JMP</a>")
 					H.handle_bloodsucking(src)
 				//					var/datum/organ/external/affecting = get_organ(src.zone_sel.selecting)
