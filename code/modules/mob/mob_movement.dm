@@ -368,6 +368,9 @@
 						if(prob(25))
 							direct = turn(direct, pick(90, -90))
 							n = get_step(mob, direct)
+
+			mob.glide_setup(move_delay-world.time)
+
 			. = mob.SelfMove(n, direct)
 
 		for (var/obj/item/weapon/grab/G in mob)
@@ -380,7 +383,6 @@
 		moving = 0
 
 		return .
-
 	return
 
 /mob/proc/SelfMove(turf/n, direct)
