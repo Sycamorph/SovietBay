@@ -170,3 +170,85 @@
 /obj/structure/filingcabinet/medical/attack_tk()
 	populate()
 	..()
+
+
+/*
+ * Detective
+ */
+
+/obj/structure/evidencestorage
+	name = "Evidence_Storage"
+	desc = "A large cabinet, that can storage some evidence"
+	icon = 'icons/obj/bureaucracy.dmi'
+	icon_state = "chestdrawer"
+	density = 1
+	anchored = 1
+
+
+/obj/structure/evidencestorage/initialize()
+	for(var/obj/item/I in loc)
+		if(istype(I, /obj/item/weapon/sample/fibers) || istype(I, /obj/item/weapon/sample/print))
+			I.loc = src
+
+
+/obj/structure/evidencestorage/attackby(obj/item/P as obj, mob/user as mob)
+	if(istype(P, /obj/item/weapon/sample/fibers) || istype(P, /obj/item/weapon/sample/print))
+		user << "<span class='notice'>You put [P] in [src].</span>"
+		user.drop_item()
+		P.loc = src
+		icon_state = "[initial(icon_state)]-open"
+		sleep(5)
+		icon_state = initial(icon_state)
+		updateUsrDialog()
+	else if(istype(P, /obj/item/weapon/wrench))
+		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
+		anchored = !anchored
+		user << "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>"
+	else
+		user << "<span class='notice'>You can't put [P] in [src]!</span>"
+
+
+/obj/structure/evidencestorage/attack_hand(mob/user as mob)
+	if(contents.len <= 0)
+		user << "<span class='notice'>\The [src] is empty.</span>"
+		return
+
+	user.set_machine(src)
+	var/dat = "<center><table>"
+	for(var/obj/item/P in src)
+		dat += "<tr><td><a href='?src=\ref[src];retrieve=\ref[P]'>[P.name]</a></td></tr>"
+	dat += "</table></center>"
+	user << browse(sanitize_local("<html><head><title>[name]</title></head><body>[dat]</body></html>", SANITIZE_BROWSER), "window=filingcabinet;size=350x300")
+
+	return
+
+/obj/structure/evidencestorage/attack_tk(mob/user)
+	if(anchored)
+		attack_self_tk(user)
+	else
+		..()
+
+/obj/structure/evidencestorage/attack_self_tk(mob/user)
+	if(contents.len)
+		if(prob(40 + contents.len * 5))
+			var/obj/item/I = pick(contents)
+			I.loc = loc
+			if(prob(25))
+				step_rand(I)
+			user << "<span class='notice'>You pull \a [I] out of [src] at random.</span>"
+			return
+	user << "<span class='notice'>You find nothing in [src].</span>"
+
+/obj/structure/evidencestorage/Topic(href, href_list)
+	if(href_list["retrieve"])
+		usr << browse("", "window=filingcabinet") // Close the menu
+
+		//var/retrieveindex = text2num(href_list["retrieve"])
+		var/obj/item/P = locate(href_list["retrieve"])//contents[retrieveindex]
+		if(istype(P) && (P.loc == src) && src.Adjacent(usr))
+			usr.put_in_hands(P)
+			updateUsrDialog()
+			icon_state = "[initial(icon_state)]-open"
+			spawn(0)
+				sleep(5)
+				icon_state = initial(icon_state)
