@@ -153,7 +153,7 @@
 			duration *= 2
 			return "You will now stay corrupted for [duration/10] seconds."
 		if(2)
-			newVars = list("name" = "\proper corruption incarnate",
+			newVars = list("name" = " corruption incarnate",
 						"melee_damage_upper" = 25,
 						"resistance" = 6,
 						"health" = 125,

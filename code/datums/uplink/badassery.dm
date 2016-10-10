@@ -64,7 +64,7 @@
 * Surplus Crate *
 ****************/
 /datum/uplink_item/item/badassery/surplus
-	name = "\improper Surplus Crate"
+	name = "Surplus Crate"
 	item_cost = DEFAULT_TELECRYSTAL_AMOUNT * 4
 	var/item_worth = DEFAULT_TELECRYSTAL_AMOUNT * 6
 	var/icon

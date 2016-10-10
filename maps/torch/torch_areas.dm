@@ -16,15 +16,15 @@
 
 //Fourth Deck (Z-1)
 /area/hallway/primary/fourthdeck/fore
-	name = "\improper Fourth Deck Fore Hallway"
+	name = "Fourth Deck Fore Hallway"
 	icon_state = "hallF"
 
 /area/hallway/primary/fourthdeck/center
-	name = "\improper Fourth Deck Central Hallway"
+	name = "Fourth Deck Central Hallway"
 	icon_state = "hallC3"
 
 /area/hallway/primary/fourthdeck/aft
-	name = "\improper Fourth Deck Aft Hallway"
+	name = "Fourth Deck Aft Hallway"
 	icon_state = "hallA"
 
 /area/maintenance/fourthdeck
@@ -48,21 +48,21 @@
 	icon_state = "smaint"
 
 /area/teleporter/fourthdeck
-	name = "\improper Fourth Deck Teleporter"
+	name = "Fourth Deck Teleporter"
 	icon_state = "teleporter"
 
 
 //Third Deck (Z-2)
 /area/hallway/primary/thirddeck/fore
-	name = "\improper Third Deck Fore Hallway"
+	name = "Third Deck Fore Hallway"
 	icon_state = "hallF"
 
 /area/hallway/primary/thirddeck/center
-	name = "\improper Third Deck Central Hallway"
+	name = "Third Deck Central Hallway"
 	icon_state = "hallC3"
 
 /area/hallway/primary/thirddeck/aft
-	name = "\improper Third Deck Aft Hallway"
+	name = "Third Deck Aft Hallway"
 	icon_state = "hallA"
 
 /area/maintenance/thirddeck
@@ -94,7 +94,7 @@
 	icon_state = "apmaint"
 
 /area/teleporter/thirddeck
-	name = "\improper Third Deck Teleporter"
+	name = "Third Deck Teleporter"
 	icon_state = "teleporter"
 
 /area/maintenance/substation/thirddeck
@@ -127,15 +127,15 @@
 	icon_state = "maintcentral"
 
 /area/teleporter/seconddeck
-	name = "\improper Second Deck Teleporter"
+	name = "Second Deck Teleporter"
 	icon_state = "teleporter"
 
 /area/hallway/primary/seconddeck/center
-	name = "\improper Second Deck Central Stairwell"
+	name = "Second Deck Central Stairwell"
 	icon_state = "hallC2"
 
 /area/tcommsat/relay/seconddeck
-	name = "\improper Second Deck Relay"
+	name = "Second Deck Relay"
 	icon_state = "tcomsatcham"
 
 /area/maintenance/substation/seconddeck
@@ -172,23 +172,23 @@
 	icon_state = "pmaint"
 
 /area/teleporter/firstdeck
-	name = "\improper First Deck Teleporter"
+	name = "First Deck Teleporter"
 	icon_state = "teleporter"
 
 /area/hallway/primary/firstdeck/fore
-	name = "\improper First Deck Fore Hallway"
+	name = "First Deck Fore Hallway"
 	icon_state = "hallF"
 
 /area/hallway/primary/firstdeck/center
-	name = "\improper First Deck Central Hallway"
+	name = "First Deck Central Hallway"
 	icon_state = "hallC1"
 
 /area/hallway/primary/firstdeck/aft
-	name = "\improper First Deck Aft Hallway"
+	name = "First Deck Aft Hallway"
 	icon_state = "hallA"
 
 /area/tcommsat/relay/firstdeck
-	name = "\improper First Deck Relay"
+	name = "First Deck Relay"
 	icon_state = "tcomsatcham"
 
 /area/maintenance/substation/firstdeck // First Deck (Z-4)
@@ -197,15 +197,15 @@
 // Shuttles
 /area/shuttle/transport1/centcom
 	icon_state = "shuttle"
-	name = "\improper Transport Shuttle Centcom"
+	name = "Transport Shuttle Centcom"
 
 /area/shuttle/transport1/station
 	icon_state = "shuttle"
-	name = "\improper Transport Shuttle"
+	name = "Transport Shuttle"
 
 //torch large pods
 /area/shuttle/escape_pod6
-	name = "\improper Escape Pod One"
+	name = "Escape Pod One"
 	flags = RAD_SHIELDED
 
 /area/shuttle/escape_pod6/station
@@ -219,7 +219,7 @@
 	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/shuttle/escape_pod7
-	name = "\improper Escape Pod Two"
+	name = "Escape Pod Two"
 	flags = RAD_SHIELDED
 
 /area/shuttle/escape_pod7/station
@@ -233,7 +233,7 @@
 	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/shuttle/escape_pod8
-	name = "\improper Escape Pod Three"
+	name = "Escape Pod Three"
 	flags = RAD_SHIELDED
 
 /area/shuttle/escape_pod8/station
@@ -247,7 +247,7 @@
 	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/shuttle/escape_pod9
-	name = "\improper Escape Pod Four"
+	name = "Escape Pod Four"
 	flags = RAD_SHIELDED
 
 /area/shuttle/escape_pod9/station
@@ -261,7 +261,7 @@
 	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/shuttle/escape_pod10
-	name = "\improper Escape Pod Five"
+	name = "Escape Pod Five"
 	flags = RAD_SHIELDED
 
 /area/shuttle/escape_pod10/station
@@ -276,7 +276,7 @@
 	base_turf = /turf/space/transit/east/shuttlespace_ew1
 
 /area/shuttle/escape_pod11
-	name = "\improper Escape Pod Six"
+	name = "Escape Pod Six"
 	flags = RAD_SHIELDED
 
 /area/shuttle/escape_pod11/station
@@ -293,7 +293,7 @@
 
 //torch small pods
 /area/shuttle/escape_pod12
-	name = "\improper Escape Pod Seven"
+	name = "Escape Pod Seven"
 	flags = RAD_SHIELDED
 
 /area/shuttle/escape_pod12/station
@@ -307,7 +307,7 @@
 	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/shuttle/escape_pod13
-	name = "\improper Escape Pod Eight"
+	name = "Escape Pod Eight"
 	flags = RAD_SHIELDED
 
 /area/shuttle/escape_pod13/station
@@ -321,7 +321,7 @@
 	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/shuttle/escape_pod14
-	name = "\improper Escape Pod Nine"
+	name = "Escape Pod Nine"
 	flags = RAD_SHIELDED
 
 /area/shuttle/escape_pod14/station
@@ -335,7 +335,7 @@
 	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/shuttle/escape_pod15
-	name = "\improper Escape Pod Ten"
+	name = "Escape Pod Ten"
 	flags = RAD_SHIELDED
 
 /area/shuttle/escape_pod15/station
@@ -349,7 +349,7 @@
 	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/shuttle/escape_pod16
-	name = "\improper Escape Pod Eleven"
+	name = "Escape Pod Eleven"
 	flags = RAD_SHIELDED
 
 /area/shuttle/escape_pod16/station
@@ -363,7 +363,7 @@
 	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 /area/shuttle/escape_pod17
-	name = "\improper Escape Pod Twelve"
+	name = "Escape Pod Twelve"
 	flags = RAD_SHIELDED
 
 /area/shuttle/escape_pod17/station
@@ -379,14 +379,14 @@
 //Calypso
 
 /area/calypso_hangar
-	name = "\improper SEV Torch Hangar Deck"
+	name = "SEV Torch Hangar Deck"
 	icon_state = "yellow"
 	requires_power = 0
 	lighting_use_dynamic = 1
 	flags = RAD_SHIELDED
 
 /area/calypso_hangar/start
-	name = "\improper SEV Torch Hangar Deck"
+	name = "SEV Torch Hangar Deck"
 	icon_state = "shuttlered"
 	base_turf = /turf/simulated/floor/plating
 
@@ -423,7 +423,7 @@
 //Guppy
 
 /area/guppy_hangar
-	name = "\improper SEV Torch Hangar Deck"
+	name = "SEV Torch Hangar Deck"
 	icon_state = "yellow"
 	requires_power = 0
 	lighting_use_dynamic = 1
@@ -431,7 +431,7 @@
 
 
 /area/guppy_hangar/start
-	name = "\improper SEV Torch Hangar Deck"
+	name = "SEV Torch Hangar Deck"
 	icon_state = "shuttlered"
 	base_turf = /turf/simulated/floor/plating
 
@@ -462,45 +462,45 @@
 
 //Turbolift
 /area/turbolift
-	name = "\improper Turbolift"
+	name = "Turbolift"
 	icon_state = "shuttle"
 	requires_power = 0
 	lighting_use_dynamic = 1
 	flags = RAD_SHIELDED
 
 /area/turbolift/start
-	name = "\improper Turbolift Start"
+	name = "Turbolift Start"
 
 /area/turbolift/firstdeck
-	name = "\improper first deck"
+	name = "first deck"
 	base_turf = /turf/simulated/open
 
 /area/turbolift/seconddeck
-	name = "\improper second deck"
+	name = "second deck"
 	base_turf = /turf/simulated/open
 
 /area/turbolift/thirddeck
-	name = "\improper third deck"
+	name = "third deck"
 	base_turf = /turf/simulated/open
 
 /area/turbolift/fourthdeck
-	name = "\improper fourth deck"
+	name = "fourth deck"
 	base_turf = /turf/simulated/floor/plating
 
 // Ninja areas
 /area/ninja_dojo
-	name = "\improper Ninja Base"
+	name = "Ninja Base"
 	icon_state = "green"
 	requires_power = 0
 	lighting_use_dynamic = 1
 	flags = RAD_SHIELDED
 
 /area/ninja_dojo/dojo
-	name = "\improper Clan Dojo"
+	name = "Clan Dojo"
 	lighting_use_dynamic = 0
 
 /area/ninja_dojo/start
-	name = "\improper Clan Dojo"
+	name = "Clan Dojo"
 	icon_state = "shuttlered"
 	base_turf = /turf/simulated/floor/plating
 
@@ -543,22 +543,22 @@
 	icon_state = "shuttlegrn"
 
 /area/shuttle/merchant/home
-	name = "\improper Merchant Vessel - Home"
+	name = "Merchant Vessel - Home"
 
 /area/shuttle/merchant/away
-	name = "\improper Merchant Vessel - Away"
+	name = "Merchant Vessel - Away"
 
 
 //Merc
 
 /area/syndicate_station
-	name = "\improper Independant Station"
+	name = "Independant Station"
 	icon_state = "yellow"
 	requires_power = 0
 	flags = RAD_SHIELDED
 
 /area/syndicate_station/start
-	name = "\improper Mercenary Forward Operating Base"
+	name = "Mercenary Forward Operating Base"
 	icon_state = "yellow"
 
 /area/syndicate_station/firstdeck
@@ -596,7 +596,7 @@
 	base_turf = /turf/space/bluespace
 
 /area/syndicate_station/arrivals_dock
-	name = "\improper docked with SEV Torch"
+	name = "docked with SEV Torch"
 	icon_state = "shuttle"
 
 //Skipjack
@@ -641,25 +641,25 @@
 	base_turf = /turf/simulated/floor/asteroid
 
 /area/skipjack_station/arrivals_dock
-	name = "\improper docked with SEV Torch"
+	name = "docked with SEV Torch"
 	icon_state = "shuttle"
 
 //NT rescue shuttle
 
 /area/rescue_base
-	name = "\improper Response Team Base"
+	name = "Response Team Base"
 	icon_state = "yellow"
 	requires_power = 0
 	lighting_use_dynamic = 1
 	flags = RAD_SHIELDED
 
 /area/rescue_base/base
-	name = "\improper Barracks"
+	name = "Barracks"
 	icon_state = "yellow"
 	lighting_use_dynamic = 0
 
 /area/rescue_base/start
-	name = "\improper Response Team Base"
+	name = "Response Team Base"
 	icon_state = "shuttlered"
 	base_turf = /turf/unsimulated/floor/rescue_base
 
@@ -693,7 +693,7 @@
 	base_turf = /turf/simulated/floor/asteroid
 
 /area/rescue_base/arrivals_dock
-	name = "\improper docked with SEV Torch"
+	name = "docked with SEV Torch"
 	icon_state = "shuttle"
 
 /area/rescue_base/transit
@@ -724,101 +724,101 @@
 	icon_state = "head_quarters"
 
 /area/crew_quarters/heads/cobed
-	name = "\improper Command - CO's Quarters"
+	name = "Command - CO's Quarters"
 	sound_env = MEDIUM_SOFTFLOOR
 
 /area/crew_quarters/heads/office/co
-	name = "\improper Command - CO's Office"
+	name = "Command - CO's Office"
 	sound_env = MEDIUM_SOFTFLOOR
 
 /area/crew_quarters/heads/office/xo
-	name = "\improper Command - XO's Office"
+	name = "Command - XO's Office"
 
 /area/crew_quarters/heads/office/rd
-	name = "\improper Command - RD's Office"
+	name = "Command - RD's Office"
 
 /area/crew_quarters/heads/office/cmo
-	name = "\improper Command - CMO's Office"
+	name = "Command - CMO's Office"
 
 /area/crew_quarters/heads/office/ce
-	name = "\improper Engineering - CE's Office"
+	name = "Engineering - CE's Office"
 
 /area/crew_quarters/heads/office/cos
-	name = "\improper Command - CoS' Office"
+	name = "Command - CoS' Office"
 
 /area/crew_quarters/heads/office/cl
-	name = "\improper Command - CL's Office"
+	name = "Command - CL's Office"
 
 /area/crew_quarters/heads/office/sgr
-	name = "\improper Command - SCGR's Office"
+	name = "Command - SCGR's Office"
 
 // Engineering
 
 /area/engineering/atmos/aux
-	name = "\improper Auxiliary Atmospherics"
+	name = "Auxiliary Atmospherics"
 	icon_state = "atmos"
 	sound_env = SMALL_ENCLOSED
 
 /area/engineering/auxpower
-	name = "\improper Auxiliary Power Storage"
+	name = "Auxiliary Power Storage"
 	icon_state = "engine_smes"
 	sound_env = SMALL_ENCLOSED
 
 /area/engineering/hallway
-	name = "\improper Engineering Hallway"
+	name = "Engineering Hallway"
 	icon_state = "engineering_workshop"
 
 /area/engineering/hardstorage
-	name = "\improper Engineering Hard Storage"
+	name = "Engineering Hard Storage"
 	icon_state = "engineering_storage"
 
 //Vacant Areas
 /area/vacant
-	name = "\improper Vacant Area"
+	name = "Vacant Area"
 	icon_state = "construction"
 
 /area/vacant/armory
-	name = "\improper Marine Armory"
+	name = "Marine Armory"
 	icon_state = "Tactical"
 
 /area/vacant/cabin
-	name = "\improper Vacant Cabins"
+	name = "Vacant Cabins"
 	icon_state = "crew_quarters"
 
 /area/vacant/chapel
-	name = "\improper Unused Chapel"
+	name = "Unused Chapel"
 	icon_state = "chapel"
 
 /area/vacant/infirmary
-	name = "\improper Auxiliary Infirmary"
+	name = "Auxiliary Infirmary"
 	icon_state = "medbay"
 
 /area/vacant/monitoring
-	name = "\improper Auxiliary Monitoring Room"
+	name = "Auxiliary Monitoring Room"
 	icon_state = "engine_monitoring"
 
 /area/vacant/cannon
-	name = "\improper Main Gun"
+	name = "Main Gun"
 	icon_state = "firingrange"
 
 /area/vacant/cargo
-	name = "\improper Requisitions Office"
+	name = "Requisitions Office"
 	icon_state = "quart"
 
 /area/vacant/briefing
-	name = "\improper Briefing Room"
+	name = "Briefing Room"
 	icon_state = "conference"
 
 /area/vacant/mess
-	name = "\improper Officer's Mess"
+	name = "Officer's Mess"
 	icon_state = "bar"
 
 /area/vacant/missile
-	name = "\improper Third Deck Port Missile Pod"
+	name = "Third Deck Port Missile Pod"
 	icon_state = "firingrange"
 
 /area/vacant/brig
-	name = "\improper Permanent Brig"
+	name = "Permanent Brig"
 	icon_state = "brig"
 
 // Storage
@@ -853,197 +853,197 @@
 //DJSTATION
 
 /area/djstation
-	name = "\improper Listening Post"
+	name = "Listening Post"
 	icon_state = "LP"
 
 // Cargo
 
 /area/quartermaster/deckofficer
-	name = "\improper Deck Officer"
+	name = "Deck Officer"
 	icon_state = "quart"
 
 /area/quartermaster/expedition/eva
-	name = "\improper Expedition EVA"
+	name = "Expedition EVA"
 	icon_state = "mining"
 
 /area/quartermaster/expedition/storage
-	name = "\improper Expedition Storage"
+	name = "Expedition Storage"
 	icon_state = "mining"
 
 /area/quartermaster/hangar
-	name = "\improper Hangar Deck"
+	name = "Hangar Deck"
 	icon_state = "mining"
 	sound_env = LARGE_ENCLOSED
 
 // Research
 /area/rnd/anom
-	name = "\improper Anomalous Materials"
+	name = "Anomalous Materials"
 	icon_state = "toxmisc"
 
 /area/rnd/canister
-	name = "\improper Canister Storage"
+	name = "Canister Storage"
 	icon_state = "toxstorage"
 
 /area/rnd/development
-	name = "\improper Development Lab"
+	name = "Development Lab"
 	icon_state = "toxlab"
 
 /area/rnd/entry
-	name = "\improper Research and Development Access"
+	name = "Research and Development Access"
 	icon_state = "decontamination"
 
 /area/rnd/equipment
-	name = "\improper Equipment Storage"
+	name = "Equipment Storage"
 	icon_state = "toxstorage"
 
 /area/rnd/locker
-	name = "\improper Research Locker Room"
+	name = "Research Locker Room"
 	icon_state = "locker"
 
 /area/rnd/phoron
-	name = "\improper Phoron Lab"
+	name = "Phoron Lab"
 	icon_state = "toxmix"
 
 /area/rnd/wing
-	name = "\improper Lab Wing"
+	name = "Lab Wing"
 	icon_state = "toxlab"
 
 /area/rnd/xenobiology/entry
-	name = "\improper Xenobiology Access"
+	name = "Xenobiology Access"
 	icon_state = "xeno_lab"
 
 // Crew areas
 /area/crew_quarters/bar
-	name = "\improper Bar"
+	name = "Bar"
 	icon_state = "bar"
 	sound_env = LARGE_SOFTFLOOR
 
 /area/crew_quarters/cryolocker
-	name = "\improper Cryogenic Storage Wardrobe"
+	name = "Cryogenic Storage Wardrobe"
 	icon_state = "locker"
 
 /area/crew_quarters/head
-	name = "\improper Head"
+	name = "Head"
 	icon_state = "toilet"
 	sound_env = SMALL_ENCLOSED
 
 /area/crew_quarters/mess
-	name = "\improper Mess Hall"
+	name = "Mess Hall"
 	icon_state = "cafeteria"
 
 /area/crew_quarters/galley
-	name = "\improper Galley"
+	name = "Galley"
 	icon_state = "kitchen"
 
 /area/crew_quarters/galleybackroom
-	name = "\improper Galley Cold Storage"
+	name = "Galley Cold Storage"
 	icon_state = "kitchen"
 
 /area/crew_quarters/lounge
-	name = "\improper Lounge"
+	name = "Lounge"
 	icon_state = "crew_quarters"
 	sound_env = MEDIUM_SOFTFLOOR
 
 /area/crew_quarters/safe_room/thirddeck
-	name = "\improper Third Deck Safe Room"
+	name = "Third Deck Safe Room"
 
 /area/crew_quarters/sleep/bunk
-	name = "\improper Bunk Room"
+	name = "Bunk Room"
 	icon_state = "Sleep"
 	sound_env = SMALL_SOFTFLOOR
 
 /area/crew_quarters/sleep/cryo/aux
-	name = "\improper Auxiliary Cryogenic Storage"
+	name = "Auxiliary Cryogenic Storage"
 	icon_state = "Sleep"
 
 /area/holocontrol
-	name = "\improper Holodeck Control"
+	name = "Holodeck Control"
 	icon_state = "Holodeck"
 
 /area/hydroponics/storage
-	name = "\improper Hydroponics Storage"
+	name = "Hydroponics Storage"
 
 // Tcomms
 /area/tcommsat/storage
-	name = "\improper Telecoms Storage"
+	name = "Telecoms Storage"
 	icon_state = "tcomsatstore"
 
 // Security
 
 /area/rnd/checkpoint
-	name = "\improper Research Security Checkpoint"
+	name = "Research Security Checkpoint"
 	icon_state = "checkpoint1"
 
 /area/security/armourybridge
-	name = "\improper Bridge - Armory"
+	name = "Bridge - Armory"
 	icon_state = "Warden"
 
 /area/security/armourybridgeaccess
-	name = "\improper bridge - Armory Access"
+	name = "bridge - Armory Access"
 	icon_state = "Warden"
 
 /area/security/bo
-	name = "\improper Security - Brig Officer"
+	name = "Security - Brig Officer"
 	icon_state = "Warden"
 
 /area/security/equipment
-	name = "\improper Security Equipment"
+	name = "Security Equipment"
 	icon_state = "security"
 
 /area/security/evidence
-	name = "\improper Security Evidence Storage"
+	name = "Security Evidence Storage"
 	icon_state = "security"
 
 /area/security/processing
-	name = "\improper Security Processing"
+	name = "Security Processing"
 	icon_state = "security"
 
 /area/security/wing
-	name = "\improper Security Wing"
+	name = "Security Wing"
 	icon_state = "security"
 
 // AI
 /area/turret_protected/ai_foyer
-	name = "\improper AI Chamber Foyer"
+	name = "AI Chamber Foyer"
 	icon_state = "ai_foyer"
 	sound_env = SMALL_ENCLOSED
 
 /area/turret_protected/ai_outer_chamber
-	name = "\improper Outer AI Chamber"
+	name = "Outer AI Chamber"
 	icon_state = "ai_chamber"
 	sound_env = SMALL_ENCLOSED
 
 // Medbay
 
 /area/medical/equipstorage
-	name = "\improper Equipment Storage"
+	name = "Equipment Storage"
 	icon_state = "medbay4"
 	ambience = list('sound/ambience/signal.ogg')
 
 /area/medical/infirmary
-	name = "\improper Infirmary Hallway"
+	name = "Infirmary Hallway"
 	icon_state = "medbay"
 
 /area/medical/infirmreception
-	name = "\improper Infirmary Reception"
+	name = "Infirmary Reception"
 	icon_state = "medbay2"
 	ambience = list('sound/ambience/signal.ogg')
 
 /area/medical/locker
-	name = "\improper Infirmary Locker Room"
+	name = "Infirmary Locker Room"
 	icon_state = "locker"
 
 /area/medical/subacute
-	name = "\improper Sub-Acute Ward"
+	name = "Sub-Acute Ward"
 	icon_state = "patients"
 
 /area/medical/mentalhealth
-	name = "\improper Mental Health"
+	name = "Mental Health"
 	icon_state = "medbay3"
 	ambience = list('sound/ambience/signal.ogg')
 
 // Chapel
 /area/chapel/crematorium
-	name = "\improper Crematorium"
+	name = "Crematorium"
 	icon_state = "chapel"
 	sound_env = SMALL_ENCLOSED

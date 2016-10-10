@@ -43,7 +43,7 @@
 	return
 
 /obj/item/weapon/card/data/clown
-	name = "\proper the coordinates to clown planet"
+	name = " the coordinates to clown planet"
 	icon_state = "data"
 	item_state = "card-id"
 	layer = 3

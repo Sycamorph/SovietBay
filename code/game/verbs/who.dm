@@ -68,9 +68,9 @@
 			continue
 		total_staff++
 		if(check_rights(R_ADMIN,0,C))
-			line += "\t[C] is \an <b>["\improper[C.holder.rank]"]</b>"
+			line += "\t[C] is \an <b>["[C.holder.rank]"]</b>"
 		else
-			line += "\t[C] is \an ["\improper[C.holder.rank]"]"
+			line += "\t[C] is \an ["[C.holder.rank]"]"
 		if(C.is_afk())
 			line += can_investigate ? " (AFK - [C.inactivity2text()])" : "(AFK)"
 		else

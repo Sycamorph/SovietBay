@@ -92,7 +92,7 @@
 		item_state = "balloon-empty"
 
 /obj/item/toy/balloon
-	name = "\improper 'criminal' balloon"
+	name = "'criminal' balloon"
 	desc = "FUK NT!11!"
 	throwforce = 0
 	throw_speed = 4
@@ -108,7 +108,7 @@
 	desc = "Across the balloon is printed: \"[desc]\""
 
 /obj/item/toy/balloon/nanotrasen
-	name = "\improper 'motivational' balloon"
+	name = "'motivational' balloon"
 	desc = "Man, I love NanoTrasen soooo much. I use only NT products. You have NO idea."
 	icon_state = "ntballoon"
 	item_state = "ntballoon"

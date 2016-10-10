@@ -20,10 +20,10 @@
 		return 0
 
 	playsound(loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
-	
+
 	M.apply_effect(5, STUTTER)
 	M.stun_effect_act(0, 70, check_zone(hit_zone), src)
-	
+
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		H.forcesay(hit_appends)
@@ -45,25 +45,25 @@
 
 
 /obj/item/borg/sight/xray
-	name = "\proper x-ray vision"
+	name = "x-ray vision"
 	sight_mode = BORGXRAY
 
 
 /obj/item/borg/sight/thermal
-	name = "\proper thermal vision"
+	name = "thermal vision"
 	sight_mode = BORGTHERM
 	icon_state = "thermal"
 	icon = 'icons/obj/clothing/glasses.dmi'
 
 
 /obj/item/borg/sight/meson
-	name = "\proper meson vision"
+	name = "meson vision"
 	sight_mode = BORGMESON
 	icon_state = "meson"
 	icon = 'icons/obj/clothing/glasses.dmi'
 
 /obj/item/borg/sight/material
-	name = "\proper material scanner vision"
+	name = "material scanner vision"
 	sight_mode = BORGMATERIAL
 
 /obj/item/borg/sight/hud
