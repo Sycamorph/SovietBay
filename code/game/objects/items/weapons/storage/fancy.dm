@@ -124,7 +124,7 @@
 	startswith = 6
 	throwforce = 2
 	slot_flags = SLOT_BELT
-	var/brand = "\improper Trans-Stellar Duty-free"
+	var/brand = "Trans-Stellar Duty-free"
 
 	key_type = /obj/item/clothing/mask/smokable/cigarette
 	startswith = list(/obj/item/clothing/mask/smokable/cigarette = 6)
@@ -181,13 +181,13 @@
 	name = "pack of Dromedary Co. cigarettes"
 	desc = "A packet of six imported Dromedary Company cancer sticks. A label on the packaging reads, \"Wouldn't a slow death make a change?\"."
 	icon_state = "Dpacket"
-	brand = "\improper Dromedary Co. cigarette"
+	brand = "Dromedary Co. cigarette"
 
 /obj/item/weapon/storage/fancy/cigarettes/killthroat
 	name = "pack of Acme Co. cigarettes"
 	desc = "A packet of six Acme Company cigarettes. For those who somehow want to obtain the record for the most amount of cancerous tumors."
 	icon_state = "Bpacket"
-	brand = "\improper Acme Co. cigarette"
+	brand = "Acme Co. cigarette"
 
 
 
@@ -237,21 +237,21 @@
 	desc = "A mellow blend made from synthetic, pod-grown tobacco. The commercial jingle is guaranteed to get stuck in your head."
 	icon_state = "LSpacket"
 	item_state = "Dpacket" //I actually don't mind cig packs not showing up in the hand. whotf doesn't just keep them in their pockets/coats //
-	brand = "\improper Lucky Star"
+	brand = "Lucky Star"
 
 /obj/item/weapon/storage/fancy/cigarettes/jerichos
 	name = "pack of Jerichos"
 	desc = "Typically seen dangling from the lips of Martian soldiers and border world hustlers. Tastes like hickory smoke, feels like warm liquid death down your lungs."
 	icon_state = "Jpacket"
 	item_state = "Dpacket"
-	brand = "\improper Jericho"
+	brand = "Jericho"
 
 /obj/item/weapon/storage/fancy/cigarettes/menthols
 	name = "pack of Temperamento Menthols"
 	desc = "With a sharp and natural organic menthol flavor, these Temperamentos are a favorite of NDV crews. Hardly anyone knows they make 'em in non-menthol!"
 	icon_state = "TMpacket"
 	item_state = "Dpacket"
-	brand = "\improper Temperamento Menthol"
+	brand = "Temperamento Menthol"
 
 	key_type = /obj/item/clothing/mask/smokable/cigarette/menthol
 	startswith = list(/obj/item/clothing/mask/smokable/cigarette/menthol = 6)
@@ -261,14 +261,14 @@
 	desc = "This unknown brand was slated for the chopping block, until they were publicly endorsed by an old Earthling gonzo journalist. The rest is history. They sell a variety for cats, too. Yes, actual cats."
 	icon_state = "CApacket"
 	item_state = "Dpacket"
-	brand = "\improper Carcinoma Angel"
+	brand = "Carcinoma Angel"
 
 /obj/item/weapon/storage/fancy/cigarettes/professionals
 	name = "pack of Professional 120s"
 	desc = "Let's face it - if you're smoking these, you're either trying to look upper-class or you're 80 years old. That's the only excuse. They taste disgusting, too."
 	icon_state = "P100packet"
 	item_state = "Dpacket"
-	brand = "\improper Professional 120"
+	brand = "Professional 120"
 
 /obj/item/weapon/storage/fancy/cigar
 	name = "cigar case"
