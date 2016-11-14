@@ -24,7 +24,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "Unknown"
 	icon = 'icons/turf/areas.dmi'
 	icon_state = "unknown"
-	layer = 10
+	plane = BASE_PLANE
+	layer = BASE_AREA_LAYER
 	luminosity = 0
 	mouse_opacity = 0
 	var/lightswitch = 1
@@ -219,14 +220,14 @@ area/space/atmosalert()
 		var/mob/M = Obj
 		if(M.client)
 			mysound.status = SOUND_UPDATE
-			M << mysound
+			sound_to(M, mysound)
 
 /area/beach/Exited(atom/movable/Obj)
 	if(ismob(Obj))
 		var/mob/M = Obj
 		if(M.client)
 			mysound.status = SOUND_PAUSED | SOUND_UPDATE
-			M << mysound
+			sound_to(M, mysound)
 
 /area/beach/proc/process()
 	set background = 1
@@ -240,9 +241,9 @@ area/space/atmosalert()
 	for(var/mob/living/carbon/human/H in src)
 		if(H.client)
 			mysound.status = SOUND_UPDATE
-			H << mysound
+			to_chat(H, mysound)
 			if(S)
 				spawn(sound_delay)
-					H << S
+					sound_to(H, S)
 
 	spawn(60) .()

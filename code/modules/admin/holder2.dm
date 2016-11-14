@@ -10,7 +10,7 @@ var/list/admin_datums = list()
 	var/rights       = 0
 	var/stealthy_    = STEALTH_OFF
 
-	var/datum/weakref/marked_datum_weak
+	var/weakref/marked_datum_weak
 
 	var/admincaster_screen = 0	//See newscaster.dm under machinery for a full description
 	var/datum/feed_message/admincaster_feed_message = new /datum/feed_message   //These two will act as holders.
@@ -61,7 +61,7 @@ generally it would be used like so:
 
 proc/admin_proc()
 	if(!check_rights(R_ADMIN)) return
-	world << "you have enough rights!"
+	to_chat(usr, "you have enough rights!")
 
 NOTE: It checks usr by default. Supply the "user" argument if you wish to check for a specific mob.
 */
@@ -139,7 +139,6 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 		to_chat(src, "<span class='notice'>You are now stealthed.</span>")
 	else
 		to_chat(src, "<span class='notice'>You are no longer stealthed.</span>")
-
 	log_and_message_admins("has turned stealth mode [holder.stealthy_ ? "ON" : "OFF"]")
 	feedback_add_details("admin_verb","SM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 

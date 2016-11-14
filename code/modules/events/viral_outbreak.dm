@@ -8,8 +8,8 @@ datum/event/viral_outbreak/setup()
 	severity = rand(2, 4)
 
 datum/event/viral_outbreak/announce()
-	command_alert("ѕодтверждена вспышка седьмого уровн&#255; биологичесной опасности на борту [station_name()]. ¬спышка должна быть локализована и сдержана.", "Ѕиологическа&#255; опасность")
-	world << sound('sound/AI/outbreak7.ogg')
+	command_alert("Confirmed outbreak of level 7 biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert")
+	sound_to(world, sound('sound/AI/outbreak7.ogg'))
 
 datum/event/viral_outbreak/start()
 	var/list/candidates = list()	//list of candidate keys

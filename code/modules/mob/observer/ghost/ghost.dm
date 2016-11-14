@@ -39,21 +39,10 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 
 	var/turf/T
 	if(ismob(body))
-		T = get_turf(body)				//Where is the body located?
-		attack_logs_ = body.attack_logs_	//preserve our attack logs by copying them to our ghost
+		T = get_turf(body)               //Where is the body located?
+		attack_logs_ = body.attack_logs_ //preserve our attack logs by copying them to our ghost
 
-		if (ishuman(body))
-			var/mob/living/carbon/human/H = body
-			icon = H.stand_icon
-			overlays = H.overlays_standing
-		else
-			icon = body.icon
-			icon_state = body.icon_state
-			overlays = body.overlays
-
-		alpha = 127
-
-		gender = body.gender
+		set_appearance(body)
 		if(body.mind && body.mind.name)
 			name = body.mind.name
 		else
@@ -296,7 +285,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	else
 		medHUD = 1
 		to_chat(src, "<span class='notice'>Medical HUD Enabled</span>")
-
 /mob/observer/ghost/verb/toggle_antagHUD()
 	set category = "Ghost"
 	set name = "Toggle AntagHUD"
@@ -324,7 +312,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	else
 		M.antagHUD = 1
 		to_chat(src, "<span class='notice'>AntagHUD Enabled</span>")
-
 /mob/observer/ghost/verb/dead_tele(A in area_repository.get_areas_by_z_level())
 	set category = "Ghost"
 	set name = "Teleport"
@@ -352,7 +339,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		ghost_to_turf(T)
 	else
 		to_chat(src, "<span class='warning'>Invalid coordinates.</span>")
-
 /mob/observer/ghost/verb/follow(input in getmobs())
 	set category = "Ghost"
 	set name = "Follow"
@@ -376,12 +362,12 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	stop_following()
 	following = target
-	moved_event.register(following, src, /atom/movable/proc/move_to_destination)
+	moved_event.register(following, src, /atom/movable/proc/move_to_turf)
 	dir_set_event.register(following, src, /atom/proc/recursive_dir_set)
 	destroyed_event.register(following, src, /mob/observer/ghost/proc/stop_following)
 
 	to_chat(src, "<span class='notice'>Now following \the [following].</span>")
-	move_to_destination(following, loc, following.loc)
+	move_to_turf(following, loc, following.loc)
 
 /mob/observer/ghost/proc/stop_following()
 	if(following)
@@ -391,7 +377,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		destroyed_event.unregister(following, src)
 		following = null
 
-/mob/observer/ghost/move_to_destination(var/atom/movable/am, var/old_loc, var/new_loc)
+/mob/observer/ghost/move_to_turf(var/atom/movable/am, var/old_loc, var/new_loc)
 	var/turf/T = get_turf(new_loc)
 	if(check_is_holy_turf(T))
 		to_chat(src, "<span class='warning'>You cannot follow something standing on holy grounds!</span>")
@@ -401,11 +387,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/observer/ghost/memory()
 	set hidden = 1
 	to_chat(src, "<span class='warning'>You are dead! You have no mind to store memory!</span>")
-
 /mob/observer/ghost/add_memory()
 	set hidden = 1
 	to_chat(src, "<span class='warning'>You are dead! You have no mind to store memory!</span>")
-
 /mob/observer/ghost/Post_Incorpmove()
 	stop_following()
 
@@ -449,7 +433,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		host = new /mob/living/simple_animal/mouse(vent_found.loc)
 	else
 		to_chat(src, "<span class='warning'>Unable to find any unwelded vents to spawn mice at.</span>")
-
 	if(host)
 		if(config.uneducated_mice)
 			host.universal_understand = 0
@@ -457,7 +440,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		host.ckey = src.ckey
 		host.status_flags |= NO_ANTAG
 		to_chat(host, "<span class='info'>You are now a mouse. Try to avoid interaction with players, and do not give hints away that you are more than a simple rodent.</span>")
-
 /mob/observer/ghost/verb/view_manfiest()
 	set name = "Show Crew Manifest"
 	set category = "Ghost"
@@ -555,7 +537,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		if (length(message) > max_length)
 			message += "-"
 			to_chat(src, "<span class='warning'>You ran out of blood to write with!</span>")
-
 		var/obj/effect/decal/cleanable/blood/writing/W = new(T)
 		W.basecolor = doodle_color
 		W.update_icon()
@@ -622,7 +603,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		to_chat(src, "<span class='info'>Your key won't be shown when you speak in dead chat.</span>")
 	else
 		to_chat(src, "<span class='info'>Your key will be publicly visible again.</span>")
-
 /mob/observer/ghost/canface()
 	return 1
 
@@ -639,7 +619,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	ghostvision = !(ghostvision)
 	updateghostsight()
 	to_chat(src, "You [(ghostvision?"now":"no longer")] have ghost vision.")
-
 /mob/observer/ghost/verb/toggle_darkness()
 	set name = "Toggle Darkness"
 	set category = "Ghost"
@@ -679,9 +658,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/observer/ghost/proc/updateghostsight()
 	if (!seedarkness)
-		see_invisible = SEE_INVISIBLE_NOLIGHTING
+		set_see_invisible(SEE_INVISIBLE_NOLIGHTING)
 	else
-		see_invisible = ghostvision ? SEE_INVISIBLE_OBSERVER : SEE_INVISIBLE_LIVING
+		set_see_invisible(ghostvision ? SEE_INVISIBLE_OBSERVER : SEE_INVISIBLE_LIVING)
 	updateghostimages()
 
 /mob/observer/ghost/proc/updateghostimages()
@@ -749,3 +728,16 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(check_rights(R_ADMIN|R_FUN, 0, src))
 		return FALSE
 	return TRUE
+
+/mob/observer/ghost/proc/set_appearance(var/mob/target)
+	var/pre_alpha = alpha
+	var/pre_plane = plane
+	var/pre_layer = layer
+	var/pre_invis = invisibility
+
+	appearance = target
+	appearance_flags |= initial(appearance_flags)
+	alpha = pre_alpha
+	plane = pre_plane
+	layer = pre_layer
+	invisibility = pre_invis

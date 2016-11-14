@@ -80,7 +80,7 @@
 			L.reagents.add_reagent("toxin", rand(5,10))
 			if(L.canmove)
 				L.reagents.add_reagent(poison_type, poison_per_bite)
-				L << "<span class='warning'>You feel a tiny prick.</span>"
+				to_chat(L, "<span class='warning'>You feel a tiny prick.</span>")
 
 /mob/living/simple_animal/hostile/giant_spider/nurse/AttackingTarget()
 	. = ..()

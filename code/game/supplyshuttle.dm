@@ -32,7 +32,8 @@ var/list/mechtoys = list(
 	icon_state = "plasticflaps"
 	density = 0
 	anchored = 1
-	layer = 4
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
 	explosion_resistance = 5
 	var/list/mobs_can_pass = list(
 		/mob/living/carbon/slime,
@@ -248,7 +249,7 @@ var/list/mechtoys = list(
 					var/list/L = SP.access // access var is a plain var, we need a list
 					A.req_access = L.Copy()
 				else
-					world << "<span class='danger'>Supply pack with invalid access restriction [SP.access] encountered!</span>"
+					log_debug("<span class='danger'>Supply pack with invalid access restriction [SP.access] encountered!</span>")
 
 			var/list/spawned = SP.spawn_contents(A)
 			if(slip)

@@ -31,7 +31,9 @@
 	var/force_down //determines if the affecting mob will be pinned to the ground
 	var/dancing //determines if assailant and affecting keep looking at each other. Basically a wrestling position
 
-	layer = 21
+	plane = HUD_PLANE
+	layer = HUD_ITEM_LAYER
+
 	abstract = 1
 	item_state = "nothing"
 	simulated = 0
@@ -65,7 +67,7 @@
 	adjust_position()
 
 /obj/item/weapon/grab/get_storage_cost()
-	return DO_NOT_STORE
+	return ITEM_SIZE_NO_CONTAINER
 
 //Used by throw code to hand over the mob, instead of throwing the grab. The grab is then deleted by the throw code.
 /obj/item/weapon/grab/proc/throw_held()
@@ -179,7 +181,7 @@
 /obj/item/weapon/grab/proc/reset_position()
 	if(!affecting.buckled)
 		animate(affecting, pixel_x = 0, pixel_y = 0, 4, 1, LINEAR_EASING)
-	affecting.layer = initial(affecting.layer)
+	affecting.reset_plane_and_layer()
 
 //Updating pixelshift, position and direction
 //Gets called on process, when the grab gets upgraded or the assailant moves
@@ -195,7 +197,7 @@
 		return
 	var/shift = 0
 	var/adir = get_dir(assailant, affecting)
-	affecting.layer = initial(affecting.layer)
+	affecting.reset_plane_and_layer()
 	switch(state)
 		if(GRAB_PASSIVE)
 			shift = 8
@@ -208,17 +210,18 @@
 			shift = -10
 			adir = assailant.dir
 			affecting.set_dir(assailant.dir)
-			affecting.loc = assailant.loc
+			affecting.forceMove(assailant.loc)
 		if(GRAB_KILL)
 			shift = 0
 			adir = 1
 			affecting.set_dir(SOUTH) //face up
-			affecting.loc = assailant.loc
+			affecting.forceMove(assailant.loc)
 
 	switch(adir)
 		if(NORTH)
 			animate(affecting, pixel_x = 0, pixel_y =-shift, 5, 1, LINEAR_EASING)
-			affecting.layer = initial(affecting.layer) - 0.1
+			affecting.plane = assailant.plane
+			affecting.layer = assailant.layer - 0.01
 		if(SOUTH)
 			animate(affecting, pixel_x = 0, pixel_y = shift, 5, 1, LINEAR_EASING)
 		if(WEST)
@@ -255,7 +258,7 @@
 		hud.icon_state = "reinforce1"
 	else if(state < GRAB_NECK)
 		if(isslime(affecting))
-			assailant << "<span class='notice'>You squeeze [affecting], but nothing interesting happens.</span>"
+			to_chat(assailant, "<span class='notice'>You squeeze [affecting], but nothing interesting happens.</span>")
 			return
 
 		assailant.visible_message("<span class='warning'>[assailant] has reinforced \his grip on [affecting] (now neck)!</span>")
@@ -313,7 +316,7 @@
 			switch(assailant.a_intent)
 				if(I_HELP)
 					if(force_down)
-						assailant << "<span class='warning'>You are no longer pinning [affecting] to the ground.</span>"
+						to_chat(assailant, "<span class='warning'>You are no longer pinning [affecting] to the ground.</span>")
 						force_down = 0
 						return
 					if(state >= GRAB_AGGRESSIVE)
@@ -397,7 +400,7 @@
 	if(affecting)
 		reset_position()
 		affecting.grabbed_by -= src
-		affecting.layer = initial(affecting.layer)
+		affecting.reset_plane_and_layer()
 		affecting = null
 	if(assailant)
 		if(assailant.client)

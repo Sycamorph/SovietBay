@@ -211,7 +211,7 @@ var/global/list/toshow=list()		//All the settings
 				dat += "<A href='?src=\ref[src];switchscreen=7'>7. Access the Forbidden Lore Vault</A><BR>"
 			if(src.arcanecheckout)
 				new /obj/item/weapon/book/tome(src.loc)
-				user << "<span class='warning'>Your sanity barely endures the seconds spent in the vault's browsing window. The only thing to remind you of this when you stop browsing is a dusty old tome sitting on the desk. You don't really remember printing it.</span>"
+				to_chat(user, "<span class='warning'>Your sanity barely endures the seconds spent in the vault's browsing window. The only thing to remind you of this when you stop browsing is a dusty old tome sitting on the desk. You don't really remember printing it.</span>")
 				user.visible_message("[user] stares at the blank screen for a few moments, his expression frozen in fear. When he finally awakens from it, he looks a lot older.", 2)
 				src.arcanecheckout = 0
 		if(1)
@@ -301,7 +301,7 @@ var/global/list/toshow=list()		//All the settings
 	if(istype(W, /obj/item/weapon/barcodescanner))
 		var/obj/item/weapon/barcodescanner/scanner = W
 		scanner.computer = src
-		user << "[scanner]'s associated machine has been set to [src]."
+		to_chat(user, "[scanner]'s associated machine has been set to [src].")
 		for (var/mob/V in hearers(src))
 			V.show_message("[src] lets out a low, short blip.", 2)
 	else
@@ -338,7 +338,7 @@ var/global/list/toshow=list()		//All the settings
 						B.deity_name = ticker.Bible_deity_name
 
 					bibledelay = 1
-					spawn(60)
+					spawn(30)
 						bibledelay = 0
 
 				else
@@ -396,7 +396,7 @@ var/global/list/toshow=list()		//All the settings
 				V.show_message("<b>[src]</b>'s monitor flashes, \"Printer unavailable. Please allow a short time before attempting to print.\"")
 		else
 			bibledelay = 1
-			spawn(60)
+			spawn(30)
 				bibledelay = 0
 			var/id=text2num(href_list["targetid"])
 			var/datum/book_entry/newbook=book_db[id]

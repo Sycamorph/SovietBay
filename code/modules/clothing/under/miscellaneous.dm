@@ -102,7 +102,7 @@
 	icon_state = "black"
 	item_state = "bl_suit"
 	worn_state = "black"
-	w_class = 5//bulky item
+	w_class = ITEM_SIZE_HUGE//bulky item
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.02
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
@@ -305,6 +305,13 @@
 	icon_state = "dress_pink"
 	item_state = "p_suit"
 	worn_state = "dress_pink"
+
+/obj/item/clothing/under/dress/dress_purple
+	name = "purple dress"
+	desc= "A simple, tight fitting purple dress."
+	icon_state = "tian_dress"
+	item_state = "p_suit"
+	worn_state = "tian_dress"
 
 /obj/item/clothing/under/dress/dress_yellow
 	name = "yellow dress"
@@ -636,8 +643,8 @@
 /obj/item/clothing/under/confederacy
 	name = " Confederacy uniform"
 	desc = "A military uniform belonging to the Confederacy of Man, an independent human government."
-	icon_state = "pcrc"
-	worn_state = "pcrc"
+	icon_state = "confed"
+	worn_state = "confed"
 
 /obj/item/clothing/under/saare
 	name = " SAARE uniform"
@@ -684,3 +691,5 @@
 	worn_state = "jeansmustang"
 	species_restricted = list("Monkey")
 	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/uniform.dmi')
+
+

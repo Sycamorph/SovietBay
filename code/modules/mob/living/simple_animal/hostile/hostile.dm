@@ -186,7 +186,7 @@
 
 /mob/living/simple_animal/hostile/proc/OpenFire(target_mob)
 	var/target = target_mob
-	visible_message("\red <b>[src]</b> fires at [target]!")
+	visible_message("<span class='danger'>\The [src] fires at \the [target]!</span>", 1)
 
 	if(rapid)
 		spawn(1)
@@ -224,6 +224,10 @@
 /mob/living/simple_animal/hostile/proc/DestroySurroundings()
 	if(prob(break_stuff_probability))
 		for(var/dir in cardinal) // North, South, East, West
+			var/obj/effect/shield/S = locate(/obj/effect/shield, get_step(src, dir))
+			if(S && S.gen && S.gen.check_flag(MODEFLAG_NONHUMANS))
+				S.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
+				return
 			for(var/obj/structure/window/obstacle in get_step(src, dir))
 				if(obstacle.dir == reverse_dir[dir]) // So that windows get smashed in the right order
 					obstacle.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)

@@ -29,16 +29,17 @@
 	if(initial)
 		. -= "Off"
 
-/obj/structure/sign/double/barsign/proc/set_sign(datum/barsign/newsign)
-	if(!istype(newsign))
-		return
-	current_sign = newsign
-	icon_state = newsign.icon_state
-	name = newsign.name
-	if(newsign.desc)
-		desc = newsign.desc
-	else
-		desc = "It displays \"[name]\"."
+/obj/structure/sign/double/barsign/examine(mob/user)
+	..()
+	switch(icon_state)
+		if("Off")
+			to_chat(user, "It appears to be switched off.")
+		if("narsiebistro")
+			to_chat(user, "It shows a picture of a large black and red being. Spooky!")
+		if("on", "empty")
+			to_chat(user, "The lights are on, but there's no picture.")
+		else
+			to_chat(user, "It says '[icon_state]'")
 
 /obj/structure/sign/double/barsign/attack_ai(mob/user)
 	return src.attack_hand(user)
@@ -66,52 +67,9 @@
 			if(!sign_type)
 				return
 			icon_state = sign_type
-			user << "<span class='notice'>You change the barsign.</span>"
+			to_chat(user, "<span class='notice'>You change the barsign.</span>")
 		else
-			user << "<span class='notice'>[translation(src, "close_panel")]</span>"
-			if(!broken && !emagged)
-				if(no_change && sign && istype(sign, /datum/barsign))
-					set_sign(new sign)
-				else
-					set_sign(pick(barsigns))
-			else if(emagged)
-				set_sign(new /datum/barsign/syndibarsign)
-			else
-				set_sign(new /datum/barsign/empbarsign)
-			panel_open = 0
-
-	else if(istype(I, /obj/item/stack/cable_coil) && panel_open)
-		var/obj/item/stack/cable_coil/C = I
-		if(emagged) //Emagged, not broken by EMP
-			user << "<span class='warning'>[translation(src, "emagged")]</span>"
-			return
-		else if(!broken)
-			user << "<span class='warning'>[translation(src, "normal")]</span>"
-			return
-
-		if(C.use(2))
-			user << "<span class='notice'>[translation(src, "replace_wire")]</span>"
-			broken = 0
-		else
-			user << "<span class='warning'>[translation(src, "more_cable")]</span>"
-	else if(istype(I, /obj/item/weapon/card/emag))
-		if(broken || emagged)
-			user << "<span class='warning'>[translation(src, "fail_emag")]</span>"
-			return
-		user << "<span class='notice'>[translation(src, "emag")]</span>"
-		sleep(100) //10 seconds
-		set_sign(new /datum/barsign/syndibarsign)
-		emagged = 1
-		req_access = list(access_syndicate)
-
-/obj/structure/sign/double/barsign/emp_act(severity)
-	if(no_change)	return
-	set_sign(new /datum/barsign/empbarsign)
-	broken = 1
-
-/obj/structure/sign/double/barsign/proc/pick_sign()
-	var/picked_name = input("[translation(src,"pick_desc")]", "[translation(src,"pick_name")]") as null|anything in translation(src,"barsigns_list")
-	if(!picked_name)
+			to_chat(user, "<span class='warning'>Access denied.</span>")
 		return
 	picked_name = translation(src,"barsigns_return",picked_name)
 	set_sign(picked_name)
