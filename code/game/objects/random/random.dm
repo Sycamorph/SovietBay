@@ -191,13 +191,9 @@
 					prob(3);/obj/item/weapon/storage/pill_bottle/tramadol,\
 					prob(2);/obj/item/weapon/storage/pill_bottle/happy,\
 					prob(2);/obj/item/weapon/storage/pill_bottle/zoom,\
-<<<<<<< HEAD
 					prob(5);/obj/item/weapon/poster/contraband,\
-=======
 					prob(1);/obj/item/weapon/reagent_containers/glass/beaker/vial/random/toxin,\
 					prob(1);/obj/item/weapon/reagent_containers/glass/beaker/sulphuric,\
-					prob(5);/obj/item/weapon/contraband/poster,\
->>>>>>> ffdb5015c0ca0fdacbe12e04d1339e11db061cfb
 					prob(2);/obj/item/weapon/material/butterfly,\
 					prob(3);/obj/item/weapon/material/butterflyblade,\
 					prob(3);/obj/item/weapon/material/butterflyhandle,\
@@ -603,9 +599,7 @@ something, make sure it's not in one of the other lists.*/
 					prob(1);/obj/item/clothing/mask/gas/swat,\
 					prob(1);/obj/item/clothing/mask/gas/syndicate,\
 					prob(4);/obj/item/clothing/mask/breath,\
-<<<<<<< HEAD
 					prob(2);/obj/item/weapon/reagent_containers/glass/rag ,\
-=======
 					prob(2);/obj/item/clothing/mask/breath/medical,\
 					prob(2);/obj/item/clothing/mask/balaclava,\
 					prob(1);/obj/item/clothing/mask/balaclava/tactical,\
@@ -613,7 +607,6 @@ something, make sure it's not in one of the other lists.*/
 					prob(2);/obj/item/weapon/reagent_containers/glass/rag ,\
 					prob(4);/obj/item/weapon/reagent_containers/food/snacks/liquidfood,\
 					prob(2);/obj/item/weapon/storage/secure/briefcase,\
->>>>>>> ffdb5015c0ca0fdacbe12e04d1339e11db061cfb
 					prob(4);/obj/item/weapon/storage/briefcase,\
 					prob(5);/obj/item/weapon/storage/backpack,\
 					prob(5);/obj/item/weapon/storage/backpack/satchel,\
@@ -629,13 +622,10 @@ something, make sure it's not in one of the other lists.*/
 					prob(3);/obj/item/weapon/storage/box/syringes,\
 					prob(3);/obj/item/weapon/storage/box/gloves,\
 					prob(3);/obj/item/weapon/storage/wallet,\
-<<<<<<< HEAD
-=======
 					prob(2);/obj/item/weapon/storage/belt/utility/full,\
 					prob(2);/obj/item/weapon/storage/belt/medical/emt,\
 					prob(2);/obj/item/weapon/storage/belt/medical,\
 					prob(2);/obj/item/weapon/storage/belt/security,\
->>>>>>> ffdb5015c0ca0fdacbe12e04d1339e11db061cfb
 					prob(4);/obj/item/device/toner,\
 					prob(1);/obj/item/device/paicard,\
 					prob(1);/obj/item/device/destTagger,\
@@ -645,8 +635,6 @@ something, make sure it's not in one of the other lists.*/
 					prob(1);/obj/item/clothing/shoes/syndigaloshes,\
 					prob(1);/obj/item/clothing/shoes/magboots,\
 					prob(4);/obj/item/clothing/shoes/laceup,\
-<<<<<<< HEAD
-=======
 					prob(4);/obj/item/clothing/shoes/black,\
 					prob(3);/obj/item/clothing/shoes/jungleboots,\
 					prob(3);/obj/item/clothing/shoes/dutyboots,\
@@ -666,15 +654,12 @@ something, make sure it's not in one of the other lists.*/
 					prob(1);/obj/item/clothing/gloves/guards,\
 					prob(1);/obj/item/clothing/gloves/tactical,\
 					prob(2);/obj/item/clothing/gloves/insulated/cheap,\
->>>>>>> ffdb5015c0ca0fdacbe12e04d1339e11db061cfb
 					prob(1);/obj/item/clothing/glasses/sunglasses,\
 					prob(3);/obj/item/clothing/glasses/meson,\
 					prob(2);/obj/item/clothing/glasses/meson/prescription,\
 					prob(4);/obj/item/clothing/glasses/science,\
 					prob(1);/obj/item/clothing/glasses/welding,\
-<<<<<<< HEAD
 					prob(2);/obj/item/weapon/weldingtool/largetank,\
-=======
 					prob(2);/obj/item/clothing/glasses/hud/health,\
 					prob(2);/obj/item/clothing/glasses/hud/security,\
 					prob(1);/obj/item/clothing/glasses/sunglasses/sechud,\
@@ -685,19 +670,16 @@ something, make sure it's not in one of the other lists.*/
 					prob(1);/obj/item/clothing/head/helmet/tactical,\
 					prob(1);/obj/item/clothing/head/helmet/space/emergency,\
 					prob(1);/obj/item/clothing/head/bio_hood/general,\
->>>>>>> ffdb5015c0ca0fdacbe12e04d1339e11db061cfb
 					prob(4);/obj/item/clothing/head/hardhat,\
 					prob(4);/obj/item/clothing/head/hardhat/orange,\
 					prob(4);/obj/item/clothing/head/hardhat/red,\
 					prob(4);/obj/item/clothing/head/hardhat/dblue,\
 					prob(3);/obj/item/clothing/head/ushanka,\
-<<<<<<< HEAD
 					prob(4);/obj/item/clothing/suit/storage/hazardvest,\
 					prob(4);/obj/item/clothing/suit/storage/toggle/labcoat,\
 					prob(3);/obj/item/weapon/camera_assembly,\
 					prob(4);/obj/item/weapon/caution,\
 					prob(4);/obj/item/weapon/caution/cone,\
-=======
 					prob(2);/obj/item/clothing/head/welding,\
 					prob(3);/obj/item/clothing/head/utility/fleet,\
 					prob(3);/obj/item/clothing/head/utility/marine,\
@@ -768,7 +750,6 @@ something, make sure it's not in one of the other lists.*/
 					prob(1);/obj/item/weapon/card/emag_broken,\
 					prob(2);/obj/item/device/camera,\
 					prob(3);/obj/item/device/pda,\
->>>>>>> ffdb5015c0ca0fdacbe12e04d1339e11db061cfb
 					prob(3);/obj/item/device/radio/headset)
 
 

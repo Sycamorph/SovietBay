@@ -51,7 +51,7 @@
 	path = /obj/item/weapon/material/kitchen/utensil/knife/boot
 	cost = 3
 	allowed_roles = list("Captain", "Head of Personnel", "Head of Security", "Chief Engineer", "Chief Medical Officer", "Research Director")
-*/
+
 /datum/gear/lunchbox
 	display_name = "lunchbox"
 	description = "A little lunchbox."
