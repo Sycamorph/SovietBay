@@ -61,7 +61,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /////////
 
 /area/space
-	name = "\improper Space"
+	name = "Space"
 	icon_state = "space"
 	requires_power = 1
 	always_unpowered = 1
@@ -93,38 +93,38 @@ area/space/atmosalert()
 //AREAS USED BY CODE//
 //////////////////////
 /area/centcom
-	name = "\improper Centcom"
+	name = "Centcom"
 	icon_state = "centcom"
 	requires_power = 0
 	lighting_use_dynamic = 0
 
 /area/centcom/holding
-	name = "\improper Holding Facility"
+	name = "Holding Facility"
 
 /area/chapel
-	name = "\improper Chapel"
+	name = "Chapel"
 	icon_state = "chapel"
 
 /area/centcom/specops
-	name = "\improper Centcom Special Ops"
+	name = "Centcom Special Ops"
 
 /area/hallway
 	name = "hallway"
 
 /area/medical/virology
-	name = "\improper Virology"
+	name = "Virology"
 	icon_state = "virology"
 
 /area/medical/virologyaccess
-	name = "\improper Virology Access"
+	name = "Virology Access"
 	icon_state = "virology"
 
 /area/security/brig
-	name = "\improper Security - Brig"
+	name = "Security - Brig"
 	icon_state = "brig"
 
 /area/security/prison
-	name = "\improper Security - Prison Wing"
+	name = "Security - Prison Wing"
 	icon_state = "sec_prison"
 
 /area/maintenance
@@ -133,19 +133,19 @@ area/space/atmosalert()
 	turf_initializer = new /datum/turf_initializer/maintenance()
 
 /area/rnd/xenobiology
-	name = "\improper Xenobiology Lab"
+	name = "Xenobiology Lab"
 	icon_state = "xeno_lab"
 
 /area/rnd/xenobiology/xenoflora
-	name = "\improper Xenoflora Lab"
+	name = "Xenoflora Lab"
 	icon_state = "xeno_f_lab"
 
 /area/rnd/xenobiology/xenoflora_storage
-	name = "\improper Xenoflora Storage"
+	name = "Xenoflora Storage"
 	icon_state = "xeno_f_store"
 
 /area/shuttle/escape/centcom
-	name = "\improper Emergency Shuttle Centcom"
+	name = "Emergency Shuttle Centcom"
 	icon_state = "shuttle"
 
 /area/shuttle/specops/centcom
@@ -161,7 +161,7 @@ area/space/atmosalert()
 	icon_state = "shuttlered2"
 
 /area/skipjack_station/start
-	name = "\improper Skipjack"
+	name = "Skipjack"
 	icon_state = "yellow"
 
 /area/supply/station
@@ -169,7 +169,7 @@ area/space/atmosalert()
 	icon_state = "shuttle3"
 
 /area/syndicate_mothership/elite_squad
-	name = "\improper Elite Mercenary Squad"
+	name = "Elite Mercenary Squad"
 	icon_state = "syndie-elite"
 
 ////////////
@@ -189,7 +189,7 @@ area/space/atmosalert()
 */
 
 /area/wizard_station
-	name = "\improper Wizard's Den"
+	name = "Wizard's Den"
 	icon_state = "yellow"
 	requires_power = 0
 	lighting_use_dynamic = 0

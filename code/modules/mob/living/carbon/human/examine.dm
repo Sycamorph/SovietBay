@@ -41,7 +41,7 @@
 
 	var/is_synth = isSynthetic()
 	if(!(skipjumpsuit && skipface))
-		var/species_name = "\improper "
+		var/species_name = ""
 		if(is_synth && species.type != /datum/species/machine)
 			species_name += "Cyborg "
 		species_name += "[species.name]"

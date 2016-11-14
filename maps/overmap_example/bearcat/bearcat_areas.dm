@@ -1,103 +1,103 @@
 /area/ship/scrap
-	name = "\improper Generic Ship"
+	name = "Generic Ship"
 
 /area/ship/scrap/crew
-	name = "\improper Crew Compartements"
+	name = "Crew Compartements"
 	icon_state = "hallC"
 
 /area/ship/scrap/crew/hallway/port
-	name = "\improper Crew Hallway - Port"
+	name = "Crew Hallway - Port"
 
 /area/ship/scrap/crew/hallway/starboard
-	name = "\improper Crew Hallway - Starboard"
+	name = "Crew Hallway - Starboard"
 
 /area/ship/scrap/crew/kitchen
-	name = "\improper Galley"
+	name = "Galley"
 	icon_state = "kitchen"
 
 /area/ship/scrap/crew/dorms
-	name = "\improper Dorms"
+	name = "Dorms"
 	icon_state = "crew_quarters"
 
 /area/ship/scrap/crew/saloon
-	name = "\improper Saloon"
+	name = "Saloon"
 	icon_state = "conference"
 
 /area/ship/scrap/crew/toilets
-	name = "\improper Bathrooms"
+	name = "Bathrooms"
 	icon_state = "toilet"
 
 /area/ship/scrap/crew/wash
-	name = "\improper Washroom"
+	name = "Washroom"
 	icon_state = "locker"
 
 /area/ship/scrap/crew/medbay
-	name = "\improper Medical Bay"
+	name = "Medical Bay"
 	icon_state = "medbay"
 
 /area/ship/scrap/cargo
-	name = "\improper Cargo Hold"
+	name = "Cargo Hold"
 	icon_state = "quartstorage"
 
 /area/ship/scrap/cargo/lower
-	name = "\improper Lower Cargo Hold"
+	name = "Lower Cargo Hold"
 
 /area/ship/scrap/dock
-	name = "\improper Docking Bay"
+	name = "Docking Bay"
 	icon_state = "entry"
 
 /area/ship/scrap/unused1
-	name = "\improper Atmos Equipment Comparment"
+	name = "Atmos Equipment Comparment"
 	icon_state = "green"
 
 /area/ship/scrap/unused2
-	name = "\improper Unused Compartment #2"
+	name = "Unused Compartment #2"
 	icon_state = "yellow"
 
 /area/ship/scrap/unused3
-	name = "\improper Unused Compartment #3"
+	name = "Unused Compartment #3"
 	icon_state = "blueold"
 
 /area/ship/scrap/maintenance
-	name = "\improper Maintenance Compartments"
+	name = "Maintenance Compartments"
 	icon_state = "storage"
 
 /area/ship/scrap/maintenance/storage
-	name = "\improper Tools Storage"
+	name = "Tools Storage"
 	icon_state = "eva"
 
 /area/ship/scrap/maintenance/atmos
-	name = "\improper Atmospherics Comparment"
+	name = "Atmospherics Comparment"
 	icon_state = "atmos"
 
 /area/ship/scrap/maintenance/power
-	name = "\improper Power Compartment"
+	name = "Power Compartment"
 	icon_state = "engine_smes"
 
 /area/ship/scrap/maintenance/engine
 
 /area/ship/scrap/maintenance/engine/aft
-	name = "\improper Engine Compartment - Aft"
+	name = "Engine Compartment - Aft"
 
 /area/ship/scrap/maintenance/engine/port
-	name = "\improper Engine Compartment - Port"
+	name = "Engine Compartment - Port"
 
 /area/ship/scrap/maintenance/engine/starboard
-	name = "\improper Engine Compartments - Starboard"
+	name = "Engine Compartments - Starboard"
 
 /area/ship/scrap/maintenance/engine/lower
-	name = "\improper Lower Engine Compartments"
+	name = "Lower Engine Compartments"
 
 /area/ship/scrap/command
-	name = "\improper Command Deck"
+	name = "Command Deck"
 	icon_state = "centcom"
 
 /area/ship/scrap/command/captain
-	name = "\improper Captain's Quarters"
+	name = "Captain's Quarters"
 	icon_state = "captain"
 
 /area/ship/scrap/comms
-	name = "\improper Communications Relay"
+	name = "Communications Relay"
 	icon_state = "tcomsatcham"
 
 /area/ship/scrap/shuttle/
@@ -106,11 +106,11 @@
 	lighting_use_dynamic = 0
 
 /area/ship/scrap/shuttle/ingoing
-	name = "\improper Docking Bay #1"
+	name = "Docking Bay #1"
 	icon_state = "tcomsatcham"
 
 /area/ship/scrap/shuttle/outgoing
-	name = "\improper Docking Bay #2"
+	name = "Docking Bay #2"
 	icon_state = "tcomsatcham"
 
 /area/ship/scrap/shuttle/pod

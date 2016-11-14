@@ -309,12 +309,12 @@
 	armor = list(melee = 30, bullet = 15, laser = 40, energy = 10, bomb = 25, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/vest/nt
-	name = "\improper NanoTrasen armored vest"
+	name = "NanoTrasen armored vest"
 	desc = "A synthetic armor vest. This one is marked with the crest of NanoTrasen."
 	icon_state = "ntvest"
 
 /obj/item/clothing/suit/armor/vest/solgov
-	name = "\improper Sol Central Government armored vest"
+	name = "Sol Central Government armored vest"
 	desc = "A synthetic armor vest. This one is marked with the crest of the Sol Central Government."
 	icon_state = "solvest"
 
@@ -358,7 +358,7 @@
 	icon_state = "comwebvest"
 
 /obj/item/clothing/suit/storage/vest/solgov
-	name = "\improper Sol Central Government heavy armored vest"
+	name = "Sol Central Government heavy armored vest"
 	desc = "A synthetic armor vest with PEACEKEEPER printed in distinctive blue lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "solwebvest"
 

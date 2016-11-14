@@ -159,7 +159,7 @@
 				name = "mineral deposit"
 
 	space
-		name = "\proper space"
+		name = " space"
 
 		var/lattice = "\blue Constructing support lattice ..."
 		var/need_support = "\red The plating is going to need some support."

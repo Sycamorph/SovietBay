@@ -324,7 +324,7 @@ update_flag
 				if (label)
 					src.canister_color = colors[label]
 					src.icon_state = colors[label]
-					src.name = "\improper Canister: [label]"
+					src.name = "Canister: [label]"
 		if("pressure")
 			var/diff = text2num(params["adjust"])
 			if(diff > 0)

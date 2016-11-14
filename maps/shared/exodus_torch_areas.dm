@@ -1,11 +1,11 @@
 // Command
 
 /area/bridge
-	name = "\improper Bridge"
+	name = "Bridge"
 	icon_state = "bridge"
 
 /area/bridge/meeting_room
-	name = "\improper Heads of Staff Meeting Room"
+	name = "Heads of Staff Meeting Room"
 	icon_state = "bridge"
 	ambience = list()
 	sound_env = MEDIUM_SOFTFLOOR
@@ -16,25 +16,25 @@
 // CentCom
 
 /area/centcom/control
-	name = "\improper Centcom Control"
+	name = "Centcom Control"
 
 /area/centcom/creed
 	name = "Creed's Office"
 
 /area/centcom/evac
-	name = "\improper Centcom Emergency Shuttle"
+	name = "Centcom Emergency Shuttle"
 
 /area/centcom/ferry
-	name = "\improper Centcom Transport Shuttle"
+	name = "Centcom Transport Shuttle"
 
 /area/centcom/living
-	name = "\improper Centcom Living Quarters"
+	name = "Centcom Living Quarters"
 
 /area/centcom/suppy
-	name = "\improper Centcom Supply Shuttle"
+	name = "Centcom Supply Shuttle"
 
 /area/centcom/test
-	name = "\improper Centcom Testing Facility"
+	name = "Centcom Testing Facility"
 
 // Solars
 /area/maintenance/auxsolarport
@@ -48,11 +48,11 @@
 	sound_env = SMALL_ENCLOSED
 
 /area/solar/auxstarboard
-	name = "\improper Fore Starboard Solar Array"
+	name = "Fore Starboard Solar Array"
 	icon_state = "panelsA"
 
 /area/solar/port
-	name = "\improper Port Auxiliary Solar Array"
+	name = "Port Auxiliary Solar Array"
 	icon_state = "panelsP"
 
 // Maintenance
@@ -62,7 +62,7 @@
 	icon_state = "disposal"
 
 /area/maintenance/incinerator
-	name = "\improper Incinerator"
+	name = "Incinerator"
 	icon_state = "disposal"
 
 // Storage
@@ -82,104 +82,104 @@
 // Holodecks
 
 /area/holodeck
-	name = "\improper Holodeck"
+	name = "Holodeck"
 	icon_state = "Holodeck"
 	lighting_use_dynamic = 0
 	sound_env = LARGE_ENCLOSED
 
 /area/holodeck/alphadeck
-	name = "\improper Holodeck Alpha"
+	name = "Holodeck Alpha"
 
 /area/holodeck/source_plating
-	name = "\improper Holodeck - Off"
+	name = "Holodeck - Off"
 
 /area/holodeck/source_emptycourt
-	name = "\improper Holodeck - Empty Court"
+	name = "Holodeck - Empty Court"
 	sound_env = ARENA
 
 /area/holodeck/source_boxingcourt
-	name = "\improper Holodeck - Boxing Court"
+	name = "Holodeck - Boxing Court"
 	sound_env = ARENA
 
 /area/holodeck/source_basketball
-	name = "\improper Holodeck - Basketball Court"
+	name = "Holodeck - Basketball Court"
 	sound_env = ARENA
 
 /area/holodeck/source_thunderdomecourt
-	name = "\improper Holodeck - Thunderdome Court"
+	name = "Holodeck - Thunderdome Court"
 	sound_env = ARENA
 
 /area/holodeck/source_courtroom
-	name = "\improper Holodeck - Courtroom"
+	name = "Holodeck - Courtroom"
 	sound_env = AUDITORIUM
 
 /area/holodeck/source_beach
-	name = "\improper Holodeck - Beach"
+	name = "Holodeck - Beach"
 	sound_env = PLAIN
 
 /area/holodeck/source_wildlife
-	name = "\improper Holodeck - Wildlife Simulation"
+	name = "Holodeck - Wildlife Simulation"
 
 /area/holodeck/source_meetinghall
-	name = "\improper Holodeck - Meeting Hall"
+	name = "Holodeck - Meeting Hall"
 	sound_env = AUDITORIUM
 
 /area/holodeck/source_theatre
-	name = "\improper Holodeck - Theatre"
+	name = "Holodeck - Theatre"
 	sound_env = CONCERT_HALL
 
 /area/holodeck/source_picnicarea
-	name = "\improper Holodeck - Picnic Area"
+	name = "Holodeck - Picnic Area"
 	sound_env = PLAIN
 
 /area/holodeck/source_snowfield
-	name = "\improper Holodeck - Snow Field"
+	name = "Holodeck - Snow Field"
 	sound_env = FOREST
 
 /area/holodeck/source_desert
-	name = "\improper Holodeck - Desert"
+	name = "Holodeck - Desert"
 	sound_env = PLAIN
 
 /area/holodeck/source_space
-	name = "\improper Holodeck - Space"
+	name = "Holodeck - Space"
 	has_gravity = 0
 	sound_env = SPACE
 
 // Construction Site
 
 /area/constructionsite
-	name = "\improper Construction Site"
+	name = "Construction Site"
 	icon_state = "storage"
 
 /area/constructionsite/storage
-	name = "\improper Construction Site Storage Area"
+	name = "Construction Site Storage Area"
 
 /area/constructionsite/bridge
-	name = "\improper Construction Site Bridge"
+	name = "Construction Site Bridge"
 	icon_state = "bridge"
 
 /area/constructionsite/hallway/aft
-	name = "\improper Construction Site Aft Hallway"
+	name = "Construction Site Aft Hallway"
 	icon_state = "hallP"
 
 /area/constructionsite/hallway/fore
-	name = "\improper Construction Site Fore Hallway"
+	name = "Construction Site Fore Hallway"
 	icon_state = "hallS"
 
 /area/constructionsite/atmospherics
-	name = "\improper Construction Site Atmospherics"
+	name = "Construction Site Atmospherics"
 	icon_state = "green"
 
 /area/constructionsite/medical
-	name = "\improper Construction Site Medbay"
+	name = "Construction Site Medbay"
 	icon_state = "medbay"
 
 /area/constructionsite/ai
-	name = "\improper Construction Computer Core"
+	name = "Construction Computer Core"
 	icon_state = "ai"
 
 /area/constructionsite/engineering
-	name = "\improper Construction Site Engine Bay"
+	name = "Construction Site Engine Bay"
 	icon_state = "engine"
 
 /area/constructionsite/teleporter
@@ -187,147 +187,147 @@
 	icon_state = "yellow"
 
 /area/solar/constructionsite
-	name = "\improper Construction Site Solars"
+	name = "Construction Site Solars"
 	icon_state = "aft"
 
 /area/constructionsite/maintenance
-	name = "\improper Construction Site Maintenance"
+	name = "Construction Site Maintenance"
 	icon_state = "yellow"
 
 // Engineering
 
 /area/engineering/atmos/storage
-	name = "\improper Atmospherics Storage"
+	name = "Atmospherics Storage"
 	icon_state = "atmos_storage"
 	sound_env = SMALL_ENCLOSED
 
 /area/engineering/engine_room
-	name = "\improper Engine Room"
+	name = "Engine Room"
 	icon_state = "engine"
 	sound_env = LARGE_ENCLOSED
 
 /area/engineering/drone_fabrication
-	name = "\improper Engineering Drone Fabrication"
+	name = "Engineering Drone Fabrication"
 	icon_state = "drone_fab"
 	sound_env = SMALL_ENCLOSED
 
 /area/engineering/engine_eva
-	name = "\improper Engine EVA"
+	name = "Engine EVA"
 	icon_state = "engine_eva"
 
 /area/engineering/engine_monitoring
-	name = "\improper Engine Monitoring Room"
+	name = "Engine Monitoring Room"
 	icon_state = "engine_monitoring"
 
 /area/engineering/engine_smes
-	name = "\improper Engineering SMES"
+	name = "Engineering SMES"
 	icon_state = "engine_smes"
 	sound_env = SMALL_ENCLOSED
 
 /area/engineering/engineering_monitoring
-	name = "\improper Engineering Monitoring Room"
+	name = "Engineering Monitoring Room"
 	icon_state = "engine_monitoring"
 
 /area/engineering/foyer
-	name = "\improper Engineering Foyer"
+	name = "Engineering Foyer"
 	icon_state = "engineering_foyer"
 
 /area/engineering/locker_room
-	name = "\improper Engineering Locker Room"
+	name = "Engineering Locker Room"
 	icon_state = "engineering_locker"
 
 /area/engineering/storage
-	name = "\improper Engineering Storage"
+	name = "Engineering Storage"
 	icon_state = "engineering_storage"
 
 // Medical
 
 /area/medical/biostorage
-	name = "\improper Secondary Storage"
+	name = "Secondary Storage"
 	icon_state = "medbay4"
 	ambience = list('sound/ambience/signal.ogg')
 
 /area/medical/chemistry
-	name = "\improper Chemistry"
+	name = "Chemistry"
 	icon_state = "chem"
 
 /area/medical/exam_room
-	name = "\improper Exam Room"
+	name = "Exam Room"
 	icon_state = "exam_room"
 
 /area/medical/genetics_cloning
-	name = "\improper Cloning Lab"
+	name = "Cloning Lab"
 	icon_state = "cloning"
 
 /area/medical/morgue
-	name = "\improper Morgue"
+	name = "Morgue"
 	icon_state = "morgue"
 	ambience = list('sound/ambience/ambimo1.ogg','sound/ambience/ambimo2.ogg','sound/music/main.ogg')
 
 /area/medical/sleeper
-	name = "\improper Emergency Treatment Centre"
+	name = "Emergency Treatment Centre"
 	icon_state = "exam_room"
 
 /area/medical/surgery
-	name = "\improper Operating Theatre"
+	name = "Operating Theatre"
 	icon_state = "surgery"
 
 // Research
 /area/assembly/chargebay
-	name = "\improper Mech Bay"
+	name = "Mech Bay"
 	icon_state = "mechbay"
 
 /area/assembly/robotics
-	name = "\improper Robotics Lab"
+	name = "Robotics Lab"
 	icon_state = "robotics"
 
 /area/rnd/lab
-	name = "\improper Research Lab"
+	name = "Research Lab"
 	icon_state = "toxlab"
 
 /area/rnd/misc_lab
-	name = "\improper Miscellaneous Research"
+	name = "Miscellaneous Research"
 	icon_state = "toxmisc"
 
 /area/rnd/research
-	name = "\improper Research and Development"
+	name = "Research and Development"
 	icon_state = "research"
 
 // Derelict
 
 /area/derelict/ship
-	name = "\improper Abandoned Ship"
+	name = "Abandoned Ship"
 	icon_state = "yellow"
 
 // Construction
 
 /area/construction
-	name = "\improper Engineering Construction Area"
+	name = "Engineering Construction Area"
 	icon_state = "yellow"
 
 // Misc
 /area/AIsattele
-	name = "\improper AI Satellite Teleporter Room"
+	name = "AI Satellite Teleporter Room"
 	icon_state = "teleporter"
 	ambience = list('sound/ambience/ambimalf.ogg')
 
 /area/alien
-	name = "\improper Alien base"
+	name = "Alien base"
 	icon_state = "yellow"
 	requires_power = 0
 
 /area/shuttle/alien/base
 	icon_state = "shuttle"
-	name = "\improper Alien Shuttle Base"
+	name = "Alien Shuttle Base"
 	requires_power = 1
 
 // Shuttles
 /area/shuttle/administration/centcom
-	name = "\improper Administration Shuttle Centcom"
+	name = "Administration Shuttle Centcom"
 	icon_state = "shuttlered"
 
 /area/shuttle/administration/station
-	name = "\improper Administration Shuttle"
+	name = "Administration Shuttle"
 	icon_state = "shuttlered2"
 
 /area/shuttle/escape_pod1/centcom
@@ -354,52 +354,52 @@
 	icon_state = "brig"
 
 /area/security/armoury
-	name = "\improper Security - Armory"
+	name = "Security - Armory"
 	icon_state = "Warden"
 
 /area/security/checkpoint2
-	name = "\improper Security - Checkpoint"
+	name = "Security - Checkpoint"
 	icon_state = "checkpoint1"
 
 /area/security/detectives_office
-	name = "\improper Security - Forensic Office"
+	name = "Security - Forensic Office"
 	icon_state = "detective"
 	sound_env = MEDIUM_SOFTFLOOR
 
 /area/security/nuke_storage
-	name = "\improper Vault"
+	name = "Vault"
 	icon_state = "nuke_storage"
 
 /area/security/range
-	name = "\improper Security - Firing Range"
+	name = "Security - Firing Range"
 	icon_state = "firingrange"
 
 // Cargo
 /area/quartermaster/office
-	name = "\improper Supply Office"
+	name = "Supply Office"
 	icon_state = "quartoffice"
 
 /area/quartermaster/storage
-	name = "\improper Warehouse"
+	name = "Warehouse"
 	icon_state = "quartstorage"
 	sound_env = LARGE_ENCLOSED
 
 // Crew
 
 /area/crew_quarters/locker
-	name = "\improper Locker Room"
+	name = "Locker Room"
 	icon_state = "locker"
 
 /area/crew_quarters/sleep/cryo
-	name = "\improper Cryogenic Storage"
+	name = "Cryogenic Storage"
 	icon_state = "Sleep"
 
 /area/hydroponics
-	name = "\improper Hydroponics"
+	name = "Hydroponics"
 	icon_state = "hydro"
 
 /area/janitor
-	name = "\improper Custodial Closet"
+	name = "Custodial Closet"
 	icon_state = "janitor"
 
 // Tcomm
@@ -407,11 +407,11 @@
 	ambience = list('sound/ambience/ambisin2.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/ambigen10.ogg')
 
 /area/tcommsat/chamber
-	name = "\improper Telecoms Central Compartment"
+	name = "Telecoms Central Compartment"
 	icon_state = "tcomsatcham"
 
 /area/tcommsat/computer
-	name = "\improper Telecoms Control Room"
+	name = "Telecoms Control Room"
 	icon_state = "tcomsatcomp"
 
 // AI
@@ -420,26 +420,26 @@
 	name = "AI Monitored Area"
 
 /area/ai_monitored/storage/eva
-	name = "\improper EVA Storage"
+	name = "EVA Storage"
 	icon_state = "eva"
 
 /area/turret_protected/ai
-	name = "\improper AI Chamber"
+	name = "AI Chamber"
 	icon_state = "ai_chamber"
 	ambience = list('sound/ambience/ambimalf.ogg')
 
 /area/turret_protected/ai_cyborg_station
-	name = "\improper Cyborg Station"
+	name = "Cyborg Station"
 	icon_state = "ai_cyborg"
 	sound_env = SMALL_ENCLOSED
 
 /area/turret_protected/ai_upload
-	name = "\improper AI Upload Chamber"
+	name = "AI Upload Chamber"
 	icon_state = "ai_upload"
 	ambience = list('sound/ambience/ambimalf.ogg')
 
 /area/turret_protected/ai_upload_foyer
-	name = "\improper  AI Upload Access"
+	name = " AI Upload Access"
 	icon_state = "ai_foyer"
 	ambience = list('sound/ambience/ambimalf.ogg')
 	sound_env = SMALL_ENCLOSED
@@ -447,7 +447,7 @@
 // Chapel
 
 /area/chapel/main
-	name = "\improper Chapel"
+	name = "Chapel"
 	icon_state = "chapel"
 	ambience = list('sound/ambience/ambicha1.ogg','sound/ambience/ambicha2.ogg','sound/ambience/ambicha3.ogg','sound/ambience/ambicha4.ogg','sound/music/traitor.ogg')
 	sound_env = LARGE_ENCLOSED
@@ -455,52 +455,52 @@
 // Merchant
 
 /area/merchant_station
-	name = "\improper Merchant Station"
+	name = "Merchant Station"
 	icon_state = "LP"
 
 // Syndicate
 
 /area/syndicate_mothership/raider_base
-	name = "\improper Raider Base"
+	name = "Raider Base"
 
 // ACTORS GUILD
 /area/acting
-	name = "\improper Centcom Acting Guild"
+	name = "Centcom Acting Guild"
 	icon_state = "red"
 	lighting_use_dynamic = 0
 	requires_power = 0
 
 /area/acting/backstage
-	name = "\improper Backstage"
+	name = "Backstage"
 
 /area/acting/stage
-	name = "\improper Stage"
+	name = "Stage"
 	lighting_use_dynamic = 1
 	icon_state = "yellow"
 
 // Thunderdome
 
 /area/tdome
-	name = "\improper Thunderdome"
+	name = "Thunderdome"
 	icon_state = "thunder"
 	requires_power = 0
 	lighting_use_dynamic = 0
 	sound_env = ARENA
 
 /area/tdome/tdome1
-	name = "\improper Thunderdome (Team 1)"
+	name = "Thunderdome (Team 1)"
 	icon_state = "green"
 
 /area/tdome/tdome2
-	name = "\improper Thunderdome (Team 2)"
+	name = "Thunderdome (Team 2)"
 	icon_state = "yellow"
 
 /area/tdome/tdomeadmin
-	name = "\improper Thunderdome (Admin.)"
+	name = "Thunderdome (Admin.)"
 	icon_state = "purple"
 
 /area/tdome/tdomeobserve
-	name = "\improper Thunderdome (Observer.)"
+	name = "Thunderdome (Observer.)"
 	icon_state = "purple"
 
 // GENERIC MINING AREAS

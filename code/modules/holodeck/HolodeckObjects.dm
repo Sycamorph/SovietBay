@@ -58,7 +58,7 @@
 
 /turf/simulated/floor/holofloor/space
 	icon = 'icons/turf/space.dmi'
-	name = "\proper space"
+	name = " space"
 	icon_state = "0"
 
 /turf/simulated/floor/holofloor/reinforced

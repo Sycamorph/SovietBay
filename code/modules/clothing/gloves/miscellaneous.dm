@@ -58,7 +58,7 @@
 
 /obj/item/clothing/gloves/thick/swat
 	desc = "These tactical gloves are somewhat fire and impact-resistant."
-	name = "\improper SWAT Gloves"
+	name = "SWAT Gloves"
 	item_state = "swat_gl"
 	force = 5
 	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)

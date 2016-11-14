@@ -18,23 +18,23 @@
 	shuttle_area = /area/sector/shuttle/outgoing2
 
 /area/sector/shuttle/
-	name = "\improper Entry Point"
+	name = "Entry Point"
 	icon_state = "tcomsatcham"
 	requires_power = 0
 	luminosity = 1
 	lighting_use_dynamic = 0
 
 /area/sector/shuttle/ingoing1
-	name = "\improper Entry Point #1"
+	name = "Entry Point #1"
 
 /area/sector/shuttle/ingoing2
-	name = "\improper Entry Point #2"
+	name = "Entry Point #2"
 
 /area/sector/shuttle/ingoing3
-	name = "\improper Entry Point #3"
+	name = "Entry Point #3"
 
 /area/sector/shuttle/ingoing4
-	name = "\improper Entry Point #4"
+	name = "Entry Point #4"
 
 /area/sector/shuttle/outgoing2
-	name = "\improper Exit Point #2"
+	name = "Exit Point #2"

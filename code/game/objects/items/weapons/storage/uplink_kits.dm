@@ -112,7 +112,7 @@
 	)
 
 /obj/item/weapon/storage/backpack/satchel/syndie_kit/revolver
-	name = "\improper Tough operator"
+	name = "Tough operator"
 	desc = "Revolver with ammunition."
 	startswith = list(
 		/obj/item/weapon/gun/projectile/revolver,

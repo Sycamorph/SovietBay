@@ -18,7 +18,7 @@
 	w_class = ITEM_SIZE_NORMAL
 
 /obj/item/clothing/head/helmet/solgov
-	name = "\improper Sol Central Government helmet"
+	name = "Sol Central Government helmet"
 	desc = "A helmet painted in Peacekeeper blue. Stands out like a sore thumb."
 	icon_state = "helmet_sol"
 
@@ -33,12 +33,12 @@
 	icon_state = "helmet_security"
 
 /obj/item/clothing/head/helmet/nt
-	name = "\improper NanoTrasen helmet"
+	name = "NanoTrasen helmet"
 	desc = "A helmet with 'CORPORATE SECURITY' printed on the back in red lettering."
 	icon_state = "helmet_nt"
 
 /obj/item/clothing/head/helmet/pcrc
-	name = "\improper PCRC helmet"
+	name = "PCRC helmet"
 	desc = "A helmet with 'PRIVATE SECURITY' printed on the back in cyan lettering."
 	icon_state = "helmet_pcrc"
 
