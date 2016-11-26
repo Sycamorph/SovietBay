@@ -439,11 +439,3 @@
 /obj/item/weapon/paper/exodus_holodeck
 	name = "holodeck disclaimer"
 	info = "Brusies sustained in the holodeck can be healed simply by sleeping."
-
-/obj/item/weapon/paper/barsoevent
-	name = "report"
-	info = "Successfully established AAA-meteor weapons. Target destroyed."
-
-/obj/item/weapon/paper/barsoevent2
-	name = "last words"
-	info = "GOD THEY COME FOR US!"

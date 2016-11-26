@@ -292,16 +292,6 @@ var/list/floor_decals = list()
 	icon = 'icons/turf/flooring/carpet.dmi'
 	icon_state = "bcarpet_edges"
 
-/obj/effect/floor_decal/railwaysleft
-    name = "railways"
-    icon = 'icons/turf/flooring/decals.dmi'
-    icon_state = "railway_1"
-
-/obj/effect/floor_decal/railwaysright
-	name = "railways"
-	icon = 'icons/turf/flooring/decals.dmi'
-	icon_state = "railway_2"
-
 /obj/effect/floor_decal/carpet/corners
 	name = "carpet"
 	icon = 'icons/turf/flooring/carpet.dmi'

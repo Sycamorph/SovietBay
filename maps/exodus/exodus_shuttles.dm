@@ -121,18 +121,6 @@
 	area_station = /area/shuttle/alien/mine
 	flags = SHUTTLE_FLAGS_NONE
 
-/datum/shuttle/ferry/train
-	name = "Train 1"
-	area_offsite = /area/shuttle/train/station
-	area_station = /area/shuttle/train/desert
-	flags = SHUTTLE_FLAGS_NONE
-
-/datum/shuttle/ferry/train2
-	name = "Train 2"
-	area_offsite = /area/shuttle/train2/station
-	area_station = /area/shuttle/train2/attack
-	flags = SHUTTLE_FLAGS_NONE
-
 /datum/shuttle/ferry/merchant
 	name = "Merchant"
 	warmup_time = 10

@@ -12,8 +12,10 @@
 
 	#include "exodus-1.dmm"
 	#include "exodus-2.dmm"
-	#include "exodus-7.dmm"
-	#include "exodus-8.dmm"
+	#include "exodus-3.dmm"
+	#include "exodus-4.dmm"
+	#include "exodus-5.dmm"
+	#include "exodus-6.dmm"
 
 	#include "../../code/modules/lobby_music/absconditus.dm"
 	#include "../../code/modules/lobby_music/clouds_of_fire.dm"
