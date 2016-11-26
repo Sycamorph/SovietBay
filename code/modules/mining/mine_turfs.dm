@@ -573,3 +573,9 @@ var/list/mining_floors = list()
 				attackby(R.module_state_3,R)
 			else
 				return
+
+/turf/simulated/floor/asteroid/withair
+	oxygen = 21
+	nitrogen = 79
+	temperature = 300
+	luminosity = 1

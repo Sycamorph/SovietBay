@@ -91,6 +91,44 @@ var/list/mechtoys = list(
 				T.blocks_air = 0
 		..()
 
+/obj/structure/barrierflaps //For events
+	name = "barrier"
+	desc = "what?"
+	density = 0
+	anchored = 1
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
+	explosion_resistance = 100
+	var/list/mobs_can_pass = list(
+		/mob/living/carbon/slime,
+		/mob/living/simple_animal/mouse,
+		/mob/living/silicon/robot/drone
+		)
+
+/obj/structure/barrierflaps/CanPass(atom/A, turf/T)
+	if(istype(A) && A.checkpass(PASSGLASS))
+		return 0
+
+	var/obj/structure/bed/B = A
+	if (istype(A, /obj/structure/bed) && B.buckled_mob)//if it's a bed/chair and someone is buckled, it will not pass
+		return 0
+
+	if(istype(A, /obj/vehicle))	//no vehicles
+		return 0
+
+	return ..()
+
+/obj/structure/barrierflaps/ex_act(severity)
+	switch(severity)
+		if (1)
+			qdel(src)
+		if (2)
+			if (prob(50))
+				qdel(src)
+		if (3)
+			if (prob(5))
+				qdel(src)
+
 /*
 /obj/effect/marker/supplymarker
 	icon_state = "X"
