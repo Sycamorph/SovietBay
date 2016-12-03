@@ -1,5 +1,5 @@
 //Config stuff
-#define SUPPLY_DOCKZ 2          //Z-level of the Dock.
+#define SUPPLY_DOCKZ 10          //Z-level of the Dock.
 #define SUPPLY_STATIONZ 1       //Z-level of the Station.
 
 //Supply packs are in /code/defines/obj/supplypacks.dm

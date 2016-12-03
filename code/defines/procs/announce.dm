@@ -7,7 +7,7 @@
 	var/log = 0
 	var/sound
 	var/newscast = 0
-	var/channel_name = "Station Announcements"
+	var/channel_name = "Ship Announcements"
 	var/announcement_type = "Announcement"
 
 /datum/announcement/New(var/do_log = 0, var/new_sound = null, var/do_newscast = 0)
@@ -122,7 +122,7 @@ datum/announcement/proc/Log(message as text, message_title as text)
 	command_announcement.Announce("Обнаружена биологическа&#255; опасность на борту [station_name()]. Требуется сдержать вспышку.", "Биологическа&#255; опасность", new_sound = 'sound/AI/outbreak7.ogg')
 
 /proc/ion_storm_announcement()
-	command_announcement.Announce("Станци&#255; входит в зону высокой ионной активности. Возможны сбои в работе электроники.", "Аномальна&#255; активность")
+	command_announcement.Announce("Крейсер входит в зону высокой ионной активности. Возможны сбои в работе электроники.", "Аномальна&#255; активность")
 
 /proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank, var/join_message)
 	if (ticker.current_state == GAME_STATE_PLAYING)
@@ -130,5 +130,5 @@ datum/announcement/proc/Log(message as text, message_title as text)
 			rank = character.mind.role_alt_title
 		AnnounceArrivalSimple(character.real_name, rank, join_message)
 
-/proc/AnnounceArrivalSimple(var/name, var/rank = "visitor", var/join_message = "прибывает на станцию")
-	global_announcer.autosay("[name], [rank], [join_message].", "Arrivals Announcement Computer")
+/proc/AnnounceArrivalSimple(var/name, var/rank = "visitor", var/join_message = "просыпается в криогенной камере")
+	global_announcer.autosay("[name], [rank], [join_message].", "Cryogenic Announcement Computer")

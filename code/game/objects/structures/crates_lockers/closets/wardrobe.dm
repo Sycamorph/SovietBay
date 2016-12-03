@@ -123,6 +123,10 @@
 	new /obj/item/clothing/under/resomi/white(src)
 	return
 
+/obj/structure/closet/wardrobe/military
+	name = "military wardrobe"
+	icon_state = "green"
+	icon_closed = "green"
 
 /obj/structure/closet/wardrobe/orange
 	name = "prison wardrobe"

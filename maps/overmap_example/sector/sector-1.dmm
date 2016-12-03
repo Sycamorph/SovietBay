@@ -6,6 +6,7 @@
 "f" = (/turf/space,/area/sector/shuttle/ingoing4)
 "g" = (/turf/simulated/mineral,/area/sector/shuttle/ingoing4)
 "h" = (/turf/space,/area/sector/shuttle/ingoing3)
+"i" = (/obj/effect/overmap/ship/bearcat,/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -25,7 +26,7 @@ aaaaaaffffeeeeaaaaaaaaaaaaaaaa
 aaaaaaffffeeeeaaaaaaadaaaaaaaa
 aaaaaagfffeeeeaahhhhddaaaaaaaa
 aaaaaaggffaaaaaahhhhddaaaaaaaa
-aaaaaaaaaaaaaaaahhhhadaaaaaaaa
+aaaaaaaaaaaaiaaahhhhadaaaaaaaa
 aaaaaaaaaaaaaaaahhhhaaaaaaaaaa
 aaaaaaaaadddaaadhhhhaaaaaaaaaa
 aaaaaaaaaddaaaddhhhhaaaaaaaaaa

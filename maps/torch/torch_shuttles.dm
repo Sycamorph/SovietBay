@@ -331,3 +331,11 @@
 	dock_target_station = "specops_centcom_dock"
 	dock_target_offsite = "specops_dock_airlock"
 
+/datum/shuttle/ferry/supply/cargo
+	name = "Supply"
+	location = 1
+	warmup_time = 10
+	area_offsite = /area/supply/dock
+	area_station = /area/supply/station
+	docking_controller_tag = "supply_shuttle"
+	dock_target_station = "cargo_bay"
