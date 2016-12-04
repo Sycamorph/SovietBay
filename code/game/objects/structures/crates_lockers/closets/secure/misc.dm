@@ -1,5 +1,5 @@
 /obj/structure/closet/secure_closet/liaison
-	name = "/improper NanoTrasen liaison's locker"
+	name = "NanoTrasen liaison's locker"
 	req_access = list(access_lawyer)
 	icon_state = "nanottwo1"
 	icon_closed = "nanottwo"
@@ -29,7 +29,7 @@
 	return
 
 /obj/structure/closet/secure_closet/representative
-	name = "/improper Sol Central Government representative's locker"
+	name = "Sol Central Government representative's locker"
 	req_access = list(access_lawyer)
 	icon_state = "solsecure1"
 	icon_closed = "solsecure"

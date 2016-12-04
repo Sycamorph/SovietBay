@@ -351,10 +351,7 @@
 	new /obj/item/clothing/accessory/stethoscope(src)
 	new /obj/item/device/flashlight/pen(src)
 	new /obj/item/clothing/glasses/hud/health(src)
-	new /obj/item/weapon/gun/energy/gun(src)
 	new /obj/item/clothing/accessory/holster/thigh(src)
-	new /obj/item/clothing/suit/storage/vest/solgov/command(src)
-	new /obj/item/clothing/head/helmet/solgov/command(src)
 	new /obj/item/weapon/clipboard(src)
 	new /obj/item/weapon/folder/white(src)
 	return
