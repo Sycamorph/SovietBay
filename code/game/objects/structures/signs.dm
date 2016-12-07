@@ -71,12 +71,12 @@
 	icon_state = "map-right"
 
 /obj/structure/sign/monkey_painting
-	name = "\improper Mr. Deempisi portrait"
+	name = "Mr. Deempisi portrait"
 	desc = "Under the painting a plaque reads: 'While the meat grinder may not have spared you, fear not. Not one part of you has gone to waste... You were delicious.'"
 	icon_state = "monkey_painting"
 
 /obj/structure/sign/warning
-	name = "\improper WARNING"
+	name = "WARNING"
 	icon_state = "securearea"
 
 /obj/structure/sign/warning/New()
@@ -84,36 +84,36 @@
 	desc = "A warning sign which reads '[name]'."
 
 /obj/structure/sign/warning/airlock
-	name = "\improper EXTERNAL AIRLOCK"
+	name = "EXTERNAL AIRLOCK"
 	icon_state = "doors"
 
 /obj/structure/sign/warning/biohazard
-	name = "\improper BIOHAZARD"
+	name = "BIOHAZARD"
 	icon_state = "bio"
 
 /obj/structure/sign/warning/bomb_range
-	name = "\improper BOMB RANGE"
+	name = "BOMB RANGE"
 	icon_state = "blast"
 
 /obj/structure/sign/warning/caution
-	name = "\improper CAUTION"
+	name = "CAUTION"
 
 /obj/structure/sign/warning/compressed_gas
-	name = "\improper COMPRESSED GAS"
+	name = "COMPRESSED GAS"
 	icon_state = "hikpa"
 
 /obj/structure/sign/warning/deathsposal
-	name = "\improper DISPOSAL LEADS TO SPACE"
+	name = "DISPOSAL LEADS TO SPACE"
 	icon_state = "deathsposal"
 
 /obj/structure/sign/warning/docking_area
-	name = "\improper KEEP CLEAR: DOCKING AREA"
+	name = "KEEP CLEAR: DOCKING AREA"
 
 /obj/structure/sign/warning/engineering_access
-	name = "\improper ENGINEERING ACCESS"
+	name = "ENGINEERING ACCESS"
 
 /obj/structure/sign/warning/fire
-	name = "\improper DANGER: FIRE"
+	name = "DANGER: FIRE"
 	icon_state = "fire"
 
 /obj/structure/sign/warning/high_voltage
@@ -150,31 +150,31 @@
 	icon_state = "nosmoking2"
 
 /obj/structure/sign/warning/pods
-	name = "\improper ESCAPE PODS"
+	name = "ESCAPE PODS"
 	icon_state = "pods"
 
 /obj/structure/sign/warning/radioactive
-	name = "\improper RADIOACTIVE AREA"
+	name = "RADIOACTIVE AREA"
 	icon_state = "radiation"
 
 /obj/structure/sign/warning/secure_area
-	name = "\improper SECURE AREA"
+	name = "SECURE AREA"
 
 /obj/structure/sign/warning/secure_area/armory
-	name = "\improper ARMORY"
+	name = "ARMORY"
 
 /obj/structure/sign/warning/server_room
-	name = "\improper SERVER ROOM"
+	name = "SERVER ROOM"
 
 /obj/structure/sign/warning/siphon_valve
-	name = "\improper SIPHON VALVE"
+	name = "SIPHON VALVE"
 
 /obj/structure/sign/warning/vacuum
-	name = "\improper HARD VACUUM AHEAD"
+	name = "HARD VACUUM AHEAD"
 	icon_state = "space"
 
 /obj/structure/sign/warning/vent_port
-	name = "\improper EJECTION/VENTING PORT"
+	name = "EJECTION/VENTING PORT"
 
 /obj/structure/sign/redcross
 	name = "medbay"
@@ -210,22 +210,22 @@
 	desc = "A picture next to a long winded description of medical certifications and degrees."
 
 /obj/structure/sign/kiddieplaque
-	name = "\improper AI developers plaque"
+	name = "AI developers plaque"
 	desc = "An extremely long list of names and job titles and a picture of the design team responsible for building this AI Core."
 	icon_state = "kiddieplaque"
 
 /obj/structure/sign/atmosplaque
-	name = "\improper engineering memorial plaque"
+	name = "engineering memorial plaque"
 	desc = "This plaque memorializes those engineers and technicians who made the ultimate sacrifice to save their vessel and its crew."
 	icon_state = "atmosplaque"
 
 /obj/structure/sign/dedicationplaque
-	name = "\improper SEV Torch dedication plaque"
+	name = "SEV Torch dedication plaque"
 	desc = "S.E.V. Torch - Mako Class - Sol Expeditionary Corps Registry 95519 - Shiva Fleet Yards, Mars - First Vessel To Bear The Name - Launched 2560 - Sol Central Government - 'Never was anything great achieved without danger.'"
 	icon_state = "lightplaque"
 
 /obj/structure/sign/floorplaque
-	name = "\improper commemorative plaque"
+	name = "commemorative plaque"
 	desc = "A list of dead explorers who gave their lives in search of the next great discovery. Hope you don't join them."
 	icon_state = "floorplaque"
 
@@ -250,67 +250,67 @@
 	icon_state = "maltesefalcon-right"
 
 /obj/structure/sign/warning/science
-	name = "\improper SCIENCE!"
+	name = "SCIENCE!"
 	icon_state = "science1"
 
 /obj/structure/sign/warning/science/anomalous_materials
-	name = "\improper ANOMALOUS MATERIALS"
+	name = "ANOMALOUS MATERIALS"
 
 /obj/structure/sign/warning/science/mass_spectrometry
-	name = "\improper MASS SPECTROMETRY"
+	name = "MASS SPECTROMETRY"
 
 /obj/structure/sign/science_1
-	name = "\improper RESEARCH WING"
+	name = "RESEARCH WING"
 	desc = "A sign labelling the research wing."
 	icon_state = "science1"
 
 /obj/structure/sign/science_2
-	name = "\improper RESEARCH"
+	name = "RESEARCH"
 	desc = "A sign labelling an area where research is performed."
 	icon_state = "science2"
 
 /obj/structure/sign/xenobio_1
-	name = "\improper XENOBIOLOGY"
+	name = "XENOBIOLOGY"
 	desc = "A sign labelling an area as a place where xenobiological entites are researched."
 	icon_state = "xenobio"
 
 /obj/structure/sign/xenobio_2
-	name = "\improper XENOBIOLOGY"
+	name = "XENOBIOLOGY"
 	desc = "A sign labelling an area as a place where xenobiological entites are researched."
 	icon_state = "xenobio2"
 
 /obj/structure/sign/xenobio_3
-	name = "\improper XENOBIOLOGY"
+	name = "XENOBIOLOGY"
 	desc = "A sign labelling an area as a place where xenobiological entites are researched."
 	icon_state = "xenobio3"
 
 /obj/structure/sign/xenobio_4
-	name = "\improper XENOBIOLOGY"
+	name = "XENOBIOLOGY"
 	desc = "A sign labelling an area as a place where xenobiological entites are researched."
 	icon_state = "xenobio4"
 
 /obj/structure/sign/chemistry
-	name = "\improper CHEMISTRY"
+	name = "CHEMISTRY"
 	desc = "A sign labelling an area containing chemical equipment."
 	icon_state = "chemistry1"
 
 /obj/structure/sign/xenoflora
-	name = "\improper XENOFLORA"
+	name = "XENOFLORA"
 	desc = "A sign labelling an area as a place where xenobiological plants are researched."
 	icon_state = "hydro4"
 
 /obj/structure/sign/botany
-	name = "\improper BOTANY"
+	name = "BOTANY"
 	desc = "A warning sign which reads 'BOTANY!'."
 	icon_state = "hydro3"
 
 /obj/structure/sign/hydro
-	name = "\improper HYDROPONICS"
+	name = "HYDROPONICS"
 	desc = "A sign labelling an area as a place where plants are grown."
 	icon_state = "hydro1"
 
 /obj/structure/sign/hydrostorage
-	name = "\improper HYDROPONICS STORAGE"
+	name = "HYDROPONICS STORAGE"
 	desc = "A sign labelling an area as a place where plant growing supplies are kept."
 	icon_state = "hydro3"
 
@@ -324,37 +324,37 @@
 	desc = "A direction sign, pointing out which way \the [src] is."
 
 /obj/structure/sign/directions/science
-	name = "\improper Research Division"
+	name = "Research Division"
 	icon_state = "direction_sci"
 
 /obj/structure/sign/directions/engineering
-	name = "\improper Engineering Bay"
+	name = "Engineering Bay"
 	icon_state = "direction_eng"
 
 /obj/structure/sign/directions/security
-	name = "\improper Security Wing"
+	name = "Security Wing"
 	icon_state = "direction_sec"
 
 /obj/structure/sign/directions/medical
-	name = "\improper Medical Bay"
+	name = "Medical Bay"
 	icon_state = "direction_med"
 
 /obj/structure/sign/directions/evac
-	name = "\improper Evacuation Wing"
+	name = "Evacuation Wing"
 	icon_state = "direction_evac"
 
 /obj/structure/sign/directions/bridge
-	name = "\improper Bridge"
+	name = "Bridge"
 	icon_state = "direction_bridge"
 
 /obj/structure/sign/directions/supply
-	name = "\improper Supply Office"
+	name = "Supply Office"
 	icon_state = "direction_supply"
 
 /obj/structure/sign/directions/infirmary
-	name = "\improper Infirmary"
+	name = "Infirmary"
 	icon_state = "direction_infirm"
 
 /obj/structure/sign/directions/examroom
-	name = "\improper Exam Room"
+	name = "Exam Room"
 	icon_state = "examroom"

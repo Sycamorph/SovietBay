@@ -4,7 +4,7 @@
 	if(initial_name == name)
 		message = "There is \a [src]."
 	else
-		message = "There is \a ["\improper[initial_name]"] labeled '[name]'."
+		message = "There is \a ["[initial_name]"] labeled '[name]'."
 	to_chat(user, message)
 /obj/item/integrated_circuit/input/button
 	name = "button"
@@ -580,7 +580,7 @@
 	if(name == initial_name)
 		text_output += "\an [name]"
 	else
-		text_output += "\an ["\improper[initial_name]"] labeled '[name]'"
+		text_output += "\an ["[initial_name]"] labeled '[name]'"
 	text_output += " which is currently [get_pin_data(IC_INPUT, 1) ? "lit <font color=[led_color]>¤</font>" : "unlit."]"
 	to_chat(user,jointext(text_output,null))
 /obj/item/integrated_circuit/output/led/get_topic_data()

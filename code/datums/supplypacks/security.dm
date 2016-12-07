@@ -420,5 +420,5 @@
 	contains = list(/obj/item/weapon/gun/energy/laser/practice = 4)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Practice laser carbine crate"
+	containername = "Practice laser carbine crate"
 	access = access_brig

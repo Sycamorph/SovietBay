@@ -273,36 +273,3 @@ proc/age2agedescription(age)
 // Returns true if the mob was removed form the dead list
 /mob/proc/remove_from_dead_mob_list()
 	return dead_mob_list_.Remove(src)
-
-
-///////////////////////////////////////////
-//////////SYKABLA EPTA NAH/////////////////
-///////////////////////////////////////////
-
-/mob/verb/Gliding()
-	set category = "OOC"
-	switch (alert(usr,"Включить епта охуенную штуку нах?","Пизда рулю","Ды","Нит","NOT PRESS!!11"))
-		if("Ды")
-			gliding = 1
-			glide_debug = 0
-		if("Нит")
-			gliding = 0
-			glide_debug = 0
-		if("NOT PRESS!!11")
-			src << "<BIG>СУКАБЛЯДЬ НАЖАЛ НАХУЙ ПИДАРАС НАПИСАНО НЕ НАЖИМАТЬ СУКА БЛЯ МАМКУ ЕБАЛ</BIG>"
-			gliding = 1
-			glide_debug = 1
-/mob
-	var/gliding = 1
-	var/glide_debug = 0
-
-	proc/glide_setup(delay as num)
-		if(gliding)
-			glide_size = (delay > 2.5) ? world.icon_size/world.fps/(delay/10)/0.85 : 0
-			if(glide_debug)
-				src << "MOVE DELAY:<b>[delay]</b> GLIDE SIZE:<b>[glide_size]<b>"
-		else
-			glide_size = 0
-
-
-

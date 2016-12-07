@@ -423,7 +423,7 @@
 	icon_state = "maint_security_starboard"
 
 /area/maintenance/exterior
-	name = "\improper Exterior Reinforcements"
+	name = "Exterior Reinforcements"
 	icon_state = "maint_security_starboard"
 
 // Dank Maintenance
@@ -450,32 +450,32 @@
 	)
 
 /area/maintenance/sub/relay_station
-	name = "\improper Sublevel Maintenance - Relay Station"
+	name = "Sublevel Maintenance - Relay Station"
 	icon_state = "blue2"
 	turf_initializer = null
 
 /area/maintenance/sub/fore
-	name = "\improper Sublevel Maintenance - Fore"
+	name = "Sublevel Maintenance - Fore"
 	icon_state = "sub_maint_fore"
 
 /area/maintenance/sub/aft
-	name = "\improper Sublevel Maintenance - Aft"
+	name = "Sublevel Maintenance - Aft"
 	icon_state = "sub_maint_aft"
 
 /area/maintenance/sub/port
-	name = "\improper Sublevel Maintenance - Port"
+	name = "Sublevel Maintenance - Port"
 	icon_state = "sub_maint_port"
 
 /area/maintenance/sub/starboard
-	name = "\improper Sublevel Maintenance - Starboard"
+	name = "Sublevel Maintenance - Starboard"
 	icon_state = "sub_maint_starboard"
 
 /area/maintenance/sub/central
-	name = "\improper Sublevel Maintenance - Central"
+	name = "Sublevel Maintenance - Central"
 	icon_state = "sub_maint_central"
 
 /area/maintenance/sub/command
-	name = "\improper Sublevel Maintenance - Command"
+	name = "Sublevel Maintenance - Command"
 	icon_state = "sub_maint_command"
 	turf_initializer = null
 
@@ -668,7 +668,7 @@
 	icon_state = "engineering_workshop"
 
 /area/engineering/sublevel_access
-	name = "\improper Engineering Sublevel Access"
+	name = "Engineering Sublevel Access"
 
 // Medbay
 
