@@ -47,11 +47,6 @@
 /obj/item/device/assembly/interact(mob/user as mob)					//Called when attack_self is called
 	return
 
-	CanUseTopic(var/mob/M)
-		if(..() && !in_range(loc, usr))
-			return STATUS_CLOSE
-		return STATUS_INTERACTIVE
-
 /obj/item/device/assembly/process_cooldown()
 	cooldown--
 	if(cooldown <= 0)	return 0

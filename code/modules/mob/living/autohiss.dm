@@ -67,7 +67,7 @@
 
 		)
 	autohiss_exempt = list(LANGUAGE_SIIK_MAAS)
-	
+
 
 /datum/species/diona
 	autohiss_basic_map = list(
@@ -89,7 +89,7 @@
 			"Þ" = list("þþþ", "þþþþ", "þþþþþ")
 
 		)
-	autohiss_exempt = list(LANGUAGE_ROOTSPEAK)
+	autohiss_exempt = list(LANGUAGE_ROOTLOCAL||LANGUAGE_ROOTGLOBAL)
 
 
 /datum/species/proc/handle_autohiss(message, datum/language/lang, mode)

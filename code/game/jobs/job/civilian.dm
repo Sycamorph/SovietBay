@@ -135,7 +135,6 @@
 					H.equip_to_slot_or_del(new /obj/item/clothing/gloves/white(H), slot_gloves)
 					H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/mime(H), slot_wear_mask)
 					H.equip_to_slot_or_del(new /obj/item/clothing/head/beret(H), slot_head)
-					H.equip_to_slot_or_del(new /obj/item/clothing/suit/suspenders(H), slot_wear_suit)
 					if(H.backbag == 1)
 						H.equip_to_slot_or_del(new /obj/item/weapon/pen/crayon/mime(H), slot_l_store)
 						H.equip_to_slot_or_del(new /obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing(H), slot_l_hand)

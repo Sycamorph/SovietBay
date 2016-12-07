@@ -49,6 +49,8 @@
 	var/die_temperature = 50 // slime dies instantly when its bodytemperature is below this
 
 	var/colour = "grey"
+	var/coretype = /obj/item/slime_extract/grey
+	var/list/slime_mutation[4]
 
 	var/core_removal_stage = 0 //For removing cores.
 

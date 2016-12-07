@@ -12,9 +12,6 @@
 	active_power_usage = 50
 	var/mob/living/carbon/slime/picked_slime = null
 
-
-
-
 /obj/machinery/slime_processor/process()
 	..()
 	if(processing || !picked_slime)
@@ -37,8 +34,6 @@
 	for(var/atom/movable/O in contents)
 		O.Move(get_turf(src))
 	picked_slime = initial(picked_slime)
-
-
 
 /obj/machinery/slime_processor/attackby(var/obj/item/weapon/grab/O as obj, mob/user as mob)
 	if(!picked_slime)

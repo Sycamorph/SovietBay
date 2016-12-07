@@ -108,7 +108,7 @@
 
 /datum/gear/suit/wcoat
 	display_name = "waistcoat"
-	path = /obj/item/clothing/suit/wcoat
+	path = /obj/item/clothing/accessory/wcoat
 	cost = 1
 
 /datum/gear/suit/warriors
