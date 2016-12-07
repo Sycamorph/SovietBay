@@ -281,7 +281,7 @@ var/global/datum/controller/gameticker/ticker
 
 			if(2)	//nuke was nowhere nearby	//TODO: a really distant explosion animation
 				sleep(50)
-				sound_to(world, sound('sound/effects/explosionfar.ogg'))				
+				sound_to(world, sound('sound/effects/explosionfar.ogg'))
 			else	//station was destroyed
 				if( mode && !override )
 					override = mode.name
@@ -290,7 +290,7 @@ var/global/datum/controller/gameticker/ticker
 						flick("intro_nuke",cinematic)
 						sleep(35)
 						flick("station_explode_fade_red",cinematic)
-						sound_to(world, sound('sound/effects/explosionfar.ogg'))						
+						sound_to(world, sound('sound/effects/explosionfar.ogg'))
 						cinematic.icon_state = "summary_nukewin"
 					if("AI malfunction") //Malf (screen,explosion,summary)
 						flick("intro_malf",cinematic)
@@ -351,6 +351,7 @@ var/global/datum/controller/gameticker/ticker
 					job_master.EquipRank(player, player.mind.assigned_role, 0)
 					UpdateFactionList(player)
 					equip_custom_items(player)
+					equip_mil_items(player)
 		if(captainless)
 			for(var/mob/M in player_list)
 				if(!istype(M,/mob/new_player))

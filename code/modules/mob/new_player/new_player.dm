@@ -281,7 +281,7 @@
 	if(!job.player_old_enough(src.client))	return 0
 	if(!job.is_branch_allowed(client.prefs.char_branch)) return 0
 	if(!job.is_rank_allowed(client.prefs.char_branch, client.prefs.char_rank)) return 0
-	
+
 	return 1
 
 /mob/new_player/proc/AttemptLateSpawn(rank,var/spawning_at)
@@ -325,6 +325,7 @@
 	character = job_master.EquipRank(character, rank, 1)					//equips the human
 	UpdateFactionList(character)
 	equip_custom_items(character)
+	equip_mil_items(character)
 
 	// AIs don't need a spawnpoint, they must spawn at an empty core
 	if(character.mind.assigned_role == "AI")
