@@ -17,7 +17,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	var/datum/hud/living/carbon/hud = null // hud
 	var/bootime = 0
 	var/started_as_observer //This variable is set to 1 when you enter the game as an observer.
-							//If you died in the game and are a ghsot - this will remain as null.
+							//If you died in the game and are a ghost - this will remain as null.
 							//Note that this is not a reliable way to determine if admins started as observers, since they change mobs a lot.
 	var/has_enabled_antagHUD = 0
 	var/medHUD = 0
@@ -696,22 +696,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	return 1
 
-/atom/proc/extra_ghost_link()
-	return
-
-/mob/extra_ghost_link(var/atom/ghost)
-	if(client && eyeobj)
-		return "|<a href='byond://?src=\ref[ghost];track=\ref[eyeobj]'>eye</a>"
-
-/mob/observer/ghost/extra_ghost_link(var/atom/ghost)
-	if(mind && (mind.current && !isghost(mind.current)))
-		return "|<a href='byond://?src=\ref[ghost];track=\ref[mind.current]'>body</a>"
-
-/proc/ghost_follow_link(var/atom/target, var/atom/ghost)
-	if((!target) || (!ghost)) return
-	. = "<a href='byond://?src=\ref[ghost];track=\ref[target]'>follow</a>"
-	. += target.extra_ghost_link(ghost)
-
 /proc/isghostmind(var/datum/mind/player)
 	return player && !isnewplayer(player.current) && (!player.current || isghost(player.current) || (isliving(player.current) && player.current.stat == DEAD) || !player.current.client)
 
@@ -741,3 +725,27 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	plane = pre_plane
 	layer = pre_layer
 	invisibility = pre_invis
+
+/mob/observer/ghost/verb/respawn()
+	set name = "Respawn"
+	set category = "OOC"
+
+	if (!(config.abandon_allowed))
+		to_chat(usr, "<span class='notice'>Respawn is disabled.</span>")
+		return
+	if (!(ticker && ticker.mode))
+		to_chat(usr, "<span class='notice'><B>You may not attempt to respawn yet.</B></span>")
+		return
+	if (ticker.mode && ticker.mode.deny_respawn)
+		to_chat(usr, "<span class='notice'>Respawn is disabled for this roundtype.</span>")
+		return
+	else if(!MayRespawn(1, config.respawn_delay))
+		return
+
+	to_chat(usr, "You can respawn now, enjoy your new life!")
+	to_chat(usr, "<span class='notice'><B>Make sure to play a different character, and please roleplay correctly!</B></span>")
+	announce_ghost_joinleave(client, 0)
+
+	var/mob/new_player/M = new /mob/new_player()
+	M.key = key
+	log_and_message_admins("has respawned.", M)

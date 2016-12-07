@@ -17,7 +17,7 @@
 //	causeerrorheresoifixthis
 	var/obj/item/master = null
 	var/list/origin_tech = null	//Used by R&D to determine what research bonuses it grants.
-	var/list/attack_verb = list() //Used in attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
+	var/list/attack_verb = list("hit") //Used in attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
 	var/lock_picking_level = 0 //used to determine whether something can pick a lock, and how well.
 	var/force = 0
 
@@ -689,7 +689,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	var/bodytype = "Default"
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/user_human = user_mob
-		bodytype = user_human.species.get_bodytype()
+		bodytype = user_human.species.get_bodytype(user_human)
 
 	var/mob_state
 	if(item_state_slots && item_state_slots[slot])

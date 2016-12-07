@@ -254,4 +254,15 @@
 					/obj/item/weapon/stock_parts/subspace/crystal,
 					/obj/item/weapon/storage/toolbox/electrical)
 	cost = 75
-	containername = "emergency bluespace relay assembly kit"
+	containername = " emergency bluespace relay assembly kit"
+
+/decl/hierarchy/supply_pack/engineering/firefighter
+	name = "Firefighting equipment"
+	contains = list(/obj/item/clothing/suit/fire/firefighter,
+			/obj/item/clothing/mask/gas,
+			/obj/item/weapon/tank/oxygen/red,
+			/obj/item/weapon/extinguisher,
+			/obj/item/clothing/head/hardhat/red)
+	cost = 20
+	containertype = /obj/structure/closet/firecloset
+	containername = " fire-safety closet"
