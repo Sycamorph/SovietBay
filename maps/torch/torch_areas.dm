@@ -1047,3 +1047,16 @@
 	name = "Crematorium"
 	icon_state = "chapel"
 	sound_env = SMALL_ENCLOSED
+
+// Planet
+
+/area/desertplanet
+	name = "Desert"
+	icon_state = "yellow"
+	luminosity = 1
+	base_turf = /turf/simulated/floor/desert
+
+/area/outpost/abandoned
+	name = "Abandoned Outpost"
+	icon_state = "dark"
+	base_turf = /turf/simulated/floor/desert

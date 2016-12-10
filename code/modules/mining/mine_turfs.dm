@@ -573,3 +573,139 @@ var/list/mining_floors = list()
 				attackby(R.module_state_3,R)
 			else
 				return
+
+//Desert
+
+/turf/simulated/floor/desert
+	name = "sand"
+	icon = 'icons/turf/desert.dmi'
+	icon_state = "desert"
+	base_name = "sand"
+	base_desc = "Seems sandy."
+	base_icon = 'icons/turf/desert.dmi'
+	base_icon_state = "desert"
+
+	initial_flooring = null
+	oxygen = 21
+	nitrogen = 79
+	temperature = 300
+	var/dug = 0       //0 = has not yet been dug, 1 = has already been dug
+	var/overlay_detail
+	has_resources = 1
+
+/turf/simulated/floor/desert/New()
+	mining_floors += src
+	if(prob(20))
+		overlay_detail = "desert[rand(0,4)]"
+
+/turf/simulated/floor/desert/Destroy()
+	mining_floors -= src
+	return ..()
+
+/turf/simulated/floor/desert/ex_act(severity)
+	switch(severity)
+		if(3.0)
+			return
+		if(2.0)
+			if (prob(70))
+				gets_dug()
+		if(1.0)
+			gets_dug()
+	return
+
+/turf/simulated/floor/desert/is_plating()
+	return !density
+
+/turf/simulated/floor/desert/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(!W || !user)
+		return 0
+
+	var/list/usable_tools = list(
+		/obj/item/weapon/shovel,
+		/obj/item/weapon/pickaxe/diamonddrill,
+		/obj/item/weapon/pickaxe/drill,
+		/obj/item/weapon/pickaxe/borgdrill
+		)
+
+	var/valid_tool
+	for(var/valid_type in usable_tools)
+		if(istype(W,valid_type))
+			valid_tool = 1
+			break
+
+	if(valid_tool)
+		if (dug)
+			to_chat(user, "<span class='warning'>This area has already been dug</span>")
+			return
+
+		var/turf/T = user.loc
+		if (!(istype(T)))
+			return
+
+		to_chat(user, "<span class='warning'>You start digging.</span>")
+		playsound(user.loc, 'sound/effects/rustle1.ogg', 50, 1)
+
+		if(!do_after(user,40, src)) return
+
+		to_chat(user, "<span class='notice'>You dug a hole.</span>")
+		gets_dug()
+
+	else if(istype(W,/obj/item/weapon/storage/ore))
+		var/obj/item/weapon/storage/ore/S = W
+		if(S.collection_mode)
+			for(var/obj/item/weapon/ore/O in contents)
+				O.attackby(W,user)
+				return
+	else if(istype(W,/obj/item/weapon/storage/bag/fossils))
+		var/obj/item/weapon/storage/bag/fossils/S = W
+		if(S.collection_mode)
+			for(var/obj/item/weapon/fossil/F in contents)
+				F.attackby(W,user)
+				return
+
+	else
+		..(W,user)
+	return
+
+/turf/simulated/floor/desert/proc/gets_dug()
+
+	if(dug)
+		return
+
+	for(var/i=0;i<(rand(3)+2);i++)
+		new/obj/item/weapon/ore/glass(src)
+
+	dug = 1
+	icon_state = "desert_dug"
+	return
+
+/turf/simulated/floor/desert/proc/updateMineralOverlays(var/update_neighbors)
+
+	overlays.Cut()
+	//todo cache
+	if(overlay_detail)
+		var/image/floor_decal = image(icon = 'icons/turf/flooring/decals.dmi', icon_state = overlay_detail)
+		floor_decal.turf_decal_layerise()
+		overlays |= floor_decal
+
+	if(update_neighbors)
+		var/list/all_step_directions = list(NORTH,NORTHEAST,EAST,SOUTHEAST,SOUTH,SOUTHWEST,WEST,NORTHWEST)
+		for(var/direction in all_step_directions)
+			var/turf/simulated/floor/desert/A
+			if(istype(get_step(src, direction), /turf/simulated/floor/desert))
+				A = get_step(src, direction)
+				A.updateMineralOverlays()
+
+/turf/simulated/floor/desert/Entered(atom/movable/M as mob|obj)
+	..()
+	if(istype(M,/mob/living/silicon/robot))
+		var/mob/living/silicon/robot/R = M
+		if(R.module)
+			if(istype(R.module_state_1,/obj/item/weapon/storage/ore))
+				attackby(R.module_state_1,R)
+			else if(istype(R.module_state_2,/obj/item/weapon/storage/ore))
+				attackby(R.module_state_2,R)
+			else if(istype(R.module_state_3,/obj/item/weapon/storage/ore))
+				attackby(R.module_state_3,R)
+			else
+				return

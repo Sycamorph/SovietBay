@@ -40,7 +40,7 @@
 
 /datum/nano_module/program/comm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 
-	var/datum/evacuation_controller/pods/shuttle/evac_control = evacuation_controller
+	var/datum/evacuation_controller/pods/evac_control = evacuation_controller
 
 	var/list/data = host.initial_data()
 
@@ -78,7 +78,7 @@
 	if(current_viewing_message)
 		data["message_current"] = current_viewing_message
 
-	if(evac_control.shuttle.location)
+	if(evac_control)
 		data["have_shuttle"] = 1
 		if(evac_control.is_idle())
 			data["have_shuttle_called"] = 0

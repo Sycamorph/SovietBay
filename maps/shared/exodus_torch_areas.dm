@@ -519,7 +519,3 @@
 	icon_state = "unexplored"
 
 // OUTPOSTS
-
-/area/outpost/abandoned
-	name = "Abandoned Outpost"
-	icon_state = "dark"
