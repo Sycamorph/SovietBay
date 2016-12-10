@@ -1,6 +1,7 @@
 /datum/random_map/noise/desert
 	descriptor = "desert"
 	smoothing_iterations = 3
+	target_turf_type = /turf/unsimulated/mask
 
 /datum/random_map/noise/desert/replace_space
 	descriptor = "desert (replacement)"

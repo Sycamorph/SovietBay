@@ -1054,6 +1054,7 @@
 	name = "Desert"
 	icon_state = "yellow"
 	luminosity = 1
+	lighting_use_dynamic = 0
 	base_turf = /turf/simulated/floor/desert
 
 /area/outpost/abandoned

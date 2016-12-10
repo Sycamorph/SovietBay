@@ -514,19 +514,6 @@
 /proc/equip_mil_items(var/mob/living/carbon/human/H)
 	var/obj/item/newitem = new H.char_rank.equip_epaullet()
 	H.equip_to_storage(newitem)
-/*
 	if(H.char_branch == /datum/mil_branch/fleet)
-		if(job.department_flag & CIV && job.department_flag & !COM)
-			H.equip_to_storage(/obj/item/clothing/under/utility/fleet)
-			return
-		if(job.department_flag & CIV && job.department_flag & COM)
-			H.equip_to_storage(/obj/item/clothing/under/utility/fleet/command)
-			return
-		if(job.department_flag & SEC && job.department_flag & !COM)
-			H.equip_to_storage(/obj/item/clothing/under/utility/fleet/security)
-			return
-		if(job.department_flag & SEC && job.department_flag & COM)
-			H.equip_to_storage(/obj/item/clothing/under/utility/fleet/command)
-			return
-*/
+		if(H.job == "Ch
 	return newitem
