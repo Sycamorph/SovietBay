@@ -2,30 +2,30 @@
 Title: DNA Modifier UI 
 Used In File(s): D:\Development\SS13-BS12\code\game\dna\dna_modifier.dm
  -->
-<h3>Статус</h3>
+<h3>Status</h3>
 
 <div class="statusDisplay">
 	{{if !data.hasOccupant}}
-		<div class="line">Капсула пуста</div>
+		<div class="line">Cell Unoccupied</div>
 	{{else}}
 		<div class="line">
 			{{:data.occupant.name}}&nbsp;=>&nbsp;
 			{{if data.occupant.stat == 0}}
-				<span class="good">В сознании</span>
+				<span class="good">Conscious</span>
 			{{else data.occupant.stat == 1}}
-				<span class="average">Без сознания</span>
+				<span class="average">Unconscious</span>
 			{{else}}
-				<span class="bad">МЁРТВ</span>
+				<span class="bad">DEAD</span>
 			{{/if}}
 		</div>
 		
 		{{if !data.occupant.isViableSubject || !data.occupant.uniqueIdentity || !data.occupant.structuralEnzymes}}
 			<div class="notice">
-				Структура ДНК пациента окончательно уничтожена, используйте пациента с цельной структурой ДНК.
+				The occupant's DNA structure is ruined beyond recognition, please insert a subject with an intact DNA structure.
 			</div>
 		{{else data.occupant.stat < 2}}
 			<div class="line">
-				<div class="statusLabel">Здоровье:</div>
+				<div class="statusLabel">Health:</div>
 					{{if data.occupant.health >= 0}}
 						{{:helper.displayBar(data.occupant.health, 0, data.occupant.maxHealth, 'good')}}
 					{{else}}
@@ -35,14 +35,14 @@ Used In File(s): D:\Development\SS13-BS12\code\game\dna\dna_modifier.dm
 			</div>
 			
 			<div class="line">
-				<div class="statusLabel">Радиоактивность:</div>
+				<div class="statusLabel">Radiation:</div>
 					{{:helper.displayBar(data.occupant.radiationLevel, 0, 100, 'average')}}
 				<div class="statusValue">{{:helper.round(data.occupant.radiationLevel)}}</div>
 			</div>
 		
 			<div class="line">
-				<div class="statusLabel">Уникальные энзимы (UE):</div>
-				<div class="statusValue">{{:data.occupant.uniqueEnzymes ? data.occupant.uniqueEnzymes : '<span class="bad">Неизвестно</span>'}}</div>
+				<div class="statusLabel">Unique Enzymes:</div>
+				<div class="statusValue">{{:data.occupant.uniqueEnzymes ? data.occupant.uniqueEnzymes : '<span class="bad">Unknown</span>'}}</div>
 			</div>
 		
 			<!--<div class="line">

@@ -5,16 +5,16 @@ code/modules/mob/living/silicon/pai/software_modules.dm
 {{if data.reading}}
 	<div class="item">
 		<div class="itemLabel">
-			Давление:
+			Pressure:
 		</div>
 		<div class="itemContent">
-			{{:data.pressure}} кПа
+			{{:data.pressure}} kPa
 		</div>
 	</div>
 
 	<div class="item">
 		<div class="itemLabel">
-			Температура
+			Temperature:
 		</div>
 		<div class="itemContent">
 			{{:data.temperature}}K ({{:data.temperatureC}}&deg;C)
@@ -32,5 +32,5 @@ code/modules/mob/living/silicon/pai/software_modules.dm
 		</div>
 	{{/for}}
 {{else}}
-	<span class="bad">Нет данных об окружении</span>
+	<span class="bad">Unable to obtain air reading!</span>
 {{/if}}
