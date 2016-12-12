@@ -177,15 +177,19 @@ nanoui is used to open and update nano browser uis
   * @return /list config data
   */
 /datum/nanoui/proc/get_config_data()
+	var/name = "[src_object]"
+	name = sanitize(name)
 	var/list/config_data = list(
 			"title" = title,
-			"srcObject" = list("name" = "[src_object]"),
+			"srcObject" = list("name" = name),
 			"stateKey" = state_key,
 			"status" = status,
 			"autoUpdateLayout" = auto_update_layout,
 			"autoUpdateContent" = auto_update_content,
 			"showMap" = show_map,
+			"mapName" = using_map.path,
 			"mapZLevel" = map_z_level,
+			"mapZLevels" = using_map.map_levels,
 			"user" = list("name" = user.name)
 		)
 	return config_data
@@ -347,18 +351,20 @@ nanoui is used to open and update nano browser uis
 
 	var/template_data_json = "{}" // An empty JSON object
 	if (templates.len > 0)
-		template_data_json = json_encode(templates)
+		template_data_json = strip_improper(json_encode(templates))
 
 	var/list/send_data = get_send_data(initial_data)
 	var/initial_data_json = replacetext(replacetext(json_encode(send_data), "&#34;", "&amp;#34;"), "'", "&#39;")
+	initial_data_json = strip_improper(initial_data_json);
 
 	var/url_parameters_json = json_encode(list("src" = "\ref[src]"))
 
 	return {"
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<script type='text/javascript'>
 			function receiveUpdateData(jsonString)
 			{
@@ -368,6 +374,10 @@ nanoui is used to open and update nano browser uis
 				{
 					NanoStateManager.receiveUpdateData(jsonString);
 				}
+				//else
+				//{
+				//	alert('browser.recieveUpdateData failed due to jQuery or NanoStateManager being unavailiable.');
+				//}
 			}
 		</script>
 		[head_content]
@@ -407,7 +417,7 @@ nanoui is used to open and update nano browser uis
 	if(status == STATUS_CLOSE)
 		return
 
-	user << browse(sanitize_local(get_html(), SANITIZE_BROWSER), "window=[window_id];[window_size][window_options]")
+	user << browse(get_html(), "window=[window_id];[window_size][window_options]")
 	winset(user, "mapwindow.map", "focus=true") // return keyboard focus to map
 	on_close_winset()
 	//onclose(user, window_id)
@@ -488,8 +498,12 @@ nanoui is used to open and update nano browser uis
 		map_update = 1
 
 	if(href_list["mapZLevel"])
-		set_map_z_level(text2num(href_list["mapZLevel"]))
-		map_update = 1
+		var/map_z = text2num(href_list["mapZLevel"])
+		if(map_z in using_map.map_levels)
+			set_map_z_level(map_z)
+			map_update = 1
+		else
+			return
 
 	if ((src_object && src_object.Topic(href, href_list, state)) || map_update)
 		nanomanager.update_uis(src_object) // update all UIs attached to src_object

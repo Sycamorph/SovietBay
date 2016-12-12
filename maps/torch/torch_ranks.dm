@@ -514,6 +514,6 @@
 /proc/equip_mil_items(var/mob/living/carbon/human/H)
 	var/obj/item/newitem = new H.char_rank.equip_epaullet()
 	H.equip_to_storage(newitem)
-	if(H.char_branch == /datum/mil_branch/fleet)
-		if(H.job == "Ch
+/*	if(H.char_branch == /datum/mil_branch/fleet)
+		if(H.job == "Ch*/
 	return newitem

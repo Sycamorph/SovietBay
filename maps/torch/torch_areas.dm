@@ -724,33 +724,33 @@
 	icon_state = "head_quarters"
 
 /area/crew_quarters/heads/cobed
-	name = "Command - CO's Quarters"
+	name = "Command - CO Quarters"
 	sound_env = MEDIUM_SOFTFLOOR
 
 /area/crew_quarters/heads/office/co
-	name = "Command - CO's Office"
+	name = "Command - CO Office"
 	sound_env = MEDIUM_SOFTFLOOR
 
 /area/crew_quarters/heads/office/xo
-	name = "Command - XO's Office"
+	name = "Command - XO Office"
 
 /area/crew_quarters/heads/office/rd
-	name = "Command - RD's Office"
+	name = "Command - RD Office"
 
 /area/crew_quarters/heads/office/cmo
-	name = "Command - CMO's Office"
+	name = "Command - CMO Office"
 
 /area/crew_quarters/heads/office/ce
 	name = "Engineering - CE's Office"
 
 /area/crew_quarters/heads/office/cos
-	name = "Command - CoS' Office"
+	name = "Command - CoS Office"
 
 /area/crew_quarters/heads/office/cl
-	name = "Command - CL's Office"
+	name = "Command - CL Office"
 
 /area/crew_quarters/heads/office/sgr
-	name = "Command - SCGR's Office"
+	name = "Command - SCGR Office"
 
 // Engineering
 
