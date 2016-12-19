@@ -25,6 +25,20 @@
 		to_chat(usr, "<span class='notice'>There is nothing of interest in this direction.</span>")
 		return 0
 
+	//Soviet fix
+	//I've tried a couple of different sophisticated fixes
+	//When nothing worked, I wrote this. Does the job
+	if(direction == UP)
+	{
+		if(!istype(destination, /turf/space) && !istype(destination, /turf/simulated/open))
+			to_chat(usr, "<span class='warning'>You bump into the ceiling.</span>")
+			return 0
+	}
+	else
+		if(!istype(loc, /turf/space) && !istype(loc, /turf/simulated/open))
+			to_chat(usr, "<span class='warning'>You bump into the flooring.</span>")
+			return 0
+
 	var/turf/start = get_turf(src)
 	if(!destination.CanPass(src, start))
 		to_chat(usr, "<span class='warning'>You bump against \the [destination].</span>")
@@ -65,9 +79,12 @@
 		var/obj/item/weapon/tank/jetpack/jet = back
 		if(jet.allow_thrust(0.01, src))
 			return 1
-		else
+		// Can cause issues with players when both the jetpack and the magboots are equipped
+		// If you turn on the magboots, but don't turn on the jetpack, you won't be able to climb
+		/*else
 			to_chat(usr, "<span class='warning'>\The [jet] is disabled.</span>")
 			return 0
+		*/
 	if(Check_Shoegrip())	//scaling hull with magboots
 		for(var/turf/simulated/T in trange(1,src))
 			if(T.density)
