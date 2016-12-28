@@ -30,20 +30,22 @@
 		command_announcement.Announce("Станци&#255; прошла радиационный по&#255;с. Пожалуйста обратитесь в медотсек, если у вас возникли какие-либо необычные симптомы. Технические тоннели в скором времени будут заблокированы вновь.", "Радиационна&#255; безопасность")
 
 /datum/event/radiation_storm/proc/radiate()
-	for(var/mob/living/carbon/C in living_mob_list_)
-		var/area/A = get_area(C)
-		if(!A)
-			continue
+	var/radiation_level = rand(15, 35)
+	for(var/area/A in all_areas)
 		if(!(A.z in using_map.station_levels))
 			continue
 		if(A.flags & RAD_SHIELDED)
 			continue
+		for(var/turf/T in A)
+			radiation_repository.irradiated_turfs[T] = radiation_level
 
+	for(var/mob/living/carbon/C in living_mob_list_)
+		var/area/A = get_area(C)
+		if(!A)
+			continue
 		if(istype(C,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = C
-			H.apply_effect((rand(15,35)),IRRADIATE,blocked = H.getarmor(null, "rad"))
 			if(prob(5))
-				H.apply_effect((rand(40,70)),IRRADIATE,blocked = H.getarmor(null, "rad"))
 				if (prob(75))
 					randmutb(H) // Applies bad mutation
 					domutcheck(H,null,MUTCHK_FORCED)
