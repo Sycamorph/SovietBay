@@ -398,7 +398,6 @@
 	name = "Sergeant Major"
 	name_short = "SgtMaj"
 	accessory = /obj/item/clothing/accessory/rank/marine/enlisted/e9
-	equip_epaullet = /obj/item/clothing/accessory/rank/marine/e8alt
 
 /datum/mil_rank/marine/e9_alt1
 	name = "Master Gunnery Sergeant"
