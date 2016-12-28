@@ -51,6 +51,9 @@
 	name = "Fourth Deck Teleporter"
 	icon_state = "teleporter"
 
+/area/maintenance/substation/fourthdeck
+	name = "Fourth Deck Substation"
+
 
 //Third Deck (Z-2)
 /area/hallway/primary/thirddeck/fore
@@ -99,6 +102,11 @@
 
 /area/maintenance/substation/thirddeck
 	name = "Third Deck Substation"
+
+/area/engineering/atmos
+ 	name = "\improper Atmospherics"
+ 	icon_state = "atmos"
+ 	sound_env = LARGE_ENCLOSED
 
 
 //Second Deck (Z-3)
@@ -406,6 +414,10 @@
 	name = "east of fourth deck"
 	icon_state = "east"
 
+/area/calypso_hangar/salvage
+	name = "debris field"
+	icon_state = "shuttlered"
+
 /area/calypso_hangar/mining
 	name = "mining site"
 	icon_state = "shuttlered"
@@ -450,6 +462,10 @@
 /area/guppy_hangar/fourthdeck
 	name = "north of fourth deck"
 	icon_state = "north"
+
+/area/guppy_hangar/salvage
+	name = "debris field"
+	icon_state = "shuttlered"
 
 /area/guppy_hangar/mining
 	name = "mining site"
@@ -550,6 +566,12 @@
 
 
 //Merc
+
+/area/syndicate_mothership
+	name = "\improper Mercenary Base"
+	icon_state = "syndie-ship"
+	requires_power = 0
+	lighting_use_dynamic = 0
 
 /area/syndicate_station
 	name = "Independant Station"
@@ -862,6 +884,10 @@
 	name = "Deck Officer"
 	icon_state = "quart"
 
+/area/quartermaster/expedition
+	name = "\improper Expedition Preparation"
+	icon_state = "mining"
+
 /area/quartermaster/expedition/eva
 	name = "Expedition EVA"
 	icon_state = "mining"
@@ -943,6 +969,11 @@
 	name = "Lounge"
 	icon_state = "crew_quarters"
 	sound_env = MEDIUM_SOFTFLOOR
+
+/area/crew_quarters/safe_room/
+	name = "\improper Safe Room"
+	icon_state = "crew_quarters"
+	sound_env = SMALL_ENCLOSED
 
 /area/crew_quarters/safe_room/thirddeck
 	name = "Third Deck Safe Room"

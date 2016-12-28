@@ -78,6 +78,15 @@
 	armor = list(melee = 15, bullet = 10, laser = 10,energy = 5, bomb = 5, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 
+/obj/item/clothing/under/rank/guard
+	desc = "A durable uniform worn by NanoTrasen corporate security."
+	name = "\improper NanoTrasen security uniform"
+	icon_state = "ntguard"
+	item_state = "r_suit"
+	worn_state = "ntguard"
+	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	siemens_coefficient = 0.9
+
 /*
  * Detective
  */

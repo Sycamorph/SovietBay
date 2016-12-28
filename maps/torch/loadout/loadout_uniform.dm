@@ -1,30 +1,20 @@
 // Uniform slot
 /datum/gear/uniform
-	display_name = "blazer, blue"
-	path = /obj/item/clothing/under/blazer
+	display_name = "black shorts" //kept separate because there aren't any other uniforms that every role could have
+	path = /obj/item/clothing/under/shorts/black
 	slot = slot_w_uniform
 	sort_category = "Uniforms and Casual Dress"
 
-/datum/gear/uniform/cheongsam
-	display_name = "cheongsam, white"
-	path = /obj/item/clothing/under/cheongsam
-
-/datum/gear/uniform/kilt
-	display_name = "kilt"
-	path = /obj/item/clothing/under/kilt
-
-/datum/gear/uniform/jumpskirt
-	display_name = "jumpskirt, black"
-	path = /obj/item/clothing/under/blackjumpskirt
-
 /datum/gear/uniform/shortjumpskirt
-    display_name = "jumpskirt color selection"
-    path = /obj/item/clothing/under/shortjumpskirt
-    flags = GEAR_HAS_COLOR_SELECTION
+	display_name = "short jumpskirt"
+	path = /obj/item/clothing/under/shortjumpskirt
+	flags = GEAR_HAS_COLOR_SELECTION
+	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender", "Merchant")
 
 /datum/gear/uniform/jumpsuit
 	display_name = "generic jumpsuits"
 	path = /obj/item/clothing/under/color/grey
+	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender", "Merchant")
 
 /datum/gear/uniform/jumpsuit/New()
 	..()
@@ -36,8 +26,9 @@
 	allowed_roles = list("Roboticist")
 
 /datum/gear/uniform/suit
-	display_name = "suit selection"
-	path = /obj/item/clothing/under/lawyer/bluesuit
+	display_name = "clothes selection"
+	path = /obj/item/clothing/under/sl_suit
+	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender", "Merchant")
 
 /datum/gear/uniform/suit/New()
 	..()
@@ -61,16 +52,20 @@
 	suits["white suit"] = /obj/item/clothing/under/scratch
 	suits["white-blue suit"] = /obj/item/clothing/under/lawyer/bluesuit
 	suits["formal outfit"] = /obj/item/clothing/under/rank/internalaffairs/plain
+	suits["blue blazer"] = /obj/item/clothing/under/blazer
+	suits["black jumpskirt"] = /obj/item/clothing/under/blackjumpskirt
+	suits["kilt"] = /obj/item/clothing/under/kilt
+	suits["human resources dress"] = /obj/item/clothing/under/dress/dress_hr
+	suits["frontier overalls"] = /obj/item/clothing/under/frontier
+	suits["detective's suit"] = /obj/item/clothing/under/det
+	suits["black detective's suit"] = /obj/item/clothing/under/det/black
+	suits["grey detective's suit"] = /obj/item/clothing/under/det/grey
 	gear_tweaks += new/datum/gear_tweak/path(suits)
-
-/datum/gear/uniform/suit/mazor
-	display_name = "suit, dark-blue"
-	path = /obj/item/clothing/under/mazor
 
 /datum/gear/uniform/scrubs
 	display_name = "medical scrubs"
 	path = /obj/item/clothing/under/rank/medical/black
-	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Paramedic","Geneticist")
+	allowed_roles = list("Chief Medical Officer", "Senior Physician", "Physician", "Medical Assistant", "Virologist", "Chemist", "Counselor")
 
 /datum/gear/uniform/scrubs/New()
 	..()
@@ -84,52 +79,26 @@
 
 /datum/gear/uniform/dress
 	display_name = "dress selection"
-	path = /obj/item/clothing/under/dress
+	path = /obj/item/clothing/under/sundress_white
+	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender", "Merchant")
 
 /datum/gear/uniform/dress/New()
 	..()
 	var/dresses = list()
+	dresses["white sundress"] = /obj/item/clothing/under/sundress_white
 	dresses["flame dress"] = /obj/item/clothing/under/dress/dress_fire
 	dresses["green dress"] = /obj/item/clothing/under/dress/dress_green
 	dresses["orange dress"] = /obj/item/clothing/under/dress/dress_orange
 	dresses["pink dress"] = /obj/item/clothing/under/dress/dress_pink
 	dresses["purple dress"] = /obj/item/clothing/under/dress/dress_purple
 	dresses["sundress"] = /obj/item/clothing/under/sundress
-	dresses["white sundress"] = /obj/item/clothing/under/sundress_white
+	dresses["white cheongsam"] = /obj/item/clothing/under/cheongsam
 	gear_tweaks += new/datum/gear_tweak/path(dresses)
-
-/datum/gear/uniform/uniform_captain
-	display_name = "uniform, captain's dress"
-	path = /obj/item/clothing/under/dress/dress_cap
-	allowed_roles = list("Captain")
-
-/datum/gear/uniform/corpsecsuit
-	display_name = "uniform, corporate (Security)"
-	path = /obj/item/clothing/under/rank/security/corp
-	allowed_roles = list("Security Officer","Head of Security","Warden")
-
-/datum/gear/uniform/uniform_hop
-	display_name = "uniform, HoP's dress"
-	path = /obj/item/clothing/under/dress/dress_hop
-	allowed_roles = list("Head of Personnel")
-
-/datum/gear/uniform/uniform_hr
-	display_name = "uniform, HR director (HoP)"
-	path = /obj/item/clothing/under/dress/dress_hr
-	allowed_roles = list("Head of Personnel")
-
-/datum/gear/uniform/navysecsuit
-	display_name = "uniform, navyblue (Security)"
-	path = /obj/item/clothing/under/rank/security/navyblue
-	allowed_roles = list("Security Officer","Head of Security","Warden")
-
-/datum/gear/uniform/settler
-	display_name = "settler outfit"
-	path = /obj/item/clothing/under/f13/settler
 
 /datum/gear/uniform/skirt
 	display_name = "skirt selection"
 	path = /obj/item/clothing/under/skirt
+	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender", "Merchant")
 
 /datum/gear/uniform/skirt/New()
 	..()
@@ -142,6 +111,9 @@
 /datum/gear/uniform/pants
 	display_name = "pants selection"
 	path = /obj/item/clothing/under/pants/white
+	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Scientist", "Prospector", "Security Guard", "Research Assistant",
+						"SolGov Representative", "Passenger", "Maintenance Assistant", "Roboticist", "Medical Assistant",
+						"Virologist", "Chemist", "Counselor", "Supply Assistant", "Bartender", "Merchant")
 
 /datum/gear/uniform/pants/New()
 	..()
@@ -154,6 +126,7 @@
 /datum/gear/uniform/shorts
 	display_name = "shorts selection"
 	path = /obj/item/clothing/under/shorts/jeans
+	allowed_roles = list("Passenger", "Bartender", "Supply Assistant", "Merchant")
 
 /datum/gear/uniform/shorts/New()
 	..()
@@ -163,11 +136,48 @@
 		shorts[initial(short_type.name)] = short_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(shorts))
 
-/datum/gear/uniform/tacticool
-	display_name = "tacticool turtleneck"
-	path = /obj/item/clothing/under/syndicate/tacticool
-
 /datum/gear/uniform/turtleneck
 	display_name = "sweater"
 	path = /obj/item/clothing/under/rank/psych/turtleneck/sweater
 	flags = GEAR_HAS_COLOR_SELECTION
+	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender", "Merchant")
+
+/datum/gear/uniform/tacticool
+	display_name = "tacticool turtleneck"
+	path = /obj/item/clothing/under/syndicate/tacticool
+	allowed_roles = list("Passenger", "Bartender", "Merchant")
+
+/datum/gear/uniform/corporate
+	display_name = "corporate uniform selection"
+	path = /obj/item/clothing/under/mbill
+	allowed_roles = list("Scientist", "Prospector", "Security Guard", "Research Assistant",
+						"Passenger", "Maintenance Assistant", "Roboticist", "Medical Assistant",
+						"Virologist", "Chemist", "Counselor", "Supply Assistant", "Bartender", "Merchant")
+
+/datum/gear/uniform/corporate/New()
+	..()
+	var/corps = list()
+	corps["major bill's shipping uniform"] = /obj/item/clothing/under/mbill
+	corps["SAARE uniform"] = /obj/item/clothing/under/saare
+	corps["aether atmospherics uniform"] = /obj/item/clothing/under/aether
+	corps["hephaestus uniform"] = /obj/item/clothing/under/hephaestus
+	corps["PCRC uniform"] = /obj/item/clothing/under/pcrc
+	corps["ward-takahashi uniform"] = /obj/item/clothing/under/wardt
+	corps["grayson uniform"] = /obj/item/clothing/under/grayson
+	corps["focal point uniform"] = /obj/item/clothing/under/focal
+	gear_tweaks += new/datum/gear_tweak/path(corps)
+
+/datum/gear/uniform/sterile
+	display_name = "sterile jumpsuit"
+	path = /obj/item/clothing/under/sterile
+	allowed_roles = list("Chief Medical Officer", "Senior Physician", "Physician", "Medical Assistant", "Virologist", "Chemist", "Counselor")
+
+/datum/gear/uniform/hazard
+	display_name = "hazard jumpsuit"
+	path = /obj/item/clothing/under/hazard
+	allowed_roles = list("Chief Engineer", "Senior Engineer", "Engineer", "Maintenance Assistant", "Roboticist")
+
+/datum/gear/uniform/utility
+	display_name = "Contractor Utility Uniform"
+	path = /obj/item/clothing/under/utility
+	allowed_roles = list("Maintenance Assistant", "Roboticist", "Medical Assistant", "Virologist", "Chemist", "Counselor", "Supply Assistant", "Bartender")

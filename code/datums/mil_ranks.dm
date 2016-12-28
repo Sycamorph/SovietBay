@@ -125,4 +125,5 @@ var/datum/mil_branches/mil_branches = new()
 /datum/mil_rank
 	var/name = "Unknown"
 	var/name_short = "N/A" // Abbreviation of the name. Should be null if the
-	var/equip_epaullet = null 	   // rank doesn't usually serve as a prefix to the individual's name.
+	                       // rank doesn't usually serve as a prefix to the individual's name.
+	var/accessory		//type of accesory that will be equipped by job code with this rank
