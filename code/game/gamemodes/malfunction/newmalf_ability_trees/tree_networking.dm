@@ -168,21 +168,21 @@
 			sleep(duration/5)
 			if(!user || user.stat == DEAD)
 				return
-			command_announcement.Announce("Внимание. Нами обнаружено аномальное поведение в сети. Кажетс&#255; кто-то пытаетс&#255; взломать ваши электронные системы. Мы св&#255;жемс&#255; с вами, когда получим больше информации.", "Мониторинг сети")
+			command_announcement.Announce("Caution, [using_map.station_name]. We have detected abnormal behaviour in your network. It seems someone is trying to hack your electronic systems. We will update you when we have more information.", "Network Monitoring")
 			sleep(duration/5)
 			if(!user || user.stat == DEAD)
 				return
-			command_announcement.Announce("Мы начали отслеживание злоумышленника. Тот, кто делает это, кажетс&#255;, на самой станции. Рекомендуем вам проверить все терминалы управлени&#255; сетью. Мы будем держать вас в курсе дела.", "Мониторинг сети")
+			command_announcement.Announce("We started tracing the intruder. Whoever is doing this, they seem to be on the station itself. We suggest checking all network control terminals. We will keep you updated on the situation.", "Network Monitoring")
 			sleep(duration/5)
 			if(!user || user.stat == DEAD)
 				return
-			command_announcement.Announce("Поведение злоумышленника крайне ненормально. Мы не может отследить его, он слишком быстро заметает следы. Человек не может так быстро...", "Мониторинг сети")
+			command_announcement.Announce("This is highly abnormal and somewhat concerning. The intruder is too fast, he is evading our traces. No man could be this fast...", "Network Monitoring")
 			sleep(duration/5)
 			if(!user || user.stat == DEAD)
 				return
-			command_announcement.Announce("Мы выследили нарушител&#255;. Мы д61ем -то с^47ма искусст%88го инт3?3%(а. Атака %? сис*3% самоуничто%№ни^.<СОЕДИНЕНИЕ ПОТЕРЯНО>", "Мониторинг сети")
+			command_announcement.Announce("We have traced the intrude#, it seem& t( e yo3r AI s7stem, it &# *#ck@ng th$ sel$ destru$t mechani&m, stop i# bef*@!)$#&&@@  <CONNECTION LOST>", "Network Monitoring")
 	else
-		command_announcement.Announce("Мы обнаружили атаку на межсетевой экран, котора&#255; кажетс&#255; исходит от вашей системы искуственного интелекта. Он уже контролирует почти все системы, единственное, к чему не удалось получить доступ, это система самоуничтожени&#255; станции. Брандмауэр блокирует это. Однако вечно он не сможет противодействовать.", "Мониторинг сети")
+		command_announcement.Announce("We have detected a strong brute-force attack on your firewall which seems to be originating from your AI system. It already controls almost the whole network, and the only thing that's preventing it from accessing the self-destruct is this firewall. You don't have much time before it succeeds.", "Network Monitoring")
 	to_chat(user, "## BEGINNING SYSTEM OVERRIDE.")
 	to_chat(user, "## ESTIMATED DURATION: [round((duration+300)/600)] MINUTES")
 	user.hacking = 1

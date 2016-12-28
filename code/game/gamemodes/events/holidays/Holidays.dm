@@ -126,7 +126,7 @@ var/global/Holiday = null
 
 	Holiday = T
 	//get a new station name
-	station_name = null
+	using_map.station_name = null
 	station_name()
 	//update our hub status
 	world.update_status()
